@@ -1,7 +1,8 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import {
   ArrowLeft,
   ArrowDown,
+  ArrowUp,
   ArrowRight,
   ArrowUpRight,
   BookOpen,
@@ -17,7 +18,24 @@ import {
   referenceSources,
   searchReference,
 } from "../reference";
+import {
+  captureReadingPosition,
+  ReferenceReadingMemory,
+  restoreReadingOffset,
+} from "../reference-reading";
 import "./reference.css";
+
+const readingMemory = new ReferenceReadingMemory();
+function readingElements(content: HTMLElement) {
+  return [...content.querySelectorAll<HTMLElement>("[data-reading-id]")];
+}
+function readingAnchors(content: HTMLElement) {
+  const top = content.getBoundingClientRect().top;
+  return readingElements(content).map((element) => ({
+    id: element.dataset.readingId!,
+    top: element.getBoundingClientRect().top - top + content.scrollTop,
+  }));
+}
 
 export default function ReferenceLibrary({
   articleId,
@@ -28,22 +46,101 @@ export default function ReferenceLibrary({
   onOpen: (id: string | null) => void;
   onRegion: (id: string) => void;
 }) {
-  const [query, setQuery] = useState("");
+  const [query, setQuery] = useState(() => readingMemory.query);
   const [message, setMessage] = useState("");
   const contentRef = useRef<HTMLDivElement>(null);
   const searchRef = useRef<HTMLInputElement>(null);
   const previousArticle = useRef(articleId);
+  const scrollFrame = useRef(0);
+  const persistTimer = useRef<ReturnType<typeof setTimeout> | undefined>(
+    undefined,
+  );
   const article = referenceArticles.find((item) => item.id === articleId);
   const articles = searchReference(query);
   const explorations = article ? referenceExplorations(article) : [];
-  useEffect(() => {
+  const readingId = article?.id ?? "library";
+  function savePosition() {
+    const content = contentRef.current;
+    if (!content) return;
+    const focused =
+      document.activeElement instanceof HTMLElement &&
+      content.contains(document.activeElement)
+        ? (document.activeElement.closest<HTMLElement>("[data-reading-id]")
+            ?.dataset.readingId ?? null)
+        : null;
+    readingMemory.set(
+      readingId,
+      captureReadingPosition(
+        content.scrollTop,
+        readingAnchors(content),
+        focused,
+      ),
+    );
+    clearTimeout(persistTimer.current);
+    persistTimer.current = setTimeout(() => readingMemory.persist(), 180);
+  }
+  function queuePosition() {
+    if (scrollFrame.current) return;
+    scrollFrame.current = requestAnimationFrame(() => {
+      scrollFrame.current = 0;
+      savePosition();
+    });
+  }
+  function changeQuery(value: string) {
+    const nextQuery = value.slice(0, 160);
+    setQuery(nextQuery);
+    readingMemory.query = nextQuery;
+    readingMemory.set("library", captureReadingPosition(0, []));
     contentRef.current?.scrollTo(0, 0);
-    if (articleId && !document.activeElement?.closest('[role="tablist"]'))
-      contentRef.current?.querySelector<HTMLElement>("h2")?.focus();
-    else if (!articleId && previousArticle.current) searchRef.current?.focus();
+    readingMemory.persist();
+  }
+  useLayoutEffect(() => {
+    const content = contentRef.current;
+    if (!content) return;
+    const saved = readingMemory.get(readingId);
+    content.scrollTop = saved
+      ? restoreReadingOffset(
+          saved,
+          readingAnchors(content),
+          content.scrollHeight - content.clientHeight,
+        )
+      : 0;
+    const canFocus = !document.activeElement?.closest('[role="tablist"]');
+    if (canFocus && (article || previousArticle.current)) {
+      const elements = readingElements(content);
+      const focused = elements.find(
+        (element) => element.dataset.readingId === saved?.focusId,
+      );
+      const bounds = content.getBoundingClientRect();
+      const focusedBounds = focused?.getBoundingClientRect();
+      const target =
+        focused &&
+        focusedBounds &&
+        focusedBounds.bottom > bounds.top &&
+        focusedBounds.top < bounds.bottom
+          ? focused
+          : (elements.find(
+              (element) => element.dataset.readingId === saved?.anchorId,
+            ) ??
+            (article
+              ? content.querySelector<HTMLElement>("h2")
+              : searchRef.current));
+      target?.focus({ preventScroll: true });
+    }
     previousArticle.current = articleId;
-    setMessage("");
+    setMessage(saved && saved.scrollTop > 0 ? "Reading position restored" : "");
+    return () => {
+      cancelAnimationFrame(scrollFrame.current);
+      scrollFrame.current = 0;
+      clearTimeout(persistTimer.current);
+      readingMemory.persist();
+    };
   }, [articleId]);
+  useEffect(() => {
+    const persist = () => readingMemory.persist();
+    window.addEventListener("pagehide", persist);
+    return () => window.removeEventListener("pagehide", persist);
+  }, []);
   async function share() {
     try {
       await navigator.clipboard.writeText(location.href);
@@ -59,19 +156,48 @@ export default function ReferenceLibrary({
           <button onClick={() => onOpen(null)}>
             <ArrowLeft size={14} /> All reference notes
           </button>
-          <button
-            onClick={share}
-            aria-label="Copy reference link"
-            title="Copy reference link"
-          >
-            <Link size={14} />
-          </button>
+          <div>
+            <button
+              onClick={() => {
+                contentRef.current?.scrollTo(0, 0);
+                contentRef.current
+                  ?.querySelector<HTMLElement>("h2")
+                  ?.focus({ preventScroll: true });
+                setMessage("");
+                savePosition();
+              }}
+              aria-label="Read note from start"
+              title="Read note from start"
+            >
+              <ArrowUp size={14} />
+            </button>
+            <button
+              onClick={share}
+              aria-label="Copy reference link"
+              title="Copy reference link"
+            >
+              <Link size={14} />
+            </button>
+          </div>
         </div>
-        <div className="reference-content" ref={contentRef}>
+        <div
+          className="reference-content"
+          ref={contentRef}
+          onScroll={queuePosition}
+          onClickCapture={savePosition}
+        >
           <article aria-label={article.title}>
             <span className="eyebrow">{article.category}</span>
-            <h2 tabIndex={-1}>{article.title}</h2>
-            <p className="reference-summary">{article.summary}</p>
+            <h2 tabIndex={-1} data-reading-id="title">
+              {article.title}
+            </h2>
+            <p
+              className="reference-summary"
+              tabIndex={-1}
+              data-reading-id="summary"
+            >
+              {article.summary}
+            </p>
             {article.comparison && (
               <button
                 className="reference-jump"
@@ -87,16 +213,26 @@ export default function ReferenceLibrary({
                 Jump to comparison <ArrowDown size={12} />
               </button>
             )}
-            {article.paragraphs.map((paragraph) => (
-              <p key={paragraph}>{paragraph}</p>
+            {article.paragraphs.map((paragraph, index) => (
+              <p
+                key={paragraph}
+                tabIndex={-1}
+                data-reading-id={`paragraph-${index}`}
+              >
+                {paragraph}
+              </p>
             ))}
             <div className="reference-scope">
               <strong>In this atlas</strong>
-              <p>{article.scope}</p>
+              <p tabIndex={-1} data-reading-id="scope">
+                {article.scope}
+              </p>
             </div>
             {article.comparison && (
               <table className="reference-comparison">
-                <caption tabIndex={-1}>{article.comparison.caption}</caption>
+                <caption tabIndex={-1} data-reading-id="comparison">
+                  {article.comparison.caption}
+                </caption>
                 <thead>
                   <tr>
                     {article.comparison.columns.map((column) => (
@@ -107,8 +243,12 @@ export default function ReferenceLibrary({
                   </tr>
                 </thead>
                 <tbody>
-                  {article.comparison.rows.map((row) => (
-                    <tr key={row.label}>
+                  {article.comparison.rows.map((row, index) => (
+                    <tr
+                      key={row.label}
+                      tabIndex={-1}
+                      data-reading-id={`row-${index}`}
+                    >
                       <th scope="row">{row.label}</th>
                       <td>
                         <span>{row.summary}</span>
@@ -118,6 +258,7 @@ export default function ReferenceLibrary({
                           target="_blank"
                           rel="noreferrer"
                           aria-label={`Source for ${row.label}`}
+                          data-reading-id={`row-source-${index}`}
                         >
                           Source <ArrowUpRight size={10} />
                         </a>
@@ -127,7 +268,9 @@ export default function ReferenceLibrary({
                 </tbody>
               </table>
             )}
-            <h3>Explore the related anatomy</h3>
+            <h3 tabIndex={-1} data-reading-id="anatomy">
+              Explore the related anatomy
+            </h3>
             <p className="reference-caption">
               Open a modeled region in the brain.
             </p>
@@ -135,7 +278,11 @@ export default function ReferenceLibrary({
               {article.regions.map((id) => {
                 const region = regions.find((item) => item.id === id)!;
                 return (
-                  <button key={id} onClick={() => onRegion(id)}>
+                  <button
+                    key={id}
+                    data-reading-id={`region-${id}`}
+                    onClick={() => onRegion(id)}
+                  >
                     <span>
                       {region.name}
                       <small>{hemisphereLabel(region.hemisphere)}</small>
@@ -147,7 +294,9 @@ export default function ReferenceLibrary({
             </div>
             {explorations.length > 0 && (
               <>
-                <h3>Continue exploring</h3>
+                <h3 tabIndex={-1} data-reading-id="explorations">
+                  Continue exploring
+                </h3>
                 <div className="reference-explorations">
                   {explorations.map((item) => (
                     <a
@@ -155,6 +304,7 @@ export default function ReferenceLibrary({
                       href={item.href}
                       target={item.external ? "_blank" : undefined}
                       rel={item.external ? "noreferrer" : undefined}
+                      data-reading-id={`explore-${item.kind}-${item.id}`}
                     >
                       <small>{item.label}</small>
                       <strong>
@@ -171,7 +321,9 @@ export default function ReferenceLibrary({
                 </div>
               </>
             )}
-            <h3>Sources & further reading</h3>
+            <h3 tabIndex={-1} data-reading-id="sources">
+              Sources & further reading
+            </h3>
             <div className="reference-sources">
               {article.sources.map((id) => {
                 const source = referenceSources[id];
@@ -181,6 +333,7 @@ export default function ReferenceLibrary({
                     href={source.url}
                     target="_blank"
                     rel="noreferrer"
+                    data-reading-id={`source-${id}`}
                   >
                     <BookOpen size={13} />
                     <span>
@@ -197,10 +350,16 @@ export default function ReferenceLibrary({
               retain their own rights. This is a curated starting point, not a
               continuously updated literature review.
             </p>
-            <h3>Keep reading</h3>
+            <h3 tabIndex={-1} data-reading-id="related">
+              Keep reading
+            </h3>
             <div className="reference-related">
               {article.related.map((id) => (
-                <button key={id} onClick={() => onOpen(id)}>
+                <button
+                  key={id}
+                  data-reading-id={`related-${id}`}
+                  onClick={() => onOpen(id)}
+                >
                   {referenceArticles.find((item) => item.id === id)!.title}
                   <ArrowRight size={12} />
                 </button>
@@ -220,21 +379,31 @@ export default function ReferenceLibrary({
         <input
           ref={searchRef}
           value={query}
-          onChange={(event) => setQuery(event.target.value)}
+          maxLength={160}
+          onChange={(event) => changeQuery(event.target.value)}
           placeholder="Layers, neurons, anatomical terms…"
           aria-label="Search reference notes"
         />
         {query && (
           <button
-            onClick={() => setQuery("")}
+            onClick={() => changeQuery("")}
             aria-label="Clear reference search"
           >
             <X size={13} />
           </button>
         )}
       </div>
-      <div className="reference-content" ref={contentRef}>
-        <p className="reference-intro">
+      <div
+        className="reference-content"
+        ref={contentRef}
+        onScroll={queuePosition}
+        onClickCapture={savePosition}
+      >
+        <p
+          className="reference-intro"
+          tabIndex={-1}
+          data-reading-id="library-intro"
+        >
           From the whole brain to its cells. Short, sourced notes explain the
           terms behind the anatomy and the limits of each view.
         </p>
@@ -251,6 +420,7 @@ export default function ReferenceLibrary({
           <button
             className="reference-card"
             key={item.id}
+            data-reading-id={`note-${item.id}`}
             onClick={() => onOpen(item.id)}
           >
             <span>{item.category}</span>

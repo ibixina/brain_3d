@@ -64,6 +64,13 @@
   font-size: 11px;
   text-align: left;
 }
+.reference-actions > div {
+  display: flex;
+  gap: 14px;
+}
+.reference-content [tabindex="-1"]:focus {
+  outline: none;
+}
 .reference-content h2 {
   font-family: "Manrope Variable", sans-serif;
   font-size: 19px;
