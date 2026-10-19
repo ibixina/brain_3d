@@ -11,17 +11,20 @@ const load = (name) =>
 const brainstem = load("brainstem");
 const thalamus = load("thalamus");
 const amygdala = load("amygdala");
+const hippocampus = load("hippocampus");
 const sha256 = (bytes) => createHash("sha256").update(bytes).digest("hex");
 
 for (const [name, atlas, byteBudget, triangleBudget] of [
   ["brainstem", brainstem, 300_000, 50_000],
   ["thalamus", thalamus, 1_500_000, 250_000],
   ["amygdala", amygdala, 1_500_000, 250_000],
+  ["hippocampus", hippocampus, 6_500_000, 1_000_000],
 ]) {
-  const raw = readFileSync(new URL("public" + atlas.rawUrl, root));
-  const compressed = readFileSync(
-    new URL("public" + atlas.compressedUrl, root),
-  );
+  const assets = atlas.assets ?? [atlas];
+  const rawFiles = assets.map((asset) => readFileSync(new URL("public" + asset.rawUrl, root)));
+  const compressedFiles = assets.map((asset) => readFileSync(new URL("public" + asset.compressedUrl, root)));
+  const raw = Buffer.concat(rawFiles);
+  const compressed = Buffer.concat(compressedFiles);
   test(`${name} retains source channels, frame, license and matching public provenance`, () => {
     const channels = atlas.source.names
       .trim()
@@ -78,16 +81,21 @@ for (const [name, atlas, byteBudget, triangleBudget] of [
     assert.ok(triangles < triangleBudget);
   });
   test(`${name} packed surfaces have valid normals, indexed faces and independent recentered bounds`, () => {
-    const view = new DataView(raw.buffer, raw.byteOffset, raw.byteLength);
+    const assetEnds = assets.map(() => 0);
     let end = 0;
     const min = [Infinity, Infinity, Infinity],
       max = [-Infinity, -Infinity, -Infinity];
     for (const part of atlas.parts) {
-      assert.equal(part.offset, end);
+      const fileIndex = atlas.assets ? assets.findIndex((asset) => asset.hemisphere === part.hemisphere) : 0;
+      assert.ok(fileIndex >= 0);
+      const file = rawFiles[fileIndex];
+      const view = new DataView(file.buffer, file.byteOffset, file.byteLength);
+      assert.equal(part.offset, assetEnds[fileIndex]);
+      assetEnds[fileIndex] += part.vertices * 28 + part.triangles * 12;
       assert.ok(Number.isInteger(part.vertices) && part.vertices > 0);
       assert.ok(Number.isInteger(part.triangles) && part.triangles > 0);
       end += part.vertices * 28 + part.triangles * 12;
-      assert.ok(end <= raw.length);
+      assert.ok(assetEnds[fileIndex] <= file.length);
       const position = (i, axis) =>
         view.getFloat32(part.offset + i * 12 + axis * 4, true);
       for (let i = 0; i < part.vertices; i++) {
@@ -134,6 +142,7 @@ for (const [name, atlas, byteBudget, triangleBudget] of [
       }
     }
     assert.equal(end, raw.length);
+    assert.deepEqual(assetEnds, rawFiles.map((file) => file.length));
     assert.deepEqual(
       min.map((value, axis) => (value + max[axis]) / 2),
       [0, 5, 10],
@@ -305,15 +314,64 @@ test("reflected source affines preserve paired amygdala surface winding and anat
 });
 
 test("standalone targets keep whole-brain source labels and hemisphere search distinct", () => {
-  for (const [id, kind] of [["aseg-16", "brainstem"], ["aseg-10", "thalamus"], ["aseg-49", "thalamus"], ["aseg-18", "amygdala"], ["aseg-54", "amygdala"]]) {
+  for (const [id, kind] of [["aseg-16", "brainstem"], ["aseg-10", "thalamus"], ["aseg-49", "thalamus"], ["aseg-18", "amygdala"], ["aseg-54", "amygdala"], ["aseg-17", "hippocampus"], ["aseg-53", "hippocampus"]]) {
     assert.equal(subregionForRegion(id), kind);
     assert.ok(isSubregionKind(kind));
   }
-  assert.equal(subregionForRegion("aseg-17"), null);
+  assert.equal(subregionForRegion("aseg-14"), null);
   assert.equal(subregionForRegion("constructor"), null);
   assert.equal(isSubregionKind("constructor"), false);
   assert.equal(isSubregionKind(null), false);
   assert.deepEqual(matchingSubregions(amygdala.parts, "right medial nucleus", "both").map((part) => part.id), ["amyg-right-7006"]);
   assert.equal(matchingSubregions(amygdala.parts, "paralaminar", "left").length, 1);
   assert.equal(matchingSubregions(amygdala.parts, "HATA", "both").length, 0);
+});
+
+test("hippocampal coverage keeps 20 protocol labels per side, including space and white matter", () => {
+  assert.equal(hippocampus.parts.length, 40);
+  assert.deepEqual(hippocampus.omitted, []);
+  assert.deepEqual(hippocampus.source.includedChannels, Array.from({ length: 20 }, (_, i) => i + 1));
+  assert.deepEqual(hippocampus.source.excludedChannels, Array.from({ length: 9 }, (_, i) => i + 21));
+  assert.match(hippocampus.source.method, /all 30 channels.*amygdala channels/);
+  assert.equal(hippocampus.source.paper, "https://doi.org/10.1016/j.neuroimage.2015.04.042");
+  assert.deepEqual(hippocampus.source.spacingMm, [0.25, 0.25, 0.25]);
+  assert.deepEqual(hippocampus.source.volumes, amygdala.source.volumes);
+  for (const side of ["left", "right"]) {
+    const parts = hippocampus.parts.filter((part) => part.hemisphere === side);
+    assert.equal(parts.length, 20);
+    assert.equal(parts.filter((part) => part.group === "White matter").length, 2);
+    const fissure = parts.find((part) => part.sourceName === "hippocampal-fissure");
+    assert.equal(fissure.group, "Fluid space");
+    assert.equal(fissure.voxelConnectedComponents6, 155);
+    assert.match(fissure.description, /rather than neural tissue/);
+    assert.equal(parts.find((part) => part.sourceName === "alveus").voxelConnectedComponents6, 108);
+    for (const part of parts.filter((part) => part.sourceName.startsWith("CA3-"))) {
+      assert.match(part.name, /CA2\/3/);
+      assert.match(part.description, /no independent CA2 boundary/);
+    }
+  }
+  assert.equal(matchingSubregions(hippocampus.parts, "CA2", "left").length, 2);
+  assert.equal(matchingSubregions(hippocampus.parts, "CA3 body", "right").length, 1);
+  assert.equal(matchingSubregions(hippocampus.parts, "dentate head", "left").length, 1);
+  assert.equal(matchingSubregions(hippocampus.parts, "GC-ML-DG", "right").length, 2);
+  assert.equal(matchingSubregions(hippocampus.parts, "HATA", "both").length, 2);
+});
+
+test("hemisphere assets keep exact geometry and independent offsets without downloading the other side", () => {
+  assert.deepEqual(hippocampus.assets.map((asset) => asset.hemisphere), ["left", "right"]);
+  for (const asset of hippocampus.assets) {
+    const raw = readFileSync(new URL("public" + asset.rawUrl, root));
+    const compressed = readFileSync(new URL("public" + asset.compressedUrl, root));
+    assert.equal(raw.length, asset.geometry.bytes);
+    assert.equal(compressed.length, asset.geometry.compressedBytes);
+    assert.equal(sha256(raw), asset.geometry.sha256);
+    assert.equal(sha256(compressed), asset.geometry.compressedSha256);
+    assert.deepEqual(gunzipSync(compressed), raw);
+    assert.ok(compressed.length < 3_300_000);
+    assert.ok(asset.geometry.triangles < 500_000);
+    const parts = hippocampus.parts.filter((part) => part.hemisphere === asset.hemisphere);
+    assert.equal(parts[0].offset, 0);
+    assert.equal(parts.reduce((sum, part) => sum + part.triangles, 0), asset.geometry.triangles);
+    assert.ok(parts.every((part) => asset.hemisphere === "left" ? part.center[0] < 0 : part.center[0] > 0));
+  }
 });

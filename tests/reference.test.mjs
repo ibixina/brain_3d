@@ -179,7 +179,10 @@ test("hippocampal notes separate regional geometry, named pathways, and species-
     );
     assert.ok(referenceExplorations(note).some((link) => link.kind === "scan"));
   }
-  assert.match(formation.scope, /no separate selectable meshes/);
+  assert.match(formation.scope, /20 independent labels per side/);
+  assert.match(formation.scope, /not 20 cellular subfields/);
+  assert.match(formation.scope, /CA2 has no independent boundary/);
+  assert.match(formation.scope, /not registered to the main brain or MRI/);
   assert.ok(
     formation.comparison.rows.some((row) => row.label === "CA2 and CA3"),
   );

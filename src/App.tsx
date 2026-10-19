@@ -1697,11 +1697,13 @@ export default function App() {
                 probability-atlas model. Thalamus inspectors open a separate
                 nuclear atlas with 23 surfaces per side, from 26 source labels
                 per side. Amygdala inspectors open nine nuclear/area surfaces
-                per side in another independent probability-atlas model.
+                per side. Hippocampus inspectors open 20 subregion labels per
+                side, including tissue and fissure space. Each uses an
+                independent probability-atlas model.
               </p>
               <strong>What remains outside this atlas</strong>
               <p>
-                Individual neurons, cortical layers, most small nuclei, detailed
+                Individual neurons, neocortical layers, most small nuclei, detailed
                 vessels, cranial nerves, complete fiber pathways, molecular
                 data, disease models, and the full research literature. Internal
                 subdivisions are described in notes; the separate brainstem
@@ -1710,6 +1712,8 @@ export default function App() {
                 surfaces; three source labels per side have no winner surface.
                 A separate amygdala atlas provides nine labels per side, with
                 particularly limited winner coverage of the medial nucleus.
+                Hippocampal labels include atlas layer compartments, without
+                individual cells, complete fibers, or an independent CA2 boundary.
                 Anatomy differs between individuals, and atlas boundaries differ
                 between atlases.
               </p>

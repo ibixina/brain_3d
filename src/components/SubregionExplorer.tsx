@@ -26,6 +26,25 @@ const initial: ViewState = {
   sectionOffset: 0,
 };
 
+const atlasNotes: Record<SubregionKind, { scope: string; protocol: string }> = {
+  brainstem: {
+    scope: "Its boundary protocol differs from the whole-brain label. Individual nuclei, nerves, and axons are not modeled.",
+    protocol: "The superior cerebellar peduncles share one label.",
+  },
+  thalamus: {
+    scope: "It includes geniculate labels that the main thalamus-proper mesh excludes. A 0.5 mm grid does not establish individual microscopic boundaries.",
+    protocol: "This download has 26 label names per side; 23 per side have winner voxels. The current segmentation software describes 25 labels per side; this explorer follows the downloaded probability file, not that software’s current output.",
+  },
+  amygdala: {
+    scope: "Its nine labels include seven nuclei and two areas per side. A 0.25 mm grid does not establish microscopic accuracy. Neurons, intercalated cell groups, and fiber pathways are not modeled.",
+    protocol: "Winner assignment uses all 30 channels, including background and 20 hippocampal labels. Only the nine amygdala labels per side are displayed. The supplied left/right probability arrays are identical with reflected affines; these shapes do not measure anatomical asymmetry. Tiny fragments, particularly the 17-voxel medial label, need caution.",
+  },
+  hippocampus: {
+    scope: "Its 20 labels per side include head/body divisions, white matter, and fissure space, not 20 cellular subfields. CA2 is grouped within the source’s CA3 labels. A 0.25 mm grid does not establish microscopic accuracy.",
+    protocol: "Winner assignment uses all 30 channels, including background and nine amygdala labels. Only the 20 hippocampal labels per side are displayed. This download uses head/body divisions and GC-ML-DG naming; it is not an unchanged copy of the original 2015 label set. Current protocol documentation includes CA2 within CA3. The left/right probability arrays are identical with reflected affines, not a measurement of anatomical asymmetry. Individual axons, cells, and synapses are not reconstructed.",
+  },
+};
+
 export default function SubregionExplorer({
   kind,
   hemisphere = "both",
@@ -44,7 +63,9 @@ export default function SubregionExplorer({
         ? import("../brainstem-subregions.json")
         : kind === "thalamus"
           ? import("../thalamus-subregions.json")
-          : import("../amygdala-subregions.json");
+          : kind === "amygdala"
+            ? import("../amygdala-subregions.json")
+            : import("../hippocampus-subregions.json");
     void request
       .then((data) => {
         if (!cancelled) setAtlas(data.default);
@@ -101,7 +122,14 @@ function LoadedSubregions({
   } | null>(null);
   const selected = atlas.parts.find((part) => part.id === state.selected);
   const pointed = atlas.parts.find((part) => part.id === hover?.id);
+  const assetHemisphere = atlas.assets ? state.hemisphere : null;
   const visible = matchingSubregions(atlas.parts, "", state.hemisphere);
+  const assets = atlas.assets?.filter((asset) =>
+    state.hemisphere === "both" || asset.hemisphere === state.hemisphere,
+  );
+  const transferBytes = assets
+    ? assets.reduce((sum, asset) => sum + asset.geometry.compressedBytes, 0)
+    : atlas.geometry.compressedBytes;
   const matches = matchingSubregions(atlas.parts, query, state.hemisphere);
   if (large)
     matches.sort(
@@ -146,15 +174,16 @@ function LoadedSubregions({
           label: () => {},
         },
         {
-          regions: atlas.parts,
+          regions: assets ? visible : atlas.parts,
           compressedUrl: atlas.compressedUrl,
           rawUrl: atlas.rawUrl,
+          assets,
           fitOnLoad: true,
           explodeFromCenter: true,
           label: `Interactive ${kind} atlas subdivisions. Drag to rotate, scroll to zoom, right-drag to pan. Use the part chooser for keyboard access.`,
         },
       );
-      viewer.current.update(start);
+      viewer.current.update(state);
     } catch {
       setError(
         "WebGL could not start. Part descriptions and source links remain available below.",
@@ -164,7 +193,7 @@ function LoadedSubregions({
       viewer.current?.dispose();
       viewer.current = null;
     };
-  }, [atlas, attempt]);
+  }, [atlas, attempt, assetHemisphere]);
 
   useEffect(() => {
     viewer.current?.update(state);
@@ -398,14 +427,19 @@ function LoadedSubregions({
         <p className="subregion-scope">
           This separate probability atlas is not registered to the whole-brain
           model or MRI templates.{" "}
-          {kind === "thalamus"
-            ? "It includes geniculate labels that the main thalamus-proper mesh excludes. A 0.5 mm grid does not establish individual microscopic boundaries."
-            : kind === "amygdala"
-              ? "Its nine labels include seven nuclei and two areas per side. A 0.25 mm grid does not establish microscopic accuracy. Neurons, intercalated cell groups, and fiber pathways are not modeled."
-              : "Its boundary protocol differs from the whole-brain label. Individual nuclei, nerves, and axons are not modeled."}
+          {atlasNotes[kind].scope}
         </p>
         <details className="subregion-sources">
           <summary>Sources, method & limitations</summary>
+          {selected && (
+            <p>
+              Selected mask: {selected.voxels.toLocaleString()} winning voxels
+              {selected.voxelConnectedComponents6 !== undefined &&
+                ` in ${selected.voxelConnectedComponents6} separate voxel ${selected.voxelConnectedComponents6 === 1 ? "group" : "groups"} (connected through shared faces)`}.{" "}
+              These describe the derived mask, not cells or a complete
+              anatomical extent.
+            </p>
+          )}
           <p>
             Each voxel takes its most probable label, including
             unknown/background. Surfaces use a 0.5 boundary on the resulting
@@ -416,15 +450,11 @@ function LoadedSubregions({
           <p>
             Source space: approximately MNI-ICBM152 2009c symmetric. Recentered
             for this independent view.{" "}
-            {kind === "thalamus"
-              ? "This download has 26 label names per side; 23 per side have winner voxels. The current segmentation software describes 25 labels per side; this explorer follows the downloaded probability file, not that software’s current output."
-              : kind === "amygdala"
-                ? "Winner assignment uses all 30 channels, including background and 20 hippocampal labels. Only the nine amygdala labels per side are displayed. The supplied left/right probability arrays are identical with reflected affines; these shapes do not measure anatomical asymmetry. Tiny fragments, particularly the 17-voxel medial label, need caution."
-                : "The superior cerebellar peduncles share one label."}
+            {atlasNotes[kind].protocol}
           </p>
           <p>
             Modified FreeSurfer data ·{" "}
-            {(atlas.geometry.compressedBytes / 1000).toFixed(0)} kB compressed
+            {(transferBytes / 1000).toFixed(0)} kB compressed
             geometry, loaded on demand. Checked October 19, 2026.
           </p>
           <a href={atlas.source.documentation} target="_blank" rel="noreferrer">

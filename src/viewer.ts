@@ -26,6 +26,11 @@ export type ViewerDataset = {
   regions: ViewerRegion[];
   compressedUrl: string;
   rawUrl: string;
+  assets?: {
+    hemisphere: string;
+    compressedUrl: string;
+    rawUrl: string;
+  }[];
   fitOnLoad?: boolean;
   explodeFromCenter?: boolean;
   label?: string;
@@ -184,21 +189,31 @@ export class AtlasViewer {
   private load = async () => {
     try {
       const compressed = "DecompressionStream" in window;
-      const response = await fetch(
-        assetUrl(compressed ? this.dataset.compressedUrl : this.dataset.rawUrl),
-        { signal: this.loadController.signal },
-      );
-      if (!response.ok) throw new Error("The atlas could not be loaded.");
-      const buffer =
-        compressed && response.body
+      const assets = this.dataset.assets ?? [{
+        compressedUrl: this.dataset.compressedUrl,
+        rawUrl: this.dataset.rawUrl,
+        hemisphere: null,
+      }];
+      const buffers = await Promise.all(assets.map(async (asset) => {
+        const response = await fetch(
+          assetUrl(compressed ? asset.compressedUrl : asset.rawUrl),
+          { signal: this.loadController.signal },
+        );
+        if (!response.ok) throw new Error("The atlas could not be loaded.");
+        return compressed && response.body
           ? await new Response(
               response.body.pipeThrough(new DecompressionStream("gzip")),
             ).arrayBuffer()
           : await response.arrayBuffer();
+      }));
       if (this.disposed) return;
       for (const region of this.dataset.regions) {
+        const assetIndex = assets.findIndex((asset) =>
+          !asset.hemisphere || asset.hemisphere === region.hemisphere,
+        );
+        if (assetIndex < 0) throw new Error("The atlas surface data is missing.");
         const geometry = this.geometry(
-          buffer,
+          buffers[assetIndex],
           region.offset,
           region.vertices,
           region.triangles,
@@ -786,6 +801,7 @@ export class AtlasViewer {
         : 0;
   };
   dispose() {
+    if (this.disposed) return;
     this.disposed = true;
     cancelAnimationFrame(this.frame);
     this.loadController.abort();
@@ -817,6 +833,7 @@ export class AtlasViewer {
       outline.material.dispose();
     }
     this.renderer.dispose();
+    this.renderer.forceContextLoss();
     this.renderer.domElement.remove();
   }
 }

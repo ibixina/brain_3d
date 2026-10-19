@@ -11,7 +11,10 @@ export type SubregionName = {
   sourceName?: string;
   aliases?: string[];
 };
-export type Subregion = ViewerRegion & SubregionName;
+export type Subregion = ViewerRegion & SubregionName & {
+  voxels: number;
+  voxelConnectedComponents6?: number;
+};
 export type SubregionAtlas = {
   title: string;
   checkedOn: string;
@@ -19,6 +22,12 @@ export type SubregionAtlas = {
   omitted?: SubregionName[];
   compressedUrl: string;
   rawUrl: string;
+  assets?: {
+    hemisphere: string;
+    compressedUrl: string;
+    rawUrl: string;
+    geometry: { compressedBytes: number };
+  }[];
   source: {
     documentation: string;
     protocol: string;
@@ -45,6 +54,11 @@ export const subregionCatalog = {
     button: "Explore atlas nuclei",
     detail: "Separate atlas · 9 surfaces per side",
   },
+  hippocampus: {
+    name: "Hippocampal",
+    button: "Explore atlas subregions",
+    detail: "Separate atlas · 20 surfaces per side",
+  },
 };
 export type SubregionKind = keyof typeof subregionCatalog;
 
@@ -54,6 +68,8 @@ const targets: Record<string, SubregionKind> = {
   "aseg-49": "thalamus",
   "aseg-18": "amygdala",
   "aseg-54": "amygdala",
+  "aseg-17": "hippocampus",
+  "aseg-53": "hippocampus",
 };
 
 export function subregionForRegion(id: string) {

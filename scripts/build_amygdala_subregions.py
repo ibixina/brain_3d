@@ -1,26 +1,15 @@
 """Build independent amygdala winner surfaces from the pinned FreeSurfer atlas."""
 from pathlib import Path
 import gzip
-import hashlib
 import json
-import urllib.request
-import zipfile
 
-import nibabel as nib
-import numpy as np
 from scipy.ndimage import label as connected_components
 from subregion_geometry import pack_surface_sets
+from hippo_amygdala_source import URL, SHA, load_source, sha256
 
 ROOT = Path(__file__).resolve().parents[1]
-CACHE = ROOT / '.cache/subregions'
 OUT = ROOT / 'public/subregions'
-URL = ('https://surfer.nmr.mgh.harvard.edu/fswiki/SubfieldAtlasesICBMspace'
-       '?action=AttachFile&do=get&target=HippoAmyg.zip')
-SHA = '3bedb212780716a9ff5547eb28f5f3018270982f085c892303eb547cb4a85811'
-NIFTI_SHA = {
-    'left': 'a79d5f88acfa21684a6f8c1e78da21e74ccbf152e68fb845fde048f451c4474e',
-    'right': '4d20bb95435afc9a139279ae2a159d8dfbf3f1b1de0d07d901ff6cf08570e5a3',
-}
+
 # Names and abbreviations follow Table 2 of Saygin, Kliemann et al. (2017).
 LABELS = [
     (7001, 'Lateral-nucleus', 'Lateral nucleus', 'La', '#8db8d1',
@@ -44,64 +33,36 @@ LABELS = [
 ]
 
 
-def sha256(data):
-    return hashlib.sha256(data).hexdigest()
-
-
 def build():
-    CACHE.mkdir(parents=True, exist_ok=True)
     OUT.mkdir(parents=True, exist_ok=True)
-    archive = CACHE / 'HippoAmyg.zip'
-    if not archive.exists():
-        urllib.request.urlretrieve(URL, archive)
-    if sha256(archive.read_bytes()) != SHA:
-        raise ValueError('Hippocampus/amygdala source archive checksum changed')
     volumes = {}
-    with zipfile.ZipFile(archive) as source:
-        names = source.read('HippoAmygProbs.MNIsymSpace.names.txt').decode()
-        rows = [line.split(',') for line in names.splitlines() if line.strip()]
-        if len(rows) != 30 or rows[0] != ['0', 'Unknown']:
-            raise ValueError('Unexpected hippocampus/amygdala channel table')
-        if rows[21:] != [[str(item[0]), item[1]] for item in LABELS]:
-            raise ValueError('Unexpected amygdala label names or channel order')
+    names = ''
 
-        def sets():
-            for side in ['left', 'right']:
-                filename = f'HippoAmygProbs.MNIsymSpace.{side}.nii.gz'
-                image_bytes = source.read(filename)
-                if sha256(image_bytes) != NIFTI_SHA[side]:
-                    raise ValueError('Source NIfTI checksum changed')
-                image = nib.Nifti1Image.from_bytes(gzip.decompress(image_bytes))
-                probs = image.get_fdata(dtype=np.float32)
-                if (not np.isfinite(probs).all() or probs.min() < -1e-6
-                        or probs.max() > 1 + 1e-6
-                        or not np.allclose(probs.sum(axis=3), 1, atol=1e-6)):
-                    raise ValueError('Invalid label probabilities')
-                winners = probs.argmax(axis=3)
-                probability_hash = hashlib.sha256()
-                for channel in range(probs.shape[3]):
-                    probability_hash.update(np.ascontiguousarray(probs[..., channel]).tobytes())
-                volumes[side] = dict(filename=filename, sha256=NIFTI_SHA[side],
-                                     shape=list(image.shape), affine=image.affine.tolist(),
-                                     probabilityArraySha256=probability_hash.hexdigest(),
-                                     probabilityRange=[float(probs.min()), float(probs.max())])
-                entries = []
-                for channel, (code, source_name, name, abbreviation, color, description) in enumerate(LABELS, start=21):
-                    mask = winners == channel
-                    _, components = connected_components(mask)
-                    entries.append(dict(
-                        id=f'amyg-{side}-{code}', key=source_name, name=name,
-                        abbreviation=abbreviation, sourceName=source_name,
-                        hemisphere=side, group='Amygdala', color=color,
-                        kind='segmentation', source='probability-atlas', label=code,
-                        channel=channel, description=description,
-                        maxProbability=float(probs[..., channel].max()),
-                        voxelConnectedComponents6=int(components),
-                    ))
-                del probs
-                yield image, winners, entries
+    def sets():
+        nonlocal names
+        for side in ['left', 'right']:
+            image, probs, names, volume = load_source(side)
+            rows = [line.split(',') for line in names.splitlines() if line.strip()]
+            if rows[21:] != [[str(item[0]), item[1]] for item in LABELS]:
+                raise ValueError('Unexpected amygdala label names or channel order')
+            volumes[side] = volume
+            winners = probs.argmax(axis=3)
+            entries = []
+            for channel, (code, source_name, name, abbreviation, color, description) in enumerate(LABELS, start=21):
+                _, components = connected_components(winners == channel)
+                entries.append(dict(
+                    id=f'amyg-{side}-{code}', key=source_name, name=name,
+                    abbreviation=abbreviation, sourceName=source_name,
+                    hemisphere=side, group='Amygdala', color=color,
+                    kind='segmentation', source='probability-atlas', label=code,
+                    channel=channel, description=description,
+                    maxProbability=float(probs[..., channel].max()),
+                    voxelConnectedComponents6=int(components),
+                ))
+            del probs
+            yield image, winners, entries
 
-        raw, parts, omitted, origin = pack_surface_sets(sets())
+    raw, parts, omitted, origin = pack_surface_sets(sets())
     if omitted:
         raise ValueError('Expected all nine amygdala labels to have winner voxels')
     if volumes['left']['probabilityArraySha256'] != volumes['right']['probabilityArraySha256']:

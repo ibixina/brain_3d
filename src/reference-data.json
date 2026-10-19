@@ -1994,10 +1994,10 @@
       "paragraphs": [
         "The hippocampal formation commonly includes the dentate gyrus, hippocampus proper (cornu ammonis, or CA fields), and subicular cortex. It lies in each medial temporal lobe beside the inferior horn of the lateral ventricle. Entorhinal cortex provides an adjacent cortical interface.",
         "Coronal sections are useful for separating the hippocampus from the more anterior amygdala and nearby temporal cortex. Their appearance changes as the section moves from front to back. Use the linked specimen lessons and MRI for orientation; a single section cannot show the full folded structure.",
-        "Subfield boundaries depend on anatomical definitions, image contrast, and the labeling protocol. The 2015 Iglesias atlas used ultra-high-resolution postmortem human MRI. Its labels include territories absent from this model, and its CA2/3 label combines two named fields. A protocol label is not proof that those fields are biologically identical.",
+        "Subfield boundaries depend on anatomical definitions, image contrast, and the labeling protocol. The 2015 Iglesias atlas used ultra-high-resolution postmortem human MRI. The main hippocampus mesh does not contain its internal labels. A separate viewer now provides head/body atlas compartments, while the source’s CA3 labels include CA2 under the current protocol. A protocol label is not proof that those fields are biologically identical.",
         "FreeSurfer cautions that internal subregion boundaries estimated from standard 1 mm T1 scans can depend strongly on atlas prior knowledge. Higher-resolution output labels do not themselves create new measured image detail. The bundled MRI templates have no hippocampal subfield labels."
       ],
-      "scope": "Cerebra has one hippocampus mesh per hemisphere plus separate entorhinal and parahippocampal surface parcels. Dentate gyrus, CA fields, subicular territories, alveus, fimbria, and fornix have no separate selectable meshes. The gross hippocampus label should not be read as a precise outline of every component of the formation. Finer mode refines its surface, not these subdivisions.",
+      "scope": "The main brain has one hippocampus mesh per hemisphere plus entorhinal and parahippocampal parcels. Explore atlas subregions opens 20 independent labels per side, including head/body CA and subicular territories, dentate and molecular-layer labels, alveus, fimbria, HATA, tail, and fissure space. These are not 20 cellular subfields. CA2 has no independent boundary; it is grouped within source CA3. The 0.25 mm probability grid is not microscopic accuracy. Source left/right arrays are mirrored, not a measurement of anatomical asymmetry. The viewer is not registered to the main brain or MRI templates. Individual cells, complete fibers, and the full fornix have no separate selectable meshes.",
       "regions": [
         "aseg-17",
         "aseg-53",
@@ -2018,7 +2018,8 @@
         "hippocampus-chapter",
         "hippocampus-sections",
         "hippocampal-atlas",
-        "hippocampal-segmentation"
+        "hippocampal-segmentation",
+        "subregion-atlases"
       ],
       "reading": {
         "keys": ["hippocampus", "entorhinal", "parahippocampal"],
@@ -2032,31 +2033,31 @@
           {
             "label": "Dentate gyrus",
             "summary": "Folded cortex with a granule-cell layer.",
-            "detail": "It is not separately segmented within either gross hippocampus mesh.",
+            "detail": "The separate viewer supplies head/body GC-ML-DG labels. This source grouping does not resolve individual granule cells or every dentate lamina.",
             "source": "hippocampal-atlas"
           },
           {
             "label": "CA1",
             "summary": "A field of hippocampus proper adjoining subiculum.",
-            "detail": "No selectable CA1 boundary is present.",
+            "detail": "Head/body CA1 surfaces are available in the independent atlas, with hippocampal molecular-layer labels kept separate.",
             "source": "hippocampal-atlas"
           },
           {
             "label": "CA2 and CA3",
             "summary": "Named fields combined as CA2/3 in the cited MRI protocol.",
-            "detail": "This grouping reflects the protocol’s contrast and delineation limits; neither field is separately modeled here.",
+            "detail": "The download names these head/body labels CA3; current protocol documentation includes CA2 within them. No independent CA2 mesh is supplied.",
             "source": "hippocampal-atlas"
           },
           {
             "label": "CA4 / hilar region",
             "summary": "The cited atlas uses CA4 for territory within the dentate gyrus.",
-            "detail": "Terminology and label definitions must be checked against the specific protocol. There is no CA4 mesh.",
+            "detail": "Head/body CA4 surfaces are available in the separate viewer. Their protocol boundaries are not a complete map of hilar cell types.",
             "source": "hippocampal-atlas"
           },
           {
             "label": "Subiculum and neighboring subicular cortices",
             "summary": "Subiculum, presubiculum, and parasubiculum are distinguished in the cited atlas.",
-            "detail": "None has its own mesh here; the gross label does not establish their individual borders.",
+            "detail": "The separate atlas supplies head/body subiculum and presubiculum labels plus one parasubiculum label per side; it does not segment every internal layer.",
             "source": "hippocampal-atlas"
           },
           {
@@ -2068,7 +2069,7 @@
           {
             "label": "Alveus and fimbria",
             "summary": "White matter along the hippocampus continuing toward the fornix.",
-            "detail": "These bundles and the fornix are not individually reconstructed.",
+            "detail": "Separate atlas envelopes for alveus and fimbria are available. Individual axons and the full fornix remain unmodeled.",
             "source": "hippocampal-atlas"
           }
         ]
@@ -2117,7 +2118,7 @@
         "Rempel-Clower and colleagues’ 1996 report combined neuropsychological testing with postmortem anatomy in three additional people with hippocampal damage, alongside earlier cases. Damage concentrated in bilateral CA1 could impair formation of new memories; more extensive damage could produce greater impairment. The cases differed in lesion extent and memory findings. They do not assign every kind of memory to one field.",
         "Anatomical pathways, electrical recordings, behavioral tests, and MRI answer different questions. The selected memory learning path introduces several related regions; it does not animate information flow or reproduce either experiment. A statistical task map is also different from a synaptic recording."
       ],
-      "scope": "The atlas contains no individual hippocampal neurons, synapses, pathway fibers, evoked potentials, or simulation of memory formation. The links below open gross anatomical context. Neither a teal highlight nor a finer mesh demonstrates potentiation, explains an individual’s memory ability, or reproduces a lesion study.",
+      "scope": "The atlas contains no individual hippocampal neurons, synapses, pathway fibers, evoked potentials, or simulation of memory formation. The links below open gross anatomical context; the hippocampus inspector also opens independent atlas subregions. Those surfaces do not reconstruct the pathways or recordings described here. Neither a teal highlight nor a finer mesh demonstrates potentiation, explains an individual’s memory ability, or reproduces a lesion study.",
       "regions": ["aseg-17", "aseg-53", "lh-entorhinal", "rh-entorhinal"],
       "related": [
         "hippocampal-formation",
@@ -2171,7 +2172,7 @@
         {
           "kind": "path",
           "id": "memory",
-          "note": "Explore selected medial temporal and diencephalic regions. Fornix, mammillary bodies, and hippocampal subfields are not separately modeled."
+          "note": "Explore selected gross medial temporal and diencephalic labels. Fornix and mammillary bodies are not modeled; the independent hippocampal subregion viewer is outside this guided sequence."
         },
         {
           "kind": "video",

@@ -30,6 +30,17 @@ and MRI templates. Data terms: /licenses/freesurfer.txt
 Source, method, frame, and checksums: /subregions/amygdala-provenance.json
 Saygin, Kliemann et al. (2017): https://doi.org/10.1016/j.neuroimage.2017.04.046
 
+Standalone hippocampus: modified winner-surface derivatives of FreeSurfer's
+HippoAmyg.zip probability atlas. All 30 channels compete; channels 1-20
+are surfaced without extra smoothing, resampling, or component removal.
+The 20 labels per side include tissue, layers, and fissure space; CA2 is
+grouped within source CA3. Source grids are reflected, not an anatomical
+asymmetry measurement. Independent of fsaverage and MRI templates.
+Data terms: /licenses/freesurfer.txt
+Source, method, frame, and per-hemisphere file checksums:
+/subregions/hippocampus-provenance.json
+Iglesias et al. (2015): https://doi.org/10.1016/j.neuroimage.2015.04.042
+
 Nilearn: Copyright (c) The nilearn developers. /licenses/nilearn.txt
 MNE testing-data: fsaverage source files from the pinned commit recorded
 in /models/atlas.json. FreeSurfer data terms apply.
