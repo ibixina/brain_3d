@@ -18,6 +18,15 @@ export type Subregion = ViewerRegion & SubregionName & {
 };
 export type SubregionAtlas = {
   guide?: ThalamicGuide;
+  boundaries?: {
+    checkedOn: string;
+    source: string;
+    sourceTitle: string;
+    note: string;
+    labels: Record<string, { text: string; neighbors: string[] }>;
+    readingScope: string;
+    reading: { id: string; label: string }[];
+  };
   title: string;
   checkedOn: string;
   parts: Subregion[];
@@ -40,6 +49,16 @@ export type SubregionAtlas = {
   };
   geometry: { compressedBytes: number };
 };
+
+export function boundaryNeighbors(parts: SubregionName[], selected: SubregionName, keys: string[]) {
+  return keys.flatMap((key) => {
+    const part = parts.find((item) =>
+      item.key === key && item.hemisphere === selected.hemisphere && item.id !== selected.id,
+    );
+    return part ? [part] : [];
+  });
+}
+
 export const subregionCatalog = {
   brainstem: {
     name: "Brainstem",

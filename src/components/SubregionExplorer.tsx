@@ -1,9 +1,10 @@
 import { lazy, Suspense, useEffect, useRef, useState } from "react";
-import { ChevronDown, Focus, Link, Minus, Plus, Split } from "lucide-react";
+import { ChevronDown, ChevronRight, Focus, Link, Minus, Plus, Split } from "lucide-react";
 import { AtlasViewer, type ViewState } from "../viewer";
 import { assetUrl } from "../asset-url.ts";
 import {
   matchingSubregions,
+  boundaryNeighbors,
   subregionName,
   subregionCatalog,
   type SubregionAtlas,
@@ -88,10 +89,12 @@ export default function SubregionExplorer({
   kind,
   route,
   onRouteChange,
+  onReference,
 }: {
   kind: SubregionKind;
   route: SubregionRoute;
   onRouteChange: (route: SubregionRoute) => void;
+  onReference: (id: string) => void;
 }) {
   const [atlas, setAtlas] = useState<SubregionAtlas | null>(null);
   const [failed, setFailed] = useState(false);
@@ -108,7 +111,10 @@ export default function SubregionExplorer({
               import("../thalamus-guide.json"),
             ]).then(([atlas, guide]) => ({ default: { ...atlas.default, guide: guide.default } }))
           : kind === "amygdala"
-            ? import("../amygdala-subregions.json")
+            ? Promise.all([
+                import("../amygdala-subregions.json"),
+                import("../amygdala-boundaries.json"),
+              ]).then(([atlas, boundaries]) => ({ default: { ...atlas.default, boundaries: boundaries.default } }))
             : import("../hippocampus-subregions.json");
     void request
       .then((data) => {
@@ -130,6 +136,7 @@ export default function SubregionExplorer({
       kind={kind}
       route={route}
       onRouteChange={onRouteChange}
+      onReference={onReference}
     />
   );
 }
@@ -139,11 +146,13 @@ function LoadedSubregions({
   kind,
   route,
   onRouteChange,
+  onReference,
 }: {
   atlas: SubregionAtlas;
   kind: SubregionKind;
   route: SubregionRoute;
   onRouteChange: (route: SubregionRoute) => void;
+  onReference: (id: string) => void;
 }) {
   const large = atlas.parts.length > 8;
   const name = subregionCatalog[kind].name;
@@ -187,6 +196,8 @@ function LoadedSubregions({
   const groupIndex = atlas.guide?.groups.findIndex((group) => group.id === tour) ?? -1;
   const activeGroup = atlas.guide?.groups[groupIndex];
   const boundary = selected ? atlas.guide?.labels[selected.key] : undefined;
+  const protocol = selected ? atlas.boundaries?.labels[selected.key] : undefined;
+  const neighbors = selected && protocol ? boundaryNeighbors(atlas.parts, selected, protocol.neighbors) : [];
   const pointed = atlas.parts.find((part) => part.id === hover?.id);
   const assetHemisphere = atlas.assets ? state.hemisphere : null;
   const inScope = (part: SubregionName) => !state.hiddenGroups.includes(part.group);
@@ -559,6 +570,23 @@ function LoadedSubregions({
             </>
           )}
         </div>
+        {selected && protocol && atlas.boundaries && (
+          <section className="subregion-boundary" aria-label={`${subregionName(selected)} boundary protocol`}>
+            <h4>Boundary protocol</h4>
+            <p>{protocol.text}</p>
+            <p className="subregion-boundary-note">{atlas.boundaries.note}</p>
+            <a className="subregion-boundary-source" href={atlas.boundaries.source} title={atlas.boundaries.sourceTitle} target="_blank" rel="noreferrer">Ex vivo MRI protocol · Table 2 ↗</a>
+            <h4>Explore selected neighbors</h4>
+            <p className="subregion-boundary-note">Choose a label to isolate its existing surface.</p>
+            <div className="subregion-neighbors">
+              {neighbors.map((part) => (
+                <button key={part.id} disabled={!ready} onClick={() => choose(part.id, true)} aria-label={`Inspect ${subregionName(part)}`}>
+                  {subregionName(part)}<ChevronRight size={13} aria-hidden="true" />
+                </button>
+              ))}
+            </div>
+          </section>
+        )}
         <div className="subregion-selection">
           <button
             disabled={!ready || !selected}
@@ -625,6 +653,15 @@ function LoadedSubregions({
                 </li>
               ))}
             </ul>
+          </details>
+        )}
+        {atlas.boundaries && (
+          <details className="subregion-reading">
+            <summary>Related anatomy & human evidence</summary>
+            <p>{atlas.boundaries.readingScope}</p>
+            {atlas.boundaries.reading.map((note) => (
+              <button key={note.id} onClick={() => onReference(note.id)}>{note.label}<ChevronRight size={13} aria-hidden="true" /></button>
+            ))}
           </details>
         )}
         <p className="subregion-scope">

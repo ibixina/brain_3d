@@ -528,3 +528,50 @@
 .subregion-probability > p a:hover {
   text-decoration: underline;
 }
+.subregion-boundary {
+  border-top: 1px solid #ffffff18;
+  margin: 18px 0;
+  padding-top: 15px;
+}
+.subregion-boundary h4 {
+  color: #c2dcd7;
+  font-size: 11px;
+  font-weight: 500;
+  margin: 14px 0 8px;
+}
+.subregion-boundary p,
+.subregion-reading p {
+  color: #aec4cf;
+  font-size: 11px;
+  line-height: 1.8;
+  margin: 8px 0;
+}
+.subregion-boundary .subregion-boundary-note {
+  color: #9fb7c5;
+  font-size: 10px;
+}
+.subregion-neighbors,
+.subregion-reading {
+  margin: 12px 0;
+}
+.subregion-neighbors button,
+.subregion-reading button {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  width: 100%;
+  text-align: left;
+  line-height: 1.6;
+  margin: 6px 0;
+}
+.subregion-neighbors svg,
+.subregion-reading svg {
+  flex-shrink: 0;
+}
+.subregion-reading summary {
+  color: #b3d2c9;
+  font-size: 11px;
+  line-height: 1.7;
+  cursor: pointer;
+}

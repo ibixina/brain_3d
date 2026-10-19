@@ -1,0 +1,49 @@
+{
+  "checkedOn": "2026-10-19",
+  "source": "https://www.nmr.mgh.harvard.edu/~iglesias/pdf/AmygdalaAtlas.pdf#page=37",
+  "sourceTitle": "Saygin, Kliemann et al. (2017), Table 2",
+  "note": "Protocol descriptions concern ex vivo MRI boundaries. These probability-derived surfaces do not show that contrast or cellular detail.",
+  "labels": {
+    "Lateral-nucleus": {
+      "text": "Coronal outline changes from oval to wedge-shaped; Ba stays beside it.",
+      "neighbors": ["Basal-nucleus", "Anterior-amygdaloid-area-AAA", "Paralaminar-nucleus"]
+    },
+    "Basal-nucleus": {
+      "text": "Coronal outline changes from rounded to L-shaped, then rounded again.",
+      "neighbors": ["Lateral-nucleus", "Accessory-Basal-nucleus", "Paralaminar-nucleus"]
+    },
+    "Accessory-Basal-nucleus": {
+      "text": "Emerges medially within Ba; CAT borders it medially and Ce dorsally.",
+      "neighbors": ["Basal-nucleus", "Corticoamygdaloid-transitio", "Central-nucleus"]
+    },
+    "Anterior-amygdaloid-area-AAA": {
+      "text": "Anterior crescent adjoining CAT; its posterior lateral extension can detach.",
+      "neighbors": ["Lateral-nucleus", "Corticoamygdaloid-transitio"]
+    },
+    "Central-nucleus": {
+      "text": "Lies above AB, with CAT medially and Ba laterally.",
+      "neighbors": ["Accessory-Basal-nucleus", "Corticoamygdaloid-transitio", "Basal-nucleus"]
+    },
+    "Medial-nucleus": {
+      "text": "Variable shape near the optic tract; axial views help verify boundaries.",
+      "neighbors": ["Corticoamygdaloid-transitio"]
+    },
+    "Cortical-nucleus": {
+      "text": "Small compartment above CAT, with AB on its lateral side.",
+      "neighbors": ["Corticoamygdaloid-transitio", "Accessory-Basal-nucleus"]
+    },
+    "Corticoamygdaloid-transitio": {
+      "text": "Forms the medial border and meets HATA posteriorly; labels remain separate.",
+      "neighbors": ["Medial-nucleus", "Cortical-nucleus", "Accessory-Basal-nucleus", "Paralaminar-nucleus"]
+    },
+    "Paralaminar-nucleus": {
+      "text": "Thin band below Ba, beside CAT, extending medially toward AB.",
+      "neighbors": ["Basal-nucleus", "Lateral-nucleus", "Corticoamygdaloid-transitio"]
+    }
+  },
+  "readingScope": "Human lesion findings are not a function map for the selected nucleus.",
+  "reading": [
+    { "id": "amygdala-anatomy", "label": "Regional anatomy & atlas limits" },
+    { "id": "amygdala-evidence", "label": "Human learning & fear evidence" }
+  ]
+}

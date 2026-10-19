@@ -670,6 +670,12 @@ export default function App() {
     setAtlasRoute(null);
     setModal(null);
   }
+  function openAtlasReference(id: string) {
+    modalRef.current?.close();
+    setAtlasRoute(null);
+    setModal(null);
+    openReference(id);
+  }
   function openLibrary() {
     if (sidebar) {
       closeLibrary();
@@ -1725,6 +1731,7 @@ export default function App() {
                 kind={subregionModal}
                 route={atlasRoute ?? defaultSubregionRoute(subregionModal, selected?.hemisphere ?? "both")}
                 onRouteChange={changeSubregionRoute}
+                onReference={openAtlasReference}
               />
             </Suspense>
           </ContentBoundary>
