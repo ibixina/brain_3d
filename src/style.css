@@ -1193,6 +1193,37 @@ kbd {
   background: #060d16c7;
   backdrop-filter: blur(7px);
 }
+.subregion-open {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  margin-top: 18px;
+  padding: 13px 14px;
+  color: #b4e1db;
+  background: #79c4bb0b;
+  border: 1px solid #79c4bb33;
+  border-radius: 9px;
+  text-align: left;
+}
+.subregion-open span {
+  flex: 1;
+}
+.subregion-open strong {
+  display: block;
+  font-size: 12px;
+  font-weight: 550;
+}
+.subregion-open small {
+  display: block;
+  margin-top: 4px;
+  font-size: 10px;
+  color: #91a6bc;
+}
+.subregion-open:hover {
+  background: #79c4bb19;
+  border-color: #79c4bb70;
+}
 .dialog-header {
   display: flex;
   align-items: center;

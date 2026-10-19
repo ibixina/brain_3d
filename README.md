@@ -52,6 +52,14 @@ The brain occupies the full canvas. There are no permanent sidebars: the search 
 - Save regions in browser storage, copy region links, or export a PNG of the model.
 - Keyboard: Ctrl/Cmd K searches, E toggles explosion, L toggles labels, R resets. In structure search, Enter opens a single match and Down focuses the first result. Selecting a structure focuses its heading; closing details returns focus to the library button. Escape closes an open library or settings panel, then clears the selected region. Library and region-detail tabs support Left/Right, Home, and End.
 
+## Brainstem atlas subregions
+
+Select **Brainstem**, then **Explore 4 subregions** in its inspector. An on-demand viewer opens four source-derived compartments: medulla oblongata, pons, midbrain, and a combined superior-cerebellar-peduncle label. Click a surface or use the four name buttons; descriptions follow the teal selection. Rotate, zoom, separate the parts, fit the view, or isolate a compartment. Closing the viewer returns to the existing anatomy/guide/reference context.
+
+This is an independent probability-atlas model, with a different boundary protocol from the whole-brain brainstem label. It is not overlaid on fsaverage or the MRI templates. The source uses an approximately MNI-ICBM152 2009c symmetric frame and a 1 mm grid. Winner labels include background; their 0.5 surfaces receive no extra smoothing or resampling. These are gross compartments, without individual nuclei, nerves, or reconstructed axons. The superior peduncles share one source label.
+
+The component, styles, and 192 kB compressed geometry load only when requested. It reuses the idle renderer; the main scene pauses while the viewer is open, and closing it disposes the extra renderer. Actual coverage is **104 whole-brain labels plus four separate atlas compartments**, not 108 labels in one registered atlas. The viewer links the [original probability atlas](https://surfer.nmr.mgh.harvard.edu/fswiki/SubfieldAtlasesICBMspace), [boundary protocol](https://surfer.nmr.mgh.harvard.edu/fswiki/BrainstemSubstructures), [Iglesias et al. (2015)](https://doi.org/10.1016/j.neuroimage.2015.02.065), the FreeSurfer license, and downloadable provenance. To regenerate the pinned derivatives with the existing Python requirements, run `.venv/bin/python scripts/build_brainstem_subregions.py`.
+
 ## Guided learning paths
 
 Choose **Explore guided learning paths** on the opening view, or **Learning paths** inside the anatomy library. Six paths cover memory and learning, movement, vision, language, emotion and bodily state, and ventricles and CSF. Their 26 stops use real existing meshes, adapt the camera and visibility, and connect a short explanation with a precise source and an observation prompt.

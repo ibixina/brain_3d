@@ -97,6 +97,11 @@
       "url": "https://doi.org/10.7554/eLife.29738",
       "kind": "Original human/primate MRI and tissue study"
     },
+    "brainstem-atlas": {
+      "title": "FreeSurfer · Subregion probability atlases in MNI space",
+      "url": "https://surfer.nmr.mgh.harvard.edu/fswiki/SubfieldAtlasesICBMspace",
+      "kind": "Atlas documentation and original data"
+    },
     "brainstem-lab": {
       "title": "UTHealth · Brainstem overview and section landmarks",
       "url": "https://nba.uth.tmc.edu/neuroanatomy/L10/Lab10p29_index.html",
@@ -707,7 +712,7 @@
           }
         ]
       },
-      "scope": "Only one brainstem surface is segmented here. Midbrain, pons, medulla, nuclei, peduncles, long tracts, and cranial-nerve roots are not separate selectable meshes. The fourth ventricle and cerebellar compartments are available as neighboring anatomy, not internal brainstem labels.",
+      "scope": "The whole-brain view has one brainstem label. Its inspector opens a separate four-compartment atlas model of midbrain, pons, medulla, and superior cerebellar peduncles. This independent probability atlas uses a different boundary protocol; it is not an overlay on the whole brain or MRI templates. Individual nuclei, long tracts, and cranial-nerve roots remain unsegmented. Neighboring fourth-ventricle and cerebellar meshes provide context.",
       "regions": ["aseg-16", "aseg-15", "aseg-8"],
       "related": [
         "cranial-nerves",
@@ -715,7 +720,7 @@
         "section-planes",
         "csf-circulation"
       ],
-      "sources": ["brainstem-lab", "orientation"],
+      "sources": ["brainstem-lab", "orientation", "brainstem-atlas"],
       "explorations": [
         {
           "kind": "video",
@@ -909,7 +914,7 @@
         "Functional divisions cut across simple lobe names: vestibulocerebellar circuits support gaze and balance; spinocerebellar circuits integrate body feedback with movement; cerebrocerebellar loops involve lateral hemispheres and cerebral cortex. These are broad circuit descriptions, not exact boundaries of a single task.",
         "Dentate, interposed (emboliform and globose), and fastigial nuclei lie in the interior. They receive inhibitory Purkinje-cell output and participate in routes back to brainstem and forebrain motor systems. Some Purkinje cells instead project directly to vestibular nuclei outside the cerebellum."
       ],
-      "scope": "The model separates left/right cerebellar cortex and white-matter compartments. It does not separately segment the vermis, individual lobes or lobules, deep nuclei, or peduncles. Smoothing and atlas sampling limit visible folial detail; a finer compartment surface is not a cellular or lobular atlas.",
+      "scope": "The whole-brain model separates left/right cerebellar cortex and white-matter compartments, without vermis, individual lobules, deep nuclei, or peduncles. The brainstem inspector opens a separate probability-atlas model with a combined superior-cerebellar-peduncle label; it is not registered to these cerebellar meshes and does not contain individual fibers. Smoothing and atlas sampling limit folial detail.",
       "regions": ["aseg-8", "aseg-47", "aseg-7", "aseg-46", "aseg-16"],
       "related": [
         "cerebellar-circuit",
@@ -917,6 +922,7 @@
         "gray-white-matter"
       ],
       "sources": [
+        "brainstem-atlas",
         "cerebellum-gross",
         "cerebellum-chapter",
         "cerebellum-circuit"

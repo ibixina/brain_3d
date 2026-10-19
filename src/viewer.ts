@@ -19,6 +19,21 @@ export type ViewState = {
   section: string;
   sectionOffset: number;
 };
+export type ViewerRegion = Omit<Region, "detail"> & {
+  detail?: Region["detail"];
+};
+export type ViewerDataset = {
+  regions: ViewerRegion[];
+  compressedUrl: string;
+  rawUrl: string;
+  fitOnLoad?: boolean;
+  label?: string;
+};
+const defaultDataset: ViewerDataset = {
+  regions,
+  compressedUrl: "/models/atlas.mesh",
+  rawUrl: "/models/atlas.bin",
+};
 type AtlasMesh = THREE.Mesh<THREE.BufferGeometry, THREE.MeshStandardMaterial>;
 type Callbacks = {
   select: (id: string) => void;
@@ -105,6 +120,7 @@ export class AtlasViewer {
   constructor(
     private element: HTMLElement,
     private callbacks: Callbacks,
+    private dataset: ViewerDataset = defaultDataset,
   ) {
     this.renderer = new THREE.WebGLRenderer({
       antialias: true,
@@ -119,7 +135,8 @@ export class AtlasViewer {
     this.renderer.localClippingEnabled = true;
     this.renderer.domElement.setAttribute(
       "aria-label",
-      "Interactive 3D brain. Drag to rotate, scroll to zoom, right-drag to pan. Select a region in the structure list for keyboard access.",
+      dataset.label ??
+        "Interactive 3D brain. Drag to rotate, scroll to zoom, right-drag to pan. Select a region in the structure list for keyboard access.",
     );
     this.renderer.domElement.setAttribute("role", "img");
     element.appendChild(this.renderer.domElement);
@@ -166,7 +183,7 @@ export class AtlasViewer {
     try {
       const compressed = "DecompressionStream" in window;
       const response = await fetch(
-        assetUrl(compressed ? "/models/atlas.mesh" : "/models/atlas.bin"),
+        assetUrl(compressed ? this.dataset.compressedUrl : this.dataset.rawUrl),
         { signal: this.loadController.signal },
       );
       if (!response.ok) throw new Error("The atlas could not be loaded.");
@@ -177,7 +194,7 @@ export class AtlasViewer {
             ).arrayBuffer()
           : await response.arrayBuffer();
       if (this.disposed) return;
-      for (const region of regions) {
+      for (const region of this.dataset.regions) {
         const geometry = this.geometry(
           buffer,
           region.offset,
@@ -201,6 +218,7 @@ export class AtlasViewer {
         this.root.add(mesh);
       }
       this.update(this.state);
+      if (this.dataset.fitOnLoad) this.view("default");
       this.callbacks.ready();
     } catch (error) {
       if (!this.disposed)
@@ -267,7 +285,7 @@ export class AtlasViewer {
     this.state = { ...state };
     this.controls.autoRotate = state.autoRotate && !this.hovered;
     for (const [id, mesh] of this.meshes) {
-      const region = mesh.userData.region as Region;
+      const region = mesh.userData.region as ViewerRegion;
       const selected = id === state.selected;
       mesh.visible = state.isolated
         ? selected
@@ -336,7 +354,11 @@ export class AtlasViewer {
   private async loadDetail(id: string) {
     const mesh = this.meshes.get(id);
     if (!mesh) return;
-    const region = mesh.userData.region as Region;
+    const region = mesh.userData.region as ViewerRegion;
+    if (!region.detail) {
+      this.callbacks.detail(id, "ready");
+      return;
+    }
     if (this.pendingDetails.has(id)) return;
     if (!this.detailed.has(id)) {
       this.pendingDetails.add(id);
@@ -383,7 +405,7 @@ export class AtlasViewer {
       this.invalidate();
     }
   }
-  private surfaceColor(region: Region) {
+  private surfaceColor(region: ViewerRegion) {
     if (this.state.selected === region.id) return "#40b8b0";
     if (this.hovered === region.id) return "#e3a637";
     if (this.state.colorMode !== "tissue") return region.color;
@@ -391,7 +413,7 @@ export class AtlasViewer {
     return region.kind === "cortex" ? "#c6ada2" : "#b9ada0";
   }
   private applyAppearance(mesh: AtlasMesh) {
-    const region = mesh.userData.region as Region;
+    const region = mesh.userData.region as ViewerRegion;
     const selected = this.state.selected === region.id;
     const hovered = this.hovered === region.id;
     const color = this.surfaceColor(region);
@@ -449,6 +471,27 @@ export class AtlasViewer {
     };
     this.invalidate();
   }
+  fit(direction?: THREE.Vector3) {
+    const bounds = new THREE.Box3();
+    for (const mesh of this.meshes.values()) {
+      if (!mesh.visible) continue;
+      bounds.union(
+        mesh.geometry.boundingBox!.clone().translate(mesh.userData.explode),
+      );
+    }
+    if (bounds.isEmpty()) return;
+    const sphere = bounds.getBoundingSphere(new THREE.Sphere());
+    const dir =
+      direction ??
+      this.camera.position.clone().sub(this.controls.target).normalize();
+    this.cameraGoal = {
+      target: sphere.center,
+      position: sphere.center
+        .clone()
+        .addScaledVector(dir, Math.max(sphere.radius * 3.6, 35) * this.framing),
+    };
+    this.invalidate();
+  }
   view(name: string) {
     this.pointerLeave();
     const positions: Record<string, number[]> = {
@@ -462,6 +505,14 @@ export class AtlasViewer {
     };
     const coords = positions[name] || positions.default;
     const target = new THREE.Vector3(0, 5, 10);
+    if (this.dataset.fitOnLoad) {
+      this.fit(
+        new THREE.Vector3(...(coords as [number, number, number]))
+          .sub(target)
+          .normalize(),
+      );
+      return;
+    }
     const position = new THREE.Vector3(...(coords as [number, number, number]))
       .sub(target)
       .multiplyScalar(this.framing * (1 + this.state.exploded * 0.7))
@@ -569,12 +620,13 @@ export class AtlasViewer {
     )
       return;
     const hit = this.hit(event);
-    if (hit) this.callbacks.select((hit.object.userData.region as Region).id);
+    if (hit)
+      this.callbacks.select((hit.object.userData.region as ViewerRegion).id);
   };
   private pointerMove = (event: PointerEvent) => {
     if (event.buttons || event.pointerType === "touch") return;
     const hit = this.hit(event);
-    const id = hit ? (hit.object.userData.region as Region).id : null;
+    const id = hit ? (hit.object.userData.region as ViewerRegion).id : null;
     if (id !== this.hovered) {
       const previous = this.hovered ? this.meshes.get(this.hovered) : null;
       this.hovered = id;
@@ -677,7 +729,7 @@ export class AtlasViewer {
           const mesh = this.meshes.get(id);
           if (!mesh?.visible) return null;
           const position = new THREE.Vector3(
-            ...((mesh.userData.region as Region).center as [
+            ...((mesh.userData.region as ViewerRegion).center as [
               number,
               number,
               number,

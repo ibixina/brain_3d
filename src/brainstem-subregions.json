@@ -1,0 +1,159 @@
+{
+  "version": 1,
+  "title": "Brainstem atlas subregions",
+  "checkedOn": "2026-10-19",
+  "parts": [
+    {
+      "id": "medulla",
+      "key": "medulla",
+      "name": "Medulla oblongata",
+      "hemisphere": "midline",
+      "group": "Brainstem",
+      "kind": "segmentation",
+      "source": "probability-atlas",
+      "color": "#bca5d4",
+      "label": 175,
+      "channel": 1,
+      "description": "The lower brainstem compartment, continuing toward the spinal cord. Internal nuclei and individual fiber pathways are not segmented.",
+      "offset": 0,
+      "vertices": 3373,
+      "triangles": 6704,
+      "voxels": 7110,
+      "center": [
+        0.0,
+        -11.38,
+        21.91
+      ]
+    },
+    {
+      "id": "pons",
+      "key": "pons",
+      "name": "Pons",
+      "hemisphere": "midline",
+      "group": "Brainstem",
+      "kind": "segmentation",
+      "source": "probability-atlas",
+      "color": "#d7b977",
+      "label": 174,
+      "channel": 2,
+      "description": "The middle brainstem compartment. Its outer surface does not distinguish pontine nuclei, cranial-nerve nuclei, or individual tracts.",
+      "offset": 174892,
+      "vertices": 6550,
+      "triangles": 13096,
+      "voxels": 20725,
+      "center": [
+        0.0,
+        11.515,
+        9.744
+      ]
+    },
+    {
+      "id": "scp",
+      "key": "scp",
+      "name": "Superior cerebellar peduncles",
+      "hemisphere": "bilateral",
+      "group": "Brainstem",
+      "kind": "segmentation",
+      "source": "probability-atlas",
+      "color": "#87b6c9",
+      "label": 178,
+      "channel": 3,
+      "description": "The atlas groups the superior cerebellar peduncle territory into one label. Its paired portions are not individual reconstructed axons.",
+      "offset": 515444,
+      "vertices": 842,
+      "triangles": 1704,
+      "voxels": 426,
+      "center": [
+        0.0,
+        19.718,
+        23.647
+      ]
+    },
+    {
+      "id": "midbrain",
+      "key": "midbrain",
+      "name": "Midbrain",
+      "hemisphere": "midline",
+      "group": "Brainstem",
+      "kind": "segmentation",
+      "source": "probability-atlas",
+      "color": "#a3bd96",
+      "label": 173,
+      "channel": 4,
+      "description": "The upper brainstem compartment. Substantia nigra, red nuclei, colliculi, and other internal subdivisions are not individually modeled.",
+      "offset": 559468,
+      "vertices": 4390,
+      "triangles": 8772,
+      "voxels": 9522,
+      "center": [
+        0.0,
+        31.445,
+        2.881
+      ]
+    }
+  ],
+  "compressedUrl": "/subregions/brainstem.mesh",
+  "rawUrl": "/subregions/brainstem.bin",
+  "source": {
+    "url": "https://surfer.nmr.mgh.harvard.edu/fswiki/SubfieldAtlasesICBMspace?action=AttachFile&do=get&target=Brainstem.zip",
+    "archiveSha256": "f6ad672136102669955ee803f27c188a5e172a326a61fb9818d12fb4707fe5c2",
+    "niftiSha256": "4c90e68a60bea6beeefa5ae7aa7d5f5400e194e7d33bc1eddca75191b62d5e1c",
+    "names": "0,Background\n175,Medulla\n174,Pons\n178,SCP\n173,Midbrain\n",
+    "documentation": "https://surfer.nmr.mgh.harvard.edu/fswiki/SubfieldAtlasesICBMspace",
+    "protocol": "https://surfer.nmr.mgh.harvard.edu/fswiki/BrainstemSubstructures",
+    "paper": "https://doi.org/10.1016/j.neuroimage.2015.02.065",
+    "license": "/licenses/freesurfer.txt",
+    "shape": [
+      53,
+      67,
+      85,
+      5
+    ],
+    "affine": [
+      [
+        1.0,
+        0.0,
+        0.0,
+        -26.0
+      ],
+      [
+        0.0,
+        1.0,
+        0.0,
+        -62.0
+      ],
+      [
+        0.0,
+        0.0,
+        1.0,
+        -78.0
+      ],
+      [
+        0.0,
+        0.0,
+        0.0,
+        1.0
+      ]
+    ],
+    "spacingMm": [
+      1.0,
+      1.0,
+      1.0
+    ],
+    "frame": "Approximately MNI-ICBM152 2009c symmetric; not registered to the fsaverage whole-brain model",
+    "method": "Maximum-probability label per voxel, including background; marching cubes at 0.5 on each binary label; no additional smoothing or resampling; disconnected components retained",
+    "displayTransform": "[R,S,-A], recentered for a standalone view",
+    "displayOrigin": [
+      0.0,
+      -39.25,
+      29.5
+    ]
+  },
+  "geometry": {
+    "bytes": 787652,
+    "compressedBytes": 192330,
+    "sha256": "7630502af223338f78138b2699c2741ce4c689f70c98133ba80d58c992f593c3",
+    "compressedSha256": "ac3761efc91d9766a47c3ee037b90f95b5f53c0a5f2660d7647e42fb67d3ef74",
+    "triangles": 30276
+  }
+}

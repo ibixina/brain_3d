@@ -6,6 +6,14 @@ Sources: https://surfer.nmr.mgh.harvard.edu/ and the checksummed sources
 listed in /models/atlas.json. Meshes are transformed, parcel-split, sampled,
 and extracted from smoothed label volumes; they are not original data files.
 
+Standalone brainstem: modified derivatives of FreeSurfer's Brainstem.zip
+probability atlas. Maximum-probability labels (including background),
+0.5 isosurfaces without extra smoothing or resampling, recentered display.
+These are separate from the fsaverage model and the MRI templates.
+Source, labels, method, frame, and checksums: /subregions/brainstem-provenance.json
+Data terms: /licenses/freesurfer.txt
+Iglesias et al. (2015): https://doi.org/10.1016/j.neuroimage.2015.02.065
+
 Nilearn: Copyright (c) The nilearn developers. /licenses/nilearn.txt
 MNE testing-data: fsaverage source files from the pinned commit recorded
 in /models/atlas.json. FreeSurfer data terms apply.

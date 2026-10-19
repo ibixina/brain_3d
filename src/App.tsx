@@ -75,6 +75,9 @@ import {
   sources,
 } from "./data";
 
+const BrainstemSubregions = lazy(
+  () => import("./components/BrainstemSubregions"),
+);
 const ImagingWorkspace = lazy(() => import("./components/ImagingWorkspace"));
 const ReferenceLibrary = lazy(() => import("./components/ReferenceLibrary"));
 type Section = "anatomy" | "scans" | "activities";
@@ -193,9 +196,9 @@ export default function App() {
   const [query, setQuery] = useState("");
   const [expanded, setExpanded] = useState<string[]>([]);
   const [tab, setTab] = useState<DetailTab>("overview");
-  const [modal, setModal] = useState<"sources" | "help" | "videos" | null>(
-    null,
-  );
+  const [modal, setModal] = useState<
+    "sources" | "help" | "videos" | "brainstem" | null
+  >(null);
   const [saved, setSaved] = useState<string[]>(readSaved);
   const [savedOnly, setSavedOnly] = useState(false);
   const [hover, setHover] = useState<{
@@ -443,6 +446,9 @@ export default function App() {
       );
     }
   }, [section]);
+  useEffect(() => {
+    viewer.current?.setActive(section === "anatomy" && modal !== "brainstem");
+  }, [section, modal]);
   useEffect(() => () => viewer.current?.dispose(), []);
   useEffect(() => {
     viewer.current?.update(state);
@@ -1501,6 +1507,19 @@ export default function App() {
                   Find current research on PubMed <ArrowUpRight size={12} />
                 </a>
               </div>
+              {selected.id === "aseg-16" && (
+                <button
+                  className="subregion-open"
+                  onClick={() => setModal("brainstem")}
+                >
+                  <Layers3 size={17} />
+                  <span>
+                    <strong>Explore 4 subregions</strong>
+                    <small>Separate brainstem atlas model</small>
+                  </span>
+                  <ArrowUpRight size={15} />
+                </button>
+              )}
               <div className="detail-bottom">
                 {learning && (
                   <LearningNavigation
@@ -1595,13 +1614,15 @@ export default function App() {
       )}
       <dialog
         ref={modalRef}
-        className="atlas-dialog"
+        className={`atlas-dialog${modal === "brainstem" ? " brainstem-dialog" : ""}`}
         aria-label={
-          modal === "videos"
-            ? "Dissection video library"
-            : modal === "sources"
-              ? "Atlas sources and coverage"
-              : "How to explore"
+          modal === "brainstem"
+            ? "Brainstem atlas subregions"
+            : modal === "videos"
+              ? "Dissection video library"
+              : modal === "sources"
+                ? "Atlas sources and coverage"
+                : "How to explore"
         }
         onCancel={() => setModal(null)}
         onClick={(e) => {
@@ -1610,11 +1631,13 @@ export default function App() {
       >
         <div className="dialog-header">
           <span className="eyebrow">
-            {modal === "sources"
-              ? "SOURCES & COVERAGE"
-              : modal === "videos"
-                ? "THE DISSECTION FILM LIBRARY"
-                : "EXPLORER GUIDE"}
+            {modal === "brainstem"
+              ? "BRAINSTEM · ATLAS SUBREGIONS"
+              : modal === "sources"
+                ? "SOURCES & COVERAGE"
+                : modal === "videos"
+                  ? "THE DISSECTION FILM LIBRARY"
+                  : "EXPLORER GUIDE"}
           </span>
           <IconButton
             icon={X}
@@ -1622,7 +1645,11 @@ export default function App() {
             onClick={() => setModal(null)}
           />
         </div>
-        {modal === "sources" ? (
+        {modal === "brainstem" ? (
+          <Suspense fallback={<p role="status">Loading subregion explorer…</p>}>
+            <BrainstemSubregions />
+          </Suspense>
+        ) : modal === "sources" ? (
           <>
             <h2>Atlas sources & coverage</h2>
             <p className="dialog-intro">
@@ -1650,15 +1677,18 @@ export default function App() {
                 Desikan–Killiany cortical parcels in both hemispheres, deep gray
                 matter labels, cerebellar cortex, the brainstem, ventricular
                 compartments, choroid plexus, and selected white matter
-                compartments. Region detail meshes load on demand.
+                compartments. Region detail meshes load on demand. The brainstem
+                inspector also opens a separate, four-compartment
+                probability-atlas model.
               </p>
               <strong>What remains outside this atlas</strong>
               <p>
                 Individual neurons, cortical layers, most small nuclei, detailed
                 vessels, cranial nerves, complete fiber pathways, molecular
                 data, disease models, and the full research literature. Internal
-                subdivisions are described in notes and are not separately
-                segmented. Anatomy differs between individuals, and atlas
+                subdivisions are described in notes; the separate brainstem
+                atlas provides four gross compartments, without individual
+                nuclei. Anatomy differs between individuals, and atlas
                 boundaries differ between atlases.
               </p>
               <strong>Evidence & updates</strong>
