@@ -192,6 +192,46 @@
     }
   },
   {
+    "id": "hippocampal-formation",
+    "title": "Inside the hippocampal formation",
+    "regions": [
+      "aseg-17",
+      "aseg-53",
+      "lh-entorhinal",
+      "rh-entorhinal",
+      "lh-parahippocampal",
+      "rh-parahippocampal",
+      "aseg-5"
+    ],
+    "reading": {
+      "keys": [
+        "hippocampus",
+        "entorhinal",
+        "parahippocampal"
+      ],
+      "label": "Regional anatomy",
+      "priority": -2
+    }
+  },
+  {
+    "id": "hippocampal-circuit",
+    "title": "Hippocampal circuits and memory evidence",
+    "regions": [
+      "aseg-17",
+      "aseg-53",
+      "lh-entorhinal",
+      "rh-entorhinal"
+    ],
+    "reading": {
+      "keys": [
+        "hippocampus",
+        "entorhinal"
+      ],
+      "label": "Circuits & evidence",
+      "priority": -1
+    }
+  },
+  {
     "id": "cortical-layers",
     "title": "Inside the cortical sheet",
     "regions": [

@@ -155,6 +155,38 @@ test("cranial-nerve comparison covers I–XII in order with sources and explicit
   assert.deepEqual(article.regions, ["aseg-16"]);
 });
 
+test("hippocampal notes separate regional geometry, named pathways, and species-specific evidence", () => {
+  const formation = referenceArticles.find(
+    (article) => article.id === "hippocampal-formation",
+  );
+  const circuit = referenceArticles.find(
+    (article) => article.id === "hippocampal-circuit",
+  );
+  for (const note of [formation, circuit]) {
+    for (const id of ["aseg-17", "aseg-53", "lh-entorhinal", "rh-entorhinal"])
+      assert.ok(note.regions.includes(id));
+    assert.ok(
+      referenceExplorations(note).some((link) => link.kind === "video"),
+    );
+    assert.ok(referenceExplorations(note).some((link) => link.kind === "scan"));
+  }
+  assert.match(formation.scope, /no separate selectable meshes/);
+  assert.ok(
+    formation.comparison.rows.some((row) => row.label === "CA2 and CA3"),
+  );
+  assert.deepEqual(
+    circuit.comparison.rows.slice(0, 3).map((row) => row.label),
+    ["Perforant pathway", "Mossy fibers", "Schaffer collaterals"],
+  );
+  assert.match(referenceSources["hippocampal-ltp"].kind, /rabbit/);
+  assert.match(referenceSources["hippocampal-lesions"].kind, /human/);
+  assert.match(circuit.paragraphs.join(" "), /anaesthetized rabbits/);
+  assert.match(circuit.scope, /no individual hippocampal neurons/);
+  assert.ok(searchReference("CA4 hilar").includes(formation));
+  assert.ok(searchReference("Schaffer collaterals").includes(circuit));
+  assert.ok(searchReference("potentiation rabbits").includes(circuit));
+});
+
 test("compact topic index stays synchronized with the lazy catalogue", () => {
   assert.deepEqual(
     regionReferenceTopics,
@@ -206,7 +238,13 @@ test("every mesh offers bounded reading suggestions with explicit context", () =
     "cerebellar-circuit",
     "myelin",
   ]);
-  assert.deepEqual(suggested("aseg-17"), [
+  for (const id of ["aseg-17", "aseg-53", "lh-entorhinal", "rh-entorhinal"]) {
+    assert.deepEqual(suggested(id).slice(0, 2), [
+      "hippocampal-formation",
+      "hippocampal-circuit",
+    ]);
+  }
+  assert.deepEqual(suggested("aseg-10"), [
     "neurons",
     "gray-white-matter",
     "atlas-boundaries",

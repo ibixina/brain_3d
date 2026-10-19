@@ -161,6 +161,36 @@
       "title": "UTHealth · Cerebellar inputs, outputs, and nuclei",
       "url": "https://nba.uth.tmc.edu/neuroanatomy/l5/Lab05p21_index.html",
       "kind": "Academic anatomy laboratory"
+    },
+    "hippocampus-chapter": {
+      "title": "Wright · Hippocampus, §§5.2–5.7 (revised 2020)",
+      "url": "https://nba.uth.tmc.edu/neuroscience/s4/chapter05.html",
+      "kind": "Academic textbook"
+    },
+    "hippocampus-sections": {
+      "title": "UTHealth · Hippocampus and amygdala in coronal sections",
+      "url": "https://nba.uth.tmc.edu/neuroanatomy/L10/Lab10p21_index.html",
+      "kind": "Academic anatomy laboratory"
+    },
+    "hippocampal-atlas": {
+      "title": "Iglesias et al. · Ex vivo MRI atlas of hippocampal subregions (2015)",
+      "url": "https://www.nmr.mgh.harvard.edu/~iglesias/pdf/subfieldsNeuroimage2015preprint.pdf",
+      "kind": "Original human MRI atlas study · author manuscript"
+    },
+    "hippocampal-segmentation": {
+      "title": "FreeSurfer · Hippocampal subfield definitions and resolution limits",
+      "url": "https://surfer.nmr.mgh.harvard.edu/fswiki/HippocampalSubfieldsAndNucleiOfAmygdala",
+      "kind": "Segmentation method documentation"
+    },
+    "hippocampal-lesions": {
+      "title": "Rempel-Clower et al. · Three human hippocampal amnesia cases (1996)",
+      "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC6579309/",
+      "kind": "Original human lesion and postmortem study"
+    },
+    "hippocampal-ltp": {
+      "title": "Bliss & Lømo · Dentate potentiation in anaesthetized rabbits (1973)",
+      "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC1350458/",
+      "kind": "Original rabbit electrophysiology study"
     }
   },
   "articles": [
@@ -846,6 +876,219 @@
       }
     },
     {
+      "id": "hippocampal-formation",
+      "title": "Inside the hippocampal formation",
+      "category": "Hippocampus & memory",
+      "summary": "Locate the medial temporal structures, distinguish their internal names, and understand why a whole hippocampus mesh is not a subfield atlas.",
+      "aliases": [
+        "dentate gyrus",
+        "DG",
+        "cornu ammonis",
+        "CA1",
+        "CA2",
+        "CA3",
+        "CA4",
+        "hilus",
+        "subiculum",
+        "presubiculum",
+        "parasubiculum",
+        "alveus",
+        "fimbria",
+        "fornix",
+        "hippocampal head body tail"
+      ],
+      "paragraphs": [
+        "The hippocampal formation commonly includes the dentate gyrus, hippocampus proper (cornu ammonis, or CA fields), and subicular cortex. It lies in each medial temporal lobe beside the inferior horn of the lateral ventricle. Entorhinal cortex provides an adjacent cortical interface.",
+        "Coronal sections are useful for separating the hippocampus from the more anterior amygdala and nearby temporal cortex. Their appearance changes as the section moves from front to back. Use the linked specimen lessons and MRI for orientation; a single section cannot show the full folded structure.",
+        "Subfield boundaries depend on anatomical definitions, image contrast, and the labeling protocol. The 2015 Iglesias atlas used ultra-high-resolution postmortem human MRI. Its labels include territories absent from this model, and its CA2/3 label combines two named fields. A protocol label is not proof that those fields are biologically identical.",
+        "FreeSurfer cautions that internal subregion boundaries estimated from standard 1 mm T1 scans can depend strongly on atlas prior knowledge. Higher-resolution output labels do not themselves create new measured image detail. The bundled MRI templates have no hippocampal subfield labels."
+      ],
+      "scope": "Cerebra has one hippocampus mesh per hemisphere plus separate entorhinal and parahippocampal surface parcels. Dentate gyrus, CA fields, subicular territories, alveus, fimbria, and fornix have no separate selectable meshes. The gross hippocampus label should not be read as a precise outline of every component of the formation. Finer mode refines its surface, not these subdivisions.",
+      "regions": [
+        "aseg-17",
+        "aseg-53",
+        "lh-entorhinal",
+        "rh-entorhinal",
+        "lh-parahippocampal",
+        "rh-parahippocampal",
+        "aseg-5"
+      ],
+      "related": [
+        "hippocampal-circuit",
+        "cortical-layers",
+        "atlas-boundaries",
+        "section-planes"
+      ],
+      "sources": [
+        "hippocampus-chapter",
+        "hippocampus-sections",
+        "hippocampal-atlas",
+        "hippocampal-segmentation"
+      ],
+      "reading": {
+        "keys": ["hippocampus", "entorhinal", "parahippocampal"],
+        "label": "Regional anatomy",
+        "priority": -2
+      },
+      "comparison": {
+        "caption": "Anatomical names and the geometry actually available",
+        "columns": ["Structure or territory", "Meaning and model coverage"],
+        "rows": [
+          {
+            "label": "Dentate gyrus",
+            "summary": "Folded cortex with a granule-cell layer.",
+            "detail": "It is not separately segmented within either gross hippocampus mesh.",
+            "source": "hippocampal-atlas"
+          },
+          {
+            "label": "CA1",
+            "summary": "A field of hippocampus proper adjoining subiculum.",
+            "detail": "No selectable CA1 boundary is present.",
+            "source": "hippocampal-atlas"
+          },
+          {
+            "label": "CA2 and CA3",
+            "summary": "Named fields combined as CA2/3 in the cited MRI protocol.",
+            "detail": "This grouping reflects the protocol’s contrast and delineation limits; neither field is separately modeled here.",
+            "source": "hippocampal-atlas"
+          },
+          {
+            "label": "CA4 / hilar region",
+            "summary": "The cited atlas uses CA4 for territory within the dentate gyrus.",
+            "detail": "Terminology and label definitions must be checked against the specific protocol. There is no CA4 mesh.",
+            "source": "hippocampal-atlas"
+          },
+          {
+            "label": "Subiculum and neighboring subicular cortices",
+            "summary": "Subiculum, presubiculum, and parasubiculum are distinguished in the cited atlas.",
+            "detail": "None has its own mesh here; the gross label does not establish their individual borders.",
+            "source": "hippocampal-atlas"
+          },
+          {
+            "label": "Entorhinal cortex",
+            "summary": "An interface with hippocampal pathways.",
+            "detail": "Bilateral surface parcels are available, without their layers or individual axons.",
+            "source": "hippocampus-chapter"
+          },
+          {
+            "label": "Alveus and fimbria",
+            "summary": "White matter along the hippocampus continuing toward the fornix.",
+            "detail": "These bundles and the fornix are not individually reconstructed.",
+            "source": "hippocampal-atlas"
+          }
+        ]
+      },
+      "explorations": [
+        {
+          "kind": "video",
+          "id": "z8rE7Z5ud-g",
+          "note": "Utah’s limbic specimen lesson includes hippocampal anatomy. Gross views are not a labeled microscopic subfield atlas."
+        },
+        {
+          "kind": "video",
+          "id": "ErpxEwlWww4",
+          "note": "UBC’s hypothalamic and limbic lesson supplies surrounding specimen context. Opens the original institutional film."
+        },
+        {
+          "kind": "scan",
+          "id": "t2",
+          "note": "Compare medial temporal relationships in linked population-template slices. These are separate data from the surface model, without subfield segmentation."
+        }
+      ]
+    },
+    {
+      "id": "hippocampal-circuit",
+      "title": "Hippocampal circuits and memory evidence",
+      "category": "Hippocampus & memory",
+      "summary": "Separate a simplified anatomical route from experiments on synaptic plasticity and human memory impairment.",
+      "aliases": [
+        "trisynaptic circuit",
+        "trisynaptic loop",
+        "perforant path",
+        "mossy fibers",
+        "Schaffer collaterals",
+        "long term potentiation",
+        "LTP",
+        "synaptic plasticity",
+        "anterograde amnesia",
+        "Rempel-Clower",
+        "Bliss",
+        "Lømo",
+        "Lomo"
+      ],
+      "paragraphs": [
+        "A common teaching sequence runs from entorhinal cortex through dentate gyrus, CA3, and CA1. Subicular outputs reach entorhinal cortex and routes through the fornix. This selected route is not a complete wiring diagram of the hippocampal formation.",
+        "Bliss and Lømo’s 1973 experiment stimulated the perforant path and recorded extracellular population responses in the dentate area of anaesthetized rabbits. Fifteen of eighteen rabbits showed potentiation lasting from 30 minutes to 10 hours after conditioning stimulation. This was an experimentally evoked physiological change, not a recording of a human autobiographical memory.",
+        "Rempel-Clower and colleagues’ 1996 report combined neuropsychological testing with postmortem anatomy in three additional people with hippocampal damage, alongside earlier cases. Damage concentrated in bilateral CA1 could impair formation of new memories; more extensive damage could produce greater impairment. The cases differed in lesion extent and memory findings. They do not assign every kind of memory to one field.",
+        "Anatomical pathways, electrical recordings, behavioral tests, and MRI answer different questions. The selected memory learning path introduces several related regions; it does not animate information flow or reproduce either experiment. A statistical task map is also different from a synaptic recording."
+      ],
+      "scope": "The atlas contains no individual hippocampal neurons, synapses, pathway fibers, evoked potentials, or simulation of memory formation. The links below open gross anatomical context. Neither a teal highlight nor a finer mesh demonstrates potentiation, explains an individual’s memory ability, or reproduces a lesion study.",
+      "regions": ["aseg-17", "aseg-53", "lh-entorhinal", "rh-entorhinal"],
+      "related": [
+        "hippocampal-formation",
+        "synapses",
+        "neurons",
+        "atlas-boundaries"
+      ],
+      "sources": [
+        "hippocampus-chapter",
+        "hippocampal-ltp",
+        "hippocampal-lesions"
+      ],
+      "reading": {
+        "keys": ["hippocampus", "entorhinal"],
+        "label": "Circuits & evidence",
+        "priority": -1
+      },
+      "comparison": {
+        "caption": "Selected hippocampal pathways — written explanation, not reconstructed fibers",
+        "columns": ["Pathway", "Selected relationship"],
+        "rows": [
+          {
+            "label": "Perforant pathway",
+            "summary": "Entorhinal cortex → dentate granule cells.",
+            "detail": "An entry route in the simplified sequence.",
+            "source": "hippocampus-chapter"
+          },
+          {
+            "label": "Mossy fibers",
+            "summary": "Dentate granule cells → CA3 pyramidal cells.",
+            "detail": "These are named hippocampal axons, absent from the mesh.",
+            "source": "hippocampus-chapter"
+          },
+          {
+            "label": "Schaffer collaterals",
+            "summary": "CA3 → CA1.",
+            "detail": "A projection between fields, not an activity overlay.",
+            "source": "hippocampus-chapter"
+          },
+          {
+            "label": "Subicular output routes",
+            "summary": "Toward entorhinal cortex and through fornix pathways.",
+            "detail": "The table selects major relationships rather than all connections.",
+            "source": "hippocampus-chapter"
+          }
+        ]
+      },
+      "explorations": [
+        {
+          "kind": "path",
+          "id": "memory",
+          "note": "Explore selected medial temporal and diencephalic regions. Fornix, mammillary bodies, and hippocampal subfields are not separately modeled."
+        },
+        {
+          "kind": "video",
+          "id": "z8rE7Z5ud-g",
+          "note": "Orient the gross hippocampus on human specimens before studying microscopic circuitry. The film is not a measurement of synaptic plasticity."
+        },
+        {
+          "kind": "scan",
+          "id": "t1",
+          "note": "Inspect structural tissue contrast in a population average. This is neither a lesion-study participant nor a measure of memory or LTP."
+        }
+      ]
+    },
+    {
       "id": "cortical-layers",
       "title": "Inside the cortical sheet",
       "category": "Tissue & structure",
@@ -879,7 +1122,8 @@
         "cell-diversity",
         "neurons",
         "atlas-boundaries",
-        "cerebellar-circuit"
+        "cerebellar-circuit",
+        "hippocampal-formation"
       ],
       "sources": ["layers", "spatial-cells"],
       "explorations": [
@@ -1003,7 +1247,7 @@
       ],
       "scope": "Synapses are not resolved in these meshes. Region connections are educational associations, not a measured synaptic wiring diagram or a simulation of thought.",
       "regions": ["aseg-17", "lh-precentral", "aseg-12"],
-      "related": ["neurons", "glia", "cell-diversity"],
+      "related": ["neurons", "glia", "cell-diversity", "hippocampal-circuit"],
       "sources": ["release", "synapses"]
     },
     {
