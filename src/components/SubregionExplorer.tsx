@@ -217,9 +217,16 @@ function LoadedSubregions({
     );
   const omitted = matchingSubregions(atlas.omitted ?? [], "", state.hemisphere).filter(inScope);
   const sourceCount = visible.length + omitted.length;
-  const focusReading = () => requestAnimationFrame(() => {
-    panel.current?.scrollTo({ top: 0 });
-    reading.current?.focus({ preventScroll: true });
+  const focusReading = (atDescription = false) => requestAnimationFrame(() => {
+    const reader = panel.current;
+    const heading = reading.current;
+    if (reader) {
+      const top = atDescription && heading
+        ? reader.scrollTop + heading.getBoundingClientRect().top - reader.getBoundingClientRect().top - 22
+        : 0;
+      reader.scrollTo({ top });
+    }
+    heading?.focus({ preventScroll: true });
   });
   const choose = (id: string, inspect = false) => {
     setState((current) => ({
@@ -351,13 +358,30 @@ function LoadedSubregions({
   return (
     <div className="subregion-explorer">
       <div className="subregion-stage">
+        <div className="subregion-caption">
+          <span className="subregion-frame">
+            SEPARATE ATLAS · {atlas.source.spacingMm[0]} mm probability grid
+            {large &&
+              ` · ${state.hemisphere === "both" ? "Both sides" : state.hemisphere === "left" ? "Left" : "Right"}`}
+            {activeGroup && ` · ${activeGroup.name} group`}
+          </span>
+          {selected ? (
+            <button
+              className="subregion-current"
+              onClick={() => focusReading(true)}
+              aria-label={`Read about ${subregionName(selected)}`}
+              title="Return to this description"
+            >
+              <span className="subregion-current-label">READING ABOUT</span>
+              <span className="subregion-current-name">
+                {subregionName(selected)}<ChevronRight size={14} aria-hidden="true" />
+              </span>
+            </button>
+          ) : (
+            <p className="subregion-current-hint">Select a surface to inspect</p>
+          )}
+        </div>
         <div ref={host} className="subregion-canvas" />
-        <span className="subregion-frame">
-          SEPARATE ATLAS · {atlas.source.spacingMm[0]} mm probability grid
-          {large &&
-            ` · ${state.hemisphere === "both" ? "Both sides" : state.hemisphere === "left" ? "Left" : "Right"}`}
-          {activeGroup && ` · ${activeGroup.name} group`}
-        </span>
         {!ready && !error && (
           <p className="subregion-loading" role="status">
             Loading atlas surfaces…
@@ -656,7 +680,7 @@ function LoadedSubregions({
           </details>
         )}
         {atlas.boundaries && (
-          <details className="subregion-reading">
+          <details className="subregion-related">
             <summary>Related anatomy & human evidence</summary>
             <p>{atlas.boundaries.readingScope}</p>
             {atlas.boundaries.reading.map((note) => (
