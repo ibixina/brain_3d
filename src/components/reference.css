@@ -143,3 +143,32 @@
   font-size: 10px;
   line-height: 1.6;
 }
+.reference-explorations a {
+  display: block;
+  padding: 13px 0;
+  border-bottom: 1px solid var(--line);
+}
+.reference-explorations small {
+  color: #93b8ad;
+  font-size: 9px;
+}
+.reference-explorations strong {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  color: #cce4db;
+  font-size: 12px;
+  line-height: 1.6;
+  font-weight: 500;
+  margin: 5px 0;
+}
+.reference-explorations span {
+  display: block;
+  font-size: 10px;
+  color: #99afbf;
+  line-height: 1.7;
+}
+.reference-explorations a:hover strong {
+  color: #a7dfd1;
+}

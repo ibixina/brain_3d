@@ -10,7 +10,15 @@ import {
   referenceSources,
   referenceCheckedOn,
   searchReference,
+  referenceExplorations,
 } from "../src/reference.ts";
+import {
+  referenceOrigin,
+  referenceRegionView,
+  withReferenceOrigin,
+} from "../src/reference-navigation.ts";
+import { learningPaths } from "../src/learning.ts";
+import { dissectionVideos } from "../src/videos.ts";
 import atlas from "../src/atlas-manifest.json" with { type: "json" };
 
 test("anatomical aliases find available parcels while respecting hemisphere and combined terms", () => {
@@ -97,4 +105,89 @@ test("reference discovery combines vocabulary, aliases, and explanatory text", (
   assert.equal(searchReference("RNA taxonomy")[0].id, "cell-diversity");
   assert.equal(searchReference("myelin impossible-term").length, 0);
   assert.equal(searchReference("   ").length, referenceArticles.length);
+  assert.equal(searchReference("BBB endothelial")[0].id, "brain-barriers");
+  assert.equal(searchReference("CSF aqueduct")[0].id, "csf-circulation");
+  assert.equal(searchReference("MCA")[0].id, "arterial-supply");
+});
+
+test("reference explorations resolve to retained specimen films, real paths, and valid MRI views", () => {
+  for (const article of referenceArticles) {
+    for (const link of referenceExplorations(article)) {
+      assert.ok(link.note && link.title && link.label);
+      if (link.kind === "video") {
+        assert.equal(link.external, true);
+        assert.equal(
+          link.href,
+          dissectionVideos.find((video) => video.id === link.id).url,
+        );
+        assert.equal(new URL(link.href).protocol, "https:");
+      } else {
+        assert.equal(link.external, false);
+        assert.equal(referenceOrigin(link.href), article.id);
+        const params = new URLSearchParams(link.href.slice(1));
+        if (link.kind === "path") {
+          assert.ok(
+            learningPaths.some((path) => path.id === params.get("path")),
+          );
+          assert.equal(params.get("step"), "1");
+        } else {
+          assert.equal(params.get("view"), "scans");
+          assert.ok(["t1", "t2", "pd"].includes(params.get("scan")));
+        }
+      }
+    }
+  }
+});
+
+test("article return context survives shared exploration links and rejects malformed origins", () => {
+  for (const hash of [
+    "#region=aseg-14",
+    "#path=csf&step=2",
+    "#view=scans&scan=t2",
+  ]) {
+    const shared = withReferenceOrigin(hash, "csf-circulation");
+    assert.equal(referenceOrigin(shared), "csf-circulation");
+    assert.equal(referenceOrigin(withReferenceOrigin(shared, null)), null);
+    assert.equal(
+      referenceOrigin(withReferenceOrigin(shared, "meninges")),
+      "meninges",
+    );
+  }
+  for (const hash of [
+    "#reference=csf-circulation&from=meninges",
+    "#from=meninges",
+    "#region=aseg-14&from=%3Cscript%3E",
+    `#view=scans&from=${"a".repeat(81)}`,
+  ])
+    assert.equal(referenceOrigin(hash), null);
+});
+
+test("reference-to-model views reveal their actual target without mutating the default scene", () => {
+  const defaults = {
+    selected: null,
+    isolated: false,
+    exploded: 0,
+    explodeMode: "lobes",
+    opacity: 1,
+    hemisphere: "both",
+    hiddenGroups: ["Ventricles", "White matter"],
+    labels: false,
+    autoRotate: false,
+    colorMode: "tissue",
+    section: "none",
+    sectionOffset: 0,
+  };
+  for (const id of new Set(
+    referenceArticles.flatMap((article) => article.regions),
+  )) {
+    const region = atlas.parts.find((part) => part.id === id);
+    const view = referenceRegionView(region, defaults);
+    assert.equal(view.selected, id);
+    assert.equal(view.hiddenGroups.includes(region.group), false);
+    assert.ok(view.opacity > 0);
+    if (region.group === "Ventricles")
+      assert.ok(view.hiddenGroups.includes("Deep structures"));
+  }
+  assert.deepEqual(defaults.hiddenGroups, ["Ventricles", "White matter"]);
+  assert.equal(defaults.opacity, 1);
 });

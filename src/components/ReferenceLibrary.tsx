@@ -12,6 +12,7 @@ import { hemisphereLabel, regions } from "../data";
 import {
   referenceArticles,
   referenceCheckedOn,
+  referenceExplorations,
   referenceSources,
   searchReference,
 } from "../reference";
@@ -33,6 +34,7 @@ export default function ReferenceLibrary({
   const previousArticle = useRef(articleId);
   const article = referenceArticles.find((item) => item.id === articleId);
   const articles = searchReference(query);
+  const explorations = article ? referenceExplorations(article) : [];
   useEffect(() => {
     contentRef.current?.scrollTo(0, 0);
     if (articleId && !document.activeElement?.closest('[role="tablist"]'))
@@ -94,6 +96,32 @@ export default function ReferenceLibrary({
                 );
               })}
             </div>
+            {explorations.length > 0 && (
+              <>
+                <h3>Continue exploring</h3>
+                <div className="reference-explorations">
+                  {explorations.map((item) => (
+                    <a
+                      key={`${item.kind}-${item.id}`}
+                      href={item.href}
+                      target={item.external ? "_blank" : undefined}
+                      rel={item.external ? "noreferrer" : undefined}
+                    >
+                      <small>{item.label}</small>
+                      <strong>
+                        {item.title}
+                        {item.external ? (
+                          <ArrowUpRight size={13} />
+                        ) : (
+                          <ArrowRight size={13} />
+                        )}
+                      </strong>
+                      <span>{item.note}</span>
+                    </a>
+                  ))}
+                </div>
+              </>
+            )}
             <h3>Sources & further reading</h3>
             <div className="reference-sources">
               {article.sources.map((id) => {

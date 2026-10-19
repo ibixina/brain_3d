@@ -53,3 +53,9 @@ Local maps are modified derivatives from public [NeuroVault collection 4438](htt
 ## Linked HCP research metadata
 
 The research index retains factual metadata and direct links for 48 maps in [NeuroVault collection 457](https://neurovault.org/collections/457/). These are a different cohort from the local IBC maps. No HCP image volumes are redistributed. The collection's specific HCP registration and data-use requirements remain applicable. Cite Van Essen and colleagues, The WU-Minn Human Connectome Project: An overview (2013), https://doi.org/10.1016/j.neuroimage.2013.05.041.
+
+## Linked reference literature
+
+The reference catalogue contains original short educational summaries, factual anatomical terminology, and links to academic publishers and original studies. Source titles, evidence types, URLs, and checked dates are retained in `src/reference-data.json`. No textbook prose, figures, histology, or specialized lymphatic MRI assets are copied into the application. Source content retains its publisher's terms.
+
+The linked OpenStax Anatomy and Physiology 2e chapter states a Creative Commons Attribution-NonCommercial-ShareAlike 4.0 license for its publisher content as checked October 19, 2026. This is a literature link; no OpenStax assets are redistributed. The original human/primate meningeal-lymphatic study is Absinta et al. (2017), eLife 6:e29738, https://doi.org/10.7554/eLife.29738. Its methods and images are not part of the bundled structural MRI templates.

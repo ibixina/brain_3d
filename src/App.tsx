@@ -40,6 +40,11 @@ import type { LucideIcon } from "lucide-react";
 import { AtlasViewer, type ViewState } from "./viewer";
 import { assetUrl } from "./asset-url.ts";
 import { matchedAnatomicalTerms, searchRegions } from "./anatomical-search.ts";
+import {
+  referenceOrigin,
+  referenceRegionView,
+  withReferenceOrigin,
+} from "./reference-navigation.ts";
 import { RegionVideos, VideoLibrary } from "./components/DissectionVideos";
 import RegionCallout from "./components/RegionCallout";
 import {
@@ -153,10 +158,16 @@ export default function App() {
   const [referenceId, setReferenceId] = useState<string | null>(
     () => new URLSearchParams(location.hash.slice(1)).get("reference") || null,
   );
+  const [returnReference, setReturnReference] = useState(() =>
+    referenceOrigin(location.hash),
+  );
   const [state, setState] = useState<ViewState>(() => {
     const position = learningFromHash(location.hash);
     if (position) return learningView(position, defaultView);
     const id = new URLSearchParams(location.hash.slice(1)).get("region");
+    const region = regions.find((item) => item.id === id);
+    if (region && referenceOrigin(location.hash))
+      return referenceRegionView(region, defaultView);
     return {
       ...defaultView,
       selected: regions.some((p) => p.id === id) ? id : null,
@@ -208,33 +219,52 @@ export default function App() {
   function notify(message: string) {
     setToast(message);
   }
-  function select(id: string) {
+  function select(id: string, origin: string | null = null) {
     setLearning(null);
+    setReturnReference(origin);
     setHover(null);
     const region = regions.find((p) => p.id === id)!;
-    setState((prev) => ({
-      ...prev,
-      selected: id,
-      hiddenGroups: prev.hiddenGroups.filter((g) => g !== region.group),
-      hemisphere:
-        prev.hemisphere !== "both" && prev.hemisphere !== region.hemisphere
-          ? "both"
-          : prev.hemisphere,
-    }));
+    setState((prev) =>
+      origin
+        ? referenceRegionView(region, defaultView)
+        : {
+            ...prev,
+            selected: id,
+            hiddenGroups: prev.hiddenGroups.filter((g) => g !== region.group),
+            hemisphere:
+              prev.hemisphere !== "both" &&
+              prev.hemisphere !== region.hemisphere
+                ? "both"
+                : prev.hemisphere,
+          },
+    );
     setTab((current) => (current === "videos" ? current : "overview"));
     setSidebar(false);
-    history.replaceState(null, "", `#region=${encodeURIComponent(id)}`);
+    history.replaceState(
+      null,
+      "",
+      withReferenceOrigin(`#region=${encodeURIComponent(id)}`, origin),
+    );
   }
-  function goToLearning(path: LearningPath, step = 0) {
+  function goToLearning(
+    path: LearningPath,
+    step = 0,
+    origin: string | null = null,
+  ) {
     const position = { path, step };
     setLearning(position);
+    setReturnReference(origin);
     setState(learningView(position, defaultView));
     setSection("anatomy");
     setTab("overview");
     setSidebar(false);
     setSettings(false);
     setHover(null);
-    history.replaceState(null, "", learningHash(path, step));
+    history.replaceState(
+      null,
+      "",
+      withReferenceOrigin(learningHash(path, step), origin),
+    );
     if (!learning || learning.path.id !== path.id)
       requestAnimationFrame(() =>
         document.querySelector<HTMLElement>(".region-name")?.focus(),
@@ -273,17 +303,8 @@ export default function App() {
       history.replaceState(null, "", location.pathname + anatomyHash());
   }
   function exploreReferenceRegion(id: string) {
-    const region = regions.find((item) => item.id === id)!;
-    select(id);
-    setState({
-      ...defaultView,
-      selected: id,
-      opacity: region.kind === "cortex" ? 1 : 0.15,
-      hiddenGroups: defaultView.hiddenGroups.filter(
-        (group) => group !== region.group,
-      ),
-    });
-    camera(region.kind === "cortex" ? region.hemisphere : "default");
+    select(id, referenceId);
+    setTab("overview");
     requestAnimationFrame(() =>
       document.querySelector<HTMLElement>(".region-name")?.focus(),
     );
@@ -293,7 +314,11 @@ export default function App() {
     history.replaceState(
       null,
       "",
-      location.pathname + (state.selected ? `#region=${state.selected}` : ""),
+      location.pathname +
+        withReferenceOrigin(
+          state.selected ? `#region=${state.selected}` : "",
+          returnReference,
+        ),
     );
     if (completed)
       notify("Path complete. Keep exploring, or choose another learning path.");
@@ -304,6 +329,8 @@ export default function App() {
     const navigate = () => {
       const params = new URLSearchParams(location.hash.slice(1));
       const view = params.get("view");
+      const origin = referenceOrigin(location.hash);
+      setReturnReference(origin);
       const next = view === "scans" || view === "activities" ? view : "anatomy";
       setSection(next);
       setNavigationVersion((version) => version + 1);
@@ -319,12 +346,12 @@ export default function App() {
         }
         const position = learningFromHash(location.hash);
         if (position) {
-          goToLearning(position.path, position.step);
+          goToLearning(position.path, position.step, origin);
           return;
         }
         setLearning(null);
         const region = regions.find((item) => item.id === params.get("region"));
-        if (region) selectRef.current(region.id);
+        if (region) selectRef.current(region.id, origin);
         else
           setState((current) => ({
             ...current,
@@ -373,6 +400,10 @@ export default function App() {
     setCameraView(camera);
     viewer.current?.view(camera);
   }, [learning, ready]);
+  useEffect(() => {
+    if (!returnReference || learning || !selected || !ready) return;
+    camera(selected.kind === "cortex" ? selected.hemisphere : "default");
+  }, [returnReference, learning, state.selected, ready]);
   useEffect(() => {
     try {
       localStorage.setItem("cerebra-saved", JSON.stringify(saved));
@@ -425,7 +456,15 @@ export default function App() {
     };
     window.addEventListener("keydown", handler);
     return () => window.removeEventListener("keydown", handler);
-  }, [modal, section, learning, state.selected, sidebar, settings]);
+  }, [
+    modal,
+    section,
+    learning,
+    state.selected,
+    sidebar,
+    settings,
+    returnReference,
+  ]);
   const search = query.trim().toLowerCase();
   const results = useMemo(
     () =>
@@ -447,6 +486,7 @@ export default function App() {
   }
   function reset() {
     setLearning(null);
+    setReturnReference(null);
     setSidebar(false);
     setSettings(false);
     setSection("anatomy");
@@ -482,15 +522,21 @@ export default function App() {
     setSidebar(false);
     setSettings(false);
     setHover(null);
-    const hash = next === "anatomy" ? anatomyHash() : `#view=${next}`;
+    const hash =
+      next === "anatomy"
+        ? anatomyHash()
+        : withReferenceOrigin(`#view=${next}`, returnReference);
     history.replaceState(null, "", location.pathname + hash);
   }
   function anatomyHash() {
-    return learning
-      ? learningHash(learning.path, learning.step)
-      : state.selected
-        ? `#region=${state.selected}`
-        : "";
+    return withReferenceOrigin(
+      learning
+        ? learningHash(learning.path, learning.step)
+        : state.selected
+          ? `#region=${state.selected}`
+          : "",
+      returnReference,
+    );
   }
   function openLibrary() {
     if (sidebar) {
@@ -505,6 +551,7 @@ export default function App() {
   }
   function closeRegion() {
     setLearning(null);
+    setReturnReference(null);
     update({ selected: null, isolated: false });
     history.replaceState(null, "", location.pathname);
   }
@@ -1120,6 +1167,14 @@ export default function App() {
                   />
                 </div>
               </div>
+              {returnReference && (
+                <button
+                  className="reference-return"
+                  onClick={() => openReference(returnReference)}
+                >
+                  <ArrowLeft size={12} /> Back to reference note
+                </button>
+              )}
               <div className="region-eyebrow">
                 <span
                   className="color-dot"
@@ -1288,7 +1343,9 @@ export default function App() {
                 {learning && (
                   <LearningNavigation
                     position={learning}
-                    onStep={(step) => goToLearning(learning.path, step)}
+                    onStep={(step) =>
+                      goToLearning(learning.path, step, returnReference)
+                    }
                     onFinish={() => endLearning(true)}
                   />
                 )}
@@ -1344,7 +1401,15 @@ export default function App() {
             </div>
           }
         >
-          <ImagingWorkspace key={navigationVersion} mode={section} />
+          <ImagingWorkspace
+            key={navigationVersion}
+            mode={section}
+            referenceOrigin={returnReference}
+            onReturnReference={() => {
+              setSection("anatomy");
+              openReference(returnReference);
+            }}
+          />
         </Suspense>
       )}
       {hover &&

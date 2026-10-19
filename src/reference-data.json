@@ -56,6 +56,46 @@
       "title": "UTHealth · Higher cortical functions: language",
       "url": "https://nba.uth.tmc.edu/neuroscience/s4/chapter08.html",
       "kind": "Academic textbook"
+    },
+    "meninges": {
+      "title": "UTHealth · Meningeal coverings",
+      "url": "https://nba.uth.tmc.edu/neuroanatomy/L1/Lab01p01_index.html",
+      "kind": "Academic anatomy laboratory"
+    },
+    "csf": {
+      "title": "Laterra et al. · Blood–CSF barrier and fluid circulation (1999)",
+      "url": "https://www.ncbi.nlm.nih.gov/books/NBK27998/",
+      "kind": "Foundational textbook"
+    },
+    "barriers": {
+      "title": "Cipolla · Barriers of the CNS (2009)",
+      "url": "https://www.ncbi.nlm.nih.gov/books/NBK53084/",
+      "kind": "Authored physiology monograph"
+    },
+    "arteries": {
+      "title": "UTHealth · Internal carotid arterial system",
+      "url": "https://nba.uth.tmc.edu/neuroanatomy/l4/Lab04p06_index.html",
+      "kind": "Academic anatomy laboratory"
+    },
+    "circulation": {
+      "title": "OpenStax · Circulation and the central nervous system",
+      "url": "https://openstax.org/books/anatomy-and-physiology-2e/pages/13-3-circulation-and-the-central-nervous-system",
+      "kind": "Anatomy & Physiology 2e · academic textbook"
+    },
+    "veins": {
+      "title": "UTHealth · Major cerebral veins",
+      "url": "https://nba.uth.tmc.edu/neuroanatomy/l4/Lab04p12_index.html",
+      "kind": "Academic anatomy laboratory"
+    },
+    "venous-anatomy": {
+      "title": "Cipolla · Cerebral vascular anatomy and ultrastructure (2009)",
+      "url": "https://www.ncbi.nlm.nih.gov/books/NBK53086/",
+      "kind": "Authored physiology monograph"
+    },
+    "lymphatics": {
+      "title": "Absinta et al. · Meningeal lymphatics in humans and marmosets (2017)",
+      "url": "https://doi.org/10.7554/eLife.29738",
+      "kind": "Original human/primate MRI and tissue study"
     }
   },
   "articles": [
@@ -83,7 +123,14 @@
       "scope": "A spatial vocabulary, not a separate structure. Use the orientation labels and View camera presets to relate these terms to the model.",
       "regions": ["lh-precentral", "rh-precentral", "aseg-16"],
       "related": ["section-planes", "folds"],
-      "sources": ["orientation"]
+      "sources": ["orientation"],
+      "explorations": [
+        {
+          "kind": "video",
+          "id": "f_hxX_xvHQY",
+          "note": "Compare section planes in real human specimens, then relate their orientation to the model."
+        }
+      ]
     },
     {
       "id": "section-planes",
@@ -105,7 +152,19 @@
       "scope": "The MRI template and 3D surface have different source data. A plane name describes orientation; it does not establish correspondence between those datasets.",
       "regions": ["aseg-14", "aseg-16"],
       "related": ["directions", "gray-white-matter", "atlas-boundaries"],
-      "sources": ["orientation"]
+      "sources": ["orientation"],
+      "explorations": [
+        {
+          "kind": "scan",
+          "id": "t1",
+          "note": "Inspect linked axial, coronal, and sagittal slices of a real population template. Its coordinates are separate from this surface atlas."
+        },
+        {
+          "kind": "video",
+          "id": "f_hxX_xvHQY",
+          "note": "See corresponding section orientations on human specimens."
+        }
+      ]
     },
     {
       "id": "folds",
@@ -155,7 +214,206 @@
       "scope": "The tissue colors are a visualization choice. A mesh’s apparent thickness and smoothness are limited by its MRI segmentation and surface processing.",
       "regions": ["lh-precentral", "aseg-10", "aseg-2", "aseg-41"],
       "related": ["neurons", "glia", "myelin", "atlas-boundaries"],
-      "sources": ["orientation", "cells"]
+      "sources": ["orientation", "cells"],
+      "explorations": [
+        {
+          "kind": "scan",
+          "id": "t1",
+          "note": "Inspect tissue contrast in a population average; this image is not a microscopic tissue classification."
+        },
+        {
+          "kind": "video",
+          "id": "PazaHElk6wc",
+          "note": "Cortical and subcortical fiber anatomy on real specimens; individual axons are not resolved."
+        }
+      ]
+    },
+    {
+      "id": "meninges",
+      "title": "The coverings around the brain",
+      "category": "Protection & circulation",
+      "summary": "Dura, arachnoid, and pia form distinct coverings around the central nervous system.",
+      "aliases": [
+        "meninx",
+        "meninges",
+        "dura mater",
+        "arachnoid mater",
+        "pia mater",
+        "leptomeninges",
+        "falx cerebri",
+        "tentorium cerebelli",
+        "subarachnoid space",
+        "cistern"
+      ],
+      "paragraphs": [
+        "From outside inward, the meninges are dura mater, arachnoid mater, and pia mater. The tough dura forms supporting folds, including the falx between the cerebral hemispheres and the tentorium over the cerebellum. The arachnoid spans surface grooves; the pia closely follows the brain’s contours.",
+        "CSF occupies the subarachnoid space between arachnoid and pia. Wider parts of this space are called cisterns. A pial surface mesh describes a boundary of brain tissue; it does not reconstruct the pia, arachnoid, dura, or their spaces as separate layers."
+      ],
+      "scope": "Meninges, skull, falx, tentorium, cisterns, and dural sinuses are not modeled. The cortex and cerebellum links provide spatial landmarks beneath those coverings.",
+      "regions": ["lh-superiorfrontal", "lh-insula", "aseg-8"],
+      "related": [
+        "csf-circulation",
+        "brain-barriers",
+        "venous-drainage",
+        "folds"
+      ],
+      "sources": ["meninges", "circulation"],
+      "explorations": [
+        {
+          "kind": "video",
+          "id": "8zsSxrlIR_c",
+          "note": "Unfixed human tissue and its coverings; broader specimen context, not a verified separate demonstration of every meningeal layer."
+        }
+      ]
+    },
+    {
+      "id": "csf-circulation",
+      "title": "Following cerebrospinal fluid",
+      "category": "Protection & circulation",
+      "summary": "Ventricular cavities connect with fluid spaces around the brain and spinal cord.",
+      "aliases": [
+        "CSF",
+        "cerebrospinal fluid",
+        "foramen Monro",
+        "aqueduct Sylvius",
+        "Luschka",
+        "Magendie",
+        "arachnoid granulations",
+        "choroid plexus"
+      ],
+      "paragraphs": [
+        "Much CSF is secreted by the choroid plexus. The classical ventricular route runs from the lateral ventricles through the interventricular foramina to the third ventricle, through the cerebral aqueduct to the fourth, then through its apertures into subarachnoid spaces. CSF provides buoyant support and a regulated fluid environment.",
+        "Classical descriptions include outflow associated with arachnoid granulations and nerve sheaths. Research also identifies meningeal lymphatic vessels. The ventricular sequence does not quantify exchange with brain tissue or the contribution of each clearance route.",
+        "Absinta and colleagues visualized dural lymphatic vessels with specialized contrast-enhanced MRI in five healthy human volunteers and three marmosets, with supporting tissue evidence. That study demonstrated vessels; it did not establish a complete human CSF flow map."
+      ],
+      "scope": "This atlas shows selected ventricular compartments and lateral-ventricular plexus. The small foramina, aqueduct, apertures, subarachnoid spaces, and lymphatic vessels lack separate meshes. No fluid motion, direction, pressure, or flow rate is measured here.",
+      "regions": ["aseg-31", "aseg-4", "aseg-14", "aseg-15"],
+      "related": [
+        "meninges",
+        "brain-barriers",
+        "venous-drainage",
+        "section-planes"
+      ],
+      "sources": ["csf", "lymphatics"],
+      "explorations": [
+        {
+          "kind": "path",
+          "id": "csf",
+          "note": "Four stops through existing plexus and ventricular meshes. This is an anatomical learning sequence, not a fluid simulation."
+        },
+        {
+          "kind": "scan",
+          "id": "t2",
+          "note": "Compare ventricular spaces in three linked population-template slices. These structural images do not measure CSF flow."
+        },
+        {
+          "kind": "video",
+          "id": "zqQ6iKw5DjY",
+          "note": "Human specimen sections, casts, and diagrams showing ventricular anatomy. Opens the institutional film on its original channel."
+        }
+      ]
+    },
+    {
+      "id": "brain-barriers",
+      "title": "Two different blood–brain interfaces",
+      "category": "Protection & circulation",
+      "summary": "The vascular blood–brain barrier and the choroid-plexus blood–CSF barrier occupy different cell layers.",
+      "aliases": [
+        "BBB",
+        "blood brain barrier",
+        "blood CSF barrier",
+        "blood cerebrospinal fluid barrier",
+        "endothelial",
+        "epithelial",
+        "tight junction",
+        "pericyte",
+        "transport"
+      ],
+      "paragraphs": [
+        "At most brain microvessels, specialized endothelial cells and their tight junctions restrict movement between blood and neural tissue. Selective transport systems regulate exchange. Supporting interactions with neighboring cells help maintain this blood–brain barrier; it is not an impermeable wall or a visible membrane around an entire brain region.",
+        "The choroid plexus has fenestrated capillaries. Its blood–CSF barrier is instead formed by junctions between choroid epithelial cells. These two interfaces therefore separate different compartments at different anatomical locations. Arachnoid barrier cells form another interface around the subarachnoid compartment."
+      ],
+      "scope": "Neither endothelial junctions, choroid epithelial junctions, transporters, nor barrier permeability are modeled. A plexus mesh represents gross tissue, not its microscopic barrier.",
+      "regions": ["aseg-31", "aseg-4", "lh-precentral"],
+      "related": ["csf-circulation", "meninges", "glia", "arterial-supply"],
+      "sources": ["barriers", "csf"],
+      "explorations": [
+        {
+          "kind": "video",
+          "id": "zqQ6iKw5DjY",
+          "note": "Ventricular and plexus context on real specimens; a gross dissection does not resolve endothelial or epithelial tight junctions."
+        }
+      ]
+    },
+    {
+      "id": "arterial-supply",
+      "title": "How blood reaches the brain",
+      "category": "Protection & circulation",
+      "summary": "Internal carotid and vertebrobasilar systems supply overlapping, variable arterial territories.",
+      "aliases": [
+        "artery",
+        "arteries",
+        "vascular",
+        "blood supply",
+        "circle of Willis",
+        "ACA",
+        "MCA",
+        "PCA",
+        "carotid",
+        "vertebral",
+        "basilar",
+        "perforator"
+      ],
+      "paragraphs": [
+        "The internal carotid system gives rise to anterior and middle cerebral arteries. Broadly, ACA branches supply much medial frontal and parietal cortex, while MCA branches supply much of the lateral hemisphere. Small penetrating branches supply deep structures; a surface view alone cannot describe this distribution.",
+        "The vertebral arteries join to form the basilar artery. This posterior system supplies brainstem and cerebellar territories and gives rise to posterior cerebral arteries supplying much occipital and inferomedial temporal cortex. Communicating arteries connect anterior and posterior systems around the circle of Willis.",
+        "These are broad anatomical patterns. Arterial branching, collateral connections, and territorial boundaries vary. A cortical parcel is not an arterial territory, and a population MRI template is not an angiogram."
+      ],
+      "scope": "No arteries, capillaries, perfusion maps, or individual vascular territories are segmented. The linked cortex, deep structures, and brainstem are context landmarks; their highlight does not claim a measured blood supply.",
+      "regions": [
+        "lh-paracentral",
+        "lh-precentral",
+        "lh-pericalcarine",
+        "aseg-10",
+        "aseg-16"
+      ],
+      "related": ["venous-drainage", "brain-barriers", "atlas-boundaries"],
+      "sources": ["arteries", "circulation"],
+      "explorations": [
+        {
+          "kind": "scan",
+          "id": "t1",
+          "note": "Use structural MRI for regional orientation. No MR angiography, arterial labeling, or blood-flow measurements are included in this template."
+        }
+      ]
+    },
+    {
+      "id": "venous-drainage",
+      "title": "Veins, sinuses, and lymphatics",
+      "category": "Protection & circulation",
+      "summary": "Venous blood and lymphatic drainage involve different vessels around and within the brain.",
+      "aliases": [
+        "vein",
+        "veins",
+        "venous sinus",
+        "dural sinus",
+        "superior sagittal sinus",
+        "straight sinus",
+        "transverse sinus",
+        "sigmoid sinus",
+        "jugular",
+        "lymphatic",
+        "bridging veins"
+      ],
+      "paragraphs": [
+        "Superficial and deep cerebral veins collect blood from different parts of the brain and communicate through venous networks. Cerebral veins drain into venous sinuses within the dura. These channels differ from the arteries supplying the tissue; cerebral veins do not generally run alongside matching arteries.",
+        "Deep venous drainage includes the internal cerebral veins and great cerebral vein. Major dural channels include the sagittal, straight, transverse, and sigmoid sinuses, with outflow toward internal jugular veins. Their arrangement and relative size vary.",
+        "Dural lymphatic vessels are distinct from these blood-filled sinuses. Human and marmoset MRI and histology in the Absinta study identified lymphatic vessels near dural sinuses. Proximity to a sinus does not make the vessel a vein or measure its drainage rate."
+      ],
+      "scope": "Veins, dural sinuses, jugular veins, and meningeal lymphatics are not reconstructed. Related meshes provide landmarks only. Neither the 3D model nor the bundled structural templates is a venogram or lymphatic-flow study.",
+      "regions": ["lh-superiorfrontal", "aseg-10", "aseg-14"],
+      "related": ["arterial-supply", "meninges", "csf-circulation"],
+      "sources": ["veins", "venous-anatomy", "lymphatics", "circulation"]
     },
     {
       "id": "cortical-layers",
@@ -188,7 +446,14 @@
         "aseg-17"
       ],
       "related": ["cell-diversity", "neurons", "atlas-boundaries"],
-      "sources": ["layers", "spatial-cells"]
+      "sources": ["layers", "spatial-cells"],
+      "explorations": [
+        {
+          "kind": "video",
+          "id": "akjdkBeFNLE",
+          "note": "Gross cortical localization on human specimens. This film does not reveal the six microscopic cortical layers."
+        }
+      ]
     },
     {
       "id": "neurons",
@@ -366,7 +631,14 @@
         "lh-pericalcarine"
       ],
       "related": ["atlas-boundaries", "cortical-layers", "folds"],
-      "sources": ["parcels", "language"]
+      "sources": ["parcels", "language"],
+      "explorations": [
+        {
+          "kind": "path",
+          "id": "language",
+          "note": "Follow four anatomical stops in a distributed language system, with limits on classical localization."
+        }
+      ]
     }
   ]
 }

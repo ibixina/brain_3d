@@ -2144,6 +2144,23 @@ kbd {
   color: #a9d6c9;
   font-size: 10px;
 }
+.reference-return {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  min-height: 28px;
+  color: #abd2c5;
+  font-size: 10px;
+  text-align: left;
+  margin-bottom: 10px;
+}
+.detail-panel:has(.reference-return) .detail-topline {
+  margin-bottom: 5px;
+}
+.imaging-heading .reference-return {
+  display: flex;
+  margin-bottom: 8px;
+}
 .reference-search-link {
   margin-top: 9px;
   text-decoration: underline;

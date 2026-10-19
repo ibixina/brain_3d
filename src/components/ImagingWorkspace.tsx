@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import {
   Activity,
+  ArrowLeft,
   ArrowUpRight,
   BookOpen,
   Check,
@@ -18,6 +19,7 @@ import { useJSON, useVolume } from "../useImagingData";
 import MRISlice from "./MRISlice";
 import ImagingResearch from "./ImagingResearch";
 import "./imaging.css";
+import { withReferenceOrigin } from "../reference-navigation.ts";
 
 type Mode = "scans" | "activities";
 const taskSummaries: Record<string, string> = {
@@ -45,7 +47,15 @@ const taskSummaries: Record<string, string> = {
     "Read words, pseudowords, and sentences with different syntactic structures.",
 };
 
-export default function ImagingWorkspace({ mode }: { mode: Mode }) {
+export default function ImagingWorkspace({
+  mode,
+  referenceOrigin = null,
+  onReturnReference,
+}: {
+  mode: Mode;
+  referenceOrigin?: string | null;
+  onReturnReference?: () => void;
+}) {
   const {
     value: manifest,
     error: manifestError,
@@ -98,9 +108,13 @@ export default function ImagingWorkspace({ mode }: { mode: Mode }) {
       mode === "scans" ? "scan" : "map",
       mode === "scans" ? scanId : active?.id || mapId,
     );
-    history.replaceState(null, "", `#${params}`);
+    history.replaceState(
+      null,
+      "",
+      withReferenceOrigin(`#${params}`, referenceOrigin),
+    );
     setChooser(false);
-  }, [mode, scanId, active?.id, mapId]);
+  }, [mode, scanId, active?.id, mapId, referenceOrigin]);
   const error =
     manifestError ||
     structural.error ||
@@ -151,6 +165,11 @@ export default function ImagingWorkspace({ mode }: { mode: Mode }) {
     >
       <div className="imaging-heading">
         <div>
+          {referenceOrigin && (
+            <button className="reference-return" onClick={onReturnReference}>
+              <ArrowLeft size={12} /> Back to reference note
+            </button>
+          )}
           <span className="eyebrow">
             {mode === "scans"
               ? "INSIDE THE ANATOMY"
