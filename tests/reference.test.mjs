@@ -217,6 +217,59 @@ test("compact topic index stays synchronized with the lazy catalogue", () => {
   }
 });
 
+test("basal ganglia reading separates gross labels, circuit scope, and recorded species", () => {
+  const anatomy = referenceArticles.find(
+    (article) => article.id === "basal-ganglia-anatomy",
+  );
+  const circuit = referenceArticles.find(
+    (article) => article.id === "basal-ganglia-circuits",
+  );
+  for (const region of atlas.parts.filter((part) =>
+    ["caudate-nucleus", "putamen", "globus-pallidus"].includes(part.key),
+  )) {
+    assert.deepEqual(
+      referenceTopicsForRegion(region)
+        .slice(0, 2)
+        .map((topic) => topic.id),
+      [anatomy.id, circuit.id],
+    );
+    assert.ok(anatomy.regions.includes(region.id));
+    assert.ok(circuit.regions.includes(region.id));
+  }
+  for (const id of ["aseg-26", "aseg-58"]) {
+    const region = atlas.parts.find((part) => part.id === id);
+    const topics = referenceTopicsForRegion(region).map((topic) => topic.id);
+    assert.equal(topics[0], anatomy.id);
+    assert.ok(
+      !topics.includes(circuit.id),
+      "Dorsal motor-loop scope excludes accumbens",
+    );
+    assert.ok(anatomy.regions.includes(id));
+  }
+  assert.match(anatomy.scope, /without separate GPi or GPe/);
+  assert.match(circuit.scope, /Ventral striatal circuits are outside/);
+  assert.deepEqual(
+    circuit.comparison.rows.slice(0, 3).map((row) => row.label),
+    ["Direct pathway", "Indirect pathway", "Hyperdirect route"],
+  );
+  assert.match(referenceSources["striatal-coactivation"].kind, /mouse calcium/);
+  assert.match(
+    referenceSources["cortico-subthalamic-route"].kind,
+    /monkey.*electrophysiology/,
+  );
+  assert.ok(searchReference("GPi GPe").includes(anatomy));
+  assert.ok(searchReference("hyperdirect").includes(circuit));
+  assert.ok(searchReference("GCaMP3 mice").includes(circuit));
+  for (const note of [anatomy, circuit]) {
+    const links = referenceExplorations(note);
+    assert.ok(links.some((link) => link.kind === "video"));
+    assert.ok(links.some((link) => link.kind === "scan"));
+  }
+  assert.ok(
+    referenceExplorations(circuit).some((link) => link.kind === "path"),
+  );
+});
+
 test("every mesh offers bounded reading suggestions with explicit context", () => {
   for (const region of atlas.parts) {
     const topics = referenceTopicsForRegion(region);

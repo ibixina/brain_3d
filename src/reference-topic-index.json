@@ -192,6 +192,55 @@
     }
   },
   {
+    "id": "basal-ganglia-anatomy",
+    "title": "Inside the basal ganglia",
+    "regions": [
+      "aseg-11",
+      "aseg-50",
+      "aseg-12",
+      "aseg-51",
+      "aseg-13",
+      "aseg-52",
+      "aseg-26",
+      "aseg-58"
+    ],
+    "reading": {
+      "keys": [
+        "caudate-nucleus",
+        "putamen",
+        "globus-pallidus",
+        "nucleus-accumbens"
+      ],
+      "label": "Regional anatomy",
+      "priority": -2
+    }
+  },
+  {
+    "id": "basal-ganglia-circuits",
+    "title": "Basal ganglia circuits and movement evidence",
+    "regions": [
+      "aseg-11",
+      "aseg-50",
+      "aseg-12",
+      "aseg-51",
+      "aseg-13",
+      "aseg-52",
+      "aseg-10",
+      "aseg-49",
+      "lh-precentral",
+      "rh-precentral"
+    ],
+    "reading": {
+      "keys": [
+        "caudate-nucleus",
+        "putamen",
+        "globus-pallidus"
+      ],
+      "label": "Circuits & evidence",
+      "priority": -1
+    }
+  },
+  {
     "id": "hippocampal-formation",
     "title": "Inside the hippocampal formation",
     "regions": [

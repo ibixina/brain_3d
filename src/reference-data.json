@@ -191,6 +191,36 @@
       "title": "Bliss & Lømo · Dentate potentiation in anaesthetized rabbits (1973)",
       "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC1350458/",
       "kind": "Original rabbit electrophysiology study"
+    },
+    "basal-ganglia-chapter": {
+      "title": "Knierim · Basal ganglia, §§4.1–4.6 (reviewed 2020)",
+      "url": "https://nba.uth.tmc.edu/neuroscience/s3/chapter04.html",
+      "kind": "Academic textbook"
+    },
+    "basal-ganglia-sections": {
+      "title": "UTHealth · Basal ganglia in coronal sections",
+      "url": "https://nba.uth.tmc.edu/neuroanatomy/L5/Lab05p20_index.html",
+      "kind": "Academic anatomy laboratory"
+    },
+    "lentiform-anatomy": {
+      "title": "UTHealth · Globus pallidus and putamen",
+      "url": "https://nba.uth.tmc.edu/neuroanatomy/L10/Lab10p11_index.html",
+      "kind": "Academic anatomy laboratory"
+    },
+    "basal-ganglia-circuits": {
+      "title": "Purves et al. · Circuits within the basal ganglia system (2001)",
+      "url": "https://www.ncbi.nlm.nih.gov/books/NBK10847/",
+      "kind": "Neuroscience textbook · 2nd edition"
+    },
+    "striatal-coactivation": {
+      "title": "Cui et al. · Concurrent striatal pathway activity during action initiation (2013)",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/23354054/",
+      "kind": "Original mouse calcium-recording study"
+    },
+    "cortico-subthalamic-route": {
+      "title": "Nambu et al. · Cortico-subthalamo-pallidal responses in awake monkeys (2000)",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/10899204/",
+      "kind": "Original monkey stimulation and electrophysiology study"
     }
   },
   "articles": [
@@ -246,7 +276,12 @@
       ],
       "scope": "The MRI template and 3D surface have different source data. A plane name describes orientation; it does not establish correspondence between those datasets.",
       "regions": ["aseg-14", "aseg-16"],
-      "related": ["directions", "gray-white-matter", "atlas-boundaries"],
+      "related": [
+        "directions",
+        "gray-white-matter",
+        "atlas-boundaries",
+        "basal-ganglia-anatomy"
+      ],
       "sources": ["orientation"],
       "explorations": [
         {
@@ -876,6 +911,253 @@
       }
     },
     {
+      "id": "basal-ganglia-anatomy",
+      "title": "Inside the basal ganglia",
+      "category": "Basal ganglia",
+      "summary": "Separate striatum, pallidum, and lentiform names, then match their subdivisions to the gross meshes available.",
+      "aliases": [
+        "dorsal striatum",
+        "ventral striatum",
+        "neostriatum",
+        "lentiform nucleus",
+        "lenticular nucleus",
+        "pallidum",
+        "GPi",
+        "GPe",
+        "internal capsule",
+        "subthalamic nucleus",
+        "STN",
+        "substantia nigra",
+        "SNc",
+        "SNr",
+        "pars compacta",
+        "pars reticulata",
+        "caudate head body tail"
+      ],
+      "paragraphs": [
+        "The basal ganglia are a set of connected nuclei, rather than one continuous mass. Their components occupy the cerebral hemispheres, diencephalon, and midbrain. They influence motor, associative, and limbic circuits; a single movement label does not describe their full role.",
+        "Caudate and putamen form the dorsal striatum. The nucleus accumbens belongs to ventral striatum; the selectable accumbens label is not the whole ventral striatal territory. Putamen and globus pallidus are grouped anatomically as the lentiform nucleus, even though they occupy different circuit stages.",
+        "Coronal sections expose relationships that the outer cortical surface hides. The internal capsule separates much of the caudate from putamen, with gray-matter bridges between them. The pallidum lies medial to putamen. The linked human specimen lessons show these gross relationships.",
+        "The eight model links below are bilateral caudate, putamen, pallidum, and accumbens labels. Finer mode improves surface sampling within a label. It does not divide pallidum into internal and external segments or reveal cell classes."
+      ],
+      "scope": "Cerebra has one globus pallidus mesh per hemisphere, without separate GPi or GPe. Subthalamic nucleus, substantia nigra, accumbens core/shell, and individual internal-capsule fiber bundles have no separate selectable meshes. The ventral diencephalon composite label and whole brainstem are not precise substitutes for those nuclei. The table distinguishes anatomical names from the geometry actually available.",
+      "regions": [
+        "aseg-11",
+        "aseg-50",
+        "aseg-12",
+        "aseg-51",
+        "aseg-13",
+        "aseg-52",
+        "aseg-26",
+        "aseg-58"
+      ],
+      "related": [
+        "basal-ganglia-circuits",
+        "section-planes",
+        "gray-white-matter",
+        "atlas-boundaries"
+      ],
+      "sources": [
+        "basal-ganglia-chapter",
+        "basal-ganglia-sections",
+        "lentiform-anatomy"
+      ],
+      "reading": {
+        "keys": [
+          "caudate-nucleus",
+          "putamen",
+          "globus-pallidus",
+          "nucleus-accumbens"
+        ],
+        "label": "Regional anatomy",
+        "priority": -2
+      },
+      "comparison": {
+        "caption": "Basal ganglia names and available geometry",
+        "columns": ["Name", "Anatomical meaning and model coverage"],
+        "rows": [
+          {
+            "label": "Caudate nucleus",
+            "summary": "A curved nucleus with head, body, and tail beside the lateral ventricle.",
+            "detail": "A single gross mesh is available on each side; these parts are not separate labels.",
+            "source": "basal-ganglia-chapter"
+          },
+          {
+            "label": "Putamen",
+            "summary": "The lateral component of the dorsal striatum, across the internal capsule from caudate.",
+            "detail": "Bilateral putamen meshes are available. The capsule and gray bridges are not individually reconstructed.",
+            "source": "basal-ganglia-sections"
+          },
+          {
+            "label": "Nucleus accumbens",
+            "summary": "A ventral striatal component near the caudate–putamen junction.",
+            "detail": "Bilateral gross labels are available, without core/shell subdivisions or a complete ventral striatal segmentation.",
+            "source": "basal-ganglia-chapter"
+          },
+          {
+            "label": "Globus pallidus · GPe and GPi",
+            "summary": "External/lateral and internal/medial pallidal segments.",
+            "detail": "Both names belong within each gross pallidum label here; neither segment can be selected separately.",
+            "source": "lentiform-anatomy"
+          },
+          {
+            "label": "Lentiform nucleus",
+            "summary": "An anatomical grouping of putamen and globus pallidus.",
+            "detail": "Use the separate putamen and pallidum model links; there is no additional lentiform mesh.",
+            "source": "lentiform-anatomy"
+          },
+          {
+            "label": "Subthalamic nucleus · STN",
+            "summary": "A diencephalic circuit component above substantia nigra.",
+            "detail": "There is no separate STN mesh. A composite imaging label does not establish its exact outline.",
+            "source": "basal-ganglia-sections"
+          },
+          {
+            "label": "Substantia nigra · SNc and SNr",
+            "summary": "Midbrain pars compacta and pars reticulata have different circuit roles.",
+            "detail": "Neither subdivision has its own mesh. Their roles are introduced in the linked circuit note.",
+            "source": "basal-ganglia-chapter"
+          }
+        ]
+      },
+      "explorations": [
+        {
+          "kind": "video",
+          "id": "JBuAFWKWxDQ",
+          "note": "Utah’s basal-ganglia lesson uses human sections and circuit diagrams. The diagrams are explanations, not reconstructed connections."
+        },
+        {
+          "kind": "video",
+          "id": "InJByqg1x-0",
+          "note": "UBC’s specimen lesson gives a second gross anatomical perspective. Opens the original institutional film."
+        },
+        {
+          "kind": "scan",
+          "id": "t1",
+          "note": "Compare deep cerebral relationships in a population template. It has no separate GPi/GPe or STN labels and is distinct from the surface atlas."
+        }
+      ]
+    },
+    {
+      "id": "basal-ganglia-circuits",
+      "title": "Basal ganglia circuits and movement evidence",
+      "category": "Basal ganglia",
+      "summary": "Follow selected direct, indirect, and hyperdirect relationships while separating a teaching model from recorded activity.",
+      "aliases": [
+        "direct pathway",
+        "indirect pathway",
+        "hyperdirect pathway",
+        "disinhibition",
+        "D1",
+        "D2",
+        "spiny projection neurons",
+        "medium spiny neurons",
+        "dopamine",
+        "nigrostriatal",
+        "GPi",
+        "GPe",
+        "SNr",
+        "SNc",
+        "STN",
+        "GCaMP3",
+        "Cui",
+        "Nambu"
+      ],
+      "paragraphs": [
+        "Basal ganglia circuits influence cortical and brainstem motor systems rather than forming a separate descending motor tract. In the selected motor loop, cortical input reaches striatum, and GPi or substantia nigra pars reticulata (SNr) sends inhibitory output toward thalamic targets. Other loops and projections also exist.",
+        "The table follows selected connection signs. Inhibition of an inhibitory output can release its target from inhibition: disinhibition. This account omits many cell types, collateral branches, recurrent connections, and timing effects. It should not be read as a complete wiring diagram or a binary action switch.",
+        "Nambu and colleagues (2000) electrically stimulated motor and somatosensory cortex in awake monkeys while recording subthalamic and pallidal neurons. Early excitation appeared in STN before pallidum; suppressing STN activity abolished the evoked pallidal excitations. This supported a rapid cortical route through STN. These are stimulation and spike-recording findings in monkeys, not a human activity map.",
+        "Cui and colleagues (2013) used genetically targeted GCaMP3 calcium signals and fiber optics in mice performing an operant task. Both direct- and indirect-pathway striatal populations showed transient activity increases around action initiation. This challenges an account in which one population must simply turn off whenever the other turns on. Population calcium signals do not resolve every neuron or establish a complete causal theory of human movement."
+      ],
+      "scope": "This is a written explanation of selected motor-loop relationships. No projection fibers, D1/D2 cell populations, dopamine concentrations, or electrical/calcium traces are modeled. The whole pallidum and thalamus meshes do not separate the nuclei or cells in these routes. The movement guide is an anatomical sequence, and the MRI link is structural contrast; neither reproduces the cited experiments. Ventral striatal circuits are outside this selected account.",
+      "regions": [
+        "aseg-11",
+        "aseg-50",
+        "aseg-12",
+        "aseg-51",
+        "aseg-13",
+        "aseg-52",
+        "aseg-10",
+        "aseg-49",
+        "lh-precentral",
+        "rh-precentral"
+      ],
+      "related": [
+        "basal-ganglia-anatomy",
+        "neurons",
+        "synapses",
+        "cerebellar-circuit",
+        "atlas-boundaries"
+      ],
+      "sources": [
+        "basal-ganglia-chapter",
+        "basal-ganglia-circuits",
+        "cortico-subthalamic-route",
+        "striatal-coactivation"
+      ],
+      "reading": {
+        "keys": ["caudate-nucleus", "putamen", "globus-pallidus"],
+        "label": "Circuits & evidence",
+        "priority": -1
+      },
+      "comparison": {
+        "caption": "Selected motor-loop routes — written relationships, not modeled fibers",
+        "columns": [
+          "Route or signal",
+          "Selected relationship and interpretation"
+        ],
+        "rows": [
+          {
+            "label": "Direct pathway",
+            "summary": "Striatum inhibits GPi/SNr, which inhibits its output targets.",
+            "detail": "Reducing that output can disinhibit thalamic targets. This is a connection-sign account, not a guarantee that every movement is facilitated.",
+            "source": "basal-ganglia-circuits"
+          },
+          {
+            "label": "Indirect pathway",
+            "summary": "Striatum inhibits GPe; reduced GPe inhibition can release STN, which excites GPi/SNr.",
+            "detail": "This selected route can increase inhibitory output. GPe also projects directly to output nuclei; the displayed sequence omits other connections.",
+            "source": "basal-ganglia-circuits"
+          },
+          {
+            "label": "Hyperdirect route",
+            "summary": "Cortex → STN → pallidum bypasses the striatal stage.",
+            "detail": "Awake-monkey stimulation and recordings supported rapid excitation along this route. This is not a measured fiber overlay in Cerebra.",
+            "source": "cortico-subthalamic-route"
+          },
+          {
+            "label": "Nigrostriatal dopamine",
+            "summary": "SNc dopamine modulates striatal neurons, including populations associated with D1 and D2 receptors.",
+            "detail": "The classical account associates D1 with direct-pathway and D2 with indirect-pathway neurons. Dopamine modulation is more complex than a single excitatory or inhibitory wire.",
+            "source": "basal-ganglia-circuits"
+          },
+          {
+            "label": "Concurrent pathway activity",
+            "summary": "Direct- and indirect-pathway population calcium signals both increased around action initiation in mice.",
+            "detail": "The Cui study measured activity-related fluorescence during behavior; it did not image these human meshes or show that every neuron in a pathway acts identically.",
+            "source": "striatal-coactivation"
+          }
+        ]
+      },
+      "explorations": [
+        {
+          "kind": "path",
+          "id": "movement",
+          "note": "Visit selected cortical, basal-ganglia, thalamic, and cerebellar structures. This guide is not a direct/indirect pathway animation."
+        },
+        {
+          "kind": "video",
+          "id": "JBuAFWKWxDQ",
+          "note": "Use the human specimen sections to orient the named structures. Circuit diagrams in the film should be read alongside the experimental limits above."
+        },
+        {
+          "kind": "scan",
+          "id": "t1",
+          "note": "Inspect structural MRI contrast in a population average. This is neither a dopamine scan nor a recording of the cited monkey or mouse experiments."
+        }
+      ]
+    },
+    {
       "id": "hippocampal-formation",
       "title": "Inside the hippocampal formation",
       "category": "Hippocampus & memory",
@@ -1247,7 +1529,13 @@
       ],
       "scope": "Synapses are not resolved in these meshes. Region connections are educational associations, not a measured synaptic wiring diagram or a simulation of thought.",
       "regions": ["aseg-17", "lh-precentral", "aseg-12"],
-      "related": ["neurons", "glia", "cell-diversity", "hippocampal-circuit"],
+      "related": [
+        "neurons",
+        "glia",
+        "cell-diversity",
+        "hippocampal-circuit",
+        "basal-ganglia-circuits"
+      ],
       "sources": ["release", "synapses"]
     },
     {
