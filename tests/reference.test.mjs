@@ -18,6 +18,10 @@ import {
 } from "../src/reference-navigation.ts";
 import { learningPaths } from "../src/learning.ts";
 import { dissectionVideos } from "../src/videos.ts";
+import {
+  regionReferenceTopics,
+  referenceTopicsForRegion,
+} from "../src/reference-topics.ts";
 import atlas from "../src/atlas-manifest.json" with { type: "json" };
 
 test("anatomical aliases find available parcels while respecting hemisphere and combined terms", () => {
@@ -94,6 +98,18 @@ test("reference articles retain precise sources, scope limits, and valid anatomy
       assert.ok(
         id !== article.id && referenceArticles.some((item) => item.id === id),
       );
+    if (article.comparison) {
+      const { caption, columns, rows } = article.comparison;
+      assert.ok(caption && columns.length === 2 && rows.length > 0);
+      assert.equal(new Set(rows.map((row) => row.label)).size, rows.length);
+      for (const row of rows) {
+        assert.ok(row.label && row.summary && row.detail);
+        assert.ok(
+          article.sources.includes(row.source),
+          `${article.id}: ${row.source}`,
+        );
+      }
+    }
   }
 });
 
@@ -107,6 +123,56 @@ test("reference discovery combines vocabulary, aliases, and explanatory text", (
   assert.equal(searchReference("BBB endothelial")[0].id, "brain-barriers");
   assert.equal(searchReference("CSF aqueduct")[0].id, "csf-circulation");
   assert.equal(searchReference("MCA")[0].id, "arterial-supply");
+  assert.equal(searchReference("CN VIII")[0].id, "cranial-nerves");
+  assert.equal(searchReference("parotid")[0].id, "cranial-nerves");
+  assert.equal(
+    searchReference("medulla pyramids")[0].id,
+    "brainstem-organization",
+  );
+  assert.equal(
+    searchReference("flocculonodular lobes")[0].id,
+    "cerebellum-organization",
+  );
+  assert.equal(
+    searchReference("climbing parallel")[0].id,
+    "cerebellar-circuit",
+  );
+});
+
+test("cranial-nerve comparison covers I–XII in order with sources and explicit missing geometry", () => {
+  const article = referenceArticles.find(
+    (item) => item.id === "cranial-nerves",
+  );
+  assert.deepEqual(
+    article.comparison.rows.map((row) => row.label.split(" · ")[0]),
+    ["I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX", "X", "XI", "XII"],
+  );
+  assert.match(article.scope, /no individual cranial-nerve/);
+  assert.match(article.comparison.rows[10].detail, /cervical/);
+  assert.deepEqual(article.regions, ["aseg-16"]);
+});
+
+test("contextual reading suggestions link real region keys to matching source articles", () => {
+  for (const topic of regionReferenceTopics) {
+    const article = referenceArticles.find((item) => item.id === topic.id);
+    assert.equal(article?.title, topic.title);
+    for (const key of topic.keys) {
+      const targets = atlas.parts.filter((part) => part.key === key);
+      assert.ok(targets.length > 0, key);
+      assert.ok(
+        targets.every((region) =>
+          referenceTopicsForRegion(region).includes(topic),
+        ),
+      );
+      assert.ok(targets.some((region) => article.regions.includes(region.id)));
+    }
+  }
+  assert.equal(referenceTopicsForRegion({ key: "brainstem" }).length, 2);
+  assert.equal(
+    referenceTopicsForRegion({ key: "cerebellar-cortex" }).length,
+    2,
+  );
+  assert.deepEqual(referenceTopicsForRegion({ key: "precentral" }), []);
 });
 
 test("reference explorations resolve to retained specimen films, real paths, and valid MRI views", () => {

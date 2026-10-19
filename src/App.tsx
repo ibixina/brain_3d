@@ -45,6 +45,7 @@ import {
   withReferenceOrigin,
 } from "./reference-navigation.ts";
 import { regionCamera, regionEnabled, regionView } from "./region-view.ts";
+import { referenceTopicsForRegion } from "./reference-topics.ts";
 import { RegionVideos, VideoLibrary } from "./components/DissectionVideos";
 import RegionCallout from "./components/RegionCallout";
 import {
@@ -213,6 +214,9 @@ export default function App() {
   const hovered = regions.find((p) => p.id === hover?.id);
   const selectedVisible = selected && regionEnabled(selected, state);
   const info = selected ? infoFor(selected) : null;
+  const relatedReferenceTopics = selected
+    ? referenceTopicsForRegion(selected)
+    : [];
   function update(patch: Partial<ViewState>) {
     setState((prev) => ({ ...prev, ...patch }));
   }
@@ -1360,6 +1364,20 @@ export default function App() {
                         <li key={s}>{s}</li>
                       ))}
                     </ul>
+                    {relatedReferenceTopics.length > 0 && (
+                      <div className="region-reference-notes">
+                        <h3>READ DEEPER</h3>
+                        {relatedReferenceTopics.map((topic) => (
+                          <button
+                            className="reference-search-link"
+                            key={topic.id}
+                            onClick={() => openReference(topic.id)}
+                          >
+                            {topic.title} <ArrowUpRight size={12} />
+                          </button>
+                        ))}
+                      </div>
+                    )}
                     <div className="method-note">
                       <strong>About this geometry</strong>
                       <p>

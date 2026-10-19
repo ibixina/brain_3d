@@ -172,3 +172,62 @@
 .reference-explorations a:hover strong {
   color: #a7dfd1;
 }
+.reference-comparison {
+  width: 100%;
+  border-collapse: collapse;
+  table-layout: fixed;
+  margin: 24px 0;
+  font-size: 11px;
+  line-height: 1.7;
+  text-align: left;
+}
+.reference-comparison caption {
+  text-align: left;
+  color: #d5e5e1;
+  font-weight: 500;
+  margin-bottom: 10px;
+}
+.reference-comparison th,
+.reference-comparison td {
+  padding: 12px 0;
+  border-bottom: 1px solid var(--line);
+  vertical-align: top;
+  overflow-wrap: anywhere;
+}
+.reference-comparison th {
+  font-weight: 500;
+  color: #c7ded6;
+}
+.reference-comparison th:first-child {
+  width: 40%;
+  padding-right: 12px;
+}
+.reference-comparison thead th {
+  color: #8da4b8;
+  font-size: 9px;
+}
+.reference-comparison td > span {
+  color: #cbdadf;
+}
+.reference-comparison td p {
+  font-size: 10px;
+  color: #9db3c2;
+  margin: 6px 0;
+  line-height: 1.7;
+}
+.reference-comparison td a {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  color: #a6cfc1;
+  font-size: 10px;
+  min-height: 24px;
+}
+.reference-jump {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  min-height: 28px;
+  color: #a6cfc1;
+  font-size: 10px;
+}

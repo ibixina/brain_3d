@@ -21,6 +21,16 @@ export type ReferenceArticle = {
   related: string[];
   sources: string[];
   explorations?: ReferenceExploration[];
+  comparison?: {
+    caption: string;
+    columns: [string, string];
+    rows: {
+      label: string;
+      summary: string;
+      detail: string;
+      source: string;
+    }[];
+  };
 };
 export const referenceArticles = catalogue.articles as ReferenceArticle[];
 export const referenceSources: Record<
@@ -36,6 +46,11 @@ const searchIndex = referenceArticles.map((article) => ({
     article.summary,
     ...article.aliases,
     ...article.paragraphs,
+    ...(article.comparison?.rows.flatMap((row) => [
+      row.label,
+      row.summary,
+      row.detail,
+    ]) ?? []),
   ]
     .join(" ")
     .toLowerCase(),

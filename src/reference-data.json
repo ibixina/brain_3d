@@ -3,7 +3,7 @@
   "provenance": "Original educational summaries written for Cerebra. Sources are linked for verification and further reading; no source text, figures, cellular data, or geometry is redistributed by this catalogue.",
   "sources": {
     "orientation": {
-      "title": "UTHealth · Overview of the nervous system, §1.2 & §1.6",
+      "title": "UTHealth · Overview of the nervous system, §§1.2, 1.4 & 1.6",
       "url": "https://nba.uth.tmc.edu/neuroscience/s2/chapter01.html",
       "kind": "Academic textbook"
     },
@@ -96,6 +96,71 @@
       "title": "Absinta et al. · Meningeal lymphatics in humans and marmosets (2017)",
       "url": "https://doi.org/10.7554/eLife.29738",
       "kind": "Original human/primate MRI and tissue study"
+    },
+    "brainstem-lab": {
+      "title": "UTHealth · Brainstem overview and section landmarks",
+      "url": "https://nba.uth.tmc.edu/neuroanatomy/L10/Lab10p29_index.html",
+      "kind": "Academic anatomy laboratory"
+    },
+    "cranial-forebrain": {
+      "title": "UTHealth · Cranial nerves of the forebrain",
+      "url": "https://oac22.hsc.uth.tmc.edu/courses/neuroanatomy/L03P16.html",
+      "kind": "Academic anatomy laboratory"
+    },
+    "cranial-midbrain": {
+      "title": "UTHealth · Cranial nerves of the midbrain",
+      "url": "https://oac22.hsc.uth.tmc.edu/courses/neuroanatomy/L03P20.html",
+      "kind": "Academic anatomy laboratory"
+    },
+    "cranial-pons": {
+      "title": "UTHealth · Cranial nerves of the pons",
+      "url": "https://nba.uth.tmc.edu/neuroanatomy/l4/Lab04p21_index.html",
+      "kind": "Academic anatomy laboratory"
+    },
+    "cranial-medulla": {
+      "title": "UTHealth · Cranial nerves of the medulla",
+      "url": "https://nba.uth.tmc.edu/neuroanatomy/L4/Lab04p24_index.html",
+      "kind": "Academic anatomy laboratory"
+    },
+    "cranial-facial": {
+      "title": "UTHealth · Facial nerve components",
+      "url": "https://nba.uth.tmc.edu/neuroanatomy/L9/Lab09p20_index.html",
+      "kind": "Academic anatomy laboratory"
+    },
+    "cranial-glossopharyngeal": {
+      "title": "UTHealth · Glossopharyngeal nerve components",
+      "url": "https://oac22.hsc.uth.tmc.edu/courses/neuroanatomy/L10P13.html",
+      "kind": "Academic anatomy laboratory"
+    },
+    "cranial-vagus": {
+      "title": "UTHealth · Vagus nerve components",
+      "url": "https://nba.uth.tmc.edu/neuroanatomy/L9/Lab09p08_index.html",
+      "kind": "Academic anatomy laboratory"
+    },
+    "cranial-accessory": {
+      "title": "UTHealth · Spinal accessory nerve",
+      "url": "https://nba.uth.tmc.edu/neuroanatomy/L9/Lab09p05_index.html",
+      "kind": "Academic anatomy laboratory"
+    },
+    "chemical-senses": {
+      "title": "UTHealth · Chemical senses: olfaction and taste",
+      "url": "https://nba.uth.tmc.edu/neuroscience/s2/chapter09.html",
+      "kind": "Academic textbook"
+    },
+    "cerebellum-chapter": {
+      "title": "Knierim · Cerebellum, §§5.2–5.4 (reviewed 2020)",
+      "url": "https://nba.uth.tmc.edu/neuroscience/s3/chapter05.html",
+      "kind": "Academic textbook"
+    },
+    "cerebellum-gross": {
+      "title": "UTHealth · Cerebellum and brainstem relationships",
+      "url": "https://nba.uth.tmc.edu/neuroanatomy/L5/Lab05p22_index.html",
+      "kind": "Academic anatomy laboratory"
+    },
+    "cerebellum-circuit": {
+      "title": "UTHealth · Cerebellar inputs, outputs, and nuclei",
+      "url": "https://nba.uth.tmc.edu/neuroanatomy/l5/Lab05p21_index.html",
+      "kind": "Academic anatomy laboratory"
     }
   },
   "articles": [
@@ -213,7 +278,13 @@
       ],
       "scope": "The tissue colors are a visualization choice. A mesh’s apparent thickness and smoothness are limited by its MRI segmentation and surface processing.",
       "regions": ["lh-precentral", "aseg-10", "aseg-2", "aseg-41"],
-      "related": ["neurons", "glia", "myelin", "atlas-boundaries"],
+      "related": [
+        "neurons",
+        "glia",
+        "myelin",
+        "atlas-boundaries",
+        "cerebellum-organization"
+      ],
       "sources": ["orientation", "cells"],
       "explorations": [
         {
@@ -416,6 +487,313 @@
       "sources": ["veins", "venous-anatomy", "lymphatics", "circulation"]
     },
     {
+      "id": "brainstem-organization",
+      "title": "Brainstem levels and landmarks",
+      "category": "Brainstem & cerebellum",
+      "summary": "Midbrain, pons, and medulla connect the forebrain, cerebellum, and spinal cord.",
+      "aliases": [
+        "mesencephalon",
+        "pons",
+        "medulla oblongata",
+        "tectum",
+        "tegmentum",
+        "cerebral peduncles",
+        "pyramids",
+        "inferior olive"
+      ],
+      "paragraphs": [
+        "The brainstem continues from the diencephalon above to the spinal cord below. Ascending and descending axons pass through it, alongside nuclei that process cranial-nerve information. A surface landmark and an internal nucleus are different things: locating a bulge does not identify every cell group beneath it.",
+        "In a section, distinguish fiber bundles from gray-matter nuclei and nearby CSF spaces. The cerebral aqueduct passes through the midbrain; the fourth ventricle lies behind the pons and upper medulla. Pontine connections reach the cerebellum through the middle cerebellar peduncles.",
+        "Medullary networks contribute to breathing, swallowing, and cardiovascular regulation. These functions involve multiple connected nuclei and pathways; the single outer brainstem mesh does not resolve them."
+      ],
+      "comparison": {
+        "caption": "Three levels of the brainstem",
+        "columns": ["Level", "Landmarks and relationships"],
+        "rows": [
+          {
+            "label": "Midbrain",
+            "summary": "Between the diencephalon and pons.",
+            "detail": "Cerebral peduncles anteriorly; colliculi in the posterior tectum; substantia nigra, red nucleus, and periaqueductal gray internally.",
+            "source": "brainstem-lab"
+          },
+          {
+            "label": "Pons",
+            "summary": "Between midbrain and medulla, in front of the cerebellum.",
+            "detail": "A prominent ventral base and internal tegmentum; pontine fibers connect with the cerebellum.",
+            "source": "orientation"
+          },
+          {
+            "label": "Medulla",
+            "summary": "Between pons and spinal cord.",
+            "detail": "Ventral pyramids contain descending corticospinal fibers; many cross near the cord. The inferior olive is a nearby landmark.",
+            "source": "orientation"
+          }
+        ]
+      },
+      "scope": "Only one brainstem surface is segmented here. Midbrain, pons, medulla, nuclei, peduncles, long tracts, and cranial-nerve roots are not separate selectable meshes. The fourth ventricle and cerebellar compartments are available as neighboring anatomy, not internal brainstem labels.",
+      "regions": ["aseg-16", "aseg-15", "aseg-8"],
+      "related": [
+        "cranial-nerves",
+        "cerebellum-organization",
+        "section-planes",
+        "csf-circulation"
+      ],
+      "sources": ["brainstem-lab", "orientation"],
+      "explorations": [
+        {
+          "kind": "video",
+          "id": "Mkj78h8w4a8",
+          "note": "A UBC laboratory overview using specimens and diagrams. Compare its visible landmarks with the unsplit brainstem model."
+        },
+        {
+          "kind": "scan",
+          "id": "t2",
+          "note": "Compare brainstem, cerebellum, and fourth-ventricle relationships in linked population-template slices. Small nuclei and individual nerves are not labeled."
+        }
+      ]
+    },
+    {
+      "id": "cranial-nerves",
+      "title": "The twelve cranial nerves",
+      "category": "Brainstem & cerebellum",
+      "summary": "Compare sensory, motor, and parasympathetic roles with their central connections.",
+      "aliases": [
+        "CN I",
+        "CN II",
+        "CN III",
+        "CN IV",
+        "CN V",
+        "CN VI",
+        "CN VII",
+        "CN VIII",
+        "CN IX",
+        "CN X",
+        "CN XI",
+        "CN XII",
+        "cranial nerve nuclei",
+        "olfactory",
+        "optic",
+        "oculomotor",
+        "trochlear",
+        "trigeminal",
+        "abducens",
+        "facial",
+        "vestibulocochlear",
+        "glossopharyngeal",
+        "vagus",
+        "accessory",
+        "hypoglossal"
+      ],
+      "paragraphs": [
+        "The conventional twelve pairs carry different combinations of sensory and motor information. “Mixed” means a nerve includes both sensory and motor components; parasympathetic fibers are an autonomic motor component. The comparison gives selected principal roles, not every branch, target, or reflex.",
+        "Forebrain connections of I and II differ from the brainstem associations of most other cranial nerves. XI has an important spinal motor component. A nerve’s surface attachment is not a complete map of its nuclei: sensory systems can extend across several brainstem levels."
+      ],
+      "comparison": {
+        "caption": "Cranial nerves I–XII: selected roles",
+        "columns": ["Nerve", "Roles and central relationship"],
+        "rows": [
+          {
+            "label": "I · Olfactory",
+            "summary": "Sensory · smell.",
+            "detail": "Olfactory receptor axons reach the olfactory bulb; this is not a brainstem attachment.",
+            "source": "chemical-senses"
+          },
+          {
+            "label": "II · Optic",
+            "summary": "Sensory · vision.",
+            "detail": "Retinal fibers pass through the optic nerve, chiasm, and tract toward forebrain targets.",
+            "source": "cranial-forebrain"
+          },
+          {
+            "label": "III · Oculomotor",
+            "summary": "Motor + parasympathetic · most eye movements and intrinsic eye-muscle control.",
+            "detail": "Emerges from the anterior midbrain in the interpeduncular fossa.",
+            "source": "cranial-midbrain"
+          },
+          {
+            "label": "IV · Trochlear",
+            "summary": "Motor · superior oblique eye muscle.",
+            "detail": "Emerges from the dorsal midbrain, just below the inferior colliculus.",
+            "source": "cranial-midbrain"
+          },
+          {
+            "label": "V · Trigeminal",
+            "summary": "Mixed · facial sensation and chewing muscles.",
+            "detail": "Attaches to the anterolateral pons through a large sensory and smaller motor root.",
+            "source": "cranial-pons"
+          },
+          {
+            "label": "VI · Abducens",
+            "summary": "Motor · lateral rectus, which turns the eye outward.",
+            "detail": "Emerges at the pons–medulla junction, near the midline.",
+            "source": "cranial-pons"
+          },
+          {
+            "label": "VII · Facial",
+            "summary": "Mixed + parasympathetic · facial expression, taste from the anterior two-thirds of the tongue, tear and salivary secretion.",
+            "detail": "Motor, sensory, and autonomic components travel together; the nerve attaches near the pons–medulla junction.",
+            "source": "cranial-facial"
+          },
+          {
+            "label": "VIII · Vestibulocochlear",
+            "summary": "Sensory · hearing and head motion/balance.",
+            "detail": "Cochlear and vestibular components carry inner-ear input at the pons–medulla junction.",
+            "source": "cranial-pons"
+          },
+          {
+            "label": "IX · Glossopharyngeal",
+            "summary": "Mixed + parasympathetic · posterior tongue taste, pharyngeal sensation, stylopharyngeus, and parotid secretion.",
+            "detail": "Medullary pathways include solitary, ambiguus, and inferior salivatory nuclei.",
+            "source": "cranial-glossopharyngeal"
+          },
+          {
+            "label": "X · Vagus",
+            "summary": "Mixed + parasympathetic · throat/larynx motor pathways, visceral sensation, and autonomic supply to thoracic and abdominal organs.",
+            "detail": "Medullary components include ambiguus, solitary, and dorsal vagal motor nuclei.",
+            "source": "cranial-vagus"
+          },
+          {
+            "label": "XI · Accessory",
+            "summary": "Motor · sternocleidomastoid and trapezius for head turning and shoulder elevation.",
+            "detail": "Its spinal motor component arises from an upper cervical cell column, rather than only the brainstem.",
+            "source": "cranial-accessory"
+          },
+          {
+            "label": "XII · Hypoglossal",
+            "summary": "Motor · tongue movements.",
+            "detail": "Rootlets emerge between the medullary pyramid and olive.",
+            "source": "cranial-medulla"
+          }
+        ]
+      },
+      "scope": "There are no individual cranial-nerve, root, ganglion, or cranial-nerve-nucleus meshes in this atlas. Opening the brainstem shows its overall location, not the course of a selected nerve. The comparison is an anatomical reference, not a clinical examination guide.",
+      "regions": ["aseg-16"],
+      "related": [
+        "brainstem-organization",
+        "cerebellum-organization",
+        "directions"
+      ],
+      "sources": [
+        "cranial-forebrain",
+        "cranial-midbrain",
+        "cranial-pons",
+        "cranial-facial",
+        "cranial-glossopharyngeal",
+        "cranial-vagus",
+        "cranial-accessory",
+        "cranial-medulla",
+        "chemical-senses"
+      ],
+      "explorations": [
+        {
+          "kind": "video",
+          "id": "lzm3K6nQNF0",
+          "note": "UTHealth’s laboratory links this cranial-nerve and vessel dissection. Inspect specimen attachments; this does not add nerve meshes or verified timestamps to the atlas."
+        },
+        {
+          "kind": "video",
+          "id": "_JXb_lGgaQQ",
+          "note": "Utah’s brainstem lesson combines human specimens and reflex demonstrations. Gross views do not resolve every nerve nucleus."
+        }
+      ]
+    },
+    {
+      "id": "cerebellum-organization",
+      "title": "Cerebellar lobes and connections",
+      "category": "Brainstem & cerebellum",
+      "summary": "Relate the folded cortex, vermis, white matter, deep nuclei, and three pairs of peduncles.",
+      "aliases": [
+        "vermis",
+        "folia",
+        "anterior lobe",
+        "posterior lobe",
+        "flocculonodular",
+        "cerebellar peduncles",
+        "vestibulocerebellum",
+        "spinocerebellum",
+        "cerebrocerebellum",
+        "dentate",
+        "fastigial",
+        "interposed"
+      ],
+      "paragraphs": [
+        "The cerebellum lies behind the brainstem. A midline vermis joins two hemispheres. Its tightly folded cortex surrounds white matter and deep nuclei. The primary fissure separates anterior and posterior lobes; the posterolateral fissure marks off the flocculonodular lobe.",
+        "Three paired peduncles connect it with the brainstem. The middle peduncle brings pontine input. The inferior peduncle carries important medullary and spinal connections, with some outgoing fibers. The superior peduncle is a major route out of the cerebellar nuclei and also carries some input.",
+        "Functional divisions cut across simple lobe names: vestibulocerebellar circuits support gaze and balance; spinocerebellar circuits integrate body feedback with movement; cerebrocerebellar loops involve lateral hemispheres and cerebral cortex. These are broad circuit descriptions, not exact boundaries of a single task.",
+        "Dentate, interposed (emboliform and globose), and fastigial nuclei lie in the interior. They receive inhibitory Purkinje-cell output and participate in routes back to brainstem and forebrain motor systems. Some Purkinje cells instead project directly to vestibular nuclei outside the cerebellum."
+      ],
+      "scope": "The model separates left/right cerebellar cortex and white-matter compartments. It does not separately segment the vermis, individual lobes or lobules, deep nuclei, or peduncles. Smoothing and atlas sampling limit visible folial detail; a finer compartment surface is not a cellular or lobular atlas.",
+      "regions": ["aseg-8", "aseg-47", "aseg-7", "aseg-46", "aseg-16"],
+      "related": [
+        "cerebellar-circuit",
+        "brainstem-organization",
+        "gray-white-matter"
+      ],
+      "sources": [
+        "cerebellum-gross",
+        "cerebellum-chapter",
+        "cerebellum-circuit"
+      ],
+      "explorations": [
+        {
+          "kind": "video",
+          "id": "mpO4lTDr1to",
+          "note": "Utah’s lesson inspects cerebellar surfaces and peduncles, with clinical examples. These specimen landmarks are finer than the model’s compartment labels."
+        },
+        {
+          "kind": "video",
+          "id": "17mxfO9nklQ",
+          "note": "A UBC cerebellar anatomy laboratory lesson with specimens and diagrams. Opens at the beginning on the original channel."
+        },
+        {
+          "kind": "path",
+          "id": "movement",
+          "note": "Place the cerebellar stop within a selected motor-system learning sequence. This is not a measured tract or signal animation."
+        }
+      ]
+    },
+    {
+      "id": "cerebellar-circuit",
+      "title": "Inside the cerebellar circuit",
+      "category": "Brainstem & cerebellum",
+      "summary": "Three cortical layers transform mossy- and climbing-fiber input into Purkinje-cell output.",
+      "aliases": [
+        "Purkinje",
+        "granule cell",
+        "molecular layer",
+        "granular layer",
+        "parallel fiber",
+        "mossy fiber",
+        "climbing fiber",
+        "inferior olive",
+        "Golgi",
+        "basket",
+        "stellate"
+      ],
+      "paragraphs": [
+        "From surface inward, cerebellar cortex has a molecular layer, a Purkinje-cell layer, and a granular layer. Granule-cell axons rise and split into parallel fibers that excite Purkinje dendrites. Golgi, basket, and stellate interneurons add local interactions to this simplified account.",
+        "Mossy fibers bring varied spinal, pontine, vestibular, and other brainstem input through granule cells. Climbing fibers originate in the inferior olive and strongly excite Purkinje cells. Both input systems also send connections to deep nuclei.",
+        "Purkinje neurons provide the cortex’s inhibitory output to deep cerebellar nuclei, with direct vestibular-nucleus projections from some regions. Deep nuclei therefore combine incoming excitation with cortical inhibition. The cortical output and the output of the whole cerebellum are different stages.",
+        "The cerebellum contributes to adaptive movement and learning. Relating climbing-fiber signals and synaptic change to learning is a physiological model supported by experiments; the 3D compartment surfaces here do not measure spikes, synapses, or a person’s learning."
+      ],
+      "scope": "This is a written circuit explanation, not measured connectivity or simulated neural activity. Cellular layers, neurons, inferior olive, deep nuclei, and individual mossy/climbing fibers have no separate meshes. The cerebellar white-matter surface is a tissue compartment, not a reconstruction of these axons.",
+      "regions": ["aseg-8", "aseg-7", "aseg-16"],
+      "related": [
+        "cerebellum-organization",
+        "neurons",
+        "synapses",
+        "cortical-layers"
+      ],
+      "sources": ["cerebellum-chapter", "cerebellum-circuit"],
+      "explorations": [
+        {
+          "kind": "video",
+          "id": "mpO4lTDr1to",
+          "note": "Orient the gross cerebellum on a specimen before reading its microscopic circuit. The film is not cellular imaging of these synapses."
+        }
+      ]
+    },
+    {
       "id": "cortical-layers",
       "title": "Inside the cortical sheet",
       "category": "Tissue & structure",
@@ -445,7 +823,12 @@
         "lh-pericalcarine",
         "aseg-17"
       ],
-      "related": ["cell-diversity", "neurons", "atlas-boundaries"],
+      "related": [
+        "cell-diversity",
+        "neurons",
+        "atlas-boundaries",
+        "cerebellar-circuit"
+      ],
       "sources": ["layers", "spatial-cells"],
       "explorations": [
         {

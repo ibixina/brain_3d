@@ -18,6 +18,7 @@ export type DissectionVideo = {
   metadataTitle: string;
   channel: string;
   url: string;
+  metadataCheckedOn?: string;
 };
 export type VideoMatch = {
   video: DissectionVideo;
@@ -29,6 +30,11 @@ export const videoProviders: Record<
 > = catalogue.providers;
 export const dissectionVideos: DissectionVideo[] = catalogue.videos;
 export const videoCheckDate = catalogue.checkedOn;
+export const videoCheckDates = [
+  ...new Set(
+    dissectionVideos.map((video) => video.metadataCheckedOn ?? videoCheckDate),
+  ),
+].sort();
 export const videoTopics = [
   "Orientation",
   "Cortex",

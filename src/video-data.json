@@ -1,6 +1,6 @@
 {
   "checkedOn": "2026-10-18",
-  "verification": "Each link is listed in its institutional catalogue. YouTube oEmbed titles and channel names were checked; full playback and timestamps were not audited.",
+  "verification": "Each link is listed in its institutional teaching page or catalogue. YouTube oEmbed titles and channel names were checked; full playback and timestamps were not audited. Individual metadataCheckedOn values override the catalogue default date.",
   "providers": {
     "utah": {
       "name": "University of Utah",
@@ -13,6 +13,12 @@
       "collection": "UBC Neuroanatomy Series",
       "presenter": "Claudia Krebs, MD, PhD",
       "sourceUrl": "https://www.neuroanatomy.ca/videos.html"
+    },
+    "uthealth": {
+      "name": "UTHealth Houston",
+      "collection": "Neuroanatomy Online · Laboratory 9",
+      "presenter": "",
+      "sourceUrl": "https://nba.uth.tmc.edu/neuroanatomy/L9/L9_index.html"
     }
   },
   "videos": [
@@ -503,6 +509,25 @@
       "channel": "UBC Medicine - Educational Media",
       "url": "https://www.youtube.com/watch?v=17mxfO9nklQ",
       "contextKeys": []
+    },
+    {
+      "id": "lzm3K6nQNF0",
+      "title": "Cranial Nerves and Vessels",
+      "provider": "uthealth",
+      "minutes": null,
+      "description": "A cranial-nerve and vessel dissection linked by UTHealth’s brainstem laboratory. Compare gross nerve attachments with the surrounding brainstem; individual nuclei are not resolved.",
+      "topics": ["Brainstem"],
+      "focusKeys": [],
+      "systemKeys": ["brainstem"],
+      "contextGroups": [],
+      "priority": 35,
+      "format": "Gross specimen dissection",
+      "general": false,
+      "metadataTitle": "Cranial Nerves and Vessels 2",
+      "channel": "Neuroscience Online",
+      "url": "https://www.youtube.com/watch?v=lzm3K6nQNF0",
+      "contextKeys": [],
+      "metadataCheckedOn": "2026-10-19"
     }
   ]
 }

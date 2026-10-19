@@ -30,10 +30,11 @@ React, React DOM, Three.js, and Lucide are used under their package licenses. Th
 
 ## Linked teaching films
 
-The dissection library links to original teaching films from the University of Utah Eccles Health Sciences Library (Neuroanatomy Video Lab, Suzanne Stensaas) and UBC Faculty of Medicine (UBC Neuroanatomy Series, Claudia Krebs). Titles and source-channel attribution are retained; short descriptions and region mappings are curated for this app. All film rights remain with their respective creators and publishers.
+The dissection library links to original teaching films from the University of Utah Eccles Health Sciences Library (Neuroanatomy Video Lab, Suzanne Stensaas), UBC Faculty of Medicine (UBC Neuroanatomy Series, Claudia Krebs), and UTHealth Houston Neuroanatomy Online. Titles and source-channel attribution are retained; short descriptions and region mappings are curated for this app. All film rights remain with their respective creators and publishers.
 
 - University of Utah catalogue: https://library.med.utah.edu/publishing/collection/neuroanatomy-video-lab-brain-dissections/
 - UBC catalogue: https://www.neuroanatomy.ca/videos.html
+- UTHealth laboratory teaching page: https://nba.uth.tmc.edu/neuroanatomy/L9/L9_index.html. This page embeds the original-channel film titled “Cranial Nerves and Vessels 2” (`lzm3K6nQNF0`, Neuroscience Online). The app uses a shortened display title, retains the exact metadata title, and links to the original film; no video, audio, thumbnail, or transcript is redistributed. No unverified presenter credit, duration, or timestamps are supplied.
 
 ## MNI / ICBM152 MRI templates
 
@@ -59,3 +60,5 @@ The research index retains factual metadata and direct links for 48 maps in [Neu
 The reference catalogue contains original short educational summaries, factual anatomical terminology, and links to academic publishers and original studies. Source titles, evidence types, URLs, and checked dates are retained in `src/reference-data.json`. No textbook prose, figures, histology, or specialized lymphatic MRI assets are copied into the application. Source content retains its publisher's terms.
 
 The linked OpenStax Anatomy and Physiology 2e chapter states a Creative Commons Attribution-NonCommercial-ShareAlike 4.0 license for its publisher content as checked October 19, 2026. This is a literature link; no OpenStax assets are redistributed. The original human/primate meningeal-lymphatic study is Absinta et al. (2017), eLife 6:e29738, https://doi.org/10.7554/eLife.29738. Its methods and images are not part of the bundled structural MRI templates.
+
+Brainstem, cranial-nerve, and cerebellar notes link to UTHealth’s Neuroanatomy Online laboratory pages and Neuroscience Online chapters, including James Knierim’s cerebellum chapter (reviewed October 20, 2020). The cranial-nerve comparison contains original short factual summaries with row-level sources. Publisher prose, specimen photographs, diagrams, animations, and histological sections are not copied. These sources retain their publisher’s rights; linking does not grant redistribution rights or add their anatomical detail to the 3D meshes.

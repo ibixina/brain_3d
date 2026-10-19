@@ -7,6 +7,7 @@ import {
   regionVideoNote,
   relevanceLabel,
   videoProviders,
+  videoCheckDates,
   videoTopics,
   videosForRegion,
   type DissectionVideo,
@@ -136,8 +137,8 @@ export function VideoLibrary() {
       </h2>
       <p className="dialog-intro">
         Explore {dissectionVideos.length} teaching films from the University of
-        Utah and UBC. Lessons use human brain specimens and may also include
-        sections, models, diagrams, or clinical demonstrations.
+        Utah, UBC, and UTHealth Houston. Lessons use human brain specimens and
+        may also include sections, models, diagrams, or clinical demonstrations.
       </p>
       <div className="film-library-controls">
         <div className="film-search">
@@ -172,7 +173,7 @@ export function VideoLibrary() {
           value={provider}
           onChange={(event) => setProvider(event.target.value)}
         >
-          <option value="all">Both institutions</option>
+          <option value="all">All institutions</option>
           {Object.entries(videoProviders).map(([key, value]) => (
             <option key={key} value={key}>
               {value.name}
@@ -213,7 +214,8 @@ export function VideoLibrary() {
             <span>
               <strong>{source.name}</strong>
               <small>
-                {source.collection} · {source.presenter}
+                {source.collection}
+                {source.presenter && ` · ${source.presenter}`}
               </small>
             </span>
             <ArrowUpRight size={15} />
@@ -221,10 +223,10 @@ export function VideoLibrary() {
         ))}
       </div>
       <p className="film-check-note">
-        Institutional catalogue links and YouTube titles/channel metadata
-        checked October 18, 2026. Full playback and timestamps have not been
-        audited. Region matches are curated; specimen laterality and atlas
-        boundaries may differ. Videos stay on their publishers’ channels.
+        Institutional catalogue links and YouTube titles/channel metadata check
+        dates: {videoCheckDates.join(", ")}. Full playback and timestamps have
+        not been audited. Region matches are curated; specimen laterality and
+        atlas boundaries may differ. Videos stay on their publishers’ channels.
       </p>
     </div>
   );

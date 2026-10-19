@@ -6,6 +6,7 @@ import {
   filterVideos,
   regionVideoNote,
   videoProviders,
+  videoCheckDates,
   videosForRegion,
 } from "../src/videos.ts";
 
@@ -18,24 +19,28 @@ const atlas = JSON.parse(
 const knownKeys = new Set(atlas.parts.map((region) => region.key));
 const knownGroups = new Set(atlas.parts.map((region) => region.group));
 
-test("20 unique films retain institutional provenance and checked channel metadata", () => {
-  assert.equal(dissectionVideos.length, 20);
-  assert.equal(new Set(dissectionVideos.map((video) => video.id)).size, 20);
+test("21 unique films retain institutional provenance and checked channel metadata", () => {
+  assert.equal(dissectionVideos.length, 21);
+  assert.equal(new Set(dissectionVideos.map((video) => video.id)).size, 21);
+  assert.deepEqual(videoCheckDates, ["2026-10-18", "2026-10-19"]);
+  const publishers = {
+    utah: { channel: /Eccles Health Sciences/, host: "library.med.utah.edu" },
+    ubc: { channel: /UBC Medicine/, host: "www.neuroanatomy.ca" },
+    uthealth: { channel: /^Neuroscience Online$/, host: "nba.uth.tmc.edu" },
+  };
   for (const video of dissectionVideos) {
     assert.match(video.id, /^[A-Za-z0-9_-]{11}$/);
     assert.equal(video.url, `https://www.youtube.com/watch?v=${video.id}`);
     const provider = videoProviders[video.provider];
     assert.ok(provider);
     assert.ok(video.metadataTitle && video.description);
-    assert.match(
-      video.channel,
-      video.provider === "utah" ? /Eccles Health Sciences/ : /UBC Medicine/,
+    assert.match(video.channel, publishers[video.provider].channel);
+    assert.equal(
+      new URL(provider.sourceUrl).hostname,
+      publishers[video.provider].host,
     );
-    assert.ok(
-      ["library.med.utah.edu", "www.neuroanatomy.ca"].includes(
-        new URL(provider.sourceUrl).hostname,
-      ),
-    );
+    if (video.metadataCheckedOn)
+      assert.ok(Number.isFinite(Date.parse(video.metadataCheckedOn)));
     assert.ok(video.minutes === null || Number.isInteger(video.minutes));
     for (const key of [
       ...video.focusKeys,
@@ -100,7 +105,7 @@ test("small parcels and composite imaging labels do not acquire exact-match clai
 });
 
 test("film search handles anatomical names and combines institution/topic filters", () => {
-  assert.equal(filterVideos().length, 20);
+  assert.equal(filterVideos().length, 21);
   assert.ok(filterVideos({ query: "  nucleus accumbens  " }).length > 0);
   assert.ok(
     filterVideos({ query: "corpus callosum" }).some(
@@ -110,5 +115,12 @@ test("film search handles anatomical names and combines institution/topic filter
   const filtered = filterVideos({ provider: "ubc", topic: "Cerebellum" });
   assert.equal(filtered.length, 1);
   assert.equal(filtered[0].id, "17mxfO9nklQ");
+  const cranial = filterVideos({
+    provider: "uthealth",
+    topic: "Brainstem",
+    query: "cranial",
+  });
+  assert.equal(cranial.length, 1);
+  assert.equal(cranial[0].id, "lzm3K6nQNF0");
   assert.deepEqual(filterVideos({ query: "no such anatomy 123" }), []);
 });

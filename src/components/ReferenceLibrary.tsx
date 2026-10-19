@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import {
   ArrowLeft,
+  ArrowDown,
   ArrowRight,
   ArrowUpRight,
   BookOpen,
@@ -71,6 +72,21 @@ export default function ReferenceLibrary({
             <span className="eyebrow">{article.category}</span>
             <h2 tabIndex={-1}>{article.title}</h2>
             <p className="reference-summary">{article.summary}</p>
+            {article.comparison && (
+              <button
+                className="reference-jump"
+                onClick={() => {
+                  const caption =
+                    contentRef.current?.querySelector<HTMLElement>(
+                      ".reference-comparison caption",
+                    );
+                  caption?.focus({ preventScroll: true });
+                  caption?.scrollIntoView({ block: "start" });
+                }}
+              >
+                Jump to comparison <ArrowDown size={12} />
+              </button>
+            )}
             {article.paragraphs.map((paragraph) => (
               <p key={paragraph}>{paragraph}</p>
             ))}
@@ -78,6 +94,39 @@ export default function ReferenceLibrary({
               <strong>In this atlas</strong>
               <p>{article.scope}</p>
             </div>
+            {article.comparison && (
+              <table className="reference-comparison">
+                <caption tabIndex={-1}>{article.comparison.caption}</caption>
+                <thead>
+                  <tr>
+                    {article.comparison.columns.map((column) => (
+                      <th key={column} scope="col">
+                        {column}
+                      </th>
+                    ))}
+                  </tr>
+                </thead>
+                <tbody>
+                  {article.comparison.rows.map((row) => (
+                    <tr key={row.label}>
+                      <th scope="row">{row.label}</th>
+                      <td>
+                        <span>{row.summary}</span>
+                        <p>{row.detail}</p>
+                        <a
+                          href={referenceSources[row.source].url}
+                          target="_blank"
+                          rel="noreferrer"
+                          aria-label={`Source for ${row.label}`}
+                        >
+                          Source <ArrowUpRight size={10} />
+                        </a>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            )}
             <h3>Explore the related anatomy</h3>
             <p className="reference-caption">
               Open a modeled region in the brain.
@@ -195,7 +244,8 @@ export default function ReferenceLibrary({
           </p>
         )}
         <p className="reference-caption" role="status">
-          {articles.length} {query ? "matching" : "reference"} notes
+          {articles.length} {query ? "matching" : "reference"}{" "}
+          {articles.length === 1 ? "note" : "notes"}
         </p>
         {articles.map((item) => (
           <button
