@@ -1,0 +1,171 @@
+{
+  "version": 1,
+  "kind": "brainstem",
+  "checkedOn": "2026-10-19",
+  "binEdges": [
+    0,
+    0.25,
+    0.5,
+    0.75,
+    1
+  ],
+  "method": "Cerebra-derived statistics from unmodified float32 source probabilities. Winner assignment compares every channel, including unknown/background and sibling structures; ties use first source channel. Bins are [0,.25), [.25,.5), [.5,.75), [.75,1], with floating-point tolerance retained in end bins. Peak is the first C-order maximum of the selected channel over its entire grid, not necessarily a winning voxel. Strongest other excludes only that channel. Indices are zero-based in the original grid; RAS is source millimeters, not the recentered display. No resampling, probability thresholding, or calibration of boundary accuracy.",
+  "source": {
+    "manifest": "/subregions/brainstem-provenance.json",
+    "manifestSha256": "ecb744f372355ea64ae6e9c7a4730aa45e691d12eca8df2027f8a3384d4cd088",
+    "archiveSha256": "f6ad672136102669955ee803f27c188a5e172a326a61fb9818d12fb4707fe5c2",
+    "niftiSha256": {
+      "both": "4c90e68a60bea6beeefa5ae7aa7d5f5400e194e7d33bc1eddca75191b62d5e1c"
+    },
+    "documentation": "https://surfer.nmr.mgh.harvard.edu/fswiki/SubfieldAtlasesICBMspace",
+    "paper": "https://doi.org/10.1016/j.neuroimage.2015.02.065",
+    "license": "/licenses/freesurfer.txt",
+    "attribution": "Modified FreeSurfer data. All or portions obtained under license from The General Hospital Corporation (MGH); full terms retained in the linked license."
+  },
+  "entries": {
+    "medulla": {
+      "channel": 1,
+      "label": 175,
+      "voxels": 7110,
+      "winningProbabilityBins": [
+        0,
+        54,
+        1420,
+        5636
+      ],
+      "winningProbabilityRange": [
+        0.3435865640640259,
+        1.0
+      ],
+      "peak": {
+        "probability": 1.0,
+        "index": [
+          16,
+          20,
+          32
+        ],
+        "rasMm": [
+          -10.0,
+          -42.0,
+          -46.0
+        ],
+        "selectedWins": true,
+        "winnerChannel": 1,
+        "strongestOther": {
+          "channel": 0,
+          "label": 0,
+          "sourceName": "Background",
+          "probability": 0.0
+        }
+      }
+    },
+    "pons": {
+      "channel": 2,
+      "label": 174,
+      "voxels": 20725,
+      "winningProbabilityBins": [
+        0,
+        196,
+        2381,
+        18148
+      ],
+      "winningProbabilityRange": [
+        0.29730457067489624,
+        1.0
+      ],
+      "peak": {
+        "probability": 1.0,
+        "index": [
+          9,
+          27,
+          41
+        ],
+        "rasMm": [
+          -17.0,
+          -35.0,
+          -37.0
+        ],
+        "selectedWins": true,
+        "winnerChannel": 2,
+        "strongestOther": {
+          "channel": 0,
+          "label": 0,
+          "sourceName": "Background",
+          "probability": 0.0
+        }
+      }
+    },
+    "scp": {
+      "channel": 3,
+      "label": 178,
+      "voxels": 426,
+      "winningProbabilityBins": [
+        0,
+        66,
+        278,
+        82
+      ],
+      "winningProbabilityRange": [
+        0.36291176080703735,
+        0.8762221932411194
+      ],
+      "peak": {
+        "probability": 0.8762221932411194,
+        "index": [
+          21,
+          18,
+          53
+        ],
+        "rasMm": [
+          -5.0,
+          -44.0,
+          -25.0
+        ],
+        "selectedWins": true,
+        "winnerChannel": 3,
+        "strongestOther": {
+          "channel": 0,
+          "label": 0,
+          "sourceName": "Background",
+          "probability": 0.1198001429438591
+        }
+      }
+    },
+    "midbrain": {
+      "channel": 4,
+      "label": 173,
+      "voxels": 9522,
+      "winningProbabilityBins": [
+        0,
+        50,
+        1778,
+        7694
+      ],
+      "winningProbabilityRange": [
+        0.3705247640609741,
+        1.0
+      ],
+      "peak": {
+        "probability": 1.0,
+        "index": [
+          11,
+          39,
+          64
+        ],
+        "rasMm": [
+          -15.0,
+          -23.0,
+          -14.0
+        ],
+        "selectedWins": true,
+        "winnerChannel": 4,
+        "strongestOther": {
+          "channel": 0,
+          "label": 0,
+          "sourceName": "Background",
+          "probability": 0.0
+        }
+      }
+    }
+  }
+}

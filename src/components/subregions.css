@@ -370,3 +370,94 @@
   outline-offset: 4px;
   border-radius: 2px;
 }
+
+.subregion-probability {
+  border-block: 1px solid #ffffff18;
+  padding: 12px 0;
+  margin: 14px 0;
+  font-size: 11px;
+  line-height: 1.75;
+  color: #adc2ce;
+}
+.subregion-probability > summary,
+.probability-method > summary {
+  cursor: pointer;
+  color: #c0ded9;
+}
+.subregion-omitted .subregion-probability {
+  border: 0;
+  margin: 0;
+  padding: 5px 0;
+}
+.probability-evidence h4 {
+  color: #d1e7e5;
+  font-size: 12px;
+  line-height: 1.65;
+  margin: 15px 0 9px;
+}
+.probability-evidence h5 {
+  color: #bed5df;
+  font-size: 10px;
+  line-height: 1.7;
+  font-weight: 500;
+  margin: 20px 0 10px;
+}
+.probability-evidence p {
+  margin: 10px 0;
+}
+.probability-evidence strong {
+  color: #d3e5e8;
+  font-weight: 500;
+}
+.subregion-probability .probability-bins {
+  list-style: none;
+  padding: 0;
+  margin: 10px 0;
+}
+.subregion-probability .probability-bins li {
+  margin: 10px 0;
+  font-size: 10px;
+}
+.probability-bins li > div:first-child,
+.probability-sample p {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 8px;
+}
+.probability-bins li > div:first-child > span:last-child,
+.probability-sample strong {
+  flex-shrink: 0;
+}
+.probability-track {
+  height: 4px;
+  border-radius: 2px;
+  overflow: hidden;
+  background: #ffffff12;
+  margin: 5px 0;
+}
+.probability-track i {
+  display: block;
+  height: 100%;
+  background: #78b7ba;
+}
+.probability-sample > div + div .probability-track i {
+  background: #9ba9bb;
+}
+.probability-sample span,
+.probability-method {
+  overflow-wrap: anywhere;
+}
+.probability-method {
+  margin-top: 17px;
+}
+.probability-method a {
+  display: block;
+  color: #a8d3cc;
+  text-decoration: none;
+  font-size: 10px;
+  padding: 6px 0;
+}
+.probability-method a:hover {
+  text-decoration: underline;
+}

@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { lazy, Suspense, useEffect, useRef, useState } from "react";
 import { ChevronDown, Focus, Link, Minus, Plus, Split } from "lucide-react";
 import { AtlasViewer, type ViewState } from "../viewer";
 import { assetUrl } from "../asset-url.ts";
@@ -8,6 +8,7 @@ import {
   subregionCatalog,
   type SubregionAtlas,
   type SubregionKind,
+  type SubregionName,
 } from "../subregions.ts";
 import {
   resolveSubregionRoute,
@@ -16,6 +17,29 @@ import {
   type SubregionView,
 } from "../subregion-navigation.ts";
 import "./subregions.css";
+
+const ProbabilityEvidence = lazy(() => import("./ProbabilityEvidence"));
+
+function ProbabilityDisclosure({ kind, part, omitted = false }: {
+  kind: SubregionKind;
+  part: SubregionName;
+  omitted?: boolean;
+}) {
+  const [open, setOpen] = useState(false);
+  return (
+    <details
+      className="subregion-probability"
+      onToggle={(event) => setOpen(event.currentTarget.open)}
+    >
+      <summary>{omitted ? subregionName(part) : "Atlas probability evidence"}</summary>
+      {open && (
+        <Suspense fallback={<p role="status">Loading evidence panel…</p>}>
+          <ProbabilityEvidence kind={kind} part={part} />
+        </Suspense>
+      )}
+    </details>
+  );
+}
 
 const initial: ViewState = {
   selected: null,
@@ -483,6 +507,7 @@ function LoadedSubregions({
             All parts
           </button>
         </div>
+        {selected && <ProbabilityDisclosure kind={kind} part={selected} />}
         <button className="subregion-share" onClick={copyLink}>
           <Link size={14} /> Copy this atlas view
         </button>
@@ -509,10 +534,13 @@ function LoadedSubregions({
               The maximum-probability rule assigns no voxels to these labels,
               even though their probabilities are nonzero. No surface is
               created; this does not mean the nuclei are anatomically absent.
+              Expand a label to inspect its source probabilities.
             </p>
             <ul>
               {omitted.map((part) => (
-                <li key={part.id}>{subregionName(part)}</li>
+                <li key={part.id}>
+                  <ProbabilityDisclosure kind={kind} part={part} omitted />
+                </li>
               ))}
             </ul>
           </details>

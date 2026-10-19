@@ -1,0 +1,1881 @@
+{
+  "version": 1,
+  "kind": "thalamus",
+  "checkedOn": "2026-10-19",
+  "binEdges": [
+    0,
+    0.25,
+    0.5,
+    0.75,
+    1
+  ],
+  "method": "Cerebra-derived statistics from unmodified float32 source probabilities. Winner assignment compares every channel, including unknown/background and sibling structures; ties use first source channel. Bins are [0,.25), [.25,.5), [.5,.75), [.75,1], with floating-point tolerance retained in end bins. Peak is the first C-order maximum of the selected channel over its entire grid, not necessarily a winning voxel. Strongest other excludes only that channel. Indices are zero-based in the original grid; RAS is source millimeters, not the recentered display. No resampling, probability thresholding, or calibration of boundary accuracy.",
+  "source": {
+    "manifest": "/subregions/thalamus-provenance.json",
+    "manifestSha256": "be752880ff48030d34577f0f50c980bf84aaaec6a74ab90f64bc249e8cef7840",
+    "archiveSha256": "d00485eb94ffebe642e11aaf19130b5d95f6773c93631b38e8e9c44e341006fb",
+    "niftiSha256": {
+      "both": "640377ae93cf0782365a698573970c2a429a775c6f64dcf9ac02536156b51f22"
+    },
+    "documentation": "https://surfer.nmr.mgh.harvard.edu/fswiki/SubfieldAtlasesICBMspace",
+    "paper": "https://doi.org/10.1016/j.neuroimage.2018.08.012",
+    "license": "/licenses/freesurfer.txt",
+    "attribution": "Modified FreeSurfer data. All or portions obtained under license from The General Hospital Corporation (MGH); full terms retained in the linked license."
+  },
+  "entries": {
+    "thal-8109": {
+      "channel": 1,
+      "label": 8109,
+      "voxels": 2876,
+      "winningProbabilityBins": [
+        0,
+        147,
+        975,
+        1754
+      ],
+      "winningProbabilityRange": [
+        0.31868934631347656,
+        0.9911988973617554
+      ],
+      "peak": {
+        "probability": 0.9911988973617554,
+        "index": [
+          27,
+          38,
+          34
+        ],
+        "rasMm": [
+          -20.5,
+          -27.0,
+          -2.0
+        ],
+        "selectedWins": true,
+        "winnerChannel": 1,
+        "strongestOther": {
+          "channel": 0,
+          "label": 0,
+          "sourceName": "Unknown",
+          "probability": 0.008801132440567017
+        }
+      }
+    },
+    "thal-8209": {
+      "channel": 2,
+      "label": 8209,
+      "voxels": 2876,
+      "winningProbabilityBins": [
+        0,
+        147,
+        975,
+        1754
+      ],
+      "winningProbabilityRange": [
+        0.31868934631347656,
+        0.9911988973617554
+      ],
+      "peak": {
+        "probability": 0.9911988973617554,
+        "index": [
+          110,
+          38,
+          34
+        ],
+        "rasMm": [
+          21.0,
+          -27.0,
+          -2.0
+        ],
+        "selectedWins": true,
+        "winnerChannel": 2,
+        "strongestOther": {
+          "channel": 0,
+          "label": 0,
+          "sourceName": "Unknown",
+          "probability": 0.008801132440567017
+        }
+      }
+    },
+    "thal-8215": {
+      "channel": 3,
+      "label": 8215,
+      "voxels": 1363,
+      "winningProbabilityBins": [
+        1,
+        119,
+        543,
+        700
+      ],
+      "winningProbabilityRange": [
+        0.24953725934028625,
+        0.9651843309402466
+      ],
+      "peak": {
+        "probability": 0.9651843309402466,
+        "index": [
+          96,
+          37,
+          31
+        ],
+        "rasMm": [
+          14.0,
+          -27.5,
+          -3.5
+        ],
+        "selectedWins": true,
+        "winnerChannel": 3,
+        "strongestOther": {
+          "channel": 0,
+          "label": 0,
+          "sourceName": "Unknown",
+          "probability": 0.031152579933404922
+        }
+      }
+    },
+    "thal-8115": {
+      "channel": 4,
+      "label": 8115,
+      "voxels": 1363,
+      "winningProbabilityBins": [
+        1,
+        119,
+        543,
+        700
+      ],
+      "winningProbabilityRange": [
+        0.24953725934028625,
+        0.9651843309402466
+      ],
+      "peak": {
+        "probability": 0.9651843309402466,
+        "index": [
+          41,
+          37,
+          31
+        ],
+        "rasMm": [
+          -13.5,
+          -27.5,
+          -3.5
+        ],
+        "selectedWins": true,
+        "winnerChannel": 4,
+        "strongestOther": {
+          "channel": 0,
+          "label": 0,
+          "sourceName": "Unknown",
+          "probability": 0.031152579933404922
+        }
+      }
+    },
+    "thal-8121": {
+      "channel": 5,
+      "label": 8121,
+      "voxels": 3037,
+      "winningProbabilityBins": [
+        7,
+        594,
+        1326,
+        1110
+      ],
+      "winningProbabilityRange": [
+        0.21204423904418945,
+        0.9603524208068848
+      ],
+      "peak": {
+        "probability": 0.9603524208068848,
+        "index": [
+          30,
+          29,
+          38
+        ],
+        "rasMm": [
+          -19.0,
+          -31.5,
+          0.0
+        ],
+        "selectedWins": true,
+        "winnerChannel": 5,
+        "strongestOther": {
+          "channel": 1,
+          "label": 8109,
+          "sourceName": "Left-LGN",
+          "probability": 0.021213669329881668
+        }
+      }
+    },
+    "thal-8123": {
+      "channel": 6,
+      "label": 8123,
+      "voxels": 12205,
+      "winningProbabilityBins": [
+        2,
+        809,
+        2975,
+        8419
+      ],
+      "winningProbabilityRange": [
+        0.23302268981933594,
+        1.0
+      ],
+      "peak": {
+        "probability": 1.0,
+        "index": [
+          39,
+          38,
+          59
+        ],
+        "rasMm": [
+          -14.5,
+          -27.0,
+          10.5
+        ],
+        "selectedWins": true,
+        "winnerChannel": 6,
+        "strongestOther": {
+          "channel": 0,
+          "label": 0,
+          "sourceName": "Unknown",
+          "probability": 0.0
+        }
+      }
+    },
+    "thal-8111": {
+      "channel": 7,
+      "label": 8111,
+      "voxels": 412,
+      "winningProbabilityBins": [
+        5,
+        190,
+        191,
+        26
+      ],
+      "winningProbabilityRange": [
+        0.19385340809822083,
+        0.8578035831451416
+      ],
+      "peak": {
+        "probability": 0.8578035831451416,
+        "index": [
+          53,
+          35,
+          39
+        ],
+        "rasMm": [
+          -7.5,
+          -28.5,
+          0.5
+        ],
+        "selectedWins": true,
+        "winnerChannel": 7,
+        "strongestOther": {
+          "channel": 6,
+          "label": 8123,
+          "sourceName": "Left-PuM",
+          "probability": 0.0685172826051712
+        }
+      }
+    },
+    "thal-8133": {
+      "channel": 8,
+      "label": 8133,
+      "voxels": 9040,
+      "winningProbabilityBins": [
+        2,
+        1080,
+        2396,
+        5562
+      ],
+      "winningProbabilityRange": [
+        0.21656285226345062,
+        1.0
+      ],
+      "peak": {
+        "probability": 1.0,
+        "index": [
+          31,
+          44,
+          46
+        ],
+        "rasMm": [
+          -18.5,
+          -24.0,
+          4.0
+        ],
+        "selectedWins": true,
+        "winnerChannel": 8,
+        "strongestOther": {
+          "channel": 0,
+          "label": 0,
+          "sourceName": "Unknown",
+          "probability": 0.0
+        }
+      }
+    },
+    "thal-8106": {
+      "channel": 9,
+      "label": 8106,
+      "voxels": 2964,
+      "winningProbabilityBins": [
+        2,
+        502,
+        922,
+        1538
+      ],
+      "winningProbabilityRange": [
+        0.20731985569000244,
+        0.9789819121360779
+      ],
+      "peak": {
+        "probability": 0.9789819121360779,
+        "index": [
+          53,
+          50,
+          43
+        ],
+        "rasMm": [
+          -7.5,
+          -21.0,
+          2.5
+        ],
+        "selectedWins": true,
+        "winnerChannel": 9,
+        "strongestOther": {
+          "channel": 8,
+          "label": 8133,
+          "sourceName": "Left-VPL",
+          "probability": 0.012858366593718529
+        }
+      }
+    },
+    "thal-8128": {
+      "channel": 10,
+      "label": 8128,
+      "voxels": 6385,
+      "winningProbabilityBins": [
+        8,
+        1330,
+        3222,
+        1825
+      ],
+      "winningProbabilityRange": [
+        0.21598893404006958,
+        0.9102606773376465
+      ],
+      "peak": {
+        "probability": 0.9102606773376465,
+        "index": [
+          45,
+          77,
+          69
+        ],
+        "rasMm": [
+          -11.5,
+          -7.5,
+          15.5
+        ],
+        "selectedWins": true,
+        "winnerChannel": 10,
+        "strongestOther": {
+          "channel": 12,
+          "label": 8113,
+          "sourceName": "Left-MDm",
+          "probability": 0.05749490112066269
+        }
+      }
+    },
+    "thal-8120": {
+      "channel": 11,
+      "label": 8120,
+      "voxels": 1888,
+      "winningProbabilityBins": [
+        5,
+        561,
+        972,
+        350
+      ],
+      "winningProbabilityRange": [
+        0.17522750794887543,
+        0.9062616229057312
+      ],
+      "peak": {
+        "probability": 0.9062616229057312,
+        "index": [
+          51,
+          48,
+          57
+        ],
+        "rasMm": [
+          -8.5,
+          -22.0,
+          9.5
+        ],
+        "selectedWins": true,
+        "winnerChannel": 11,
+        "strongestOther": {
+          "channel": 22,
+          "label": 8122,
+          "sourceName": "Left-PuL",
+          "probability": 0.031666312366724014
+        }
+      }
+    },
+    "thal-8113": {
+      "channel": 12,
+      "label": 8113,
+      "voxels": 6318,
+      "winningProbabilityBins": [
+        7,
+        745,
+        1824,
+        3742
+      ],
+      "winningProbabilityRange": [
+        0.18913377821445465,
+        0.9639602303504944
+      ],
+      "peak": {
+        "probability": 0.9639602303504944,
+        "index": [
+          63,
+          61,
+          59
+        ],
+        "rasMm": [
+          -2.5,
+          -15.5,
+          10.5
+        ],
+        "selectedWins": true,
+        "winnerChannel": 12,
+        "strongestOther": {
+          "channel": 26,
+          "label": 8129,
+          "sourceName": "Left-VLp",
+          "probability": 0.03075283206999302
+        }
+      }
+    },
+    "thal-8118": {
+      "channel": 13,
+      "label": 8118,
+      "voxels": 467,
+      "winningProbabilityBins": [
+        2,
+        146,
+        247,
+        72
+      ],
+      "winningProbabilityRange": [
+        0.21973669528961182,
+        0.8548424243927002
+      ],
+      "peak": {
+        "probability": 0.8548424243927002,
+        "index": [
+          57,
+          47,
+          36
+        ],
+        "rasMm": [
+          -5.5,
+          -22.5,
+          -1.0
+        ],
+        "selectedWins": true,
+        "winnerChannel": 13,
+        "strongestOther": {
+          "channel": 19,
+          "label": 8125,
+          "sourceName": "Left-R",
+          "probability": 0.035239994525909424
+        }
+      }
+    },
+    "thal-8127": {
+      "channel": 14,
+      "label": 8127,
+      "voxels": 90,
+      "winningProbabilityBins": [
+        2,
+        88,
+        0,
+        0
+      ],
+      "winningProbabilityRange": [
+        0.22890008985996246,
+        0.47158825397491455
+      ],
+      "peak": {
+        "probability": 0.47158825397491455,
+        "index": [
+          56,
+          73,
+          37
+        ],
+        "rasMm": [
+          -6.0,
+          -9.5,
+          -0.5
+        ],
+        "selectedWins": true,
+        "winnerChannel": 14,
+        "strongestOther": {
+          "channel": 17,
+          "label": 8126,
+          "sourceName": "Left-VA",
+          "probability": 0.3004499077796936
+        }
+      }
+    },
+    "thal-8112": {
+      "channel": 15,
+      "label": 8112,
+      "voxels": 2723,
+      "winningProbabilityBins": [
+        9,
+        535,
+        1119,
+        1060
+      ],
+      "winningProbabilityRange": [
+        0.22258049249649048,
+        0.9532158374786377
+      ],
+      "peak": {
+        "probability": 0.9532158374786377,
+        "index": [
+          55,
+          61,
+          49
+        ],
+        "rasMm": [
+          -6.5,
+          -15.5,
+          5.5
+        ],
+        "selectedWins": true,
+        "winnerChannel": 15,
+        "strongestOther": {
+          "channel": 26,
+          "label": 8129,
+          "sourceName": "Left-VLp",
+          "probability": 0.04678419977426529
+        }
+      }
+    },
+    "thal-8104": {
+      "channel": 16,
+      "label": 8104,
+      "voxels": 1177,
+      "winningProbabilityBins": [
+        14,
+        452,
+        457,
+        254
+      ],
+      "winningProbabilityRange": [
+        0.19801637530326843,
+        0.9259716272354126
+      ],
+      "peak": {
+        "probability": 0.9259716272354126,
+        "index": [
+          61,
+          72,
+          37
+        ],
+        "rasMm": [
+          -3.5,
+          -10.0,
+          -0.5
+        ],
+        "selectedWins": true,
+        "winnerChannel": 16,
+        "strongestOther": {
+          "channel": 18,
+          "label": 8116,
+          "sourceName": "Left-MV(Re)",
+          "probability": 0.027797222137451172
+        }
+      }
+    },
+    "thal-8126": {
+      "channel": 17,
+      "label": 8126,
+      "voxels": 4970,
+      "winningProbabilityBins": [
+        2,
+        606,
+        1582,
+        2780
+      ],
+      "winningProbabilityRange": [
+        0.21253737807273865,
+        1.0
+      ],
+      "peak": {
+        "probability": 1.0,
+        "index": [
+          51,
+          87,
+          53
+        ],
+        "rasMm": [
+          -8.5,
+          -2.5,
+          7.5
+        ],
+        "selectedWins": true,
+        "winnerChannel": 17,
+        "strongestOther": {
+          "channel": 0,
+          "label": 0,
+          "sourceName": "Unknown",
+          "probability": 0.0
+        }
+      }
+    },
+    "thal-8116": {
+      "channel": 18,
+      "label": 8116,
+      "voxels": 193,
+      "winningProbabilityBins": [
+        4,
+        115,
+        74,
+        0
+      ],
+      "winningProbabilityRange": [
+        0.21837112307548523,
+        0.7298318147659302
+      ],
+      "peak": {
+        "probability": 0.7298318147659302,
+        "index": [
+          62,
+          71,
+          32
+        ],
+        "rasMm": [
+          -3.0,
+          -10.5,
+          -3.0
+        ],
+        "selectedWins": true,
+        "winnerChannel": 18,
+        "strongestOther": {
+          "channel": 16,
+          "label": 8104,
+          "sourceName": "Left-CeM",
+          "probability": 0.15619543194770813
+        }
+      }
+    },
+    "thal-8125": {
+      "channel": 19,
+      "label": 8125,
+      "voxels": 2945,
+      "winningProbabilityBins": [
+        2,
+        1216,
+        1586,
+        141
+      ],
+      "winningProbabilityRange": [
+        0.23622742295265198,
+        0.8516468405723572
+      ],
+      "peak": {
+        "probability": 0.8516468405723572,
+        "index": [
+          36,
+          68,
+          71
+        ],
+        "rasMm": [
+          -16.0,
+          -12.0,
+          16.5
+        ],
+        "selectedWins": true,
+        "winnerChannel": 19,
+        "strongestOther": {
+          "channel": 0,
+          "label": 0,
+          "sourceName": "Unknown",
+          "probability": 0.062013015151023865
+        }
+      }
+    },
+    "thal-8105": {
+      "channel": 21,
+      "label": 8105,
+      "voxels": 233,
+      "winningProbabilityBins": [
+        4,
+        214,
+        15,
+        0
+      ],
+      "winningProbabilityRange": [
+        0.19646646082401276,
+        0.5913639664649963
+      ],
+      "peak": {
+        "probability": 0.5913639664649963,
+        "index": [
+          60,
+          60,
+          66
+        ],
+        "rasMm": [
+          -4.0,
+          -16.0,
+          14.0
+        ],
+        "selectedWins": true,
+        "winnerChannel": 21,
+        "strongestOther": {
+          "channel": 12,
+          "label": 8113,
+          "sourceName": "Left-MDm",
+          "probability": 0.18878602981567383
+        }
+      }
+    },
+    "thal-8122": {
+      "channel": 22,
+      "label": 8122,
+      "voxels": 2252,
+      "winningProbabilityBins": [
+        2,
+        416,
+        1015,
+        819
+      ],
+      "winningProbabilityRange": [
+        0.24336041510105133,
+        0.9455986022949219
+      ],
+      "peak": {
+        "probability": 0.9455986022949219,
+        "index": [
+          35,
+          46,
+          66
+        ],
+        "rasMm": [
+          -16.5,
+          -23.0,
+          14.0
+        ],
+        "selectedWins": true,
+        "winnerChannel": 22,
+        "strongestOther": {
+          "channel": 11,
+          "label": 8120,
+          "sourceName": "Left-PuA",
+          "probability": 0.020245911553502083
+        }
+      }
+    },
+    "thal-8103": {
+      "channel": 24,
+      "label": 8103,
+      "voxels": 1810,
+      "winningProbabilityBins": [
+        1,
+        310,
+        572,
+        927
+      ],
+      "winningProbabilityRange": [
+        0.2412877380847931,
+        0.997917890548706
+      ],
+      "peak": {
+        "probability": 0.997917890548706,
+        "index": [
+          62,
+          79,
+          61
+        ],
+        "rasMm": [
+          -3.0,
+          -6.5,
+          11.5
+        ],
+        "selectedWins": true,
+        "winnerChannel": 24,
+        "strongestOther": {
+          "channel": 21,
+          "label": 8105,
+          "sourceName": "Left-CL",
+          "probability": 0.0011683637276291847
+        }
+      }
+    },
+    "thal-8129": {
+      "channel": 26,
+      "label": 8129,
+      "voxels": 8786,
+      "winningProbabilityBins": [
+        19,
+        1621,
+        4984,
+        2162
+      ],
+      "winningProbabilityRange": [
+        0.186709925532341,
+        0.9499636292457581
+      ],
+      "peak": {
+        "probability": 0.9499636292457581,
+        "index": [
+          43,
+          62,
+          61
+        ],
+        "rasMm": [
+          -12.5,
+          -15.0,
+          11.5
+        ],
+        "selectedWins": true,
+        "winnerChannel": 26,
+        "strongestOther": {
+          "channel": 9,
+          "label": 8106,
+          "sourceName": "Left-CM",
+          "probability": 0.020924516022205353
+        }
+      }
+    },
+    "thal-8110": {
+      "channel": 27,
+      "label": 8110,
+      "voxels": 1230,
+      "winningProbabilityBins": [
+        4,
+        417,
+        539,
+        270
+      ],
+      "winningProbabilityRange": [
+        0.21989703178405762,
+        0.9494906067848206
+      ],
+      "peak": {
+        "probability": 0.9494906067848206,
+        "index": [
+          51,
+          60,
+          71
+        ],
+        "rasMm": [
+          -8.5,
+          -16.0,
+          16.5
+        ],
+        "selectedWins": true,
+        "winnerChannel": 27,
+        "strongestOther": {
+          "channel": 12,
+          "label": 8113,
+          "sourceName": "Left-MDm",
+          "probability": 0.018133113160729408
+        }
+      }
+    },
+    "thal-8221": {
+      "channel": 28,
+      "label": 8221,
+      "voxels": 3037,
+      "winningProbabilityBins": [
+        7,
+        594,
+        1326,
+        1110
+      ],
+      "winningProbabilityRange": [
+        0.21204423904418945,
+        0.9603524208068848
+      ],
+      "peak": {
+        "probability": 0.9603524208068848,
+        "index": [
+          107,
+          29,
+          38
+        ],
+        "rasMm": [
+          19.5,
+          -31.5,
+          0.0
+        ],
+        "selectedWins": true,
+        "winnerChannel": 28,
+        "strongestOther": {
+          "channel": 2,
+          "label": 8209,
+          "sourceName": "Right-LGN",
+          "probability": 0.021213669329881668
+        }
+      }
+    },
+    "thal-8223": {
+      "channel": 29,
+      "label": 8223,
+      "voxels": 12205,
+      "winningProbabilityBins": [
+        2,
+        809,
+        2975,
+        8419
+      ],
+      "winningProbabilityRange": [
+        0.23302268981933594,
+        1.0
+      ],
+      "peak": {
+        "probability": 1.0,
+        "index": [
+          89,
+          39,
+          63
+        ],
+        "rasMm": [
+          10.5,
+          -26.5,
+          12.5
+        ],
+        "selectedWins": true,
+        "winnerChannel": 29,
+        "strongestOther": {
+          "channel": 0,
+          "label": 0,
+          "sourceName": "Unknown",
+          "probability": 0.0
+        }
+      }
+    },
+    "thal-8211": {
+      "channel": 30,
+      "label": 8211,
+      "voxels": 412,
+      "winningProbabilityBins": [
+        5,
+        190,
+        191,
+        26
+      ],
+      "winningProbabilityRange": [
+        0.19385340809822083,
+        0.8578035831451416
+      ],
+      "peak": {
+        "probability": 0.8578035831451416,
+        "index": [
+          84,
+          35,
+          39
+        ],
+        "rasMm": [
+          8.0,
+          -28.5,
+          0.5
+        ],
+        "selectedWins": true,
+        "winnerChannel": 30,
+        "strongestOther": {
+          "channel": 29,
+          "label": 8223,
+          "sourceName": "Right-PuM",
+          "probability": 0.0685172826051712
+        }
+      }
+    },
+    "thal-8233": {
+      "channel": 31,
+      "label": 8233,
+      "voxels": 9040,
+      "winningProbabilityBins": [
+        2,
+        1080,
+        2396,
+        5562
+      ],
+      "winningProbabilityRange": [
+        0.21656285226345062,
+        1.0
+      ],
+      "peak": {
+        "probability": 1.0,
+        "index": [
+          101,
+          42,
+          44
+        ],
+        "rasMm": [
+          16.5,
+          -25.0,
+          3.0
+        ],
+        "selectedWins": true,
+        "winnerChannel": 31,
+        "strongestOther": {
+          "channel": 0,
+          "label": 0,
+          "sourceName": "Unknown",
+          "probability": 0.0
+        }
+      }
+    },
+    "thal-8206": {
+      "channel": 32,
+      "label": 8206,
+      "voxels": 2964,
+      "winningProbabilityBins": [
+        2,
+        502,
+        922,
+        1538
+      ],
+      "winningProbabilityRange": [
+        0.20731985569000244,
+        0.9789819121360779
+      ],
+      "peak": {
+        "probability": 0.9789819121360779,
+        "index": [
+          84,
+          50,
+          43
+        ],
+        "rasMm": [
+          8.0,
+          -21.0,
+          2.5
+        ],
+        "selectedWins": true,
+        "winnerChannel": 32,
+        "strongestOther": {
+          "channel": 31,
+          "label": 8233,
+          "sourceName": "Right-VPL",
+          "probability": 0.012858366593718529
+        }
+      }
+    },
+    "thal-8228": {
+      "channel": 33,
+      "label": 8228,
+      "voxels": 6385,
+      "winningProbabilityBins": [
+        8,
+        1330,
+        3222,
+        1825
+      ],
+      "winningProbabilityRange": [
+        0.21598893404006958,
+        0.9102606773376465
+      ],
+      "peak": {
+        "probability": 0.9102606773376465,
+        "index": [
+          92,
+          77,
+          69
+        ],
+        "rasMm": [
+          12.0,
+          -7.5,
+          15.5
+        ],
+        "selectedWins": true,
+        "winnerChannel": 33,
+        "strongestOther": {
+          "channel": 35,
+          "label": 8213,
+          "sourceName": "Right-MDm",
+          "probability": 0.05749490112066269
+        }
+      }
+    },
+    "thal-8220": {
+      "channel": 34,
+      "label": 8220,
+      "voxels": 1888,
+      "winningProbabilityBins": [
+        5,
+        561,
+        972,
+        350
+      ],
+      "winningProbabilityRange": [
+        0.17522750794887543,
+        0.9062616229057312
+      ],
+      "peak": {
+        "probability": 0.9062616229057312,
+        "index": [
+          86,
+          48,
+          57
+        ],
+        "rasMm": [
+          9.0,
+          -22.0,
+          9.5
+        ],
+        "selectedWins": true,
+        "winnerChannel": 34,
+        "strongestOther": {
+          "channel": 44,
+          "label": 8222,
+          "sourceName": "Right-PuL",
+          "probability": 0.031666312366724014
+        }
+      }
+    },
+    "thal-8213": {
+      "channel": 35,
+      "label": 8213,
+      "voxels": 6318,
+      "winningProbabilityBins": [
+        7,
+        745,
+        1824,
+        3742
+      ],
+      "winningProbabilityRange": [
+        0.18913377821445465,
+        0.9639602303504944
+      ],
+      "peak": {
+        "probability": 0.9639602303504944,
+        "index": [
+          74,
+          61,
+          59
+        ],
+        "rasMm": [
+          3.0,
+          -15.5,
+          10.5
+        ],
+        "selectedWins": true,
+        "winnerChannel": 35,
+        "strongestOther": {
+          "channel": 46,
+          "label": 8229,
+          "sourceName": "Right-VLp",
+          "probability": 0.03075283206999302
+        }
+      }
+    },
+    "thal-8218": {
+      "channel": 36,
+      "label": 8218,
+      "voxels": 467,
+      "winningProbabilityBins": [
+        2,
+        146,
+        247,
+        72
+      ],
+      "winningProbabilityRange": [
+        0.21973669528961182,
+        0.8548424243927002
+      ],
+      "peak": {
+        "probability": 0.8548424243927002,
+        "index": [
+          80,
+          47,
+          36
+        ],
+        "rasMm": [
+          6.0,
+          -22.5,
+          -1.0
+        ],
+        "selectedWins": true,
+        "winnerChannel": 36,
+        "strongestOther": {
+          "channel": 39,
+          "label": 8225,
+          "sourceName": "Right-R",
+          "probability": 0.035239994525909424
+        }
+      }
+    },
+    "thal-8227": {
+      "channel": 37,
+      "label": 8227,
+      "voxels": 90,
+      "winningProbabilityBins": [
+        2,
+        88,
+        0,
+        0
+      ],
+      "winningProbabilityRange": [
+        0.22890008985996246,
+        0.47158825397491455
+      ],
+      "peak": {
+        "probability": 0.47158825397491455,
+        "index": [
+          81,
+          73,
+          37
+        ],
+        "rasMm": [
+          6.5,
+          -9.5,
+          -0.5
+        ],
+        "selectedWins": true,
+        "winnerChannel": 37,
+        "strongestOther": {
+          "channel": 40,
+          "label": 8226,
+          "sourceName": "Right-VA",
+          "probability": 0.3004499077796936
+        }
+      }
+    },
+    "thal-8212": {
+      "channel": 38,
+      "label": 8212,
+      "voxels": 2723,
+      "winningProbabilityBins": [
+        9,
+        535,
+        1119,
+        1060
+      ],
+      "winningProbabilityRange": [
+        0.22258049249649048,
+        0.9532158374786377
+      ],
+      "peak": {
+        "probability": 0.9532158374786377,
+        "index": [
+          82,
+          61,
+          49
+        ],
+        "rasMm": [
+          7.0,
+          -15.5,
+          5.5
+        ],
+        "selectedWins": true,
+        "winnerChannel": 38,
+        "strongestOther": {
+          "channel": 46,
+          "label": 8229,
+          "sourceName": "Right-VLp",
+          "probability": 0.04678419977426529
+        }
+      }
+    },
+    "thal-8225": {
+      "channel": 39,
+      "label": 8225,
+      "voxels": 2945,
+      "winningProbabilityBins": [
+        2,
+        1216,
+        1586,
+        141
+      ],
+      "winningProbabilityRange": [
+        0.23622742295265198,
+        0.8516468405723572
+      ],
+      "peak": {
+        "probability": 0.8516468405723572,
+        "index": [
+          101,
+          68,
+          71
+        ],
+        "rasMm": [
+          16.5,
+          -12.0,
+          16.5
+        ],
+        "selectedWins": true,
+        "winnerChannel": 39,
+        "strongestOther": {
+          "channel": 0,
+          "label": 0,
+          "sourceName": "Unknown",
+          "probability": 0.062013015151023865
+        }
+      }
+    },
+    "thal-8226": {
+      "channel": 40,
+      "label": 8226,
+      "voxels": 4970,
+      "winningProbabilityBins": [
+        2,
+        606,
+        1582,
+        2780
+      ],
+      "winningProbabilityRange": [
+        0.21253737807273865,
+        1.0
+      ],
+      "peak": {
+        "probability": 1.0,
+        "index": [
+          84,
+          86,
+          53
+        ],
+        "rasMm": [
+          8.0,
+          -3.0,
+          7.5
+        ],
+        "selectedWins": true,
+        "winnerChannel": 40,
+        "strongestOther": {
+          "channel": 0,
+          "label": 0,
+          "sourceName": "Unknown",
+          "probability": 0.0
+        }
+      }
+    },
+    "thal-8216": {
+      "channel": 41,
+      "label": 8216,
+      "voxels": 193,
+      "winningProbabilityBins": [
+        4,
+        115,
+        74,
+        0
+      ],
+      "winningProbabilityRange": [
+        0.21837112307548523,
+        0.7298318147659302
+      ],
+      "peak": {
+        "probability": 0.7298318147659302,
+        "index": [
+          75,
+          71,
+          32
+        ],
+        "rasMm": [
+          3.5,
+          -10.5,
+          -3.0
+        ],
+        "selectedWins": true,
+        "winnerChannel": 41,
+        "strongestOther": {
+          "channel": 42,
+          "label": 8204,
+          "sourceName": "Right-CeM",
+          "probability": 0.15619543194770813
+        }
+      }
+    },
+    "thal-8204": {
+      "channel": 42,
+      "label": 8204,
+      "voxels": 1177,
+      "winningProbabilityBins": [
+        14,
+        452,
+        457,
+        254
+      ],
+      "winningProbabilityRange": [
+        0.19801637530326843,
+        0.9259716272354126
+      ],
+      "peak": {
+        "probability": 0.9259716272354126,
+        "index": [
+          76,
+          72,
+          37
+        ],
+        "rasMm": [
+          4.0,
+          -10.0,
+          -0.5
+        ],
+        "selectedWins": true,
+        "winnerChannel": 42,
+        "strongestOther": {
+          "channel": 41,
+          "label": 8216,
+          "sourceName": "Right-MV(Re)",
+          "probability": 0.027797222137451172
+        }
+      }
+    },
+    "thal-8222": {
+      "channel": 44,
+      "label": 8222,
+      "voxels": 2252,
+      "winningProbabilityBins": [
+        2,
+        416,
+        1015,
+        819
+      ],
+      "winningProbabilityRange": [
+        0.24336041510105133,
+        0.9455986022949219
+      ],
+      "peak": {
+        "probability": 0.9455986022949219,
+        "index": [
+          102,
+          46,
+          66
+        ],
+        "rasMm": [
+          17.0,
+          -23.0,
+          14.0
+        ],
+        "selectedWins": true,
+        "winnerChannel": 44,
+        "strongestOther": {
+          "channel": 34,
+          "label": 8220,
+          "sourceName": "Right-PuA",
+          "probability": 0.020245911553502083
+        }
+      }
+    },
+    "thal-8205": {
+      "channel": 45,
+      "label": 8205,
+      "voxels": 233,
+      "winningProbabilityBins": [
+        4,
+        214,
+        15,
+        0
+      ],
+      "winningProbabilityRange": [
+        0.19646646082401276,
+        0.5913639664649963
+      ],
+      "peak": {
+        "probability": 0.5913639664649963,
+        "index": [
+          77,
+          60,
+          66
+        ],
+        "rasMm": [
+          4.5,
+          -16.0,
+          14.0
+        ],
+        "selectedWins": true,
+        "winnerChannel": 45,
+        "strongestOther": {
+          "channel": 35,
+          "label": 8213,
+          "sourceName": "Right-MDm",
+          "probability": 0.18878602981567383
+        }
+      }
+    },
+    "thal-8229": {
+      "channel": 46,
+      "label": 8229,
+      "voxels": 8786,
+      "winningProbabilityBins": [
+        19,
+        1621,
+        4984,
+        2162
+      ],
+      "winningProbabilityRange": [
+        0.186709925532341,
+        0.9499636292457581
+      ],
+      "peak": {
+        "probability": 0.9499636292457581,
+        "index": [
+          94,
+          62,
+          61
+        ],
+        "rasMm": [
+          13.0,
+          -15.0,
+          11.5
+        ],
+        "selectedWins": true,
+        "winnerChannel": 46,
+        "strongestOther": {
+          "channel": 32,
+          "label": 8206,
+          "sourceName": "Right-CM",
+          "probability": 0.020924516022205353
+        }
+      }
+    },
+    "thal-8203": {
+      "channel": 49,
+      "label": 8203,
+      "voxels": 1810,
+      "winningProbabilityBins": [
+        1,
+        310,
+        572,
+        927
+      ],
+      "winningProbabilityRange": [
+        0.2412877380847931,
+        0.997917890548706
+      ],
+      "peak": {
+        "probability": 0.997917890548706,
+        "index": [
+          75,
+          79,
+          61
+        ],
+        "rasMm": [
+          3.5,
+          -6.5,
+          11.5
+        ],
+        "selectedWins": true,
+        "winnerChannel": 49,
+        "strongestOther": {
+          "channel": 45,
+          "label": 8205,
+          "sourceName": "Right-CL",
+          "probability": 0.0011683637276291847
+        }
+      }
+    },
+    "thal-8210": {
+      "channel": 50,
+      "label": 8210,
+      "voxels": 1230,
+      "winningProbabilityBins": [
+        4,
+        417,
+        539,
+        270
+      ],
+      "winningProbabilityRange": [
+        0.21989703178405762,
+        0.9494906067848206
+      ],
+      "peak": {
+        "probability": 0.9494906067848206,
+        "index": [
+          86,
+          60,
+          71
+        ],
+        "rasMm": [
+          9.0,
+          -16.0,
+          16.5
+        ],
+        "selectedWins": true,
+        "winnerChannel": 50,
+        "strongestOther": {
+          "channel": 35,
+          "label": 8213,
+          "sourceName": "Right-MDm",
+          "probability": 0.018133113160729408
+        }
+      }
+    },
+    "thal-8108": {
+      "channel": 51,
+      "label": 8108,
+      "voxels": 390,
+      "winningProbabilityBins": [
+        3,
+        200,
+        187,
+        0
+      ],
+      "winningProbabilityRange": [
+        0.20033691823482513,
+        0.737076997756958
+      ],
+      "peak": {
+        "probability": 0.737076997756958,
+        "index": [
+          58,
+          63,
+          70
+        ],
+        "rasMm": [
+          -5.0,
+          -14.5,
+          16.0
+        ],
+        "selectedWins": true,
+        "winnerChannel": 51,
+        "strongestOther": {
+          "channel": 27,
+          "label": 8110,
+          "sourceName": "Left-LP",
+          "probability": 0.12198460102081299
+        }
+      }
+    },
+    "thal-8208": {
+      "channel": 52,
+      "label": 8208,
+      "voxels": 390,
+      "winningProbabilityBins": [
+        3,
+        200,
+        187,
+        0
+      ],
+      "winningProbabilityRange": [
+        0.20033691823482513,
+        0.737076997756958
+      ],
+      "peak": {
+        "probability": 0.737076997756958,
+        "index": [
+          79,
+          63,
+          70
+        ],
+        "rasMm": [
+          5.5,
+          -14.5,
+          16.0
+        ],
+        "selectedWins": true,
+        "winnerChannel": 52,
+        "strongestOther": {
+          "channel": 50,
+          "label": 8210,
+          "sourceName": "Right-LP",
+          "probability": 0.12198460102081299
+        }
+      }
+    },
+    "thal-8130": {
+      "channel": 20,
+      "label": 8130,
+      "voxels": 0,
+      "winningProbabilityBins": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "winningProbabilityRange": null,
+      "peak": {
+        "probability": 0.1764208972454071,
+        "index": [
+          30,
+          58,
+          49
+        ],
+        "rasMm": [
+          -19.0,
+          -17.0,
+          5.5
+        ],
+        "selectedWins": false,
+        "winnerChannel": 26,
+        "strongestOther": {
+          "channel": 26,
+          "label": 8129,
+          "sourceName": "Left-VLp",
+          "probability": 0.21080327033996582
+        }
+      }
+    },
+    "thal-8119": {
+      "channel": 23,
+      "label": 8119,
+      "voxels": 0,
+      "winningProbabilityBins": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "winningProbabilityRange": null,
+      "peak": {
+        "probability": 0.13718825578689575,
+        "index": [
+          44,
+          44,
+          44
+        ],
+        "rasMm": [
+          -12.0,
+          -24.0,
+          3.0
+        ],
+        "selectedWins": false,
+        "winnerChannel": 8,
+        "strongestOther": {
+          "channel": 8,
+          "label": 8133,
+          "sourceName": "Left-VPL",
+          "probability": 0.4483402669429779
+        }
+      }
+    },
+    "thal-8117": {
+      "channel": 25,
+      "label": 8117,
+      "voxels": 0,
+      "winningProbabilityBins": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "winningProbabilityRange": null,
+      "peak": {
+        "probability": 0.1994006335735321,
+        "index": [
+          58,
+          73,
+          45
+        ],
+        "rasMm": [
+          -5.0,
+          -9.5,
+          3.5
+        ],
+        "selectedWins": false,
+        "winnerChannel": 15,
+        "strongestOther": {
+          "channel": 15,
+          "label": 8112,
+          "sourceName": "Left-MDl",
+          "probability": 0.23811852931976318
+        }
+      }
+    },
+    "thal-8230": {
+      "channel": 43,
+      "label": 8230,
+      "voxels": 0,
+      "winningProbabilityBins": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "winningProbabilityRange": null,
+      "peak": {
+        "probability": 0.1764208972454071,
+        "index": [
+          107,
+          58,
+          49
+        ],
+        "rasMm": [
+          19.5,
+          -17.0,
+          5.5
+        ],
+        "selectedWins": false,
+        "winnerChannel": 46,
+        "strongestOther": {
+          "channel": 46,
+          "label": 8229,
+          "sourceName": "Right-VLp",
+          "probability": 0.21080327033996582
+        }
+      }
+    },
+    "thal-8217": {
+      "channel": 47,
+      "label": 8217,
+      "voxels": 0,
+      "winningProbabilityBins": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "winningProbabilityRange": null,
+      "peak": {
+        "probability": 0.1994006335735321,
+        "index": [
+          79,
+          73,
+          45
+        ],
+        "rasMm": [
+          5.5,
+          -9.5,
+          3.5
+        ],
+        "selectedWins": false,
+        "winnerChannel": 38,
+        "strongestOther": {
+          "channel": 38,
+          "label": 8212,
+          "sourceName": "Right-MDl",
+          "probability": 0.23811852931976318
+        }
+      }
+    },
+    "thal-8219": {
+      "channel": 48,
+      "label": 8219,
+      "voxels": 0,
+      "winningProbabilityBins": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "winningProbabilityRange": null,
+      "peak": {
+        "probability": 0.13718825578689575,
+        "index": [
+          93,
+          44,
+          44
+        ],
+        "rasMm": [
+          12.5,
+          -24.0,
+          3.0
+        ],
+        "selectedWins": false,
+        "winnerChannel": 31,
+        "strongestOther": {
+          "channel": 31,
+          "label": 8233,
+          "sourceName": "Right-VPL",
+          "probability": 0.4483402669429779
+        }
+      }
+    }
+  }
+}

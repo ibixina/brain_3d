@@ -1,0 +1,1468 @@
+{
+  "version": 1,
+  "kind": "hippocampus",
+  "checkedOn": "2026-10-19",
+  "binEdges": [
+    0,
+    0.25,
+    0.5,
+    0.75,
+    1
+  ],
+  "method": "Cerebra-derived statistics from unmodified float32 source probabilities. Winner assignment compares every channel, including unknown/background and sibling structures; ties use first source channel. Bins are [0,.25), [.25,.5), [.5,.75), [.75,1], with floating-point tolerance retained in end bins. Peak is the first C-order maximum of the selected channel over its entire grid, not necessarily a winning voxel. Strongest other excludes only that channel. Indices are zero-based in the original grid; RAS is source millimeters, not the recentered display. No resampling, probability thresholding, or calibration of boundary accuracy.",
+  "source": {
+    "manifest": "/subregions/hippocampus-provenance.json",
+    "manifestSha256": "2a0c7ad189ccc24ce8b2368c1b333319c510d938b5d7425af2ed09fe8a1f3aa8",
+    "archiveSha256": "3bedb212780716a9ff5547eb28f5f3018270982f085c892303eb547cb4a85811",
+    "niftiSha256": {
+      "left": "a79d5f88acfa21684a6f8c1e78da21e74ccbf152e68fb845fde048f451c4474e",
+      "right": "4d20bb95435afc9a139279ae2a159d8dfbf3f1b1de0d07d901ff6cf08570e5a3"
+    },
+    "documentation": "https://surfer.nmr.mgh.harvard.edu/fswiki/SubfieldAtlasesICBMspace",
+    "paper": "https://doi.org/10.1016/j.neuroimage.2015.04.042",
+    "license": "/licenses/freesurfer.txt",
+    "attribution": "Modified FreeSurfer data. All or portions obtained under license from The General Hospital Corporation (MGH); full terms retained in the linked license."
+  },
+  "entries": {
+    "hipp-left-226": {
+      "channel": 1,
+      "label": 226,
+      "voxels": 41081,
+      "winningProbabilityBins": [
+        7,
+        2655,
+        10304,
+        28115
+      ],
+      "winningProbabilityRange": [
+        0.19858086109161377,
+        0.9975702166557312
+      ],
+      "peak": {
+        "probability": 0.9975702166557312,
+        "index": [
+          103,
+          46,
+          162
+        ],
+        "rasMm": [
+          -19.25,
+          -37.5,
+          5.5
+        ],
+        "selectedWins": true,
+        "winnerChannel": 1,
+        "strongestOther": {
+          "channel": 0,
+          "label": 0,
+          "sourceName": "Unknown",
+          "probability": 0.0014320064801722765
+        }
+      }
+    },
+    "hipp-left-236": {
+      "channel": 2,
+      "label": 236,
+      "voxels": 20625,
+      "winningProbabilityBins": [
+        2,
+        1896,
+        7240,
+        11487
+      ],
+      "winningProbabilityRange": [
+        0.21471890807151794,
+        0.999805212020874
+      ],
+      "peak": {
+        "probability": 0.999805212020874,
+        "index": [
+          69,
+          72,
+          91
+        ],
+        "rasMm": [
+          -27.75,
+          -31.0,
+          -12.25
+        ],
+        "selectedWins": true,
+        "winnerChannel": 2,
+        "strongestOther": {
+          "channel": 3,
+          "label": 238,
+          "sourceName": "CA1-body",
+          "probability": 0.0001114596743718721
+        }
+      }
+    },
+    "hipp-left-238": {
+      "channel": 3,
+      "label": 238,
+      "voxels": 7644,
+      "winningProbabilityBins": [
+        4,
+        1550,
+        3256,
+        2834
+      ],
+      "winningProbabilityRange": [
+        0.21579743921756744,
+        0.9963796138763428
+      ],
+      "peak": {
+        "probability": 0.9963796138763428,
+        "index": [
+          42,
+          71,
+          95
+        ],
+        "rasMm": [
+          -34.5,
+          -31.25,
+          -11.25
+        ],
+        "selectedWins": true,
+        "winnerChannel": 3,
+        "strongestOther": {
+          "channel": 12,
+          "label": 246,
+          "sourceName": "molecular_layer_HP-body",
+          "probability": 0.001890806364826858
+        }
+      }
+    },
+    "hipp-left-235": {
+      "channel": 4,
+      "label": 235,
+      "voxels": 15273,
+      "winningProbabilityBins": [
+        4,
+        1948,
+        5840,
+        7481
+      ],
+      "winningProbabilityRange": [
+        0.19411636888980865,
+        1.0
+      ],
+      "peak": {
+        "probability": 1.0,
+        "index": [
+          61,
+          139,
+          39
+        ],
+        "rasMm": [
+          -29.75,
+          -14.25,
+          -25.25
+        ],
+        "selectedWins": true,
+        "winnerChannel": 4,
+        "strongestOther": {
+          "channel": 0,
+          "label": 0,
+          "sourceName": "Unknown",
+          "probability": 0.0
+        }
+      }
+    },
+    "hipp-left-215": {
+      "channel": 5,
+      "label": 215,
+      "voxels": 6861,
+      "winningProbabilityBins": [
+        62,
+        5573,
+        1218,
+        8
+      ],
+      "winningProbabilityRange": [
+        0.18529021739959717,
+        0.8440802097320557
+      ],
+      "peak": {
+        "probability": 0.8440802097320557,
+        "index": [
+          78,
+          156,
+          35
+        ],
+        "rasMm": [
+          -25.5,
+          -10.0,
+          -26.25
+        ],
+        "selectedWins": true,
+        "winnerChannel": 5,
+        "strongestOther": {
+          "channel": 11,
+          "label": 245,
+          "sourceName": "molecular_layer_HP-head",
+          "probability": 0.08861984312534332
+        }
+      }
+    },
+    "hipp-left-233": {
+      "channel": 6,
+      "label": 233,
+      "voxels": 12023,
+      "winningProbabilityBins": [
+        13,
+        1758,
+        3900,
+        6352
+      ],
+      "winningProbabilityRange": [
+        0.21425102651119232,
+        1.0
+      ],
+      "peak": {
+        "probability": 1.0,
+        "index": [
+          88,
+          132,
+          46
+        ],
+        "rasMm": [
+          -23.0,
+          -16.0,
+          -23.5
+        ],
+        "selectedWins": true,
+        "winnerChannel": 6,
+        "strongestOther": {
+          "channel": 0,
+          "label": 0,
+          "sourceName": "Unknown",
+          "probability": 0.0
+        }
+      }
+    },
+    "hipp-left-201": {
+      "channel": 7,
+      "label": 201,
+      "voxels": 14967,
+      "winningProbabilityBins": [
+        17,
+        6550,
+        6996,
+        1404
+      ],
+      "winningProbabilityRange": [
+        0.1688365638256073,
+        0.9572338461875916
+      ],
+      "peak": {
+        "probability": 0.9572338461875916,
+        "index": [
+          113,
+          160,
+          60
+        ],
+        "rasMm": [
+          -16.75,
+          -9.0,
+          -20.0
+        ],
+        "selectedWins": true,
+        "winnerChannel": 7,
+        "strongestOther": {
+          "channel": 0,
+          "label": 0,
+          "sourceName": "Unknown",
+          "probability": 0.038612112402915955
+        }
+      }
+    },
+    "hipp-left-237": {
+      "channel": 8,
+      "label": 237,
+      "voxels": 39880,
+      "winningProbabilityBins": [
+        18,
+        5967,
+        16577,
+        17318
+      ],
+      "winningProbabilityRange": [
+        0.20969602465629578,
+        1.0
+      ],
+      "peak": {
+        "probability": 1.0,
+        "index": [
+          49,
+          145,
+          45
+        ],
+        "rasMm": [
+          -32.75,
+          -12.75,
+          -23.75
+        ],
+        "selectedWins": true,
+        "winnerChannel": 8,
+        "strongestOther": {
+          "channel": 0,
+          "label": 0,
+          "sourceName": "Unknown",
+          "probability": 0.0
+        }
+      }
+    },
+    "hipp-left-234": {
+      "channel": 9,
+      "label": 234,
+      "voxels": 13009,
+      "winningProbabilityBins": [
+        3,
+        1560,
+        5718,
+        5728
+      ],
+      "winningProbabilityRange": [
+        0.22596727311611176,
+        1.0
+      ],
+      "peak": {
+        "probability": 1.0,
+        "index": [
+          84,
+          94,
+          84
+        ],
+        "rasMm": [
+          -24.0,
+          -25.5,
+          -14.0
+        ],
+        "selectedWins": true,
+        "winnerChannel": 9,
+        "strongestOther": {
+          "channel": 0,
+          "label": 0,
+          "sourceName": "Unknown",
+          "probability": 0.0
+        }
+      }
+    },
+    "hipp-left-203": {
+      "channel": 10,
+      "label": 203,
+      "voxels": 3169,
+      "winningProbabilityBins": [
+        0,
+        653,
+        1730,
+        786
+      ],
+      "winningProbabilityRange": [
+        0.2553722858428955,
+        0.9250930547714233
+      ],
+      "peak": {
+        "probability": 0.9250930547714233,
+        "index": [
+          108,
+          144,
+          46
+        ],
+        "rasMm": [
+          -18.0,
+          -13.0,
+          -23.5
+        ],
+        "selectedWins": true,
+        "winnerChannel": 10,
+        "strongestOther": {
+          "channel": 0,
+          "label": 0,
+          "sourceName": "Unknown",
+          "probability": 0.0688876286149025
+        }
+      }
+    },
+    "hipp-left-245": {
+      "channel": 11,
+      "label": 245,
+      "voxels": 24953,
+      "winningProbabilityBins": [
+        25,
+        7389,
+        12469,
+        5070
+      ],
+      "winningProbabilityRange": [
+        0.16063609719276428,
+        0.9842736721038818
+      ],
+      "peak": {
+        "probability": 0.9842736721038818,
+        "index": [
+          93,
+          163,
+          41
+        ],
+        "rasMm": [
+          -21.75,
+          -8.25,
+          -24.75
+        ],
+        "selectedWins": true,
+        "winnerChannel": 11,
+        "strongestOther": {
+          "channel": 5,
+          "label": 215,
+          "sourceName": "hippocampal-fissure",
+          "probability": 0.015660082921385765
+        }
+      }
+    },
+    "hipp-left-246": {
+      "channel": 12,
+      "label": 246,
+      "voxels": 17370,
+      "winningProbabilityBins": [
+        6,
+        4700,
+        9683,
+        2981
+      ],
+      "winningProbabilityRange": [
+        0.2134270966053009,
+        0.9934352040290833
+      ],
+      "peak": {
+        "probability": 0.9934352040290833,
+        "index": [
+          48,
+          104,
+          88
+        ],
+        "rasMm": [
+          -33.0,
+          -23.0,
+          -13.0
+        ],
+        "selectedWins": true,
+        "winnerChannel": 12,
+        "strongestOther": {
+          "channel": 11,
+          "label": 245,
+          "sourceName": "molecular_layer_HP-head",
+          "probability": 0.003517236327752471
+        }
+      }
+    },
+    "hipp-left-243": {
+      "channel": 13,
+      "label": 243,
+      "voxels": 11414,
+      "winningProbabilityBins": [
+        59,
+        5260,
+        5280,
+        815
+      ],
+      "winningProbabilityRange": [
+        0.15799839794635773,
+        0.9461960196495056
+      ],
+      "peak": {
+        "probability": 0.9461960196495056,
+        "index": [
+          60,
+          142,
+          64
+        ],
+        "rasMm": [
+          -30.0,
+          -13.5,
+          -19.0
+        ],
+        "selectedWins": true,
+        "winnerChannel": 13,
+        "strongestOther": {
+          "channel": 16,
+          "label": 241,
+          "sourceName": "CA4-head",
+          "probability": 0.02584359236061573
+        }
+      }
+    },
+    "hipp-left-240": {
+      "channel": 14,
+      "label": 240,
+      "voxels": 7037,
+      "winningProbabilityBins": [
+        21,
+        2278,
+        3394,
+        1344
+      ],
+      "winningProbabilityRange": [
+        0.18002453446388245,
+        0.991334080696106
+      ],
+      "peak": {
+        "probability": 0.991334080696106,
+        "index": [
+          46,
+          72,
+          109
+        ],
+        "rasMm": [
+          -33.5,
+          -31.0,
+          -7.75
+        ],
+        "selectedWins": true,
+        "winnerChannel": 14,
+        "strongestOther": {
+          "channel": 12,
+          "label": 246,
+          "sourceName": "molecular_layer_HP-body",
+          "probability": 0.005294736009091139
+        }
+      }
+    },
+    "hipp-left-244": {
+      "channel": 15,
+      "label": 244,
+      "voxels": 12274,
+      "winningProbabilityBins": [
+        16,
+        3837,
+        7275,
+        1146
+      ],
+      "winningProbabilityRange": [
+        0.20455646514892578,
+        0.9646042585372925
+      ],
+      "peak": {
+        "probability": 0.9646042585372925,
+        "index": [
+          48,
+          104,
+          84
+        ],
+        "rasMm": [
+          -33.0,
+          -23.0,
+          -14.0
+        ],
+        "selectedWins": true,
+        "winnerChannel": 15,
+        "strongestOther": {
+          "channel": 12,
+          "label": 246,
+          "sourceName": "molecular_layer_HP-body",
+          "probability": 0.014426066540181637
+        }
+      }
+    },
+    "hipp-left-241": {
+      "channel": 16,
+      "label": 241,
+      "voxels": 10074,
+      "winningProbabilityBins": [
+        15,
+        2426,
+        3819,
+        3814
+      ],
+      "winningProbabilityRange": [
+        0.21784044802188873,
+        0.9994926452636719
+      ],
+      "peak": {
+        "probability": 0.9994926452636719,
+        "index": [
+          63,
+          136,
+          62
+        ],
+        "rasMm": [
+          -29.25,
+          -15.0,
+          -19.5
+        ],
+        "selectedWins": true,
+        "winnerChannel": 16,
+        "strongestOther": {
+          "channel": 13,
+          "label": 243,
+          "sourceName": "GC-ML-DG-head",
+          "probability": 0.0005073718493804336
+        }
+      }
+    },
+    "hipp-left-242": {
+      "channel": 17,
+      "label": 242,
+      "voxels": 10883,
+      "winningProbabilityBins": [
+        14,
+        1378,
+        4152,
+        5339
+      ],
+      "winningProbabilityRange": [
+        0.19409975409507751,
+        0.9995266199111938
+      ],
+      "peak": {
+        "probability": 0.9995266199111938,
+        "index": [
+          52,
+          101,
+          84
+        ],
+        "rasMm": [
+          -32.0,
+          -23.75,
+          -14.0
+        ],
+        "selectedWins": true,
+        "winnerChannel": 17,
+        "strongestOther": {
+          "channel": 14,
+          "label": 240,
+          "sourceName": "CA3-body",
+          "probability": 0.0002504894800949842
+        }
+      }
+    },
+    "hipp-left-212": {
+      "channel": 18,
+      "label": 212,
+      "voxels": 8907,
+      "winningProbabilityBins": [
+        17,
+        2317,
+        5198,
+        1375
+      ],
+      "winningProbabilityRange": [
+        0.20518195629119873,
+        0.8886505961418152
+      ],
+      "peak": {
+        "probability": 0.8886505961418152,
+        "index": [
+          69,
+          65,
+          125
+        ],
+        "rasMm": [
+          -27.75,
+          -32.75,
+          -3.75
+        ],
+        "selectedWins": true,
+        "winnerChannel": 18,
+        "strongestOther": {
+          "channel": 0,
+          "label": 0,
+          "sourceName": "Unknown",
+          "probability": 0.0615948885679245
+        }
+      }
+    },
+    "hipp-left-239": {
+      "channel": 19,
+      "label": 239,
+      "voxels": 8164,
+      "winningProbabilityBins": [
+        66,
+        3581,
+        3659,
+        858
+      ],
+      "winningProbabilityRange": [
+        0.1772056668996811,
+        0.9418458938598633
+      ],
+      "peak": {
+        "probability": 0.9418458938598633,
+        "index": [
+          71,
+          132,
+          80
+        ],
+        "rasMm": [
+          -27.25,
+          -16.0,
+          -15.0
+        ],
+        "selectedWins": true,
+        "winnerChannel": 19,
+        "strongestOther": {
+          "channel": 7,
+          "label": 201,
+          "sourceName": "alveus",
+          "probability": 0.024835268035531044
+        }
+      }
+    },
+    "hipp-left-211": {
+      "channel": 20,
+      "label": 211,
+      "voxels": 3740,
+      "winningProbabilityBins": [
+        9,
+        836,
+        1711,
+        1184
+      ],
+      "winningProbabilityRange": [
+        0.19643966853618622,
+        0.958300769329071
+      ],
+      "peak": {
+        "probability": 0.958300769329071,
+        "index": [
+          113,
+          154,
+          80
+        ],
+        "rasMm": [
+          -16.75,
+          -10.5,
+          -15.0
+        ],
+        "selectedWins": true,
+        "winnerChannel": 20,
+        "strongestOther": {
+          "channel": 11,
+          "label": 245,
+          "sourceName": "molecular_layer_HP-head",
+          "probability": 0.013606609776616096
+        }
+      }
+    },
+    "hipp-right-226": {
+      "channel": 1,
+      "label": 226,
+      "voxels": 41081,
+      "winningProbabilityBins": [
+        7,
+        2655,
+        10304,
+        28115
+      ],
+      "winningProbabilityRange": [
+        0.19858086109161377,
+        0.9975702166557312
+      ],
+      "peak": {
+        "probability": 0.9975702166557312,
+        "index": [
+          103,
+          46,
+          162
+        ],
+        "rasMm": [
+          19.25,
+          -37.5,
+          5.5
+        ],
+        "selectedWins": true,
+        "winnerChannel": 1,
+        "strongestOther": {
+          "channel": 0,
+          "label": 0,
+          "sourceName": "Unknown",
+          "probability": 0.0014320064801722765
+        }
+      }
+    },
+    "hipp-right-236": {
+      "channel": 2,
+      "label": 236,
+      "voxels": 20625,
+      "winningProbabilityBins": [
+        2,
+        1896,
+        7240,
+        11487
+      ],
+      "winningProbabilityRange": [
+        0.21471890807151794,
+        0.999805212020874
+      ],
+      "peak": {
+        "probability": 0.999805212020874,
+        "index": [
+          69,
+          72,
+          91
+        ],
+        "rasMm": [
+          27.75,
+          -31.0,
+          -12.25
+        ],
+        "selectedWins": true,
+        "winnerChannel": 2,
+        "strongestOther": {
+          "channel": 3,
+          "label": 238,
+          "sourceName": "CA1-body",
+          "probability": 0.0001114596743718721
+        }
+      }
+    },
+    "hipp-right-238": {
+      "channel": 3,
+      "label": 238,
+      "voxels": 7644,
+      "winningProbabilityBins": [
+        4,
+        1550,
+        3256,
+        2834
+      ],
+      "winningProbabilityRange": [
+        0.21579743921756744,
+        0.9963796138763428
+      ],
+      "peak": {
+        "probability": 0.9963796138763428,
+        "index": [
+          42,
+          71,
+          95
+        ],
+        "rasMm": [
+          34.5,
+          -31.25,
+          -11.25
+        ],
+        "selectedWins": true,
+        "winnerChannel": 3,
+        "strongestOther": {
+          "channel": 12,
+          "label": 246,
+          "sourceName": "molecular_layer_HP-body",
+          "probability": 0.001890806364826858
+        }
+      }
+    },
+    "hipp-right-235": {
+      "channel": 4,
+      "label": 235,
+      "voxels": 15273,
+      "winningProbabilityBins": [
+        4,
+        1948,
+        5840,
+        7481
+      ],
+      "winningProbabilityRange": [
+        0.19411636888980865,
+        1.0
+      ],
+      "peak": {
+        "probability": 1.0,
+        "index": [
+          61,
+          139,
+          39
+        ],
+        "rasMm": [
+          29.75,
+          -14.25,
+          -25.25
+        ],
+        "selectedWins": true,
+        "winnerChannel": 4,
+        "strongestOther": {
+          "channel": 0,
+          "label": 0,
+          "sourceName": "Unknown",
+          "probability": 0.0
+        }
+      }
+    },
+    "hipp-right-215": {
+      "channel": 5,
+      "label": 215,
+      "voxels": 6861,
+      "winningProbabilityBins": [
+        62,
+        5573,
+        1218,
+        8
+      ],
+      "winningProbabilityRange": [
+        0.18529021739959717,
+        0.8440802097320557
+      ],
+      "peak": {
+        "probability": 0.8440802097320557,
+        "index": [
+          78,
+          156,
+          35
+        ],
+        "rasMm": [
+          25.5,
+          -10.0,
+          -26.25
+        ],
+        "selectedWins": true,
+        "winnerChannel": 5,
+        "strongestOther": {
+          "channel": 11,
+          "label": 245,
+          "sourceName": "molecular_layer_HP-head",
+          "probability": 0.08861984312534332
+        }
+      }
+    },
+    "hipp-right-233": {
+      "channel": 6,
+      "label": 233,
+      "voxels": 12023,
+      "winningProbabilityBins": [
+        13,
+        1758,
+        3900,
+        6352
+      ],
+      "winningProbabilityRange": [
+        0.21425102651119232,
+        1.0
+      ],
+      "peak": {
+        "probability": 1.0,
+        "index": [
+          88,
+          132,
+          46
+        ],
+        "rasMm": [
+          23.0,
+          -16.0,
+          -23.5
+        ],
+        "selectedWins": true,
+        "winnerChannel": 6,
+        "strongestOther": {
+          "channel": 0,
+          "label": 0,
+          "sourceName": "Unknown",
+          "probability": 0.0
+        }
+      }
+    },
+    "hipp-right-201": {
+      "channel": 7,
+      "label": 201,
+      "voxels": 14967,
+      "winningProbabilityBins": [
+        17,
+        6550,
+        6996,
+        1404
+      ],
+      "winningProbabilityRange": [
+        0.1688365638256073,
+        0.9572338461875916
+      ],
+      "peak": {
+        "probability": 0.9572338461875916,
+        "index": [
+          113,
+          160,
+          60
+        ],
+        "rasMm": [
+          16.75,
+          -9.0,
+          -20.0
+        ],
+        "selectedWins": true,
+        "winnerChannel": 7,
+        "strongestOther": {
+          "channel": 0,
+          "label": 0,
+          "sourceName": "Unknown",
+          "probability": 0.038612112402915955
+        }
+      }
+    },
+    "hipp-right-237": {
+      "channel": 8,
+      "label": 237,
+      "voxels": 39880,
+      "winningProbabilityBins": [
+        18,
+        5967,
+        16577,
+        17318
+      ],
+      "winningProbabilityRange": [
+        0.20969602465629578,
+        1.0
+      ],
+      "peak": {
+        "probability": 1.0,
+        "index": [
+          49,
+          145,
+          45
+        ],
+        "rasMm": [
+          32.75,
+          -12.75,
+          -23.75
+        ],
+        "selectedWins": true,
+        "winnerChannel": 8,
+        "strongestOther": {
+          "channel": 0,
+          "label": 0,
+          "sourceName": "Unknown",
+          "probability": 0.0
+        }
+      }
+    },
+    "hipp-right-234": {
+      "channel": 9,
+      "label": 234,
+      "voxels": 13009,
+      "winningProbabilityBins": [
+        3,
+        1560,
+        5718,
+        5728
+      ],
+      "winningProbabilityRange": [
+        0.22596727311611176,
+        1.0
+      ],
+      "peak": {
+        "probability": 1.0,
+        "index": [
+          84,
+          94,
+          84
+        ],
+        "rasMm": [
+          24.0,
+          -25.5,
+          -14.0
+        ],
+        "selectedWins": true,
+        "winnerChannel": 9,
+        "strongestOther": {
+          "channel": 0,
+          "label": 0,
+          "sourceName": "Unknown",
+          "probability": 0.0
+        }
+      }
+    },
+    "hipp-right-203": {
+      "channel": 10,
+      "label": 203,
+      "voxels": 3169,
+      "winningProbabilityBins": [
+        0,
+        653,
+        1730,
+        786
+      ],
+      "winningProbabilityRange": [
+        0.2553722858428955,
+        0.9250930547714233
+      ],
+      "peak": {
+        "probability": 0.9250930547714233,
+        "index": [
+          108,
+          144,
+          46
+        ],
+        "rasMm": [
+          18.0,
+          -13.0,
+          -23.5
+        ],
+        "selectedWins": true,
+        "winnerChannel": 10,
+        "strongestOther": {
+          "channel": 0,
+          "label": 0,
+          "sourceName": "Unknown",
+          "probability": 0.0688876286149025
+        }
+      }
+    },
+    "hipp-right-245": {
+      "channel": 11,
+      "label": 245,
+      "voxels": 24953,
+      "winningProbabilityBins": [
+        25,
+        7389,
+        12469,
+        5070
+      ],
+      "winningProbabilityRange": [
+        0.16063609719276428,
+        0.9842736721038818
+      ],
+      "peak": {
+        "probability": 0.9842736721038818,
+        "index": [
+          93,
+          163,
+          41
+        ],
+        "rasMm": [
+          21.75,
+          -8.25,
+          -24.75
+        ],
+        "selectedWins": true,
+        "winnerChannel": 11,
+        "strongestOther": {
+          "channel": 5,
+          "label": 215,
+          "sourceName": "hippocampal-fissure",
+          "probability": 0.015660082921385765
+        }
+      }
+    },
+    "hipp-right-246": {
+      "channel": 12,
+      "label": 246,
+      "voxels": 17370,
+      "winningProbabilityBins": [
+        6,
+        4700,
+        9683,
+        2981
+      ],
+      "winningProbabilityRange": [
+        0.2134270966053009,
+        0.9934352040290833
+      ],
+      "peak": {
+        "probability": 0.9934352040290833,
+        "index": [
+          48,
+          104,
+          88
+        ],
+        "rasMm": [
+          33.0,
+          -23.0,
+          -13.0
+        ],
+        "selectedWins": true,
+        "winnerChannel": 12,
+        "strongestOther": {
+          "channel": 11,
+          "label": 245,
+          "sourceName": "molecular_layer_HP-head",
+          "probability": 0.003517236327752471
+        }
+      }
+    },
+    "hipp-right-243": {
+      "channel": 13,
+      "label": 243,
+      "voxels": 11414,
+      "winningProbabilityBins": [
+        59,
+        5260,
+        5280,
+        815
+      ],
+      "winningProbabilityRange": [
+        0.15799839794635773,
+        0.9461960196495056
+      ],
+      "peak": {
+        "probability": 0.9461960196495056,
+        "index": [
+          60,
+          142,
+          64
+        ],
+        "rasMm": [
+          30.0,
+          -13.5,
+          -19.0
+        ],
+        "selectedWins": true,
+        "winnerChannel": 13,
+        "strongestOther": {
+          "channel": 16,
+          "label": 241,
+          "sourceName": "CA4-head",
+          "probability": 0.02584359236061573
+        }
+      }
+    },
+    "hipp-right-240": {
+      "channel": 14,
+      "label": 240,
+      "voxels": 7037,
+      "winningProbabilityBins": [
+        21,
+        2278,
+        3394,
+        1344
+      ],
+      "winningProbabilityRange": [
+        0.18002453446388245,
+        0.991334080696106
+      ],
+      "peak": {
+        "probability": 0.991334080696106,
+        "index": [
+          46,
+          72,
+          109
+        ],
+        "rasMm": [
+          33.5,
+          -31.0,
+          -7.75
+        ],
+        "selectedWins": true,
+        "winnerChannel": 14,
+        "strongestOther": {
+          "channel": 12,
+          "label": 246,
+          "sourceName": "molecular_layer_HP-body",
+          "probability": 0.005294736009091139
+        }
+      }
+    },
+    "hipp-right-244": {
+      "channel": 15,
+      "label": 244,
+      "voxels": 12274,
+      "winningProbabilityBins": [
+        16,
+        3837,
+        7275,
+        1146
+      ],
+      "winningProbabilityRange": [
+        0.20455646514892578,
+        0.9646042585372925
+      ],
+      "peak": {
+        "probability": 0.9646042585372925,
+        "index": [
+          48,
+          104,
+          84
+        ],
+        "rasMm": [
+          33.0,
+          -23.0,
+          -14.0
+        ],
+        "selectedWins": true,
+        "winnerChannel": 15,
+        "strongestOther": {
+          "channel": 12,
+          "label": 246,
+          "sourceName": "molecular_layer_HP-body",
+          "probability": 0.014426066540181637
+        }
+      }
+    },
+    "hipp-right-241": {
+      "channel": 16,
+      "label": 241,
+      "voxels": 10074,
+      "winningProbabilityBins": [
+        15,
+        2426,
+        3819,
+        3814
+      ],
+      "winningProbabilityRange": [
+        0.21784044802188873,
+        0.9994926452636719
+      ],
+      "peak": {
+        "probability": 0.9994926452636719,
+        "index": [
+          63,
+          136,
+          62
+        ],
+        "rasMm": [
+          29.25,
+          -15.0,
+          -19.5
+        ],
+        "selectedWins": true,
+        "winnerChannel": 16,
+        "strongestOther": {
+          "channel": 13,
+          "label": 243,
+          "sourceName": "GC-ML-DG-head",
+          "probability": 0.0005073718493804336
+        }
+      }
+    },
+    "hipp-right-242": {
+      "channel": 17,
+      "label": 242,
+      "voxels": 10883,
+      "winningProbabilityBins": [
+        14,
+        1378,
+        4152,
+        5339
+      ],
+      "winningProbabilityRange": [
+        0.19409975409507751,
+        0.9995266199111938
+      ],
+      "peak": {
+        "probability": 0.9995266199111938,
+        "index": [
+          52,
+          101,
+          84
+        ],
+        "rasMm": [
+          32.0,
+          -23.75,
+          -14.0
+        ],
+        "selectedWins": true,
+        "winnerChannel": 17,
+        "strongestOther": {
+          "channel": 14,
+          "label": 240,
+          "sourceName": "CA3-body",
+          "probability": 0.0002504894800949842
+        }
+      }
+    },
+    "hipp-right-212": {
+      "channel": 18,
+      "label": 212,
+      "voxels": 8907,
+      "winningProbabilityBins": [
+        17,
+        2317,
+        5198,
+        1375
+      ],
+      "winningProbabilityRange": [
+        0.20518195629119873,
+        0.8886505961418152
+      ],
+      "peak": {
+        "probability": 0.8886505961418152,
+        "index": [
+          69,
+          65,
+          125
+        ],
+        "rasMm": [
+          27.75,
+          -32.75,
+          -3.75
+        ],
+        "selectedWins": true,
+        "winnerChannel": 18,
+        "strongestOther": {
+          "channel": 0,
+          "label": 0,
+          "sourceName": "Unknown",
+          "probability": 0.0615948885679245
+        }
+      }
+    },
+    "hipp-right-239": {
+      "channel": 19,
+      "label": 239,
+      "voxels": 8164,
+      "winningProbabilityBins": [
+        66,
+        3581,
+        3659,
+        858
+      ],
+      "winningProbabilityRange": [
+        0.1772056668996811,
+        0.9418458938598633
+      ],
+      "peak": {
+        "probability": 0.9418458938598633,
+        "index": [
+          71,
+          132,
+          80
+        ],
+        "rasMm": [
+          27.25,
+          -16.0,
+          -15.0
+        ],
+        "selectedWins": true,
+        "winnerChannel": 19,
+        "strongestOther": {
+          "channel": 7,
+          "label": 201,
+          "sourceName": "alveus",
+          "probability": 0.024835268035531044
+        }
+      }
+    },
+    "hipp-right-211": {
+      "channel": 20,
+      "label": 211,
+      "voxels": 3740,
+      "winningProbabilityBins": [
+        9,
+        836,
+        1711,
+        1184
+      ],
+      "winningProbabilityRange": [
+        0.19643966853618622,
+        0.958300769329071
+      ],
+      "peak": {
+        "probability": 0.958300769329071,
+        "index": [
+          113,
+          154,
+          80
+        ],
+        "rasMm": [
+          16.75,
+          -10.5,
+          -15.0
+        ],
+        "selectedWins": true,
+        "winnerChannel": 20,
+        "strongestOther": {
+          "channel": 11,
+          "label": 245,
+          "sourceName": "molecular_layer_HP-head",
+          "probability": 0.013606609776616096
+        }
+      }
+    }
+  }
+}
