@@ -263,11 +263,11 @@ const subcortical: Record<
       "Cortical communication",
       "Sleep and wake regulation",
     ],
-    "Paired diencephalic structures bordering the third ventricle, above the brainstem.",
+    "Paired diencephalic structures bordering the third ventricle, above the brainstem. The source thalamus-proper label excludes the geniculate bodies.",
     [
       "Anterior nuclear group",
       "Medial and lateral nuclear groups",
-      "Geniculate nuclei · not separately segmented",
+      "Pulvinar · not separately segmented",
     ],
     ["precentral", "postcentral", "pericalcarine"],
   ],

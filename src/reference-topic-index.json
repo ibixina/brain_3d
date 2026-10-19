@@ -241,6 +241,39 @@
     }
   },
   {
+    "id": "thalamic-anatomy",
+    "title": "Thalamic nuclei and atlas boundaries",
+    "regions": [
+      "aseg-10",
+      "aseg-49",
+      "aseg-14",
+      "aseg-28",
+      "aseg-60"
+    ],
+    "reading": {
+      "keys": [
+        "thalamus"
+      ],
+      "label": "Regional anatomy",
+      "priority": -2
+    }
+  },
+  {
+    "id": "thalamic-circuits",
+    "title": "Thalamus, cortex, and attention",
+    "regions": [
+      "aseg-10",
+      "aseg-49"
+    ],
+    "reading": {
+      "keys": [
+        "thalamus"
+      ],
+      "label": "Circuits & evidence",
+      "priority": -1
+    }
+  },
+  {
     "id": "hippocampal-formation",
     "title": "Inside the hippocampal formation",
     "regions": [

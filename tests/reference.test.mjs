@@ -297,11 +297,13 @@ test("every mesh offers bounded reading suggestions with explicit context", () =
       "hippocampal-circuit",
     ]);
   }
-  assert.deepEqual(suggested("aseg-10"), [
-    "neurons",
-    "gray-white-matter",
-    "atlas-boundaries",
-  ]);
+  for (const id of ["aseg-10", "aseg-49"]) {
+    assert.deepEqual(suggested(id), [
+      "thalamic-anatomy",
+      "thalamic-circuits",
+      "neurons",
+    ]);
+  }
   assert.deepEqual(suggested("aseg-31"), [
     "csf-circulation",
     "brain-barriers",
@@ -316,6 +318,62 @@ test("every mesh offers bounded reading suggestions with explicit context", () =
     "cortical-layers",
     "folds",
   ]);
+});
+
+test("thalamic notes keep nuclear names distinct from gross and composite labels", () => {
+  const anatomy = referenceArticles.find(
+    (article) => article.id === "thalamic-anatomy",
+  );
+  const circuit = referenceArticles.find(
+    (article) => article.id === "thalamic-circuits",
+  );
+  for (const note of [anatomy, circuit]) {
+    for (const id of ["aseg-10", "aseg-49"])
+      assert.ok(note.regions.includes(id));
+    assert.match(
+      note.scope,
+      /individual selectable meshes|No individual thalamic nuclei/,
+    );
+    assert.ok(referenceExplorations(note).some((link) => link.kind === "scan"));
+  }
+  const geniculate = anatomy.comparison.rows.find((row) =>
+    row.label.includes("LGN / MGN"),
+  );
+  assert.match(geniculate.detail, /excluded.*thalamus-proper/);
+  assert.match(anatomy.scope, /not an exhaustive list/);
+  for (const id of ["aseg-28", "aseg-60"]) {
+    const region = atlas.parts.find((part) => part.id === id);
+    assert.ok(
+      anatomy.regions.includes(id),
+      "Composite context remains inspectable",
+    );
+    assert.ok(
+      !referenceTopicsForRegion(region).some((topic) =>
+        [anatomy.id, circuit.id].includes(topic.id),
+      ),
+      "A composite label is not recommended as a dedicated nuclear mesh",
+    );
+  }
+  assert.match(
+    referenceSources["thalamic-histology-atlas"].kind,
+    /human postmortem/,
+  );
+  assert.match(
+    referenceSources["thalamic-driver-framework"].kind,
+    /conceptual framework/,
+  );
+  for (const id of ["thalamic-attention", "thalamic-reticular-states"])
+    assert.match(referenceSources[id].kind, /mouse.*optogenetics/);
+  assert.ok(searchReference("geniculate LGN").includes(anatomy));
+  assert.ok(searchReference("VPM trigeminal").includes(anatomy));
+  assert.ok(searchReference("driver layer-5").includes(circuit));
+  assert.ok(searchReference("Schmitt optogenetic").includes(circuit));
+  assert.deepEqual(
+    referenceExplorations(circuit)
+      .filter((link) => link.kind === "path")
+      .map((link) => link.id),
+    ["movement", "memory"],
+  );
 });
 
 test("reference context retains explicit model links and guide returns while rejecting unrelated highlights", () => {

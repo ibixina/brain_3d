@@ -221,6 +221,41 @@
       "title": "Nambu et al. · Cortico-subthalamo-pallidal responses in awake monkeys (2000)",
       "url": "https://pubmed.ncbi.nlm.nih.gov/10899204/",
       "kind": "Original monkey stimulation and electrophysiology study"
+    },
+    "thalamic-anatomy": {
+      "title": "UTHealth · Thalamic nuclei and selected connections",
+      "url": "https://nba.uth.tmc.edu/neuroanatomy/L5/Lab05p10_index.html",
+      "kind": "Academic anatomy laboratory"
+    },
+    "aseg-boundaries": {
+      "title": "FreeSurfer · Thalamus-proper and ventral-diencephalon definitions",
+      "url": "https://surfer.nmr.mgh.harvard.edu/fswiki/SubcorticalSegmentation",
+      "kind": "Model source and segmentation documentation"
+    },
+    "thalamic-segmentation": {
+      "title": "FreeSurfer · Specialized thalamic-nuclei segmentation",
+      "url": "https://surfer.nmr.mgh.harvard.edu/fswiki/ThalamicNuclei",
+      "kind": "Segmentation method documentation"
+    },
+    "thalamic-histology-atlas": {
+      "title": "Iglesias et al. · Human thalamic nuclei from ex vivo MRI and histology (2018)",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/30121337/",
+      "kind": "Original human postmortem atlas and MRI segmentation study"
+    },
+    "thalamic-driver-framework": {
+      "title": "Sherman & Guillery · Distinguishing drivers from modulators (1998)",
+      "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC22761/",
+      "kind": "Original conceptual framework · sensory physiology synthesis"
+    },
+    "thalamic-reticular-states": {
+      "title": "Halassa et al. · State-dependent thalamic reticular subnetworks (2014)",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/25126786/",
+      "kind": "Original mouse electrophysiology and optogenetics study"
+    },
+    "thalamic-attention": {
+      "title": "Schmitt et al. · Thalamic amplification sustains attentional control (2017)",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/28467827/",
+      "kind": "Original mouse attention, electrophysiology, and optogenetics study"
     }
   },
   "articles": [
@@ -1087,7 +1122,8 @@
         "neurons",
         "synapses",
         "cerebellar-circuit",
-        "atlas-boundaries"
+        "atlas-boundaries",
+        "thalamic-circuits"
       ],
       "sources": [
         "basal-ganglia-chapter",
@@ -1154,6 +1190,253 @@
           "kind": "scan",
           "id": "t1",
           "note": "Inspect structural MRI contrast in a population average. This is neither a dopamine scan nor a recording of the cited monkey or mouse experiments."
+        }
+      ]
+    },
+    {
+      "id": "thalamic-anatomy",
+      "title": "Thalamic nuclei and atlas boundaries",
+      "category": "Thalamus",
+      "summary": "Distinguish selected sensory, motor, and association nuclei from the gross thalamus labels displayed in 3D.",
+      "aliases": [
+        "anterior nucleus",
+        "anterior nuclear group",
+        "mediodorsal",
+        "dorsomedial",
+        "MD",
+        "DM",
+        "ventral anterior",
+        "ventral lateral",
+        "VA",
+        "VL",
+        "ventral posterolateral",
+        "ventral posteromedial",
+        "VPL",
+        "VPM",
+        "pulvinar",
+        "centromedian",
+        "parafascicular",
+        "intralaminar",
+        "geniculate",
+        "LGN",
+        "MGN",
+        "LGB",
+        "MGB",
+        "reticular nucleus",
+        "TRN",
+        "internal medullary lamina",
+        "thalamus proper"
+      ],
+      "paragraphs": [
+        "The two thalami lie beside the third ventricle. In the source segmentation definition, the internal capsule forms a lateral boundary and the lateral ventricle a superior boundary. These relationships help orient a gross view; they do not reveal each internal nucleus.",
+        "The internal medullary lamina separates major nuclear groups. Selected names below describe different connections, rather than interchangeable pieces of a uniform relay. Most nuclei cannot be identified reliably on a gross specimen slice without additional anatomical information.",
+        "FreeSurfer’s documented thalamus-proper definition excludes the lateral and medial geniculate bodies. Its ventral-diencephalon convention groups several neighboring territories, including geniculate regions. Cerebra’s composite label does not outline either geniculate nucleus separately. A biological name and an imaging label therefore need not cover the same territory.",
+        "Iglesias and colleagues’ 2018 atlas used serial histology of 12 thalami from six postmortem donors, with 26 nuclei delineated under its protocol and ex vivo MRI used for reconstruction. The specialized FreeSurfer nuclei module uses histological atlas information to estimate internal labels from MRI. Those atlas assets and subdivisions have not been applied to Cerebra’s gross meshes or structural templates."
+      ],
+      "scope": "There is one gross thalamus-proper mesh per hemisphere. Anterior, mediodorsal, VA/VL, VPL/VPM, pulvinar, intralaminar, geniculate, and reticular nuclei have no individual selectable meshes. Finer mode refines the outer surface of the existing label; it does not add nuclear boundaries. The third-ventricle and ventral-diencephalon links provide neighboring context. This selected comparison is not an exhaustive list of thalamic nuclei or a histological atlas.",
+      "regions": ["aseg-10", "aseg-49", "aseg-14", "aseg-28", "aseg-60"],
+      "related": [
+        "thalamic-circuits",
+        "basal-ganglia-anatomy",
+        "hippocampal-circuit",
+        "section-planes",
+        "atlas-boundaries"
+      ],
+      "sources": [
+        "thalamic-anatomy",
+        "aseg-boundaries",
+        "thalamic-histology-atlas",
+        "thalamic-segmentation",
+        "thalamic-reticular-states"
+      ],
+      "reading": {
+        "keys": ["thalamus"],
+        "label": "Regional anatomy",
+        "priority": -2
+      },
+      "comparison": {
+        "caption": "Selected thalamic names — none is separately segmented here",
+        "columns": ["Nucleus or group", "Selected anatomical relationship"],
+        "rows": [
+          {
+            "label": "Anterior nuclear group",
+            "summary": "Mammillary-body input and cingulate-cortex connections.",
+            "detail": "A limbic-system relationship; no individual anterior-nucleus label is available.",
+            "source": "thalamic-anatomy"
+          },
+          {
+            "label": "Mediodorsal · MD / DM",
+            "summary": "Often called dorsomedial in the laboratory source; projects chiefly toward prefrontal cortex.",
+            "detail": "The adjacent circuit note explains one mouse experiment, without assigning all cognition to this nucleus.",
+            "source": "thalamic-anatomy"
+          },
+          {
+            "label": "Ventral anterior / ventral lateral · VA / VL",
+            "summary": "Motor-related thalamic territories receiving basal-ganglia and cerebellar inputs.",
+            "detail": "These are selected relationships across territories, not a claim that every VA/VL neuron receives all inputs.",
+            "source": "thalamic-anatomy"
+          },
+          {
+            "label": "Ventral posterolateral · VPL",
+            "summary": "Receives medial-lemniscal and spinothalamic input in somatosensory pathways.",
+            "detail": "A named relay territory, without a separate surface or ascending fiber reconstruction.",
+            "source": "thalamic-anatomy"
+          },
+          {
+            "label": "Ventral posteromedial · VPM",
+            "summary": "Receives trigeminal somatosensory input.",
+            "detail": "The table selects this major relationship; it does not enumerate every VPM subdivision or input.",
+            "source": "thalamic-anatomy"
+          },
+          {
+            "label": "Pulvinar",
+            "summary": "Posterior territory with parietal, temporal, and occipital cortical connections.",
+            "detail": "Its internal subdivisions are not distinguished by the gross mesh.",
+            "source": "thalamic-anatomy"
+          },
+          {
+            "label": "Intralaminar nuclei · CM / Pf",
+            "summary": "Centromedian and parafascicular nuclei belong to the intralaminar group.",
+            "detail": "CM has basal-ganglia and cortical projections. No CM or Pf boundary is shown.",
+            "source": "thalamic-anatomy"
+          },
+          {
+            "label": "Geniculate bodies · LGN / MGN",
+            "summary": "Lateral geniculate is associated with vision; medial geniculate with audition.",
+            "detail": "Both are excluded from the documented thalamus-proper label. Neither has a separate selectable mesh here.",
+            "source": "aseg-boundaries"
+          },
+          {
+            "label": "Thalamic reticular nucleus · TRN",
+            "summary": "An inhibitory thalamic circuit with functionally distinct subnetworks.",
+            "detail": "Mouse recordings show state-dependent differences. It is not the brainstem reticular formation, and has no separate mesh here.",
+            "source": "thalamic-reticular-states"
+          }
+        ]
+      },
+      "explorations": [
+        {
+          "kind": "video",
+          "id": "JBuAFWKWxDQ",
+          "note": "Utah’s basal-ganglia lesson provides deep cerebral sections and motor-loop context. It is not a complete dissection of individual thalamic nuclei."
+        },
+        {
+          "kind": "video",
+          "id": "zqQ6iKw5DjY",
+          "note": "Orient the adjacent ventricular cavities on human specimens. This is a lesson on ventricles, not a nuclear thalamic atlas."
+        },
+        {
+          "kind": "scan",
+          "id": "t1",
+          "note": "Compare ventricular and deep cerebral relationships in a structural population template. No thalamic nuclear segmentation is bundled."
+        }
+      ]
+    },
+    {
+      "id": "thalamic-circuits",
+      "title": "Thalamus, cortex, and attention",
+      "category": "Thalamus",
+      "summary": "Separate driver/modulator terminology from mouse experiments on reticular subnetworks and mediodorsal–prefrontal interactions.",
+      "aliases": [
+        "thalamocortical",
+        "corticothalamic",
+        "first order",
+        "higher order",
+        "driver",
+        "modulator",
+        "layer 5",
+        "layer 6",
+        "reticular nucleus",
+        "TRN",
+        "GABA",
+        "mediodorsal",
+        "prefrontal",
+        "MD",
+        "attention",
+        "spindles",
+        "optogenetics",
+        "Halassa",
+        "Schmitt",
+        "Sherman",
+        "Guillery"
+      ],
+      "paragraphs": [
+        "Sherman and Guillery’s 1998 framework distinguishes inputs that convey a sensory receptive-field signal (drivers) from inputs that alter its transmission (modulators). It also distinguishes ascending first-order relays from higher-order routes receiving cortical driving input. These are functional ideas about particular connections, not colors or subdivisions visible on the gross thalamus mesh.",
+        "Their sensory examples separate cortical layer-5 driving routes from layer-6 modulatory feedback. The paper explicitly discusses limits to applying these criteria where receptive fields are not defined. A connection’s origin or transmitter alone is not a complete explanation of its function.",
+        "Halassa and colleagues (2014) combined neuronal ensemble recordings, behavioral testing, and connectivity-based optogenetic tagging in mice. Sensory-projecting reticular neurons participated in sleep spindles and changed their activity during attention, differently from limbic-projecting neurons. Targeted optical manipulations changed task performance. The findings support state-dependent inhibitory subnetworks, rather than one uniform gate that is simply open or closed.",
+        "Schmitt and colleagues (2017) studied mice using rules to attend to visual or auditory targets. Neuronal recordings and optogenetic manipulations supported a mediodorsal-thalamus contribution to sustaining prefrontal rule representations. In that task, the mediodorsal signal was not itself a categorical copy of the rule. The result concerns a defined mouse experiment, not every human attentional state.",
+        "Anatomical projections, neuronal spike recordings, behavioral performance, and statistical fMRI contrasts are different kinds of evidence. The bundled human activity maps do not reproduce either mouse experiment, and a highlighted thalamus does not measure attention, sensory gating, or sleep."
+      ],
+      "scope": "This written account selects concepts and experiments; it is not a measured connectome or simulation. No individual thalamic nuclei, reticular shell, cortical layers, axons, spike trains, sleep recordings, or optogenetic data are rendered. The model links identify gross human atlas labels, not the experimental mouse structures. Guided paths provide anatomical context, and the MRI template has structural contrast without these nuclear boundaries.",
+      "regions": ["aseg-10", "aseg-49"],
+      "related": [
+        "thalamic-anatomy",
+        "cortical-layers",
+        "basal-ganglia-circuits",
+        "hippocampal-circuit",
+        "synapses"
+      ],
+      "sources": [
+        "thalamic-driver-framework",
+        "thalamic-reticular-states",
+        "thalamic-attention"
+      ],
+      "reading": {
+        "keys": ["thalamus"],
+        "label": "Circuits & evidence",
+        "priority": -1
+      },
+      "comparison": {
+        "caption": "Selected circuit concepts and the evidence behind them",
+        "columns": ["Relationship", "Meaning and evidence limit"],
+        "rows": [
+          {
+            "label": "First-order driving input",
+            "summary": "Ascending sensory input supplies a relay’s driving signal in the framework.",
+            "detail": "Retinal input to the lateral geniculate is a classic example. That nucleus is not separately modeled here.",
+            "source": "thalamic-driver-framework"
+          },
+          {
+            "label": "Higher-order cortical input",
+            "summary": "Selected cortical layer-5 inputs can drive further thalamic relays.",
+            "detail": "The framework does not establish one exclusive input type for every neuron in a named nucleus.",
+            "source": "thalamic-driver-framework"
+          },
+          {
+            "label": "Corticothalamic feedback",
+            "summary": "Layer-6 input can modulate relay transmission.",
+            "detail": "Driving and modulatory effects require physiological criteria; an excitatory projection is not automatically a driver.",
+            "source": "thalamic-driver-framework"
+          },
+          {
+            "label": "Reticular inhibition",
+            "summary": "GABAergic TRN neurons influence thalamic relay activity.",
+            "detail": "The mouse subnetwork study found different relationships to sleep and attention; the gross mesh cannot display those neuronal populations.",
+            "source": "thalamic-reticular-states"
+          },
+          {
+            "label": "Mediodorsal–prefrontal interaction",
+            "summary": "Mouse mediodorsal input helped sustain cortical representations of task rules.",
+            "detail": "The experiment combined recordings and interventions. It does not locate a general human “attention center” in the whole thalamus.",
+            "source": "thalamic-attention"
+          }
+        ]
+      },
+      "explorations": [
+        {
+          "kind": "path",
+          "id": "movement",
+          "note": "Visit the gross thalamus alongside selected cortical, basal-ganglia, and cerebellar structures. No VA/VL subnuclei or measured fibers are shown."
+        },
+        {
+          "kind": "path",
+          "id": "memory",
+          "note": "Visit selected medial temporal and diencephalic context. Anterior thalamic nuclei and mammillary bodies have no separate meshes."
+        },
+        {
+          "kind": "scan",
+          "id": "t1",
+          "note": "Inspect structural tissue contrast in a population average. This is not a recording of attention, sleep, or either experimental animal."
         }
       ]
     },
@@ -1310,7 +1593,8 @@
         "hippocampal-formation",
         "synapses",
         "neurons",
-        "atlas-boundaries"
+        "atlas-boundaries",
+        "thalamic-anatomy"
       ],
       "sources": [
         "hippocampus-chapter",
