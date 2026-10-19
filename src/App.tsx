@@ -1770,7 +1770,10 @@ export default function App() {
                 per side. Amygdala inspectors open nine nuclear/area surfaces
                 per side. Hippocampus inspectors open 20 subregion labels per
                 side, including tissue and fissure space. Each uses an
-                independent probability-atlas model.
+                independent atlas model. Cerebellar cortex inspectors open a
+                separate published parcellation with 28 lobular compartments
+                and six deep-nucleus labels, including the vermis and explicit
+                warnings for tiny remaining fragments.
               </p>
               <strong>What remains outside this atlas</strong>
               <p>

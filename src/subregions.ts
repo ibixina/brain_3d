@@ -11,12 +11,15 @@ export type SubregionName = {
   abbreviation?: string;
   sourceName?: string;
   aliases?: string[];
+  warning?: string;
 };
 export type Subregion = ViewerRegion & SubregionName & {
   voxels: number;
   voxelConnectedComponents6?: number;
 };
 export type SubregionAtlas = {
+  probabilityEvidence?: boolean;
+  relatedReading?: { title: string; scope: string; links: { id: string; label: string }[] };
   guide?: ThalamicGuide;
   boundaries?: {
     checkedOn: string;
@@ -46,6 +49,12 @@ export type SubregionAtlas = {
     labelDefinitions?: string;
     license: string;
     spacingMm: number[];
+    frame: string;
+    method: string;
+    attribution?: string;
+    paperTitle?: string;
+    licenseTitle?: string;
+    otherStudies?: { title: string; url: string }[];
   };
   geometry: { compressedBytes: number };
 };
@@ -80,6 +89,11 @@ export const subregionCatalog = {
     button: "Explore atlas subregions",
     detail: "Separate atlas · 20 surfaces per side",
   },
+  cerebellum: {
+    name: "Cerebellar",
+    button: "Explore lobules & deep nuclei",
+    detail: "Separate atlas · 34 source-label surfaces",
+  },
 };
 export type SubregionKind = keyof typeof subregionCatalog;
 
@@ -91,6 +105,8 @@ const targets: Record<string, SubregionKind> = {
   "aseg-54": "amygdala",
   "aseg-17": "hippocampus",
   "aseg-53": "hippocampus",
+  "aseg-8": "cerebellum",
+  "aseg-47": "cerebellum",
 };
 
 export function subregionForRegion(id: string) {

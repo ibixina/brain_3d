@@ -179,7 +179,9 @@
     "title": "Inside the cerebellar circuit",
     "regions": [
       "aseg-8",
+      "aseg-47",
       "aseg-7",
+      "aseg-46",
       "aseg-16"
     ],
     "reading": {

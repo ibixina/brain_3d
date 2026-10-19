@@ -83,6 +83,10 @@ const atlasNotes: Record<SubregionKind, { scope: string; protocol: string }> = {
     scope: "Its 20 labels per side include head/body divisions, white matter, and fissure space, not 20 cellular subfields. CA2 is grouped within the source’s CA3 labels. A 0.25 mm grid does not establish microscopic accuracy.",
     protocol: "Winner assignment uses all 30 channels, including background and nine amygdala labels. Only the 20 hippocampal labels per side are displayed. This download uses head/body divisions and GC-ML-DG naming; it is not an unchanged copy of the original 2015 label set. Current protocol documentation includes CA2 within CA3. The left/right probability arrays are identical with reflected affines, not a measurement of anatomical asymmetry. Individual axons, cells, and synapses are not reconstructed.",
   },
+  cerebellum: {
+    scope: "It shows 28 lobular compartments and six deep-nucleus labels (three pairs). I–IV share a compartment; interposed combines emboliform and globose. Cellular layers, full foliation, and individual fibers are not reconstructed.",
+    protocol: "Lobular and deep-nucleus maps come from different participant groups in the 2009 and 2011 studies. The published categorical map is used as supplied. The left/right fastigial labels contain only 2/5 voxels, and Vermis_CrusI contains 20; these fragments do not establish full anatomical extents. Source spellings are retained. Anatomical labels are not task-activation maps.",
+  },
 };
 
 export default function SubregionExplorer({
@@ -115,7 +119,9 @@ export default function SubregionExplorer({
                 import("../amygdala-subregions.json"),
                 import("../amygdala-boundaries.json"),
               ]).then(([atlas, boundaries]) => ({ default: { ...atlas.default, boundaries: boundaries.default } }))
-            : import("../hippocampus-subregions.json");
+            : kind === "hippocampus"
+              ? import("../hippocampus-subregions.json")
+              : import("../cerebellum-subregions.json");
     void request
       .then((data) => {
         if (!cancelled) setAtlas(data.default);
@@ -197,6 +203,11 @@ function LoadedSubregions({
   const activeGroup = atlas.guide?.groups[groupIndex];
   const boundary = selected ? atlas.guide?.labels[selected.key] : undefined;
   const protocol = selected ? atlas.boundaries?.labels[selected.key] : undefined;
+  const relatedReading = atlas.relatedReading ?? (atlas.boundaries && {
+    title: "Related anatomy & human evidence",
+    scope: atlas.boundaries.readingScope,
+    links: atlas.boundaries.reading,
+  });
   const neighbors = selected && protocol ? boundaryNeighbors(atlas.parts, selected, protocol.neighbors) : [];
   const pointed = atlas.parts.find((part) => part.id === hover?.id);
   const assetHemisphere = atlas.assets ? state.hemisphere : null;
@@ -360,9 +371,10 @@ function LoadedSubregions({
       <div className="subregion-stage">
         <div className="subregion-caption">
           <span className="subregion-frame">
-            SEPARATE ATLAS · {atlas.source.spacingMm[0]} mm probability grid
+            SEPARATE ATLAS · {atlas.source.spacingMm[0]} mm {atlas.probabilityEvidence === false ? "label" : "probability"} grid
             {large &&
               ` · ${state.hemisphere === "both" ? "Both sides" : state.hemisphere === "left" ? "Left" : "Right"}`}
+            {kind === "cerebellum" && state.hemisphere !== "both" && " + vermis"}
             {activeGroup && ` · ${activeGroup.name} group`}
           </span>
           {selected ? (
@@ -372,7 +384,7 @@ function LoadedSubregions({
               aria-label={`Read about ${subregionName(selected)}`}
               title="Return to this description"
             >
-              <span className="subregion-current-label">READING ABOUT</span>
+              <span className="subregion-current-label">READING ABOUT{selected.warning && ` · ${selected.warning.toUpperCase()}`}</span>
               <span className="subregion-current-name">
                 {subregionName(selected)}<ChevronRight size={14} aria-hidden="true" />
               </span>
@@ -454,7 +466,7 @@ function LoadedSubregions({
         <h2>Inside the {kind}.</h2>
         <p className="subregion-intro">
           {large
-            ? `${visible.length} selectable ${visible.length === 1 ? "surface" : "surfaces"} from ${sourceCount} source ${sourceCount === 1 ? "label" : "labels"}${state.hemisphere === "both" ? " across both sides" : ` on the ${state.hemisphere}`}${activeGroup ? " in this group" : ""}.`
+            ? `${visible.length} selectable ${visible.length === 1 ? "surface" : "surfaces"} from ${sourceCount} source ${sourceCount === 1 ? "label" : "labels"}${state.hemisphere === "both" ? " across both sides" : ` on the ${state.hemisphere}${kind === "cerebellum" ? " plus the vermis" : ""}`}${activeGroup ? " in this group" : ""}.`
             : "Select a surface or a name to inspect one of four atlas compartments."}
         </p>
         {route.selected && route.selected !== initialSelected && (
@@ -585,7 +597,7 @@ function LoadedSubregions({
           </h3>
           <p>
             {boundary ?? selected?.description ??
-              `Surfaces derived from FreeSurfer’s ${kind} probability atlas. Colors identify atlas labels; they do not show activity, tissue color, or individual cells.`}
+              `Surfaces derived from ${kind === "cerebellum" ? "Diedrichsen Lab’s published cerebellar label map" : `FreeSurfer’s ${kind} probability atlas`}. Colors identify atlas labels; they do not show activity, tissue color, or individual cells.`}
           </p>
           {boundary && atlas.guide && (
             <>
@@ -640,7 +652,7 @@ function LoadedSubregions({
             All parts
           </button>
         </div>
-        {selected && <ProbabilityDisclosure kind={kind} part={selected} />}
+        {selected && atlas.probabilityEvidence !== false && <ProbabilityDisclosure kind={kind} part={selected} />}
         <button className="subregion-share" onClick={copyLink}>
           <Link size={14} /> Copy this atlas view
         </button>
@@ -679,17 +691,17 @@ function LoadedSubregions({
             </ul>
           </details>
         )}
-        {atlas.boundaries && (
+        {relatedReading && (
           <details className="subregion-related">
-            <summary>Related anatomy & human evidence</summary>
-            <p>{atlas.boundaries.readingScope}</p>
-            {atlas.boundaries.reading.map((note) => (
+            <summary>{relatedReading.title}</summary>
+            <p>{relatedReading.scope}</p>
+            {relatedReading.links.map((note) => (
               <button key={note.id} onClick={() => onReference(note.id)}>{note.label}<ChevronRight size={13} aria-hidden="true" /></button>
             ))}
           </details>
         )}
         <p className="subregion-scope">
-          This separate probability atlas is not registered to the whole-brain
+          This separate {atlas.probabilityEvidence === false ? "anatomical" : "probability"} atlas is not registered to the whole-brain
           model or MRI templates.{" "}
           {atlasNotes[kind].scope}
         </p>
@@ -697,41 +709,43 @@ function LoadedSubregions({
           <summary>Sources, method & limitations</summary>
           {selected && (
             <p>
-              Selected mask: {selected.voxels.toLocaleString()} winning voxels
+              Selected mask: {selected.voxels.toLocaleString()} {atlas.probabilityEvidence === false ? "labeled" : "winning"} voxels
               {selected.voxelConnectedComponents6 !== undefined &&
                 ` in ${selected.voxelConnectedComponents6} separate voxel ${selected.voxelConnectedComponents6 === 1 ? "group" : "groups"} (connected through shared faces)`}.{" "}
               These describe the derived mask, not cells or a complete
               anatomical extent.
             </p>
           )}
-          <p>
+          {atlas.probabilityEvidence === false ? <p>{atlas.source.method}</p> : <p>
             Each voxel takes its most probable label, including
             unknown/background. Surfaces use a 0.5 boundary on the resulting
             masks, without extra smoothing or resampling. The grid limits
             detail; crisp boundaries do not express certainty. Small
             disconnected surface portions are retained.
-          </p>
+          </p>}
           <p>
-            Source space: approximately MNI-ICBM152 2009c symmetric. Recentered
-            for this independent view.{" "}
+            Source space: {atlas.source.frame}.{" "}
             {atlasNotes[kind].protocol}
           </p>
           <p>
-            Modified FreeSurfer data ·{" "}
+            {atlas.source.attribution ?? "Modified FreeSurfer data"} ·{" "}
             {(transferBytes / 1000).toFixed(0)} kB compressed
             geometry, loaded on demand. Checked October 19, 2026.
           </p>
           <a href={atlas.source.documentation} target="_blank" rel="noreferrer">
-            Probability atlas & original data ↗
+            Atlas & original data ↗
           </a>
           <a href={atlas.source.protocol} target="_blank" rel="noreferrer">
             Segmentation protocol & boundary differences ↗
           </a>
           <a href={atlas.source.paper} target="_blank" rel="noreferrer">
-            {kind === "amygdala"
+            {atlas.source.paperTitle ?? (kind === "amygdala"
               ? "Saygin, Kliemann et al. (2017)"
-              : `Iglesias et al. (${kind === "thalamus" ? "2018" : "2015"})`}, original study ↗
+              : `Iglesias et al. (${kind === "thalamus" ? "2018" : "2015"})`)}, original study ↗
           </a>
+          {atlas.source.otherStudies?.map((study) => (
+            <a key={study.url} href={study.url} target="_blank" rel="noreferrer">{study.title} ↗</a>
+          ))}
           {atlas.source.labelDefinitions && (
             <a
               href={atlas.source.labelDefinitions}
@@ -746,7 +760,7 @@ function LoadedSubregions({
             target="_blank"
             rel="noreferrer"
           >
-            FreeSurfer license ↗
+            {atlas.source.licenseTitle ?? "FreeSurfer license"} ↗
           </a>
           <a
             href={assetUrl(`/subregions/${kind}-provenance.json`)}

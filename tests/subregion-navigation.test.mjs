@@ -16,6 +16,7 @@ const datasets = [
   ["thalamus", "aseg-10", "left"],
   ["amygdala", "aseg-18", "left"],
   ["hippocampus", "aseg-17", "left"],
+  ["cerebellum", "aseg-8", "left"],
 ].map(([kind, id, hemisphere]) => ({
   kind,
   parent: { id, hemisphere },

@@ -147,6 +147,16 @@
       "url": "https://nba.uth.tmc.edu/neuroscience/s2/chapter09.html",
       "kind": "Academic textbook"
     },
+    "cerebellum-lobular-atlas": {
+      "title": "Diedrichsen et al. (2009) · A probabilistic MR atlas of the human cerebellum",
+      "url": "https://doi.org/10.1016/j.neuroimage.2009.01.045",
+      "kind": "Original human MRI atlas study"
+    },
+    "cerebellum-nuclear-atlas": {
+      "title": "Diedrichsen et al. (2011) · Imaging the deep cerebellar nuclei",
+      "url": "https://doi.org/10.1016/j.neuroimage.2010.10.035",
+      "kind": "Original human MRI atlas study"
+    },
     "cerebellum-chapter": {
       "title": "Knierim · Cerebellum, §§5.2–5.4 (reviewed 2020)",
       "url": "https://nba.uth.tmc.edu/neuroscience/s3/chapter05.html",
@@ -914,7 +924,7 @@
         "Functional divisions cut across simple lobe names: vestibulocerebellar circuits support gaze and balance; spinocerebellar circuits integrate body feedback with movement; cerebrocerebellar loops involve lateral hemispheres and cerebral cortex. These are broad circuit descriptions, not exact boundaries of a single task.",
         "Dentate, interposed (emboliform and globose), and fastigial nuclei lie in the interior. They receive inhibitory Purkinje-cell output and participate in routes back to brainstem and forebrain motor systems. Some Purkinje cells instead project directly to vestibular nuclei outside the cerebellum."
       ],
-      "scope": "The whole-brain model separates left/right cerebellar cortex and white-matter compartments, without vermis, individual lobules, deep nuclei, or peduncles. The brainstem inspector opens a separate probability-atlas model with a combined superior-cerebellar-peduncle label; it is not registered to these cerebellar meshes and does not contain individual fibers. Smoothing and atlas sampling limit folial detail.",
+      "scope": "The whole-brain model separates cortex and white matter. Its cortex inspectors also open an independent 34-label cerebellar atlas: 28 lobular compartments, including eight vermal labels, and six deep-nucleus labels. I–IV are combined, as are emboliform/globose within interposed. Fastigial labels retain only 2/5 voxels and Vermis_CrusI 20; these fragments are not full anatomical extents. The separate brainstem atlas has one combined superior-peduncle label. These independent atlases are not registered together or to the bundled MRI scans; individual fibers and complete foliation are not reconstructed.",
       "regions": ["aseg-8", "aseg-47", "aseg-7", "aseg-46", "aseg-16"],
       "related": [
         "cerebellar-circuit",
@@ -925,7 +935,9 @@
         "subregion-atlases",
         "cerebellum-gross",
         "cerebellum-chapter",
-        "cerebellum-circuit"
+        "cerebellum-circuit",
+        "cerebellum-lobular-atlas",
+        "cerebellum-nuclear-atlas"
       ],
       "explorations": [
         {
@@ -974,15 +986,15 @@
         "Purkinje neurons provide the cortex’s inhibitory output to deep cerebellar nuclei, with direct vestibular-nucleus projections from some regions. Deep nuclei therefore combine incoming excitation with cortical inhibition. The cortical output and the output of the whole cerebellum are different stages.",
         "The cerebellum contributes to adaptive movement and learning. Relating climbing-fiber signals and synaptic change to learning is a physiological model supported by experiments; the 3D compartment surfaces here do not measure spikes, synapses, or a person’s learning."
       ],
-      "scope": "This is a written circuit explanation, not measured connectivity or simulated neural activity. Cellular layers, neurons, inferior olive, deep nuclei, and individual mossy/climbing fibers have no separate meshes. The cerebellar white-matter surface is a tissue compartment, not a reconstruction of these axons.",
-      "regions": ["aseg-8", "aseg-7", "aseg-16"],
+      "scope": "This is a written circuit explanation, not measured connectivity or simulated neural activity. Cellular layers, neurons, inferior olive, and individual mossy/climbing fibers have no separate meshes. An independent cerebellar atlas supplies six deep-nucleus label surfaces (three pairs), with tiny incomplete fastigial fragments explicitly flagged; these do not trace the connections described here. The whole-brain white-matter surface is a tissue compartment, not a reconstruction of these axons.",
+      "regions": ["aseg-8", "aseg-47", "aseg-7", "aseg-46", "aseg-16"],
       "related": [
         "cerebellum-organization",
         "neurons",
         "synapses",
         "cortical-layers"
       ],
-      "sources": ["cerebellum-chapter", "cerebellum-circuit"],
+      "sources": ["cerebellum-chapter", "cerebellum-circuit", "cerebellum-nuclear-atlas"],
       "explorations": [
         {
           "kind": "video",
