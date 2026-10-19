@@ -178,7 +178,7 @@
       "kind": "Original human MRI atlas study · author manuscript"
     },
     "hippocampal-segmentation": {
-      "title": "FreeSurfer · Hippocampal subfield definitions and resolution limits",
+      "title": "FreeSurfer · Hippocampal subfields and amygdala nuclei",
       "url": "https://surfer.nmr.mgh.harvard.edu/fswiki/HippocampalSubfieldsAndNucleiOfAmygdala",
       "kind": "Segmentation method documentation"
     },
@@ -256,6 +256,26 @@
       "title": "Schmitt et al. · Thalamic amplification sustains attentional control (2017)",
       "url": "https://pubmed.ncbi.nlm.nih.gov/28467827/",
       "kind": "Original mouse attention, electrophysiology, and optogenetics study"
+    },
+    "amygdala-chapter": {
+      "title": "Wright · Amygdala and its connections (revised 2020)",
+      "url": "https://nba.uth.tmc.edu/neuroscience/s4/chapter06.html",
+      "kind": "Academic textbook"
+    },
+    "amygdala-atlas": {
+      "title": "Saygin, Kliemann et al. · Human amygdala nuclei from high-resolution ex vivo MRI (2017)",
+      "url": "https://web.mit.edu/zsaygin/www/uploads/1/4/8/7/14872660/saygin_2017_NI_amygnuc.pdf",
+      "kind": "Original human postmortem MRI atlas study · author-hosted paper"
+    },
+    "amygdala-conditioning": {
+      "title": "Bechara et al. · Conditioning and declarative knowledge after human lesions (1995)",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/7652558/",
+      "kind": "Original human lesion and conditioning study"
+    },
+    "amygdala-panic": {
+      "title": "Feinstein et al. · Fear and panic with bilateral amygdala damage (2013)",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/23377128/",
+      "kind": "Original human lesion and experimental interoception study"
     }
   },
   "articles": [
@@ -1441,6 +1461,227 @@
       ]
     },
     {
+      "id": "amygdala-anatomy",
+      "title": "Inside the amygdala",
+      "category": "Amygdala",
+      "summary": "Locate the medial temporal complex, distinguish nuclear names and fiber routes, and understand the gross model’s limits.",
+      "aliases": [
+        "amygdaloid complex",
+        "basolateral",
+        "lateral nucleus",
+        "basal nucleus",
+        "accessory basal",
+        "central nucleus",
+        "medial nucleus",
+        "cortical nucleus",
+        "paralaminar",
+        "anterior amygdaloid area",
+        "corticoamygdaloid transition",
+        "cortico-amygdaloid",
+        "stria terminalis",
+        "ventral amygdalofugal",
+        "extended amygdala",
+        "BNST",
+        "bed nucleus"
+      ],
+      "paragraphs": [
+        "The amygdala is a complex of nuclei in the anterior medial temporal region, next to the hippocampus. Coronal sections encounter the amygdala before more posterior hippocampal levels. The model links below let you compare these neighboring gross labels, rather than treating them as one structure.",
+        "Amygdala connections include sensory and visceral inputs, routes to hypothalamic and brainstem systems, and connections with cortical and memory regions. The stria terminalis and ventral amygdalofugal pathway are named fiber routes. Both contain connections beyond a simple one-way input/output sequence.",
+        "Saygin, Kliemann and colleagues (2017) scanned ten postmortem specimens at 7 T with 100–150 micrometer sampling to delineate nine amygdala subregions and build a probabilistic atlas. Nuclear boundaries and labeling conventions in that protocol are more specific than the whole-amygdala meshes available here. The study did not delineate the complete extended amygdala.",
+        "FreeSurfer’s specialized hippocampus/amygdala module estimates nuclear labels using atlas information. Its documentation cautions that internal amygdala boundaries depend substantially on prior knowledge from ex vivo training data. Those labels are not applied to Cerebra’s meshes or MRI templates. A finer outer surface does not create internal nuclear evidence."
+      ],
+      "scope": "Cerebra has one gross amygdala mesh per hemisphere. The lateral, basal, accessory basal, central, medial, cortical, and paralaminar nuclei, anterior amygdaloid area, and corticoamygdaloid transition area have no separate selectable meshes. Individual fibers, intercalated cell groups, and the bed nucleus of the stria terminalis (BNST) are not reconstructed. The table groups selected atlas names and pathways; it is not a complete histological or connectivity atlas.",
+      "regions": [
+        "aseg-18",
+        "aseg-54",
+        "aseg-17",
+        "aseg-53",
+        "lh-entorhinal",
+        "rh-entorhinal"
+      ],
+      "related": [
+        "amygdala-evidence",
+        "hippocampal-formation",
+        "basal-ganglia-anatomy",
+        "section-planes",
+        "atlas-boundaries"
+      ],
+      "sources": [
+        "hippocampus-sections",
+        "amygdala-chapter",
+        "amygdala-atlas",
+        "hippocampal-segmentation"
+      ],
+      "reading": {
+        "keys": ["amygdala"],
+        "label": "Regional anatomy",
+        "priority": -2
+      },
+      "comparison": {
+        "caption": "Selected amygdala names and pathways — written detail within gross anatomical context",
+        "columns": ["Name or route", "Distinction and available coverage"],
+        "rows": [
+          {
+            "label": "Lateral, basal, and accessory basal nuclei",
+            "summary": "Three separately labeled components in the cited ex vivo MRI protocol.",
+            "detail": "Basolateral terminology groups territories; a grouped name does not make their boundaries identical. None is separately selectable here.",
+            "source": "amygdala-atlas"
+          },
+          {
+            "label": "Central nucleus",
+            "summary": "A separate protocol label with hypothalamic and brainstem connections described in the textbook.",
+            "detail": "Its subdivisions and projection neurons are not shown by the gross amygdala surface.",
+            "source": "amygdala-chapter"
+          },
+          {
+            "label": "Medial and cortical nuclei",
+            "summary": "Two distinct labels in the cited MRI protocol.",
+            "detail": "A combined regional term such as centromedial or corticomedial is not itself a measured boundary in Cerebra.",
+            "source": "amygdala-atlas"
+          },
+          {
+            "label": "Paralaminar nucleus",
+            "summary": "Included as its own label in the cited protocol.",
+            "detail": "There is no separate paralaminar mesh or microscopic cell layer here.",
+            "source": "amygdala-atlas"
+          },
+          {
+            "label": "Anterior amygdaloid and corticoamygdaloid transition areas",
+            "summary": "Named areas included alongside the nuclear labels.",
+            "detail": "Their inclusion and definitions belong to that protocol, not a universal count of every amygdala subdivision.",
+            "source": "amygdala-atlas"
+          },
+          {
+            "label": "Stria terminalis",
+            "summary": "A route connecting the amygdala with septal and hypothalamic regions.",
+            "detail": "The pathway and its bed nucleus are not selectable fiber or nuclear models here.",
+            "source": "amygdala-chapter"
+          },
+          {
+            "label": "Ventral amygdalofugal pathway",
+            "summary": "Connections toward cortical, basal-forebrain, striatal, and hypothalamic territories.",
+            "detail": "This is a written selection of relationships; the atlas does not reconstruct those individual fibers.",
+            "source": "amygdala-chapter"
+          }
+        ]
+      },
+      "explorations": [
+        {
+          "kind": "video",
+          "id": "z8rE7Z5ud-g",
+          "note": "Utah’s limbic specimen lesson provides medial temporal context. Gross dissection views do not identify every amygdala nucleus."
+        },
+        {
+          "kind": "video",
+          "id": "ErpxEwlWww4",
+          "note": "UBC’s hypothalamic and limbic lesson shows surrounding human specimen anatomy. This is not a labeled microscopic amygdala atlas."
+        },
+        {
+          "kind": "scan",
+          "id": "t2",
+          "note": "Compare medial temporal relationships in linked population-template slices. These separate data have no bundled amygdala nuclear segmentation."
+        }
+      ]
+    },
+    {
+      "id": "amygdala-evidence",
+      "title": "Amygdala, learning, and fear",
+      "category": "Amygdala",
+      "summary": "Distinguish learned bodily responses, remembered facts, and experienced fear using specific human experiments.",
+      "aliases": [
+        "fear conditioning",
+        "Pavlovian",
+        "classical conditioning",
+        "autonomic",
+        "skin conductance",
+        "GSR",
+        "SCR",
+        "declarative knowledge",
+        "double dissociation",
+        "Bechara",
+        "Feinstein",
+        "interoception",
+        "panic",
+        "carbon dioxide",
+        "CO2",
+        "CO₂",
+        "bilateral lesions"
+      ],
+      "paragraphs": [
+        "The amygdala participates in networks relating sensory and bodily information to learning and responses. Its connections with cortex, hippocampal regions, hypothalamus, and brainstem are broader than a single fear response. An anatomical connection does not by itself establish a person’s conscious experience.",
+        "Bechara and colleagues (1995) compared three people with different bilateral lesions. A person with amygdala damage retained facts about stimulus pairings but did not acquire the conditioned autonomic response. A person with hippocampal damage showed conditioning without acquiring those facts. A person with damage to both acquired neither. These selected cases dissociate two measured learning outcomes; they do not assign all memory or emotion to either structure.",
+        "The conditioning experiment measured autonomic responses using skin conductance, alongside declarative knowledge of the pairings. A change in skin conductance is a bodily measurement, not a direct reading of subjective fear. Preserved knowledge and preserved conditioning are different outcomes.",
+        "Feinstein and colleagues (2013) reported fear and panic during an experimental carbon-dioxide inhalation challenge in three people with bilateral amygdala damage. The result shows that this form of internally triggered fear can occur despite that damage. It does not mean that amygdala damage leaves every response to external threats unchanged, or that the whole structure has one uniform function.",
+        "Lesion extent, the kind of task, physiological measurements, and people’s reports constrain each conclusion. These rare cases do not define everyone’s emotional life. Structural templates and statistical fMRI contrasts supply different evidence and do not reproduce the lesion or inhalation experiments."
+      ],
+      "scope": "The 3D atlas has no lesion reconstructions, individual amygdala nuclei, conditioned-response recordings, or experimental participant scans. A teal amygdala highlight identifies a gross atlas region; it does not measure fear, diagnose anxiety, or simulate learning. The linked emotion guide is a selected anatomical sequence, and the MRI link opens a population template. Neither reproduces these experiments.",
+      "regions": ["aseg-18", "aseg-54"],
+      "related": [
+        "amygdala-anatomy",
+        "hippocampal-circuit",
+        "synapses",
+        "thalamic-circuits",
+        "atlas-boundaries"
+      ],
+      "sources": [
+        "amygdala-chapter",
+        "amygdala-conditioning",
+        "amygdala-panic"
+      ],
+      "reading": {
+        "keys": ["amygdala"],
+        "label": "Learning & evidence",
+        "priority": -1
+      },
+      "comparison": {
+        "caption": "Different outcomes in selected human lesion experiments",
+        "columns": ["Study outcome", "Finding and interpretation limit"],
+        "rows": [
+          {
+            "label": "Amygdala lesion · conditioning versus facts",
+            "summary": "Conditioned autonomic responding was impaired while declarative knowledge was acquired.",
+            "detail": "One bilateral-amygdala lesion case in Bechara et al.; this is not a claim that every autonomic response or memory was absent.",
+            "source": "amygdala-conditioning"
+          },
+          {
+            "label": "Hippocampal lesion · conditioning versus facts",
+            "summary": "Conditioning was acquired without declarative knowledge of the pairings.",
+            "detail": "The contrasting case helps separate the measured outcomes, rather than two complete independent memory systems.",
+            "source": "amygdala-conditioning"
+          },
+          {
+            "label": "Combined lesions",
+            "summary": "Neither measured conditioning nor declarative knowledge was acquired.",
+            "detail": "The third lesion case differs in damaged anatomy; the cases are not interchangeable randomized interventions.",
+            "source": "amygdala-conditioning"
+          },
+          {
+            "label": "Internally triggered fear and panic",
+            "summary": "Three people with bilateral amygdala damage experienced fear and panic during the carbon-dioxide challenge.",
+            "detail": "The Feinstein study concerns a defined interoceptive challenge. It does not show that all fear is independent of the amygdala.",
+            "source": "amygdala-panic"
+          }
+        ]
+      },
+      "explorations": [
+        {
+          "kind": "path",
+          "id": "emotion",
+          "note": "Visit selected amygdala, insular, cingulate, and composite diencephalic anatomy. This is not an animation of fear or a patient-specific circuit."
+        },
+        {
+          "kind": "video",
+          "id": "z8rE7Z5ud-g",
+          "note": "Orient the gross medial temporal structures on human specimens. The film is not a recording of either lesion experiment."
+        },
+        {
+          "kind": "scan",
+          "id": "t1",
+          "note": "Inspect structural tissue contrast in a population average. These are not the experimental participants or a measurement of fear."
+        }
+      ]
+    },
+    {
       "id": "hippocampal-formation",
       "title": "Inside the hippocampal formation",
       "category": "Hippocampus & memory",
@@ -1482,7 +1723,8 @@
         "hippocampal-circuit",
         "cortical-layers",
         "atlas-boundaries",
-        "section-planes"
+        "section-planes",
+        "amygdala-anatomy"
       ],
       "sources": [
         "hippocampus-chapter",
@@ -1594,7 +1836,8 @@
         "synapses",
         "neurons",
         "atlas-boundaries",
-        "thalamic-anatomy"
+        "thalamic-anatomy",
+        "amygdala-evidence"
       ],
       "sources": [
         "hippocampus-chapter",

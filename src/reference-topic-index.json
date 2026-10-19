@@ -274,6 +274,40 @@
     }
   },
   {
+    "id": "amygdala-anatomy",
+    "title": "Inside the amygdala",
+    "regions": [
+      "aseg-18",
+      "aseg-54",
+      "aseg-17",
+      "aseg-53",
+      "lh-entorhinal",
+      "rh-entorhinal"
+    ],
+    "reading": {
+      "keys": [
+        "amygdala"
+      ],
+      "label": "Regional anatomy",
+      "priority": -2
+    }
+  },
+  {
+    "id": "amygdala-evidence",
+    "title": "Amygdala, learning, and fear",
+    "regions": [
+      "aseg-18",
+      "aseg-54"
+    ],
+    "reading": {
+      "keys": [
+        "amygdala"
+      ],
+      "label": "Learning & evidence",
+      "priority": -1
+    }
+  },
+  {
     "id": "hippocampal-formation",
     "title": "Inside the hippocampal formation",
     "regions": [

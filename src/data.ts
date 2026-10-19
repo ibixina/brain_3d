@@ -31,6 +31,7 @@ export type Info = {
 const ut = "https://nba.uth.tmc.edu/neuroscience/";
 const motor = ut + "s3/chapter03.html";
 const memory = ut + "s4/chapter05.html";
+const amygdala = ut + "s4/chapter06.html";
 const basal = ut + "s3/chapter04.html";
 const cerebellum = ut + "s3/chapter05.html";
 const general = "https://www.ncbi.nlm.nih.gov/books/NBK10915/";
@@ -458,18 +459,21 @@ export function infoFor(region: Region): Info {
       connections: s[4],
       context:
         "Subdivisions listed here describe internal anatomy. They are not individually segmented in this reference mesh. Individual anatomy and functional organization vary.",
-      source: ["hippocampus", "amygdala"].includes(region.key)
-        ? memory
-        : [
-              "caudate-nucleus",
-              "putamen",
-              "globus-pallidus",
-              "nucleus-accumbens",
-            ].includes(region.key)
-          ? basal
-          : region.key.includes("cerebellar")
-            ? cerebellum
-            : general,
+      source:
+        region.key === "amygdala"
+          ? amygdala
+          : region.key === "hippocampus"
+            ? memory
+            : [
+                  "caudate-nucleus",
+                  "putamen",
+                  "globus-pallidus",
+                  "nucleus-accumbens",
+                ].includes(region.key)
+              ? basal
+              : region.key.includes("cerebellar")
+                ? cerebellum
+                : general,
     };
   return {
     summary:

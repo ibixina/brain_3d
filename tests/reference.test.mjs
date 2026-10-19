@@ -376,6 +376,57 @@ test("thalamic notes keep nuclear names distinct from gross and composite labels
   );
 });
 
+test("amygdala notes link bilateral gross anatomy and distinguish human experimental outcomes", () => {
+  const anatomy = referenceArticles.find(
+    (article) => article.id === "amygdala-anatomy",
+  );
+  const evidence = referenceArticles.find(
+    (article) => article.id === "amygdala-evidence",
+  );
+  for (const region of atlas.parts.filter((part) => part.key === "amygdala")) {
+    assert.deepEqual(
+      referenceTopicsForRegion(region)
+        .slice(0, 2)
+        .map((topic) => topic.id),
+      [anatomy.id, evidence.id],
+    );
+    assert.ok(anatomy.regions.includes(region.id));
+    assert.ok(evidence.regions.includes(region.id));
+  }
+  assert.match(anatomy.scope, /no separate selectable meshes/);
+  assert.match(anatomy.paragraphs.join(" "), /prior knowledge/);
+  assert.match(referenceSources["amygdala-atlas"].kind, /human postmortem/);
+  for (const id of ["amygdala-conditioning", "amygdala-panic"])
+    assert.match(referenceSources[id].kind, /Original human lesion/);
+  assert.deepEqual(
+    evidence.comparison.rows.map((row) => row.source),
+    [
+      "amygdala-conditioning",
+      "amygdala-conditioning",
+      "amygdala-conditioning",
+      "amygdala-panic",
+    ],
+  );
+  assert.match(
+    evidence.paragraphs.join(" "),
+    /skin conductance.*not a direct reading/,
+  );
+  assert.match(evidence.scope, /no lesion reconstructions/);
+  assert.ok(searchReference("paralaminar").includes(anatomy));
+  assert.ok(searchReference("stria terminalis").includes(anatomy));
+  assert.ok(searchReference("conditioning declarative").includes(evidence));
+  assert.ok(searchReference("Feinstein panic").includes(evidence));
+  for (const note of [anatomy, evidence]) {
+    const links = referenceExplorations(note);
+    assert.ok(links.some((link) => link.kind === "video"));
+    assert.ok(links.some((link) => link.kind === "scan"));
+  }
+  assert.equal(
+    referenceExplorations(evidence).find((link) => link.kind === "path").id,
+    "emotion",
+  );
+});
+
 test("reference context retains explicit model links and guide returns while rejecting unrelated highlights", () => {
   for (const article of referenceArticles) {
     for (const id of article.regions) {
