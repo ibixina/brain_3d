@@ -238,3 +238,35 @@
   color: #a6cfc1;
   font-size: 10px;
 }
+
+.reference-model-context {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  padding: 10px 0 12px;
+  margin-bottom: 12px;
+  border-bottom: 1px solid var(--line);
+  text-align: left;
+  color: #b4dcd4;
+}
+.reference-model-context > span {
+  flex: 1;
+  min-width: 0;
+}
+.reference-model-context strong {
+  display: block;
+  font-size: 12px;
+  line-height: 1.5;
+  font-weight: 500;
+}
+.reference-model-context small {
+  display: block;
+  margin-top: 3px;
+  font-size: 10px;
+  line-height: 1.5;
+  color: #8fa8b7;
+}
+.reference-model-context > svg {
+  flex-shrink: 0;
+}

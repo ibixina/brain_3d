@@ -3,6 +3,7 @@ import { OrbitControls } from "three/examples/jsm/controls/OrbitControls.js";
 import { regions, type Region } from "./data";
 import { assetUrl } from "./asset-url.ts";
 import { meshBoundary } from "./mesh-boundary.ts";
+import { perspectiveFraming } from "./viewer-framing.ts";
 
 export type ViewState = {
   selected: string | null;
@@ -521,7 +522,8 @@ export class AtlasViewer {
     const { width, height } = this.element.getBoundingClientRect();
     if (!width || !height) return;
     this.camera.aspect = width / height;
-    const framing = Math.max(1, 0.82 / this.camera.aspect);
+    const framing = perspectiveFraming(this.camera.aspect, this.camera.fov);
+    this.controls.maxDistance = Math.min(2100, 850 * framing);
     this.camera.position
       .sub(this.controls.target)
       .multiplyScalar(framing / this.framing)

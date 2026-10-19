@@ -2200,3 +2200,32 @@ kbd {
   font-size: 10px;
   font-weight: 400;
 }
+
+@media (min-width: 601px) {
+  .reading-reference .viewport {
+    left: 388px;
+  }
+  .reading-reference .isolation-notice {
+    left: 408px;
+  }
+}
+@media (min-width: 901px) {
+  .reading-reference .stage-toolbar,
+  .reading-reference .stage-bottom {
+    left: calc((100% + 388px) / 2);
+  }
+}
+
+@media (max-height: 600px) {
+  .reading-reference {
+    min-height: 0;
+  }
+  .reading-reference .structure-panel {
+    top: 12px;
+    bottom: 12px;
+    padding-top: 12px;
+  }
+  .reading-reference .structure-panel h1 {
+    display: none;
+  }
+}

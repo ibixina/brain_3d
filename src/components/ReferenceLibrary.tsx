@@ -6,11 +6,12 @@ import {
   ArrowRight,
   ArrowUpRight,
   BookOpen,
+  Focus,
   Link,
   Search,
   X,
 } from "lucide-react";
-import { hemisphereLabel, regions } from "../data";
+import { hemisphereLabel, regions, type Region } from "../data";
 import {
   referenceArticles,
   referenceCheckedOn,
@@ -41,10 +42,18 @@ export default function ReferenceLibrary({
   articleId,
   onOpen,
   onRegion,
+  selectedRegion,
+  selectionVisible,
+  isolated,
+  onShowModel,
 }: {
   articleId: string | null;
   onOpen: (id: string | null) => void;
   onRegion: (id: string) => void;
+  selectedRegion?: Region;
+  selectionVisible: boolean;
+  isolated: boolean;
+  onShowModel: () => void;
 }) {
   const [query, setQuery] = useState(() => readingMemory.query);
   const [message, setMessage] = useState("");
@@ -180,6 +189,28 @@ export default function ReferenceLibrary({
             </button>
           </div>
         </div>
+        {selectedRegion && (
+          <button
+            className="reference-model-context"
+            onClick={onShowModel}
+            aria-label={`Show selected 3D model: ${selectedRegion.name}, ${hemisphereLabel(selectedRegion.hemisphere)}`}
+            title="Return to this model without losing your reading position"
+          >
+            <Focus size={16} />
+            <span>
+              <strong>3D · {selectedRegion.name}</strong>
+              <small>
+                {hemisphereLabel(selectedRegion.hemisphere)} ·{" "}
+                {!selectionVisible
+                  ? "Hidden in current view"
+                  : isolated
+                    ? "Isolated region mesh"
+                    : "Teal selection"}
+              </small>
+            </span>
+            <ArrowRight size={14} />
+          </button>
+        )}
         <div
           className="reference-content"
           ref={contentRef}

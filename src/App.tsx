@@ -323,6 +323,18 @@ export default function App() {
     if (new URLSearchParams(location.hash.slice(1)).has("reference"))
       history.replaceState(null, "", location.pathname + anatomyHash());
   }
+  function showReferenceModel() {
+    if (!selected) return;
+    setReturnReference(referenceId);
+    setSidebar(false);
+    if (!selectedVisible) revealSelected();
+    history.replaceState(
+      null,
+      "",
+      withReferenceOrigin(anatomyHash(), referenceId),
+    );
+    focusRegion();
+  }
   function exploreReferenceRegion(id: string) {
     select(id, { origin: referenceId, reveal: true });
     setTab("overview");
@@ -625,7 +637,7 @@ export default function App() {
   const controlsDisabled = !!error || !ready;
   return (
     <div
-      className={`app-shell ${section === "anatomy" && selected && !readingReference ? "has-selection" : ""} ${sidebar ? "library-open" : ""} section-${section}`}
+      className={`app-shell ${section === "anatomy" && selected && !readingReference ? "has-selection" : ""} ${sidebar ? "library-open" : ""} ${readingReference ? "reading-reference" : ""} section-${section}`}
     >
       <header className="app-header">
         <button className="brand" onClick={reset} aria-label="Cerebra home">
@@ -752,6 +764,10 @@ export default function App() {
                     articleId={referenceId}
                     onOpen={openReference}
                     onRegion={exploreReferenceRegion}
+                    selectedRegion={selected}
+                    selectionVisible={!!selectedVisible}
+                    isolated={state.isolated}
+                    onShowModel={showReferenceModel}
                   />
                 </Suspense>
               ) : libraryTab === "paths" ? (
