@@ -1,11 +1,11 @@
-.atlas-dialog.brainstem-dialog {
+.atlas-dialog.subregion-dialog {
   width: min(1280px, calc(100% - 32px));
   height: min(900px, calc(100dvh - 32px));
   max-height: none;
   padding: 20px;
   overflow: hidden;
 }
-.brainstem-dialog .dialog-header {
+.subregion-dialog .dialog-header {
   height: 32px;
   margin-bottom: 12px;
 }
@@ -127,7 +127,7 @@
   padding: 10px 10px 20px 0;
   scrollbar-width: thin;
 }
-.brainstem-dialog .subregion-reading h2 {
+.subregion-dialog .subregion-reading h2 {
   font-size: 25px;
   letter-spacing: -0.7px;
   margin: 0;
@@ -207,16 +207,16 @@
   text-underline-offset: 3px;
 }
 @media (max-width: 700px) {
-  .atlas-dialog.brainstem-dialog {
+  .atlas-dialog.subregion-dialog {
     width: calc(100% - 16px);
     height: calc(100dvh - 16px);
     padding: 12px;
     border-radius: 12px;
   }
-  .brainstem-dialog .dialog-header {
+  .subregion-dialog .dialog-header {
     margin-bottom: 8px;
   }
-  .brainstem-dialog .dialog-header .eyebrow {
+  .subregion-dialog .dialog-header .eyebrow {
     font-size: 9px;
     letter-spacing: 0.08em;
   }
@@ -235,7 +235,7 @@
   .subregion-parts button {
     min-height: 40px;
   }
-  .brainstem-dialog .subregion-reading h2 {
+  .subregion-dialog .subregion-reading h2 {
     font-size: 22px;
   }
   .subregion-frame {
@@ -262,4 +262,80 @@
     grid-template-columns: repeat(2, minmax(0, 1fr));
     margin: 16px 0;
   }
+}
+
+.subregion-hemisphere {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin: 15px 0 9px;
+  color: #a5bac9;
+  font-size: 11px;
+}
+.subregion-hemisphere select,
+.subregion-chooser input {
+  border: 1px solid #ffffff25;
+  border-radius: 7px;
+  background: #142230;
+  color: #d0e1e7;
+  font: inherit;
+  padding: 9px 10px;
+}
+.subregion-hemisphere select {
+  width: 120px;
+}
+.subregion-explorer .subregion-picker {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 9px;
+  width: 100%;
+  text-align: left;
+  margin: 9px 0;
+}
+.subregion-chooser input {
+  width: 100%;
+  box-sizing: border-box;
+  font-size: 11px;
+}
+.subregion-parts.searchable {
+  max-height: 190px;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  scrollbar-width: thin;
+  margin: 9px 0;
+  grid-template-columns: minmax(0, 1fr);
+  padding-right: 4px;
+}
+.subregion-parts.searchable button {
+  padding: 9px;
+}
+.subregion-match-count {
+  font-size: 10px;
+  line-height: 1.7;
+  color: #92a9b8;
+  margin: 8px 0;
+}
+.subregion-omitted {
+  font-size: 11px;
+  line-height: 1.8;
+  margin-top: 20px;
+  color: #9aafbf;
+}
+.subregion-omitted summary {
+  color: #bfd3dc;
+  cursor: pointer;
+}
+.subregion-omitted ul {
+  padding-left: 17px;
+  margin: 9px 0;
+}
+.subregion-omitted li {
+  margin: 6px 0;
+}
+.subregion-description h3:focus-visible {
+  outline: 1px solid #78cbb6;
+  outline-offset: 4px;
+  border-radius: 2px;
 }

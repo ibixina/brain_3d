@@ -9,7 +9,7 @@ import zipfile
 
 import nibabel as nib
 import numpy as np
-from skimage.measure import marching_cubes
+from subregion_geometry import pack_surfaces
 
 ROOT = Path(__file__).resolve().parents[1]
 CACHE = ROOT / ".cache/subregions"
@@ -58,45 +58,15 @@ def build():
     probs = image.get_fdata(dtype=np.float32)
     if not np.isfinite(probs).all() or not np.allclose(probs.sum(axis=3), 1, atol=1e-6):
         raise ValueError("Invalid label probabilities")
-    labels = probs.argmax(axis=3)
-    surfaces = []
-    for channel, *_ in ENTRIES:
-        vertices, faces, _, _ = marching_cubes(
-            (labels == channel).astype(np.float32), level=0.5
-        )
-        ras = nib.affines.apply_affine(image.affine, vertices)
-        display = ras[:, [0, 2, 1]]
-        display[:, 2] *= -1
-        surfaces.append((display, faces))
-    all_vertices = np.concatenate([vertices for vertices, _ in surfaces])
-    origin = (all_vertices.min(axis=0) + all_vertices.max(axis=0)) / 2
-    blob = bytearray()
-    parts = []
-    for entry, (vertices, faces) in zip(ENTRIES, surfaces):
-        channel, label, key, name, color, description = entry
-        vertices = vertices - origin + np.array([0, 5, 10])
-        normals = np.zeros_like(vertices)
-        cross = np.cross(
-            vertices[faces[:, 1]] - vertices[faces[:, 0]],
-            vertices[faces[:, 2]] - vertices[faces[:, 0]],
-        )
-        for corner in range(3):
-            np.add.at(normals, faces[:, corner], cross)
-        normals /= np.maximum(np.linalg.norm(normals, axis=1, keepdims=True), 1e-30)
-        arrays = [
-            vertices.astype("<f4"), normals.astype("<f4"),
-            np.ones(len(vertices), dtype="<f4"), faces.astype("<u4"),
-        ]
-        parts.append(dict(
-            id=key, key=key, name=name, hemisphere="bilateral" if key == "scp" else "midline", group="Brainstem",
-            kind="segmentation", source="probability-atlas", color=color,
-            label=label, channel=channel, description=description, offset=len(blob),
-            vertices=len(vertices), triangles=len(faces),
-            voxels=int((labels == channel).sum()),
-            center=vertices.mean(axis=0).round(3).tolist(),
-        ))
-        blob.extend(b"".join(array.tobytes() for array in arrays))
-    raw = bytes(blob)
+    entries = [dict(
+        id=key, key=key, name=name,
+        hemisphere="bilateral" if key == "scp" else "midline", group="Brainstem",
+        kind="segmentation", source="probability-atlas", color=color,
+        label=label, channel=channel, description=description,
+    ) for channel, label, key, name, color, description in ENTRIES]
+    raw, parts, omitted, origin = pack_surfaces(image, probs.argmax(axis=3), entries)
+    if omitted:
+        raise ValueError("A brainstem source label has no winner surface")
     compressed = gzip.compress(raw, mtime=0)
     (OUT / "brainstem.bin").write_bytes(raw)
     (OUT / "brainstem.mesh").write_bytes(compressed)
@@ -115,7 +85,7 @@ def build():
             frame="Approximately MNI-ICBM152 2009c symmetric; not registered to the fsaverage whole-brain model",
             method="Maximum-probability label per voxel, including background; marching cubes at 0.5 on each binary label; no additional smoothing or resampling; disconnected components retained",
             displayTransform="[R,S,-A], recentered for a standalone view",
-            displayOrigin=origin.tolist(),
+            displayOrigin=origin,
         ),
         geometry=dict(
             bytes=len(raw), compressedBytes=len(compressed), sha256=sha256(raw),

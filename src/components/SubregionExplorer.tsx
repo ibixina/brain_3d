@@ -1,0 +1,457 @@
+import { useEffect, useRef, useState } from "react";
+import { ChevronDown, Focus, Minus, Plus, Split } from "lucide-react";
+import { AtlasViewer, type ViewState } from "../viewer";
+import { assetUrl } from "../asset-url.ts";
+import {
+  matchingSubregions,
+  subregionName,
+  type SubregionAtlas,
+  type SubregionKind,
+} from "../subregions.ts";
+import "./subregions.css";
+
+const initial: ViewState = {
+  selected: null,
+  isolated: false,
+  exploded: 0,
+  explodeMode: "regions",
+  opacity: 1,
+  hemisphere: "both",
+  hiddenGroups: [],
+  labels: false,
+  autoRotate: false,
+  colorMode: "atlas",
+  section: "none",
+  sectionOffset: 0,
+};
+
+export default function SubregionExplorer({
+  kind,
+  hemisphere = "both",
+}: {
+  kind: SubregionKind;
+  hemisphere?: string;
+}) {
+  const [atlas, setAtlas] = useState<SubregionAtlas | null>(null);
+  const [error, setError] = useState("");
+  useEffect(() => {
+    let cancelled = false;
+    setAtlas(null);
+    setError("");
+    const request =
+      kind === "brainstem"
+        ? import("../brainstem-subregions.json")
+        : import("../thalamus-subregions.json");
+    void request
+      .then((data) => {
+        if (!cancelled) setAtlas(data.default);
+      })
+      .catch(() => {
+        if (!cancelled)
+          setError(
+            "The atlas reference could not load. Reload the page to try again.",
+          );
+      });
+    return () => {
+      cancelled = true;
+    };
+  }, [kind]);
+  if (error) return <p role="alert">{error}</p>;
+  if (!atlas) return <p role="status">Loading atlas reference…</p>;
+  return (
+    <LoadedSubregions
+      key={`${kind}-${hemisphere}`}
+      atlas={atlas}
+      kind={kind}
+      hemisphere={hemisphere}
+    />
+  );
+}
+
+function LoadedSubregions({
+  atlas,
+  kind,
+  hemisphere,
+}: {
+  atlas: SubregionAtlas;
+  kind: SubregionKind;
+  hemisphere: string;
+}) {
+  const large = atlas.parts.length > 8;
+  const start = { ...initial, hemisphere: large ? hemisphere : "both" };
+  const host = useRef<HTMLDivElement>(null);
+  const viewer = useRef<AtlasViewer | null>(null);
+  const reading = useRef<HTMLHeadingElement>(null);
+  const panel = useRef<HTMLElement>(null);
+  const [state, setState] = useState(start);
+  const [ready, setReady] = useState(false);
+  const [error, setError] = useState("");
+  const [attempt, setAttempt] = useState(0);
+  const [query, setQuery] = useState("");
+  const [choosing, setChoosing] = useState(true);
+  const [hover, setHover] = useState<{
+    id: string;
+    x: number;
+    y: number;
+  } | null>(null);
+  const selected = atlas.parts.find((part) => part.id === state.selected);
+  const pointed = atlas.parts.find((part) => part.id === hover?.id);
+  const visible = matchingSubregions(atlas.parts, "", state.hemisphere);
+  const matches = matchingSubregions(atlas.parts, query, state.hemisphere);
+  if (large)
+    matches.sort(
+      (a, b) =>
+        a.name.localeCompare(b.name) ||
+        a.hemisphere.localeCompare(b.hemisphere),
+    );
+  const omitted = matchingSubregions(atlas.omitted ?? [], "", state.hemisphere);
+  const choose = (id: string, inspect = false) => {
+    setState((current) => ({
+      ...current,
+      selected: id,
+      isolated: inspect || current.isolated,
+      exploded: inspect ? 0 : current.exploded,
+    }));
+    if (large) {
+      setChoosing(false);
+      requestAnimationFrame(() => {
+        panel.current?.scrollTo({ top: 0 });
+        reading.current?.focus({ preventScroll: true });
+      });
+    }
+  };
+  const chooseRef = useRef(choose);
+  chooseRef.current = choose;
+  const lastHemisphere = useRef(state.hemisphere);
+
+  useEffect(() => {
+    if (!host.current) return;
+    setReady(false);
+    setError("");
+    try {
+      viewer.current = new AtlasViewer(
+        host.current,
+        {
+          select: (id) => chooseRef.current(id),
+          hover: (id, x, y) => setHover(id ? { id, x, y } : null),
+          ready: () => setReady(true),
+          error: setError,
+          detail: () => {},
+          stats: () => {},
+          label: () => {},
+        },
+        {
+          regions: atlas.parts,
+          compressedUrl: atlas.compressedUrl,
+          rawUrl: atlas.rawUrl,
+          fitOnLoad: true,
+          explodeFromCenter: true,
+          label: `Interactive ${kind} atlas subdivisions. Drag to rotate, scroll to zoom, right-drag to pan. Use the part chooser for keyboard access.`,
+        },
+      );
+      viewer.current.update(start);
+    } catch {
+      setError(
+        "WebGL could not start. Part descriptions and source links remain available below.",
+      );
+    }
+    return () => {
+      viewer.current?.dispose();
+      viewer.current = null;
+    };
+  }, [atlas, attempt]);
+
+  useEffect(() => {
+    viewer.current?.update(state);
+    if (lastHemisphere.current !== state.hemisphere)
+      viewer.current?.view("default");
+    lastHemisphere.current = state.hemisphere;
+  }, [state, ready]);
+
+  return (
+    <div className="subregion-explorer">
+      <div className="subregion-stage">
+        <div ref={host} className="subregion-canvas" />
+        <span className="subregion-frame">
+          SEPARATE ATLAS · {atlas.source.spacingMm[0]} mm probability grid
+          {large &&
+            ` · ${state.hemisphere === "both" ? "Both sides" : state.hemisphere === "left" ? "Left" : "Right"}`}
+        </span>
+        {!ready && !error && (
+          <p className="subregion-loading" role="status">
+            Loading atlas surfaces…
+          </p>
+        )}
+        {error && (
+          <div className="subregion-loading" role="alert">
+            <p>{error}</p>
+            <button onClick={() => setAttempt((value) => value + 1)}>
+              Retry model
+            </button>
+          </div>
+        )}
+        <div
+          className="subregion-controls"
+          aria-label="Subregion view controls"
+        >
+          <button
+            disabled={!ready}
+            onClick={() => viewer.current?.zoom(0.8)}
+            aria-label="Zoom in on subregions"
+          >
+            <Plus size={16} />
+          </button>
+          <button
+            disabled={!ready}
+            onClick={() => viewer.current?.zoom(1.25)}
+            aria-label="Zoom out from subregions"
+          >
+            <Minus size={16} />
+          </button>
+          <button disabled={!ready} onClick={() => viewer.current?.fit()}>
+            <Focus size={15} /> Fit model
+          </button>
+          <button
+            disabled={!ready}
+            aria-pressed={state.exploded > 0}
+            onClick={() =>
+              setState((current) => ({
+                ...current,
+                isolated: false,
+                exploded: current.exploded ? 0 : 0.3,
+              }))
+            }
+          >
+            <Split size={15} /> Separate parts
+          </button>
+        </div>
+        <p className="subregion-instructions">
+          Drag to rotate · Scroll or pinch to zoom
+        </p>
+        {pointed && hover && (
+          <div
+            className="subregion-hover"
+            style={{
+              left: Math.min(hover.x + 16, window.innerWidth - 245),
+              top: Math.min(hover.y + 18, window.innerHeight - 90),
+            }}
+          >
+            <small>POINTING AT</small>
+            <strong>{subregionName(pointed)}</strong>
+          </div>
+        )}
+      </div>
+      <section
+        className="subregion-reading"
+        ref={panel}
+        aria-label={`${kind === "brainstem" ? "Brainstem" : "Thalamic"} part descriptions`}
+      >
+        <h2>Inside the {kind === "brainstem" ? "brainstem" : "thalamus"}.</h2>
+        <p className="subregion-intro">
+          {large
+            ? `${visible.length} selectable surfaces from ${visible.length + omitted.length} source labels${state.hemisphere === "both" ? " across both sides" : ` on the ${state.hemisphere}`}.`
+            : "Select a surface or a name to inspect one of four atlas compartments."}
+        </p>
+        {large && (
+          <>
+            <label className="subregion-hemisphere">
+              Hemisphere
+              <select
+                aria-label="Subregion hemisphere"
+                value={state.hemisphere}
+                onChange={(event) => {
+                  setState((current) => ({
+                    ...current,
+                    hemisphere: event.target.value,
+                    selected: null,
+                    isolated: false,
+                    exploded: 0,
+                  }));
+                  setQuery("");
+                  setChoosing(true);
+                }}
+              >
+                <option value="left">Left</option>
+                <option value="right">Right</option>
+                <option value="both">Both</option>
+              </select>
+            </label>
+            <button
+              className="subregion-picker"
+              aria-expanded={choosing}
+              onClick={() => setChoosing((value) => !value)}
+            >
+              Choose {selected ? "another nucleus" : "a nucleus"}
+              <ChevronDown size={14} />
+            </button>
+          </>
+        )}
+        {(!large || choosing) && (
+          <div className={large ? "subregion-chooser" : ""}>
+            {large && (
+              <input
+                aria-label="Find an atlas nucleus"
+                placeholder="Name, abbreviation, or group…"
+                value={query}
+                onChange={(event) => setQuery(event.target.value)}
+                onKeyDown={(event) => {
+                  if (event.key === "Enter" && matches.length === 1) {
+                    event.preventDefault();
+                    choose(matches[0].id, true);
+                  }
+                }}
+              />
+            )}
+            <div
+              className={`subregion-parts${large ? " searchable" : ""}`}
+              aria-label={large ? "Thalamic nuclei" : "Brainstem subdivisions"}
+            >
+              {matches.map((part) => (
+                <button
+                  key={part.id}
+                  aria-pressed={state.selected === part.id}
+                  className={hover?.id === part.id ? "pointed" : ""}
+                  onClick={() => choose(part.id, large)}
+                >
+                  <i style={{ background: part.color }} aria-hidden="true" />
+                  {subregionName(part)}
+                </button>
+              ))}
+            </div>
+            {large && (
+              <p className="subregion-match-count" role="status">
+                {matches.length
+                  ? `${matches.length} matching ${matches.length === 1 ? "surface" : "surfaces"}`
+                  : "No matching surface. See coverage below for source labels without winner voxels."}
+              </p>
+            )}
+          </div>
+        )}
+        <div
+          className="subregion-description"
+          aria-live="polite"
+          aria-atomic="true"
+        >
+          <span className="eyebrow">
+            {selected ? "READING ABOUT" : "WHAT THIS MODEL SHOWS"}
+          </span>
+          <h3 ref={reading} tabIndex={-1}>
+            {selected
+              ? subregionName(selected)
+              : large
+                ? "Nuclear atlas surfaces"
+                : "Four gross subdivisions"}
+          </h3>
+          <p>
+            {selected?.description ??
+              `Surfaces derived from FreeSurfer’s ${kind} probability atlas. Colors identify atlas labels; they do not show activity, tissue color, or individual cells.`}
+          </p>
+        </div>
+        <div className="subregion-selection">
+          <button
+            disabled={!ready || !selected}
+            aria-pressed={state.isolated}
+            onClick={() =>
+              setState((current) => ({
+                ...current,
+                isolated: !current.isolated,
+                exploded: 0,
+              }))
+            }
+          >
+            Only this part
+          </button>
+          <button
+            disabled={!ready}
+            onClick={() => {
+              setState((current) => ({
+                ...initial,
+                hemisphere: current.hemisphere,
+              }));
+              setQuery("");
+              setChoosing(true);
+            }}
+          >
+            All parts
+          </button>
+        </div>
+        {omitted.length > 0 && (
+          <details className="subregion-omitted">
+            <summary>{omitted.length} source labels without a surface</summary>
+            <p>
+              The maximum-probability rule assigns no voxels to these labels,
+              even though their probabilities are nonzero. No surface is
+              created; this does not mean the nuclei are anatomically absent.
+            </p>
+            <ul>
+              {omitted.map((part) => (
+                <li key={part.id}>{subregionName(part)}</li>
+              ))}
+            </ul>
+          </details>
+        )}
+        <p className="subregion-scope">
+          This separate probability atlas is not registered to the whole-brain
+          model or MRI templates.{" "}
+          {large
+            ? "It includes geniculate labels that the main thalamus-proper mesh excludes. A 0.5 mm grid does not establish individual microscopic boundaries."
+            : "Its boundary protocol differs from the whole-brain label. Individual nuclei, nerves, and axons are not modeled."}
+        </p>
+        <details className="subregion-sources">
+          <summary>Sources, method & limitations</summary>
+          <p>
+            Each voxel takes its most probable label, including
+            unknown/background. Surfaces use a 0.5 boundary on the resulting
+            masks, without extra smoothing or resampling. The grid limits
+            detail; crisp boundaries do not express certainty. Small
+            disconnected surface portions are retained.
+          </p>
+          <p>
+            Source space: approximately MNI-ICBM152 2009c symmetric. Recentered
+            for this independent view.{" "}
+            {large
+              ? "This download has 26 label names per side; 23 per side have winner voxels. The current segmentation software describes 25 labels per side; this explorer follows the downloaded probability file, not that software’s current output."
+              : "The superior cerebellar peduncles share one label."}
+          </p>
+          <p>
+            Modified FreeSurfer data ·{" "}
+            {(atlas.geometry.compressedBytes / 1000).toFixed(0)} kB compressed
+            geometry, loaded on demand. Checked October 19, 2026.
+          </p>
+          <a href={atlas.source.documentation} target="_blank" rel="noreferrer">
+            Probability atlas & original data ↗
+          </a>
+          <a href={atlas.source.protocol} target="_blank" rel="noreferrer">
+            Segmentation protocol & boundary differences ↗
+          </a>
+          <a href={atlas.source.paper} target="_blank" rel="noreferrer">
+            Iglesias et al. ({large ? "2018" : "2015"}), original study ↗
+          </a>
+          {atlas.source.labelDefinitions && (
+            <a
+              href={atlas.source.labelDefinitions}
+              target="_blank"
+              rel="noreferrer"
+            >
+              Original label definitions (Table 2) ↗
+            </a>
+          )}
+          <a
+            href={assetUrl(atlas.source.license)}
+            target="_blank"
+            rel="noreferrer"
+          >
+            FreeSurfer license ↗
+          </a>
+          <a
+            href={assetUrl(`/subregions/${kind}-provenance.json`)}
+            target="_blank"
+            rel="noreferrer"
+          >
+            Mesh provenance & checksums ↗
+          </a>
+        </details>
+      </section>
+    </div>
+  );
+}

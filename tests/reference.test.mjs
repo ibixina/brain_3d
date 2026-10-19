@@ -339,10 +339,7 @@ test("thalamic notes keep nuclear names distinct from gross and composite labels
   for (const note of [anatomy, circuit]) {
     for (const id of ["aseg-10", "aseg-49"])
       assert.ok(note.regions.includes(id));
-    assert.match(
-      note.scope,
-      /individual selectable meshes|No individual thalamic nuclei/,
-    );
+    assert.match(note.scope, /independent|separate probability-atlas/);
     assert.ok(referenceExplorations(note).some((link) => link.kind === "scan"));
   }
   const geniculate = anatomy.comparison.rows.find((row) =>
@@ -350,6 +347,14 @@ test("thalamic notes keep nuclear names distinct from gross and composite labels
   );
   assert.match(geniculate.detail, /excluded.*thalamus-proper/);
   assert.match(anatomy.scope, /not an exhaustive list/);
+  assert.match(
+    anatomy.scope,
+    /23 winner surfaces from 26 source labels per side/,
+  );
+  assert.match(anatomy.scope, /VM, Pc, and Pt have no winner voxels/);
+  assert.match(anatomy.scope, /not registered/);
+  assert.match(circuit.scope, /do not map the experimental mouse structures/);
+  assert.ok(anatomy.sources.includes("subregion-atlases"));
   for (const id of ["aseg-28", "aseg-60"]) {
     const region = atlas.parts.find((part) => part.id === id);
     assert.ok(

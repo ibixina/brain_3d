@@ -75,9 +75,7 @@ import {
   sources,
 } from "./data";
 
-const BrainstemSubregions = lazy(
-  () => import("./components/BrainstemSubregions"),
-);
+const SubregionExplorer = lazy(() => import("./components/SubregionExplorer"));
 const ImagingWorkspace = lazy(() => import("./components/ImagingWorkspace"));
 const ReferenceLibrary = lazy(() => import("./components/ReferenceLibrary"));
 type Section = "anatomy" | "scans" | "activities";
@@ -197,7 +195,7 @@ export default function App() {
   const [expanded, setExpanded] = useState<string[]>([]);
   const [tab, setTab] = useState<DetailTab>("overview");
   const [modal, setModal] = useState<
-    "sources" | "help" | "videos" | "brainstem" | null
+    "sources" | "help" | "videos" | "brainstem" | "thalamus" | null
   >(null);
   const [saved, setSaved] = useState<string[]>(readSaved);
   const [savedOnly, setSavedOnly] = useState(false);
@@ -447,7 +445,9 @@ export default function App() {
     }
   }, [section]);
   useEffect(() => {
-    viewer.current?.setActive(section === "anatomy" && modal !== "brainstem");
+    viewer.current?.setActive(
+      section === "anatomy" && modal !== "brainstem" && modal !== "thalamus",
+    );
   }, [section, modal]);
   useEffect(() => () => viewer.current?.dispose(), []);
   useEffect(() => {
@@ -1507,15 +1507,27 @@ export default function App() {
                   Find current research on PubMed <ArrowUpRight size={12} />
                 </a>
               </div>
-              {selected.id === "aseg-16" && (
+              {["aseg-16", "aseg-10", "aseg-49"].includes(selected.id) && (
                 <button
                   className="subregion-open"
-                  onClick={() => setModal("brainstem")}
+                  onClick={() =>
+                    setModal(
+                      selected.id === "aseg-16" ? "brainstem" : "thalamus",
+                    )
+                  }
                 >
                   <Layers3 size={17} />
                   <span>
-                    <strong>Explore 4 subregions</strong>
-                    <small>Separate brainstem atlas model</small>
+                    <strong>
+                      {selected.id === "aseg-16"
+                        ? "Explore 4 subregions"
+                        : "Explore atlas nuclei"}
+                    </strong>
+                    <small>
+                      {selected.id === "aseg-16"
+                        ? "Separate brainstem atlas model"
+                        : "Separate atlas · 23 surfaces per side"}
+                    </small>
                   </span>
                   <ArrowUpRight size={15} />
                 </button>
@@ -1614,15 +1626,17 @@ export default function App() {
       )}
       <dialog
         ref={modalRef}
-        className={`atlas-dialog${modal === "brainstem" ? " brainstem-dialog" : ""}`}
+        className={`atlas-dialog${modal === "brainstem" || modal === "thalamus" ? " subregion-dialog" : ""}`}
         aria-label={
-          modal === "brainstem"
-            ? "Brainstem atlas subregions"
-            : modal === "videos"
-              ? "Dissection video library"
-              : modal === "sources"
-                ? "Atlas sources and coverage"
-                : "How to explore"
+          modal === "thalamus"
+            ? "Thalamic atlas subregions"
+            : modal === "brainstem"
+              ? "Brainstem atlas subregions"
+              : modal === "videos"
+                ? "Dissection video library"
+                : modal === "sources"
+                  ? "Atlas sources and coverage"
+                  : "How to explore"
         }
         onCancel={() => setModal(null)}
         onClick={(e) => {
@@ -1631,13 +1645,15 @@ export default function App() {
       >
         <div className="dialog-header">
           <span className="eyebrow">
-            {modal === "brainstem"
-              ? "BRAINSTEM · ATLAS SUBREGIONS"
-              : modal === "sources"
-                ? "SOURCES & COVERAGE"
-                : modal === "videos"
-                  ? "THE DISSECTION FILM LIBRARY"
-                  : "EXPLORER GUIDE"}
+            {modal === "thalamus"
+              ? "THALAMUS · ATLAS SUBREGIONS"
+              : modal === "brainstem"
+                ? "BRAINSTEM · ATLAS SUBREGIONS"
+                : modal === "sources"
+                  ? "SOURCES & COVERAGE"
+                  : modal === "videos"
+                    ? "THE DISSECTION FILM LIBRARY"
+                    : "EXPLORER GUIDE"}
           </span>
           <IconButton
             icon={X}
@@ -1645,9 +1661,12 @@ export default function App() {
             onClick={() => setModal(null)}
           />
         </div>
-        {modal === "brainstem" ? (
+        {modal === "brainstem" || modal === "thalamus" ? (
           <Suspense fallback={<p role="status">Loading subregion explorer…</p>}>
-            <BrainstemSubregions />
+            <SubregionExplorer
+              kind={modal}
+              hemisphere={selected?.hemisphere ?? "both"}
+            />
           </Suspense>
         ) : modal === "sources" ? (
           <>
@@ -1679,7 +1698,9 @@ export default function App() {
                 compartments, choroid plexus, and selected white matter
                 compartments. Region detail meshes load on demand. The brainstem
                 inspector also opens a separate, four-compartment
-                probability-atlas model.
+                probability-atlas model. Thalamus inspectors open a separate
+                nuclear atlas with 23 surfaces per side, from 26 source labels
+                per side.
               </p>
               <strong>What remains outside this atlas</strong>
               <p>
@@ -1688,8 +1709,10 @@ export default function App() {
                 data, disease models, and the full research literature. Internal
                 subdivisions are described in notes; the separate brainstem
                 atlas provides four gross compartments, without individual
-                nuclei. Anatomy differs between individuals, and atlas
-                boundaries differ between atlases.
+                nuclei. A separate thalamic atlas provides selected nuclear
+                surfaces; three source labels per side have no winner surface.
+                Anatomy differs between individuals, and atlas boundaries differ
+                between atlases.
               </p>
               <strong>Evidence & updates</strong>
               <p>

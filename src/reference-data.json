@@ -97,11 +97,6 @@
       "url": "https://doi.org/10.7554/eLife.29738",
       "kind": "Original human/primate MRI and tissue study"
     },
-    "brainstem-atlas": {
-      "title": "FreeSurfer · Subregion probability atlases in MNI space",
-      "url": "https://surfer.nmr.mgh.harvard.edu/fswiki/SubfieldAtlasesICBMspace",
-      "kind": "Atlas documentation and original data"
-    },
     "brainstem-lab": {
       "title": "UTHealth · Brainstem overview and section landmarks",
       "url": "https://nba.uth.tmc.edu/neuroanatomy/L10/Lab10p29_index.html",
@@ -306,6 +301,11 @@
       "title": "Aponte, Atasoy & Sternson · AgRP activation and feeding (2011)",
       "url": "https://pubmed.ncbi.nlm.nih.gov/21209617/",
       "kind": "Original mouse cell-specific optogenetics and feeding study"
+    },
+    "subregion-atlases": {
+      "title": "FreeSurfer · Subregion probability atlases in MNI space",
+      "url": "https://surfer.nmr.mgh.harvard.edu/fswiki/SubfieldAtlasesICBMspace",
+      "kind": "Atlas documentation and original data"
     }
   },
   "articles": [
@@ -720,7 +720,7 @@
         "section-planes",
         "csf-circulation"
       ],
-      "sources": ["brainstem-lab", "orientation", "brainstem-atlas"],
+      "sources": ["brainstem-lab", "orientation", "subregion-atlases"],
       "explorations": [
         {
           "kind": "video",
@@ -922,7 +922,7 @@
         "gray-white-matter"
       ],
       "sources": [
-        "brainstem-atlas",
+        "subregion-atlases",
         "cerebellum-gross",
         "cerebellum-chapter",
         "cerebellum-circuit"
@@ -1248,7 +1248,7 @@
       "id": "thalamic-anatomy",
       "title": "Thalamic nuclei and atlas boundaries",
       "category": "Thalamus",
-      "summary": "Distinguish selected sensory, motor, and association nuclei from the gross thalamus labels displayed in 3D.",
+      "summary": "Relate selected nuclear names to the gross thalamus and a separate probability-atlas model.",
       "aliases": [
         "anterior nucleus",
         "anterior nuclear group",
@@ -1282,9 +1282,9 @@
         "The two thalami lie beside the third ventricle. In the source segmentation definition, the internal capsule forms a lateral boundary and the lateral ventricle a superior boundary. These relationships help orient a gross view; they do not reveal each internal nucleus.",
         "The internal medullary lamina separates major nuclear groups. Selected names below describe different connections, rather than interchangeable pieces of a uniform relay. Most nuclei cannot be identified reliably on a gross specimen slice without additional anatomical information.",
         "FreeSurfer’s documented thalamus-proper definition excludes the lateral and medial geniculate bodies. Its ventral-diencephalon convention groups several neighboring territories, including geniculate regions. Cerebra’s composite label does not outline either geniculate nucleus separately. A biological name and an imaging label therefore need not cover the same territory.",
-        "Iglesias and colleagues’ 2018 atlas used serial histology of 12 thalami from six postmortem donors, with 26 nuclei delineated under its protocol and ex vivo MRI used for reconstruction. The specialized FreeSurfer nuclei module uses histological atlas information to estimate internal labels from MRI. Those atlas assets and subdivisions have not been applied to Cerebra’s gross meshes or structural templates."
+        "Iglesias and colleagues’ 2018 atlas used serial histology of 12 thalami from six postmortem donors, with 26 nuclei delineated under its protocol and ex vivo MRI used for reconstruction. The specialized FreeSurfer nuclei module uses histological atlas information to estimate internal labels from MRI. Those atlas assets and subdivisions have not been applied to Cerebra’s gross meshes or structural templates. A separate viewer now derives winner-label surfaces from FreeSurfer’s MNI-space probability download; it does not run the participant-segmentation algorithm or transfer nuclear boundaries to those templates."
       ],
-      "scope": "There is one gross thalamus-proper mesh per hemisphere. Anterior, mediodorsal, VA/VL, VPL/VPM, pulvinar, intralaminar, geniculate, and reticular nuclei have no individual selectable meshes. Finer mode refines the outer surface of the existing label; it does not add nuclear boundaries. The third-ventricle and ventral-diencephalon links provide neighboring context. This selected comparison is not an exhaustive list of thalamic nuclei or a histological atlas.",
+      "scope": "The whole-brain view has one gross thalamus-proper mesh per hemisphere; its finer mode refines only that outer surface. Choose Explore atlas nuclei in a thalamus inspector for a separate probability-atlas model: 23 winner surfaces from 26 source labels per side. VM, Pc, and Pt have no winner voxels and no surfaces. Geniculate labels are included there, although excluded from the main thalamus-proper label. The independent model is not registered to the whole brain or MRI templates. This comparison is not an exhaustive list of thalamic nuclei.",
       "regions": ["aseg-10", "aseg-49", "aseg-14", "aseg-28", "aseg-60"],
       "related": [
         "thalamic-circuits",
@@ -1299,7 +1299,8 @@
         "aseg-boundaries",
         "thalamic-histology-atlas",
         "thalamic-segmentation",
-        "thalamic-reticular-states"
+        "thalamic-reticular-states",
+        "subregion-atlases"
       ],
       "reading": {
         "keys": ["thalamus"],
@@ -1307,13 +1308,13 @@
         "priority": -2
       },
       "comparison": {
-        "caption": "Selected thalamic names — none is separately segmented here",
+        "caption": "Selected thalamic names and atlas-specific groupings",
         "columns": ["Nucleus or group", "Selected anatomical relationship"],
         "rows": [
           {
             "label": "Anterior nuclear group",
             "summary": "Mammillary-body input and cingulate-cortex connections.",
-            "detail": "A limbic-system relationship; no individual anterior-nucleus label is available.",
+            "detail": "The separate atlas’s AV label groups anterior medial and anterior dorsal territory under this protocol.",
             "source": "thalamic-anatomy"
           },
           {
@@ -1331,37 +1332,37 @@
           {
             "label": "Ventral posterolateral · VPL",
             "summary": "Receives medial-lemniscal and spinothalamic input in somatosensory pathways.",
-            "detail": "A named relay territory, without a separate surface or ascending fiber reconstruction.",
+            "detail": "The separate atlas supplies a VPL surface, whose protocol also includes ventral posteromedial territory; individual fibers are not reconstructed.",
             "source": "thalamic-anatomy"
           },
           {
             "label": "Ventral posteromedial · VPM",
             "summary": "Receives trigeminal somatosensory input.",
-            "detail": "The table selects this major relationship; it does not enumerate every VPM subdivision or input.",
+            "detail": "There is no separate VPM label in this probability file: its territory is grouped within VPL by this protocol.",
             "source": "thalamic-anatomy"
           },
           {
             "label": "Pulvinar",
             "summary": "Posterior territory with parietal, temporal, and occipital cortical connections.",
-            "detail": "Its internal subdivisions are not distinguished by the gross mesh.",
+            "detail": "PuA, PuM, PuL, and PuI have separate winner surfaces in the independent atlas, without individual measured pathways.",
             "source": "thalamic-anatomy"
           },
           {
             "label": "Intralaminar nuclei · CM / Pf",
             "summary": "Centromedian and parafascicular nuclei belong to the intralaminar group.",
-            "detail": "CM has basal-ganglia and cortical projections. No CM or Pf boundary is shown.",
+            "detail": "CM and Pf have separate winner surfaces in the independent atlas; these do not delineate individual experimental neurons.",
             "source": "thalamic-anatomy"
           },
           {
             "label": "Geniculate bodies · LGN / MGN",
             "summary": "Lateral geniculate is associated with vision; medial geniculate with audition.",
-            "detail": "Both are excluded from the documented thalamus-proper label. Neither has a separate selectable mesh here.",
+            "detail": "Both are excluded from the main thalamus-proper label but have separate winner surfaces in the independent atlas.",
             "source": "aseg-boundaries"
           },
           {
             "label": "Thalamic reticular nucleus · TRN",
             "summary": "An inhibitory thalamic circuit with functionally distinct subnetworks.",
-            "detail": "Mouse recordings show state-dependent differences. It is not the brainstem reticular formation, and has no separate mesh here.",
+            "detail": "The independent atlas has an R surface. It is not the brainstem reticular formation and does not map the mouse study’s functional subnetworks.",
             "source": "thalamic-reticular-states"
           }
         ]
@@ -1380,7 +1381,7 @@
         {
           "kind": "scan",
           "id": "t1",
-          "note": "Compare ventricular and deep cerebral relationships in a structural population template. No thalamic nuclear segmentation is bundled."
+          "note": "Compare ventricular and deep cerebral relationships in a structural population template. No nuclear segmentation is overlaid on this structural template."
         }
       ]
     },
@@ -1419,7 +1420,7 @@
         "Schmitt and colleagues (2017) studied mice using rules to attend to visual or auditory targets. Neuronal recordings and optogenetic manipulations supported a mediodorsal-thalamus contribution to sustaining prefrontal rule representations. In that task, the mediodorsal signal was not itself a categorical copy of the rule. The result concerns a defined mouse experiment, not every human attentional state.",
         "Anatomical projections, neuronal spike recordings, behavioral performance, and statistical fMRI contrasts are different kinds of evidence. The bundled human activity maps do not reproduce either mouse experiment, and a highlighted thalamus does not measure attention, sensory gating, or sleep."
       ],
-      "scope": "This written account selects concepts and experiments; it is not a measured connectome or simulation. No individual thalamic nuclei, reticular shell, cortical layers, axons, spike trains, sleep recordings, or optogenetic data are rendered. The model links identify gross human atlas labels, not the experimental mouse structures. Guided paths provide anatomical context, and the MRI template has structural contrast without these nuclear boundaries.",
+      "scope": "This account selects concepts and experiments; it is not a measured connectome or simulation. Model links identify gross human labels, whose inspectors offer an independent nuclear probability atlas. Those surfaces do not map the experimental mouse structures or functional subnetworks. Cortical layers, axons, spike trains, sleep recordings, and optogenetic data are not rendered. Guided paths provide gross context, and the MRI template has no overlaid nuclear boundaries.",
       "regions": ["aseg-10", "aseg-49"],
       "related": [
         "thalamic-anatomy",
@@ -1431,7 +1432,8 @@
       "sources": [
         "thalamic-driver-framework",
         "thalamic-reticular-states",
-        "thalamic-attention"
+        "thalamic-attention",
+        "subregion-atlases"
       ],
       "reading": {
         "keys": ["thalamus"],
@@ -1445,7 +1447,7 @@
           {
             "label": "First-order driving input",
             "summary": "Ascending sensory input supplies a relay’s driving signal in the framework.",
-            "detail": "Retinal input to the lateral geniculate is a classic example. That nucleus is not separately modeled here.",
+            "detail": "Retinal input to the lateral geniculate is a classic example. Its independent atlas surface does not reconstruct retinal axons or measure driving input.",
             "source": "thalamic-driver-framework"
           },
           {
