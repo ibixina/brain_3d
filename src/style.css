@@ -1024,34 +1024,89 @@ kbd {
 .has-selection .model-label {
   max-width: 180px;
 }
+.region-callout {
+  --target-color: #f5c778;
+}
+.region-callout.is-selected {
+  --target-color: #8be1d6;
+}
+.hover-target {
+  position: fixed;
+  z-index: 51;
+  width: 18px;
+  height: 18px;
+  transform: translate(-50%, -50%);
+  border: 2px solid var(--target-color);
+  border-radius: 50%;
+  box-shadow: 0 0 0 3px #0a111ba6;
+  pointer-events: none;
+}
 .hover-tooltip {
   position: fixed;
   z-index: 50;
   pointer-events: none;
-  display: flex;
-  align-items: flex-start;
-  gap: 9px;
-  background: #182637f2;
-  border: 1px solid #afc7d82b;
-  border-radius: 9px;
-  box-shadow: 0 4px 25px #0004;
-  padding: 12px 15px;
-  max-width: 270px;
+  background: #111d2bf5;
+  border: 1px solid color-mix(in srgb, var(--target-color) 45%, transparent);
+  border-radius: 12px;
+  box-shadow: 0 12px 40px #0006;
+  padding: 16px 18px;
+  max-height: calc(100dvh - 24px);
+  overflow: hidden;
 }
-.hover-tooltip .color-dot {
-  margin-top: 5px;
+.hover-eyebrow {
+  display: block;
+  color: var(--target-color);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  margin-bottom: 8px;
 }
 .hover-tooltip strong {
   display: block;
-  font-size: 12px;
-  font-weight: 500;
-  color: #dce9f1;
+  font-size: 17px;
+  font-weight: 600;
+  line-height: 1.35;
+  color: #f0f5f9;
 }
-.hover-tooltip small {
+.hover-location {
   display: block;
-  font-size: 9px;
-  color: #7e9bb4;
-  margin-top: 5px;
+  font-size: 11px;
+  color: #b2c5d6;
+  margin-top: 6px;
+}
+.hover-tooltip p {
+  margin: 12px 0;
+  color: #d0dbe5;
+  font-size: 12px;
+  line-height: 1.65;
+}
+.hover-action {
+  display: block;
+  border-top: 1px solid #ffffff14;
+  padding-top: 10px;
+  color: var(--target-color);
+  font-size: 11px;
+}
+.selection-key {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  color: #9bd9d0;
+  font-size: 10px;
+  margin: 10px 0 0;
+}
+.selection-key span {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #7bd9ce;
+}
+.selection-key.is-hidden {
+  color: #a7b7c6;
+}
+.selection-key.is-hidden span {
+  background: #8194a6;
 }
 .loading-screen {
   position: absolute;

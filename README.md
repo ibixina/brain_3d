@@ -41,6 +41,7 @@ The brain occupies the full canvas. There are no permanent sidebars: the search 
 
 - Drag to rotate; scroll or pinch to zoom; right drag or use two fingers to pan.
 - Click the model or search the anatomy library by structure, hemisphere, or function.
+- Hover to highlight a part in gold and see its name, hemisphere, anatomical group, and a short description. The selected part stays teal, matching the **Reading about** panel; cortical parcel boundaries are outlined. Hover labels clear during dragging, and slow rotation pauses while inspecting a part.
 - Use **Isolate & inspect** to load a finer anatomical surface for the selected region.
 - Use **Explode** and the separation slider to separate visible lobes or individual parcels.
 - Use the eye controls to show or hide anatomical groups.

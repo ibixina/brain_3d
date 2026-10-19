@@ -34,6 +34,7 @@ import type { LucideIcon } from "lucide-react";
 import { AtlasViewer, type ViewState } from "./viewer";
 import { assetUrl } from "./asset-url.ts";
 import { RegionVideos, VideoLibrary } from "./components/DissectionVideos";
+import RegionCallout from "./components/RegionCallout";
 import {
   atlas,
   groupColors,
@@ -151,6 +152,14 @@ function App() {
   const [settings, setSettings] = useState(false);
   const [cameraView, setCameraView] = useState("default");
   const selected = regions.find((p) => p.id === state.selected);
+  const hovered = regions.find((p) => p.id === hover?.id);
+  const selectedVisible = selected &&
+    (state.isolated ||
+      (!state.hiddenGroups.includes(selected.group) &&
+        (state.hemisphere === "both" ||
+          selected.hemisphere === "midline" ||
+          selected.hemisphere === state.hemisphere))) &&
+    (selected.kind !== "cortex" || state.opacity > 0);
   const info = selected ? infoFor(selected) : null;
   function update(patch: Partial<ViewState>) {
     setState((prev) => ({ ...prev, ...patch }));
@@ -837,7 +846,7 @@ function App() {
           >
             <>
               <div className="detail-topline">
-                <span className="eyebrow">SELECTED STRUCTURE</span>
+                <span className="eyebrow">READING ABOUT</span>
                 <div>
                   <IconButton
                     icon={Link}
@@ -877,6 +886,12 @@ function App() {
                     : "Deep anatomy"}
                 </span>
               </div>
+              <p className={`selection-key ${selectedVisible ? "" : "is-hidden"}`}>
+                <span />
+                {selectedVisible
+                  ? "Teal highlight on the model"
+                  : "Hidden in this view"}
+              </p>
               <div
                 className="detail-tabs"
                 role="tablist"
@@ -1032,7 +1047,7 @@ function App() {
         <div className="intro-caption">
           <span className="eyebrow">104 STRUCTURES. ONE CONNECTED SYSTEM.</span>
           <h1>The human brain.</h1>
-          <p>Rotate to explore. Select a region to understand it.</p>
+          <p>Hover to identify a part. Click to read about it.</p>
         </div>
       )}
       {section === "anatomy" && (
@@ -1054,30 +1069,13 @@ function App() {
           <ImagingWorkspace key={navigationVersion} mode={section} />
         </Suspense>
       )}
-      {hover && section === "anatomy" && !settings && !sidebar && !modal && (
-        <div
-          className="hover-tooltip"
-          style={{
-            left: Math.min(hover.x + 16, window.innerWidth - 270),
-            top: hover.y + 18,
-          }}
-        >
-          <span
-            className="color-dot"
-            style={{
-              background: regions.find((p) => p.id === hover.id)?.color,
-            }}
-          />
-          <div>
-            <strong>{regions.find((p) => p.id === hover.id)?.name}</strong>
-            <small>
-              {hemisphereLabel(
-                regions.find((p) => p.id === hover.id)?.hemisphere || "midline",
-              )}{" "}
-              · Click to explore
-            </small>
-          </div>
-        </div>
+      {hover && hovered && section === "anatomy" && !settings && !sidebar && !modal && (
+        <RegionCallout
+          region={hovered}
+          x={hover.x}
+          y={hover.y}
+          selected={hovered.id === selected?.id}
+        />
       )}
       {toast && (
         <div className="toast" role="status">

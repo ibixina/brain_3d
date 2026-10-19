@@ -2,6 +2,7 @@ import * as THREE from "three";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls.js";
 import { regions, type Region } from "./data";
 import { assetUrl } from "./asset-url.ts";
+import { meshBoundary } from "./mesh-boundary.ts";
 
 export type ViewState = {
   selected: string | null;
@@ -97,6 +98,8 @@ export class AtlasViewer {
   private statsTime = 0;
   private statsFrames = 0;
   private hovered: string | null = null;
+  private hoverOutline = this.createOutline("#ffe0a0");
+  private selectionOutline = this.createOutline("#b6fff3");
   private framing = 1;
   constructor(
     private element: HTMLElement,
@@ -130,6 +133,7 @@ export class AtlasViewer {
     this.controls.addEventListener("change", this.invalidate);
     this.controls.addEventListener("start", this.stopFlight);
     this.scene.add(this.root);
+    this.root.add(this.hoverOutline, this.selectionOutline);
     this.scene.add(new THREE.HemisphereLight(0xf3f3de, 0x384b43, 1.7));
     const key = new THREE.DirectionalLight(0xfff7e7, 2.5);
     key.position.set(-160, 220, -150);
@@ -260,7 +264,7 @@ export class AtlasViewer {
   update(state: ViewState) {
     const previous = this.state;
     this.state = { ...state };
-    this.controls.autoRotate = state.autoRotate;
+    this.controls.autoRotate = state.autoRotate && !this.hovered;
     for (const [id, mesh] of this.meshes) {
       const region = mesh.userData.region as Region;
       const selected = id === state.selected;
@@ -276,13 +280,6 @@ export class AtlasViewer {
       mesh.material.transparent = mesh.material.opacity < 1;
       mesh.material.depthWrite = mesh.material.opacity > 0.45;
       mesh.renderOrder = cortex && state.opacity < 1 ? 1 : 0;
-      mesh.material.emissive.set(
-        selected ? "#7dc8d2" : id === this.hovered ? "#537a89" : "#000000",
-      );
-      mesh.material.emissiveIntensity = selected ? 0.13 : 0.1;
-      const color = this.surfaceColor(region);
-      if (mesh.geometry.userData.color !== color)
-        this.recolor(mesh.geometry, color);
       const plane =
         state.section === "none"
           ? []
@@ -315,7 +312,10 @@ export class AtlasViewer {
       mesh.userData.explode = state.isolated ? new THREE.Vector3() : direction;
       if ((!state.isolated || !selected) && mesh.geometry !== this.base.get(id))
         mesh.geometry = this.base.get(id)!;
+      this.applyAppearance(mesh);
     }
+    if (this.hovered && !this.meshes.get(this.hovered)?.visible)
+      this.pointerLeave();
     if (state.isolated && state.selected) {
       if (!previous.isolated || previous.selected !== state.selected)
         this.focus(state.selected);
@@ -373,20 +373,57 @@ export class AtlasViewer {
     }
     if (this.state.isolated && this.state.selected === id) {
       mesh.geometry = this.detailed.get(id)!;
-      this.updateDetailColor(mesh, region);
+      this.applyAppearance(mesh);
       this.callbacks.detail(id, "ready");
       this.invalidate();
     }
   }
   private surfaceColor(region: Region) {
+    if (this.state.selected === region.id) return "#40b8b0";
+    if (this.hovered === region.id) return "#e3a637";
     if (this.state.colorMode !== "tissue") return region.color;
-    if (this.state.selected === region.id && !this.state.isolated)
-      return "#82bac2";
     if (region.group === "Ventricles") return "#85bfd3";
     return region.kind === "cortex" ? "#c6ada2" : "#b9ada0";
   }
-  private updateDetailColor(mesh: AtlasMesh, region: Region) {
-    this.recolor(mesh.geometry, this.surfaceColor(region));
+  private applyAppearance(mesh: AtlasMesh) {
+    const region = mesh.userData.region as Region;
+    const selected = this.state.selected === region.id;
+    const hovered = this.hovered === region.id;
+    const color = this.surfaceColor(region);
+    if (mesh.geometry.userData.color !== color)
+      this.recolor(mesh.geometry, color);
+    mesh.material.emissive.set(
+      selected ? "#3ca99d" : hovered ? "#b97e25" : "#000000",
+    );
+    mesh.material.emissiveIntensity = selected || hovered ? 0.22 : 0;
+    mesh.material.polygonOffset = selected || hovered;
+    mesh.material.polygonOffsetFactor = 1;
+    mesh.material.polygonOffsetUnits = 1;
+  }
+  private createOutline(color: string) {
+    const outline = new THREE.LineSegments(
+      new THREE.BufferGeometry(),
+      new THREE.LineBasicMaterial({ color, transparent: true, depthWrite: false }),
+    );
+    outline.visible = false;
+    outline.renderOrder = 2;
+    return outline;
+  }
+  private syncOutline(
+    outline: THREE.LineSegments<THREE.BufferGeometry, THREE.LineBasicMaterial>,
+    id: string | null,
+  ) {
+    const mesh = id ? this.meshes.get(id) : null;
+    outline.visible = !!mesh?.visible && mesh.userData.region.kind === "cortex";
+    if (!outline.visible || !mesh) return;
+    if (outline.userData.source !== mesh.geometry) {
+      outline.geometry.dispose();
+      outline.geometry = meshBoundary(mesh.geometry);
+      outline.userData.source = mesh.geometry;
+    }
+    outline.position.copy(mesh.position);
+    outline.material.clippingPlanes = mesh.material.clippingPlanes;
+    outline.material.opacity = mesh.material.opacity;
   }
   focus(id: string) {
     const mesh = this.meshes.get(id);
@@ -404,6 +441,7 @@ export class AtlasViewer {
     this.invalidate();
   }
   view(name: string) {
+    this.pointerLeave();
     const positions: Record<string, number[]> = {
       default: [-282, 108, -179],
       left: [-360, 15, 15],
@@ -438,6 +476,7 @@ export class AtlasViewer {
     this.invalidate();
   }
   zoom(amount: number) {
+    this.pointerLeave();
     this.camera.position
       .sub(this.controls.target)
       .multiplyScalar(amount)
@@ -457,6 +496,7 @@ export class AtlasViewer {
   }
   private stopFlight = () => {
     this.cameraGoal = null;
+    this.pointerLeave();
     this.invalidate();
   };
   private contextLost = (event: Event) => {
@@ -469,6 +509,7 @@ export class AtlasViewer {
     if (!document.hidden) this.invalidate();
   };
   private resize = () => {
+    this.pointerLeave();
     const { width, height } = this.element.getBoundingClientRect();
     if (!width || !height) return;
     this.camera.aspect = width / height;
@@ -508,6 +549,7 @@ export class AtlasViewer {
     );
   }
   private pointerDown = (event: PointerEvent) => {
+    this.pointerLeave();
     this.down = { x: event.clientX, y: event.clientY };
   };
   private pointerUp = (event: PointerEvent) => {
@@ -520,22 +562,15 @@ export class AtlasViewer {
     if (hit) this.callbacks.select((hit.object.userData.region as Region).id);
   };
   private pointerMove = (event: PointerEvent) => {
-    if (event.buttons) return;
+    if (event.buttons || event.pointerType === "touch") return;
     const hit = this.hit(event);
     const id = hit ? (hit.object.userData.region as Region).id : null;
     if (id !== this.hovered) {
+      const previous = this.hovered ? this.meshes.get(this.hovered) : null;
       this.hovered = id;
-      for (const [key, mesh] of this.meshes) {
-        mesh.material.emissive.set(
-          key === this.state.selected
-            ? "#7dc8d2"
-            : key === id
-              ? "#537a89"
-              : "#000",
-        );
-        mesh.material.emissiveIntensity =
-          key === this.state.selected ? 0.13 : 0.1;
-      }
+      this.controls.autoRotate = this.state.autoRotate && !id;
+      if (previous) this.applyAppearance(previous);
+      if (id) this.applyAppearance(this.meshes.get(id)!);
       this.invalidate();
     }
     this.renderer.domElement.style.cursor = id ? "pointer" : "grab";
@@ -543,17 +578,19 @@ export class AtlasViewer {
   };
   private pointerLeave = () => {
     const mesh = this.hovered ? this.meshes.get(this.hovered) : null;
-    if (mesh && this.hovered !== this.state.selected) {
-      mesh.material.emissive.set("#000000");
-      this.invalidate();
-    }
+    if (!this.hovered) return;
     this.hovered = null;
+    if (mesh) this.applyAppearance(mesh);
+    this.controls.autoRotate = this.state.autoRotate;
+    this.renderer.domElement.style.cursor = "grab";
     this.callbacks.hover(null, 0, 0);
+    this.invalidate();
   };
   setActive(active: boolean) {
     this.active = active;
     if (active) this.invalidate();
     else {
+      this.pointerLeave();
       cancelAnimationFrame(this.frame);
       this.frame = 0;
     }
@@ -609,6 +646,11 @@ export class AtlasViewer {
       }
     }
     this.controls.update();
+    this.syncOutline(
+      this.hoverOutline,
+      this.hovered === this.state.selected ? null : this.hovered,
+    );
+    this.syncOutline(this.selectionOutline, this.state.selected);
     this.renderer.render(this.scene, this.camera);
     if (this.state.labels) {
       const right =
@@ -696,6 +738,10 @@ export class AtlasViewer {
     for (const mesh of this.meshes.values()) mesh.material.dispose();
     for (const g of this.base.values()) g.dispose();
     for (const g of this.detailed.values()) g.dispose();
+    for (const outline of [this.hoverOutline, this.selectionOutline]) {
+      outline.geometry.dispose();
+      outline.material.dispose();
+    }
     this.renderer.dispose();
     this.renderer.domElement.remove();
   }
