@@ -1,0 +1,20 @@
+Cerebra — Third-party attributions
+
+Geometry: modified visualization derivatives of FreeSurfer fsaverage data.
+Copyright and terms: /licenses/freesurfer.txt
+Sources: https://surfer.nmr.mgh.harvard.edu/ and the checksummed sources
+listed in /models/atlas.json. Meshes are transformed, parcel-split, sampled,
+and extracted from smoothed label volumes; they are not original data files.
+
+Nilearn: Copyright (c) The nilearn developers. /licenses/nilearn.txt
+MNE testing-data: fsaverage source files from the pinned commit recorded
+in /models/atlas.json. FreeSurfer data terms apply.
+
+React: /licenses/react.txt
+React DOM: /licenses/react-dom.txt
+Three.js: /licenses/three.txt
+Lucide: /licenses/lucide.txt
+DM Sans font: /licenses/dm-sans.txt
+Manrope font: /licenses/manrope.txt
+
+No affiliation or endorsement by the source institutions is implied.

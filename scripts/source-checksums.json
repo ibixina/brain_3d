@@ -1,0 +1,10 @@
+{
+  "aseg.mgz": "b55ef817e5e5bd1a3d76d4a2305283eef16fbff199ead3d840dd4b0fa8205e48",
+  "fsaverage6.tar.gz": "ffab4ce0e067079388b863edca7f3c9aefa870b151511b8f91f48031a5576757",
+  "lh.aparc.annot": "39b1acde9a32b4227631eb51cbcd8dff84e2138c57bf9f96d74026f2c17f1480",
+  "pial_left.gii.gz": "1e76fe43ac194c15fd272643f7ae7995621e2a496b3102b2d6175f0f8e6d7fc8",
+  "pial_right.gii.gz": "fdfae008bc10acf7cba82737ea5db9a7298948c41884a2d3330a785783a60a91",
+  "rh.aparc.annot": "6a326aed325d313e6e0d10f67630efcd8d3b8343c50d3e108e005f626614badb",
+  "sulc_left.gii.gz": "bd0f87e0cba153e9d5c5281edc7267f631b1967e5883d4027924766c8430eb62",
+  "sulc_right.gii.gz": "97afe76225903205a16b88f88cd796945f2a27011328e98decaa9128ff063afb"
+}
