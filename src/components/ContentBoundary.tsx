@@ -7,7 +7,7 @@ export function ContentRecovery({ label, className = "" }: RecoveryProps) {
   useEffect(() => {
     const frame = requestAnimationFrame(() => panel.current?.focus());
     return () => cancelAnimationFrame(frame);
-  }, []);
+  }, [label]);
   return (
     <section
       className={`content-recovery ${className}`}

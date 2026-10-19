@@ -1637,7 +1637,6 @@ export default function App() {
       )}
       {section !== "anatomy" && (
         <ContentBoundary
-          key={section}
           label={section === "scans" ? "Brain scans" : "Activity maps"}
           className="workspace-recovery"
         >
