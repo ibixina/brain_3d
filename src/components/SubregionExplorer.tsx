@@ -17,13 +17,16 @@ import {
   type SubregionView,
 } from "../subregion-navigation.ts";
 import "./subregions.css";
+import { thalamicGroupCamera, thalamicGroupSelection } from "../thalamus-guide.ts";
 
 const ProbabilityEvidence = lazy(() => import("./ProbabilityEvidence"));
 
-function ProbabilityDisclosure({ kind, part, omitted = false }: {
+function ProbabilityDisclosure({ kind, part, omitted = false, boundary, source }: {
   kind: SubregionKind;
   part: SubregionName;
   omitted?: boolean;
+  boundary?: string;
+  source?: string;
 }) {
   const [open, setOpen] = useState(false);
   return (
@@ -32,6 +35,9 @@ function ProbabilityDisclosure({ kind, part, omitted = false }: {
       onToggle={(event) => setOpen(event.currentTarget.open)}
     >
       <summary>{omitted ? subregionName(part) : "Atlas probability evidence"}</summary>
+      {open && boundary && (
+        <p>{boundary} <a href={source} target="_blank" rel="noreferrer">Boundary reference ↗</a></p>
+      )}
       {open && (
         <Suspense fallback={<p role="status">Loading evidence panel…</p>}>
           <ProbabilityEvidence kind={kind} part={part} />
@@ -94,7 +100,10 @@ export default function SubregionExplorer({
       kind === "brainstem"
         ? import("../brainstem-subregions.json")
         : kind === "thalamus"
-          ? import("../thalamus-subregions.json")
+          ? Promise.all([
+              import("../thalamus-subregions.json"),
+              import("../thalamus-guide.json"),
+            ]).then(([atlas, guide]) => ({ default: { ...atlas.default, guide: guide.default } }))
           : kind === "amygdala"
             ? import("../amygdala-subregions.json")
             : import("../hippocampus-subregions.json");
@@ -140,23 +149,30 @@ function LoadedSubregions({
   const name = subregionCatalog[kind].name;
   const partWord = kind === "thalamus" ? "nucleus" : "subregion";
   const resolved = resolveSubregionRoute(route, atlas.parts);
+  const initialGroup = atlas.guide?.groups.find((group) => group.id === resolved.tour);
+  const groupStart = initialGroup
+    ? thalamicGroupSelection(atlas.parts, initialGroup, resolved.hemisphere, resolved.selected)
+    : null;
+  const initialSelected = groupStart?.selected ?? resolved.selected;
   const host = useRef<HTMLDivElement>(null);
   const viewer = useRef<AtlasViewer | null>(null);
   const reading = useRef<HTMLHeadingElement>(null);
   const panel = useRef<HTMLElement>(null);
   const [state, setState] = useState<ViewState>(() => ({
     ...initial,
-    selected: resolved.selected,
+    selected: initialSelected,
     hemisphere: resolved.hemisphere,
-    isolated: resolved.isolated,
+    isolated: resolved.isolated && initialSelected === resolved.selected,
     exploded: resolved.exploded,
+    hiddenGroups: groupStart?.hiddenGroups ?? [],
   }));
+  const [tour, setTour] = useState(initialGroup?.id ?? null);
   const [camera, setCamera] = useState(resolved.camera);
   const [ready, setReady] = useState(false);
   const [error, setError] = useState("");
   const [attempt, setAttempt] = useState(0);
   const [query, setQuery] = useState("");
-  const [choosing, setChoosing] = useState(!resolved.selected);
+  const [choosing, setChoosing] = useState(!initialSelected);
   const [shareMessage, setShareMessage] = useState("");
   const [shareFailed, setShareFailed] = useState(false);
   const shareInput = useRef<HTMLInputElement>(null);
@@ -168,23 +184,32 @@ function LoadedSubregions({
     y: number;
   } | null>(null);
   const selected = atlas.parts.find((part) => part.id === state.selected);
+  const groupIndex = atlas.guide?.groups.findIndex((group) => group.id === tour) ?? -1;
+  const activeGroup = atlas.guide?.groups[groupIndex];
+  const boundary = selected ? atlas.guide?.labels[selected.key] : undefined;
   const pointed = atlas.parts.find((part) => part.id === hover?.id);
   const assetHemisphere = atlas.assets ? state.hemisphere : null;
-  const visible = matchingSubregions(atlas.parts, "", state.hemisphere);
+  const inScope = (part: SubregionName) => !state.hiddenGroups.includes(part.group);
+  const visible = matchingSubregions(atlas.parts, "", state.hemisphere).filter(inScope);
   const assets = atlas.assets?.filter((asset) =>
     state.hemisphere === "both" || asset.hemisphere === state.hemisphere,
   );
   const transferBytes = assets
     ? assets.reduce((sum, asset) => sum + asset.geometry.compressedBytes, 0)
     : atlas.geometry.compressedBytes;
-  const matches = matchingSubregions(atlas.parts, query, state.hemisphere);
+  const matches = matchingSubregions(atlas.parts, query, state.hemisphere).filter(inScope);
   if (large)
     matches.sort(
       (a, b) =>
         a.name.localeCompare(b.name) ||
         a.hemisphere.localeCompare(b.hemisphere),
     );
-  const omitted = matchingSubregions(atlas.omitted ?? [], "", state.hemisphere);
+  const omitted = matchingSubregions(atlas.omitted ?? [], "", state.hemisphere).filter(inScope);
+  const sourceCount = visible.length + omitted.length;
+  const focusReading = () => requestAnimationFrame(() => {
+    panel.current?.scrollTo({ top: 0 });
+    reading.current?.focus({ preventScroll: true });
+  });
   const choose = (id: string, inspect = false) => {
     setState((current) => ({
       ...current,
@@ -194,14 +219,48 @@ function LoadedSubregions({
     }));
     if (large) {
       setChoosing(false);
-      requestAnimationFrame(() => {
-        panel.current?.scrollTo({ top: 0 });
-        reading.current?.focus({ preventScroll: true });
-      });
+      focusReading();
     }
   };
   const chooseRef = useRef(choose);
   chooseRef.current = choose;
+
+  function showGroup(index: number) {
+    const group = atlas.guide?.groups[index];
+    if (!group) return;
+    setTour(group.id);
+    setState((current) => ({
+      ...current,
+      ...thalamicGroupSelection(atlas.parts, group, current.hemisphere),
+      isolated: false,
+      exploded: 0,
+    }));
+    setCamera(thalamicGroupCamera(group, state.hemisphere));
+    setQuery("");
+    setChoosing(false);
+    focusReading();
+  }
+
+  function endTour() {
+    setTour(null);
+    setState((current) => ({ ...current, hiddenGroups: [], isolated: false, exploded: 0 }));
+    setCamera("default");
+    focusReading();
+  }
+
+  function changeHemisphere(hemisphere: string) {
+    setState((current) => ({
+      ...current,
+      hemisphere,
+      selected: null,
+      isolated: false,
+      exploded: 0,
+      ...(activeGroup ? thalamicGroupSelection(atlas.parts, activeGroup, hemisphere) : {}),
+    }));
+    if (activeGroup) setCamera(thalamicGroupCamera(activeGroup, hemisphere));
+    setQuery("");
+    setChoosing(!activeGroup);
+  }
 
   useEffect(() => {
     routeChange.current({
@@ -211,13 +270,14 @@ function LoadedSubregions({
       isolated: state.isolated,
       exploded: state.exploded,
       camera,
+      tour,
     });
     setShareMessage("");
     setShareFailed(false);
-  }, [kind, state, camera]);
+  }, [kind, state, camera, tour]);
 
   useEffect(() => {
-    if (resolved.selected) reading.current?.focus({ preventScroll: true });
+    if (initialSelected) reading.current?.focus({ preventScroll: true });
   }, []);
 
   async function copyLink() {
@@ -275,7 +335,7 @@ function LoadedSubregions({
 
   useEffect(() => {
     if (ready) viewer.current?.view(camera);
-  }, [camera, ready, state.hemisphere, state.isolated, state.exploded]);
+  }, [camera, ready, state.hemisphere, state.isolated, state.exploded, tour]);
 
   return (
     <div className="subregion-explorer">
@@ -285,6 +345,7 @@ function LoadedSubregions({
           SEPARATE ATLAS · {atlas.source.spacingMm[0]} mm probability grid
           {large &&
             ` · ${state.hemisphere === "both" ? "Both sides" : state.hemisphere === "left" ? "Left" : "Right"}`}
+          {activeGroup && ` · ${activeGroup.name} group`}
         </span>
         {!ready && !error && (
           <p className="subregion-loading" role="status">
@@ -358,12 +419,12 @@ function LoadedSubregions({
         <h2>Inside the {kind}.</h2>
         <p className="subregion-intro">
           {large
-            ? `${visible.length} selectable surfaces from ${visible.length + omitted.length} source labels${state.hemisphere === "both" ? " across both sides" : ` on the ${state.hemisphere}`}.`
+            ? `${visible.length} selectable ${visible.length === 1 ? "surface" : "surfaces"} from ${sourceCount} source ${sourceCount === 1 ? "label" : "labels"}${state.hemisphere === "both" ? " across both sides" : ` on the ${state.hemisphere}`}${activeGroup ? " in this group" : ""}.`
             : "Select a surface or a name to inspect one of four atlas compartments."}
         </p>
-        {route.selected && !resolved.selected && (
+        {route.selected && route.selected !== initialSelected && (
           <p className="subregion-link-notice" role="status">
-            The linked part is unavailable in this atlas or hemisphere.
+            The linked part is unavailable in this view.
             Showing the available surfaces instead.
           </p>
         )}
@@ -374,17 +435,7 @@ function LoadedSubregions({
               <select
                 aria-label="Subregion hemisphere"
                 value={state.hemisphere}
-                onChange={(event) => {
-                  setState((current) => ({
-                    ...current,
-                    hemisphere: event.target.value,
-                    selected: null,
-                    isolated: false,
-                    exploded: 0,
-                  }));
-                  setQuery("");
-                  setChoosing(true);
-                }}
+                onChange={(event) => changeHemisphere(event.target.value)}
               >
                 <option value="left">Left</option>
                 <option value="right">Right</option>
@@ -408,6 +459,27 @@ function LoadedSubregions({
             ))}
           </select>
         </label>
+        {atlas.guide && (
+          activeGroup ? (
+            <div className="subregion-tour" aria-label="Thalamic nuclear group tour">
+              <div className="subregion-tour-heading">
+                <div>
+                  <span className="eyebrow" role="status">GROUP {groupIndex + 1} OF {atlas.guide.groups.length}</span>
+                  <h3>{activeGroup.name}</h3>
+                </div>
+                <button className="subregion-tour-end" onClick={endTour}>Show all groups</button>
+              </div>
+              <p>{activeGroup.text}</p>
+              <p className="subregion-tour-scope">{state.isolated ? "One nucleus is isolated." : "Only this group is shown."}</p>
+              <div className="subregion-tour-actions">
+                <button disabled={groupIndex === 0} onClick={() => showGroup(groupIndex - 1)} aria-label="Previous nuclear group">← Previous</button>
+                <button disabled={groupIndex === atlas.guide.groups.length - 1} onClick={() => showGroup(groupIndex + 1)} aria-label="Next nuclear group">Next →</button>
+              </div>
+            </div>
+          ) : (
+            <button className="subregion-tour-start" onClick={() => showGroup(0)}>Tour {atlas.guide.groups.length} nuclear groups →</button>
+          )
+        )}
         {large && (
           <button
             className="subregion-picker"
@@ -454,7 +526,9 @@ function LoadedSubregions({
               <p className="subregion-match-count" role="status">
                 {matches.length
                   ? `${matches.length} matching ${matches.length === 1 ? "surface" : "surfaces"}`
-                  : "No matching surface. See coverage below for source labels without winner voxels."}
+                  : activeGroup
+                    ? "No matching surface in this group. Show all groups to broaden the search."
+                    : "No matching surface. See coverage below for source labels without winner voxels."}
               </p>
             )}
           </div>
@@ -475,9 +549,15 @@ function LoadedSubregions({
                 : "Four gross subdivisions"}
           </h3>
           <p>
-            {selected?.description ??
+            {boundary ?? selected?.description ??
               `Surfaces derived from FreeSurfer’s ${kind} probability atlas. Colors identify atlas labels; they do not show activity, tissue color, or individual cells.`}
           </p>
+          {boundary && atlas.guide && (
+            <>
+              <p className="subregion-boundary-note">{atlas.guide.note}</p>
+              <a className="subregion-boundary-source" href={atlas.guide.source} target="_blank" rel="noreferrer">Boundary protocol · Table 2 ↗</a>
+            </>
+          )}
         </div>
         <div className="subregion-selection">
           <button
@@ -496,6 +576,7 @@ function LoadedSubregions({
           <button
             disabled={!ready}
             onClick={() => {
+              setTour(null);
               setState((current) => ({
                 ...initial,
                 hemisphere: current.hemisphere,
@@ -512,6 +593,7 @@ function LoadedSubregions({
           <Link size={14} /> Copy this atlas view
         </button>
         <p className="subregion-share-hint">
+          {tour && "Includes this group-tour stop. "}
           Shares the side, part, layout and chosen viewpoint. Manual rotation
           and zoom are not saved.
         </p>
@@ -529,7 +611,7 @@ function LoadedSubregions({
         )}
         {omitted.length > 0 && (
           <details className="subregion-omitted">
-            <summary>{omitted.length} source labels without a surface</summary>
+            <summary>{omitted.length} source {omitted.length === 1 ? "label" : "labels"} without a surface</summary>
             <p>
               The maximum-probability rule assigns no voxels to these labels,
               even though their probabilities are nonzero. No surface is
@@ -539,7 +621,7 @@ function LoadedSubregions({
             <ul>
               {omitted.map((part) => (
                 <li key={part.id}>
-                  <ProbabilityDisclosure kind={kind} part={part} omitted />
+                  <ProbabilityDisclosure kind={kind} part={part} omitted boundary={atlas.guide?.labels[part.key]} source={atlas.guide?.source} />
                 </li>
               ))}
             </ul>

@@ -5,6 +5,7 @@ import {
   type SubregionKind,
   type SubregionName,
 } from "./subregions.ts";
+import { thalamicGroupIds } from "./thalamus-guide.ts";
 
 export const subregionViews = {
   default: "Oblique",
@@ -23,8 +24,9 @@ export type SubregionRoute = {
   isolated: boolean;
   exploded: number;
   camera: SubregionView;
+  tour: string | null;
 };
-const fields = ["atlas", "side", "part", "isolate", "explode", "angle"];
+const fields = ["atlas", "side", "part", "isolate", "explode", "angle", "tour"];
 
 export function defaultSubregionRoute(
   kind: SubregionKind,
@@ -40,6 +42,7 @@ export function defaultSubregionRoute(
     isolated: false,
     exploded: 0,
     camera: "default",
+    tour: null,
   };
 }
 
@@ -65,6 +68,9 @@ export function subregionRouteFromHash(
   const angle = params.get("angle");
   if (angle && Object.hasOwn(subregionViews, angle))
     route.camera = angle as SubregionView;
+  const tour = params.get("tour");
+  if (kind === "thalamus" && tour && thalamicGroupIds.includes(tour))
+    route.tour = tour;
   return route;
 }
 
@@ -88,6 +94,8 @@ export function withSubregionRoute(hash: string, route: SubregionRoute | null) {
     if (route.selected && route.isolated) params.set("isolate", "1");
     else if (route.exploded > 0) params.set("explode", "1");
     if (route.camera !== "default") params.set("angle", route.camera);
+    if (route.kind === "thalamus" && route.tour && thalamicGroupIds.includes(route.tour))
+      params.set("tour", route.tour);
   }
   return params.size ? `#${params}` : "";
 }

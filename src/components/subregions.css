@@ -461,3 +461,70 @@
 .probability-method a:hover {
   text-decoration: underline;
 }
+
+.subregion-explorer .subregion-tour-start {
+  width: 100%;
+  margin: 8px 0;
+  color: #b6ded5;
+}
+.subregion-tour {
+  border: 1px solid #8cbaaf35;
+  border-radius: 8px;
+  padding: 12px;
+  margin: 13px 0;
+  background: #1c353344;
+  color: #b9cfd7;
+}
+.subregion-tour h3 {
+  font-size: 17px;
+  font-weight: 450;
+  color: #d5ede7;
+  margin: 7px 0;
+}
+.subregion-tour-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+.subregion-tour p {
+  font-size: 11px;
+  line-height: 1.7;
+  margin: 8px 0;
+}
+.subregion-tour .subregion-tour-scope {
+  color: #9db7c3;
+  font-size: 10px;
+}
+.subregion-tour-actions {
+  display: flex;
+  gap: 8px;
+  margin-top: 12px;
+}
+.subregion-tour-actions button {
+  flex: 1;
+}
+.subregion-tour .subregion-tour-end {
+  padding: 7px 5px;
+  border: 0;
+  background: transparent;
+  font-size: 10px;
+  white-space: nowrap;
+  color: #b6ded5;
+}
+.subregion-description .subregion-boundary-note {
+  font-size: 10px;
+  line-height: 1.7;
+  color: #9fb7c5;
+}
+.subregion-boundary-source,
+.subregion-probability > p a {
+  color: #a7d3c9;
+  font-size: 10px;
+  line-height: 1.7;
+  text-decoration: none;
+}
+.subregion-boundary-source:hover,
+.subregion-probability > p a:hover {
+  text-decoration: underline;
+}

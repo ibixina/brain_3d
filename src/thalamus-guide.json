@@ -1,0 +1,85 @@
+{
+  "checkedOn": "2026-10-19",
+  "source": "https://arxiv.org/html/1806.08634v1#Sx2.T2",
+  "sourceTitle": "Iglesias et al. (2018), Table 2",
+  "note": "Boundary notes summarize histology. Cells, layers and fiber bundles are not resolved by these surfaces.",
+  "groups": [
+    {
+      "id": "anterior",
+      "name": "Anterior",
+      "lead": "AV",
+      "camera": "anterior",
+      "text": "Begin with the rostral AV compartment."
+    },
+    {
+      "id": "lateral",
+      "name": "Lateral",
+      "lead": "LD",
+      "camera": "lateral",
+      "text": "Compare the two lateral-group labels."
+    },
+    {
+      "id": "ventral",
+      "name": "Ventral",
+      "lead": "VA",
+      "camera": "inferior",
+      "text": "Follow the ventral labels from anterior to posterior."
+    },
+    {
+      "id": "intralaminar",
+      "name": "Intralaminar",
+      "lead": "CM",
+      "camera": "superior",
+      "text": "Compare the four surfaced labels and their relative positions."
+    },
+    {
+      "id": "medial",
+      "name": "Medial",
+      "lead": "MDm",
+      "camera": "medial",
+      "text": "Compare the paired MD labels and reuniens."
+    },
+    {
+      "id": "posterior",
+      "name": "Posterior",
+      "lead": "PuM",
+      "camera": "posterior",
+      "text": "Locate geniculate labels, L-Sg, and the four pulvinar compartments."
+    },
+    {
+      "id": "reticular",
+      "name": "Reticular",
+      "lead": "R",
+      "camera": "lateral",
+      "text": "Inspect this wrapping compartment by rotating the model."
+    }
+  ],
+  "labels": {
+    "AV": "Rostral label incorporating AM and AD.",
+    "LD": "Small, evenly distributed cells histologically.",
+    "LP": "Continues VLp toward anterior pulvinar.",
+    "VA": "Anterior pole; traversed by fibers.",
+    "VAmc": "Large, darkly stained cells histologically.",
+    "VLa": "Small cell clusters histologically.",
+    "VLp": "Loosely arranged, large cells histologically.",
+    "VPL": "Includes ventral posteromedial territory (VPM).",
+    "VM": "Ventral to VA.",
+    "CeM": "Compact cells near reuniens histologically.",
+    "CL": "Above MD; lateral to MDl.",
+    "Pc": "Between MDl and VLp.",
+    "CM": "Encircled by internal medullary fibers.",
+    "Pf": "Below and medial to CM.",
+    "Pt": "Follows the stria medullaris.",
+    "MV(Re)": "Anteroventral to CM; medial to VA.",
+    "MDm": "Large, dark cells histologically.",
+    "MDl": "Smaller, variably grouped cells histologically.",
+    "LGN": "Ventral magnocellular and dorsal parvocellular layers.",
+    "MGN": "Medial and posterior to LGN.",
+    "L-Sg": "Above the pretectal complex.",
+    "PuA": "Ventromedial to LP.",
+    "PuM": "Posterior thalamic pole.",
+    "PuL": "Lateral caudal thalamic territory.",
+    "PuI": "Below and lateral to PuM.",
+    "R": "Wraps other thalamic nuclei."
+  }
+}

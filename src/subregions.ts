@@ -1,4 +1,5 @@
 import type { ViewerRegion } from "./viewer";
+import type { ThalamicGuide } from "./thalamus-guide.ts";
 
 export type SubregionName = {
   id: string;
@@ -16,6 +17,7 @@ export type Subregion = ViewerRegion & SubregionName & {
   voxelConnectedComponents6?: number;
 };
 export type SubregionAtlas = {
+  guide?: ThalamicGuide;
   title: string;
   checkedOn: string;
   parts: Subregion[];
