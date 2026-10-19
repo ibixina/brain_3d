@@ -1521,10 +1521,10 @@
       "paragraphs": [
         "The amygdala is a complex of nuclei in the anterior medial temporal region, next to the hippocampus. Coronal sections encounter the amygdala before more posterior hippocampal levels. The model links below let you compare these neighboring gross labels, rather than treating them as one structure.",
         "Amygdala connections include sensory and visceral inputs, routes to hypothalamic and brainstem systems, and connections with cortical and memory regions. The stria terminalis and ventral amygdalofugal pathway are named fiber routes. Both contain connections beyond a simple one-way input/output sequence.",
-        "Saygin, Kliemann and colleagues (2017) scanned ten postmortem specimens at 7 T with 100–150 micrometer sampling to delineate nine amygdala subregions and build a probabilistic atlas. Nuclear boundaries and labeling conventions in that protocol are more specific than the whole-amygdala meshes available here. The study did not delineate the complete extended amygdala.",
-        "FreeSurfer’s specialized hippocampus/amygdala module estimates nuclear labels using atlas information. Its documentation cautions that internal amygdala boundaries depend substantially on prior knowledge from ex vivo training data. Those labels are not applied to Cerebra’s meshes or MRI templates. A finer outer surface does not create internal nuclear evidence."
+        "Saygin, Kliemann and colleagues (2017) scanned ten postmortem specimens at 7 T with 100–150 micrometer sampling to delineate nine amygdala subregions and build a probabilistic atlas. Nuclear boundaries and labeling conventions in that protocol are more specific than the main whole-amygdala meshes. Their inspectors now open a separate probability-atlas viewer with nine source-derived labels per side. The study did not delineate the complete extended amygdala.",
+        "FreeSurfer’s specialized hippocampus/amygdala module estimates nuclear labels using atlas information. Its documentation cautions that internal amygdala boundaries depend substantially on prior knowledge from ex vivo training data. The separate atlas is not registered to Cerebra’s main meshes or MRI templates. Its 0.25 mm probability grid is not microscopic accuracy, and a finer gross outer surface does not create internal nuclear evidence."
       ],
-      "scope": "Cerebra has one gross amygdala mesh per hemisphere. The lateral, basal, accessory basal, central, medial, cortical, and paralaminar nuclei, anterior amygdaloid area, and corticoamygdaloid transition area have no separate selectable meshes. Individual fibers, intercalated cell groups, and the bed nucleus of the stria terminalis (BNST) are not reconstructed. The table groups selected atlas names and pathways; it is not a complete histological or connectivity atlas.",
+      "scope": "Cerebra has one gross amygdala mesh per hemisphere in the main brain. Explore atlas nuclei opens nine independent nuclear/area surfaces per side, derived by maximum-probability winner assignment. The medial label has only 17 winner voxels per side; this tiny fragment does not establish the nucleus’s full anatomical extent. The source left/right probability arrays are mirrored, not a measurement of anatomical asymmetry. Individual fibers, intercalated cell groups, and the bed nucleus of the stria terminalis (BNST) have no separate selectable meshes. This is not a complete histological or connectivity atlas.",
       "regions": [
         "aseg-18",
         "aseg-54",
@@ -1545,7 +1545,8 @@
         "hippocampus-sections",
         "amygdala-chapter",
         "amygdala-atlas",
-        "hippocampal-segmentation"
+        "hippocampal-segmentation",
+        "subregion-atlases"
       ],
       "reading": {
         "keys": ["amygdala"],
@@ -1553,31 +1554,31 @@
         "priority": -2
       },
       "comparison": {
-        "caption": "Selected amygdala names and pathways — written detail within gross anatomical context",
+        "caption": "Selected amygdala names and pathways — gross context and separate atlas coverage",
         "columns": ["Name or route", "Distinction and available coverage"],
         "rows": [
           {
             "label": "Lateral, basal, and accessory basal nuclei",
             "summary": "Three separately labeled components in the cited ex vivo MRI protocol.",
-            "detail": "Basolateral terminology groups territories; a grouped name does not make their boundaries identical. None is separately selectable here.",
+            "detail": "Basolateral terminology groups territories; a grouped name does not make their boundaries identical. Each has a separate surface in the independent atlas viewer.",
             "source": "amygdala-atlas"
           },
           {
             "label": "Central nucleus",
             "summary": "A separate protocol label with hypothalamic and brainstem connections described in the textbook.",
-            "detail": "Its subdivisions and projection neurons are not shown by the gross amygdala surface.",
+            "detail": "The separate viewer supplies one central-nucleus surface; its subdivisions and projection neurons remain unmodeled.",
             "source": "amygdala-chapter"
           },
           {
             "label": "Medial and cortical nuclei",
             "summary": "Two distinct labels in the cited MRI protocol.",
-            "detail": "A combined regional term such as centromedial or corticomedial is not itself a measured boundary in Cerebra.",
+            "detail": "Both have separate winner surfaces, but the medial label has just 17 winning voxels per side. Combined terms such as centromedial are not themselves measured boundaries here.",
             "source": "amygdala-atlas"
           },
           {
             "label": "Paralaminar nucleus",
             "summary": "Included as its own label in the cited protocol.",
-            "detail": "There is no separate paralaminar mesh or microscopic cell layer here.",
+            "detail": "The independent viewer supplies a paralaminar winner surface, retaining disconnected portions. Individual cells and microscopic layers are not reconstructed.",
             "source": "amygdala-atlas"
           },
           {
@@ -1649,7 +1650,7 @@
         "Feinstein and colleagues (2013) reported fear and panic during an experimental carbon-dioxide inhalation challenge in three people with bilateral amygdala damage. The result shows that this form of internally triggered fear can occur despite that damage. It does not mean that amygdala damage leaves every response to external threats unchanged, or that the whole structure has one uniform function.",
         "Lesion extent, the kind of task, physiological measurements, and people’s reports constrain each conclusion. These rare cases do not define everyone’s emotional life. Structural templates and statistical fMRI contrasts supply different evidence and do not reproduce the lesion or inhalation experiments."
       ],
-      "scope": "The 3D atlas has no lesion reconstructions, individual amygdala nuclei, conditioned-response recordings, or experimental participant scans. A teal amygdala highlight identifies a gross atlas region; it does not measure fear, diagnose anxiety, or simulate learning. The linked emotion guide is a selected anatomical sequence, and the MRI link opens a population template. Neither reproduces these experiments.",
+      "scope": "The whole-brain view shows gross amygdala labels; its inspector opens a separate nuclear probability atlas. Neither model contains lesion reconstructions, conditioned-response recordings, or experimental participant scans. A teal amygdala highlight identifies a gross atlas region; it does not measure fear, diagnose anxiety, or simulate learning. The linked emotion guide is a selected anatomical sequence, and the MRI link opens a population template. Neither reproduces these experiments.",
       "regions": ["aseg-18", "aseg-54"],
       "related": [
         "amygdala-anatomy",

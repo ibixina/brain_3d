@@ -5,6 +5,7 @@ import { assetUrl } from "../asset-url.ts";
 import {
   matchingSubregions,
   subregionName,
+  subregionCatalog,
   type SubregionAtlas,
   type SubregionKind,
 } from "../subregions.ts";
@@ -41,7 +42,9 @@ export default function SubregionExplorer({
     const request =
       kind === "brainstem"
         ? import("../brainstem-subregions.json")
-        : import("../thalamus-subregions.json");
+        : kind === "thalamus"
+          ? import("../thalamus-subregions.json")
+          : import("../amygdala-subregions.json");
     void request
       .then((data) => {
         if (!cancelled) setAtlas(data.default);
@@ -78,6 +81,8 @@ function LoadedSubregions({
   hemisphere: string;
 }) {
   const large = atlas.parts.length > 8;
+  const name = subregionCatalog[kind].name;
+  const partWord = kind === "thalamus" ? "nucleus" : "subregion";
   const start = { ...initial, hemisphere: large ? hemisphere : "both" };
   const host = useRef<HTMLDivElement>(null);
   const viewer = useRef<AtlasViewer | null>(null);
@@ -244,9 +249,9 @@ function LoadedSubregions({
       <section
         className="subregion-reading"
         ref={panel}
-        aria-label={`${kind === "brainstem" ? "Brainstem" : "Thalamic"} part descriptions`}
+        aria-label={`${name} part descriptions`}
       >
-        <h2>Inside the {kind === "brainstem" ? "brainstem" : "thalamus"}.</h2>
+        <h2>Inside the {kind}.</h2>
         <p className="subregion-intro">
           {large
             ? `${visible.length} selectable surfaces from ${visible.length + omitted.length} source labels${state.hemisphere === "both" ? " across both sides" : ` on the ${state.hemisphere}`}.`
@@ -281,7 +286,7 @@ function LoadedSubregions({
               aria-expanded={choosing}
               onClick={() => setChoosing((value) => !value)}
             >
-              Choose {selected ? "another nucleus" : "a nucleus"}
+              Choose {selected ? `another ${partWord}` : `a ${partWord}`}
               <ChevronDown size={14} />
             </button>
           </>
@@ -290,7 +295,7 @@ function LoadedSubregions({
           <div className={large ? "subregion-chooser" : ""}>
             {large && (
               <input
-                aria-label="Find an atlas nucleus"
+                aria-label={`Find an atlas ${partWord}`}
                 placeholder="Name, abbreviation, or group…"
                 value={query}
                 onChange={(event) => setQuery(event.target.value)}
@@ -304,7 +309,7 @@ function LoadedSubregions({
             )}
             <div
               className={`subregion-parts${large ? " searchable" : ""}`}
-              aria-label={large ? "Thalamic nuclei" : "Brainstem subdivisions"}
+              aria-label={`${name} subdivisions`}
             >
               {matches.map((part) => (
                 <button
@@ -339,7 +344,7 @@ function LoadedSubregions({
             {selected
               ? subregionName(selected)
               : large
-                ? "Nuclear atlas surfaces"
+                ? "Atlas subregion surfaces"
                 : "Four gross subdivisions"}
           </h3>
           <p>
@@ -393,9 +398,11 @@ function LoadedSubregions({
         <p className="subregion-scope">
           This separate probability atlas is not registered to the whole-brain
           model or MRI templates.{" "}
-          {large
+          {kind === "thalamus"
             ? "It includes geniculate labels that the main thalamus-proper mesh excludes. A 0.5 mm grid does not establish individual microscopic boundaries."
-            : "Its boundary protocol differs from the whole-brain label. Individual nuclei, nerves, and axons are not modeled."}
+            : kind === "amygdala"
+              ? "Its nine labels include seven nuclei and two areas per side. A 0.25 mm grid does not establish microscopic accuracy. Neurons, intercalated cell groups, and fiber pathways are not modeled."
+              : "Its boundary protocol differs from the whole-brain label. Individual nuclei, nerves, and axons are not modeled."}
         </p>
         <details className="subregion-sources">
           <summary>Sources, method & limitations</summary>
@@ -409,9 +416,11 @@ function LoadedSubregions({
           <p>
             Source space: approximately MNI-ICBM152 2009c symmetric. Recentered
             for this independent view.{" "}
-            {large
+            {kind === "thalamus"
               ? "This download has 26 label names per side; 23 per side have winner voxels. The current segmentation software describes 25 labels per side; this explorer follows the downloaded probability file, not that software’s current output."
-              : "The superior cerebellar peduncles share one label."}
+              : kind === "amygdala"
+                ? "Winner assignment uses all 30 channels, including background and 20 hippocampal labels. Only the nine amygdala labels per side are displayed. The supplied left/right probability arrays are identical with reflected affines; these shapes do not measure anatomical asymmetry. Tiny fragments, particularly the 17-voxel medial label, need caution."
+                : "The superior cerebellar peduncles share one label."}
           </p>
           <p>
             Modified FreeSurfer data ·{" "}
@@ -425,7 +434,9 @@ function LoadedSubregions({
             Segmentation protocol & boundary differences ↗
           </a>
           <a href={atlas.source.paper} target="_blank" rel="noreferrer">
-            Iglesias et al. ({large ? "2018" : "2015"}), original study ↗
+            {kind === "amygdala"
+              ? "Saygin, Kliemann et al. (2017)"
+              : `Iglesias et al. (${kind === "thalamus" ? "2018" : "2015"})`}, original study ↗
           </a>
           {atlas.source.labelDefinitions && (
             <a

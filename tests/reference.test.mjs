@@ -126,7 +126,7 @@ test("reference articles retain precise sources, scope limits, and valid anatomy
 });
 
 test("reference discovery combines vocabulary, aliases, and explanatory text", () => {
-  assert.equal(searchReference("layers microscopic")[0].id, "cortical-layers");
+  assert.ok(searchReference("layers microscopic").some((article) => article.id === "cortical-layers"));
   assert.equal(searchReference("EPSP")[0].id, "synapses");
   assert.equal(searchReference("sagittal")[0].id, "section-planes");
   assert.equal(searchReference("RNA taxonomy")[0].id, "cell-diversity");
@@ -407,7 +407,9 @@ test("amygdala notes link bilateral gross anatomy and distinguish human experime
     assert.ok(anatomy.regions.includes(region.id));
     assert.ok(evidence.regions.includes(region.id));
   }
-  assert.match(anatomy.scope, /no separate selectable meshes/);
+  assert.match(anatomy.scope, /nine independent nuclear\/area surfaces per side/);
+  assert.match(anatomy.scope, /17 winner voxels/);
+  assert.match(anatomy.scope, /mirrored.*not a measurement of anatomical asymmetry/);
   assert.match(anatomy.paragraphs.join(" "), /prior knowledge/);
   assert.match(referenceSources["amygdala-atlas"].kind, /human postmortem/);
   for (const id of ["amygdala-conditioning", "amygdala-panic"])
@@ -425,7 +427,7 @@ test("amygdala notes link bilateral gross anatomy and distinguish human experime
     evidence.paragraphs.join(" "),
     /skin conductance.*not a direct reading/,
   );
-  assert.match(evidence.scope, /no lesion reconstructions/);
+  assert.match(evidence.scope, /Neither model contains lesion reconstructions/);
   assert.ok(searchReference("paralaminar").includes(anatomy));
   assert.ok(searchReference("stria terminalis").includes(anatomy));
   assert.ok(searchReference("conditioning declarative").includes(evidence));

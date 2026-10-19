@@ -3,18 +3,20 @@ import { createHash } from "node:crypto";
 import { readFileSync } from "node:fs";
 import { gunzipSync } from "node:zlib";
 import test from "node:test";
-import { matchingSubregions, subregionName } from "../src/subregions.ts";
+import { matchingSubregions, subregionName, subregionForRegion, isSubregionKind } from "../src/subregions.ts";
 
 const root = new URL("../", import.meta.url);
 const load = (name) =>
   JSON.parse(readFileSync(new URL(`src/${name}-subregions.json`, root)));
 const brainstem = load("brainstem");
 const thalamus = load("thalamus");
+const amygdala = load("amygdala");
 const sha256 = (bytes) => createHash("sha256").update(bytes).digest("hex");
 
 for (const [name, atlas, byteBudget, triangleBudget] of [
   ["brainstem", brainstem, 300_000, 50_000],
   ["thalamus", thalamus, 1_500_000, 250_000],
+  ["amygdala", amygdala, 1_500_000, 250_000],
 ]) {
   const raw = readFileSync(new URL("public" + atlas.rawUrl, root));
   const compressed = readFileSync(
@@ -26,9 +28,10 @@ for (const [name, atlas, byteBudget, triangleBudget] of [
       .split(/\n/)
       .map((row) => row.split(","));
     const entries = [...atlas.parts, ...(atlas.omitted ?? [])];
-    assert.equal(entries.length, channels.length - 1);
+    const sides = atlas.source.volumes ? ["left", "right"] : ["both"];
+    assert.equal(entries.length, (atlas.source.includedChannels?.length ?? channels.length - 1) * sides.length);
     assert.equal(
-      new Set(entries.map((part) => part.channel)).size,
+      new Set(entries.map((part) => `${part.hemisphere}-${part.channel}`)).size,
       entries.length,
     );
     for (const entry of entries) {
@@ -54,7 +57,10 @@ for (const [name, atlas, byteBudget, triangleBudget] of [
       ),
       atlas,
     );
-    for (const hash of [atlas.source.archiveSha256, atlas.source.niftiSha256])
+    const niftiHashes = atlas.source.volumes
+      ? Object.values(atlas.source.volumes).map((volume) => volume.sha256)
+      : [atlas.source.niftiSha256];
+    for (const hash of [atlas.source.archiveSha256, ...niftiHashes])
       assert.match(hash, /^[a-f0-9]{64}$/);
   });
   test(`${name} compressed geometry matches the source-derived binary within its runtime budget`, () => {
@@ -247,4 +253,67 @@ test("nuclear search combines expanded names, exact source abbreviations, groups
     "Left Lateral geniculate · LGN",
   );
   assert.equal(matchingSubregions(brainstem.parts, "", "both").length, 4);
+});
+
+test("amygdala keeps nine labels per side and competes against all hippocampal/background channels", () => {
+  assert.equal(amygdala.parts.length, 18);
+  assert.deepEqual(amygdala.omitted, []);
+  assert.deepEqual(amygdala.source.spacingMm, [0.25, 0.25, 0.25]);
+  assert.deepEqual(amygdala.source.includedChannels, [21, 22, 23, 24, 25, 26, 27, 28, 29]);
+  assert.equal(amygdala.source.excludedChannels.length, 20);
+  assert.match(amygdala.source.method, /across all 30 channels.*hippocampal channels/);
+  assert.equal(amygdala.source.paper, "https://doi.org/10.1016/j.neuroimage.2017.04.046");
+  const { left, right } = amygdala.source.volumes;
+  assert.deepEqual(left.shape, [164, 224, 196, 30]);
+  assert.deepEqual(right.shape, left.shape);
+  assert.equal(left.probabilityArraySha256, right.probabilityArraySha256);
+  assert.equal(left.affine[0][0], 0.25);
+  assert.equal(right.affine[0][0], -0.25);
+  assert.equal(left.affine[0][3], -right.affine[0][3]);
+  for (const side of ["left", "right"]) {
+    const parts = amygdala.parts.filter((part) => part.hemisphere === side);
+    assert.equal(parts.length, 9);
+    const medial = parts.find((part) => part.abbreviation === "Me");
+    assert.equal(medial.voxels, 17);
+    assert.ok(medial.maxProbability < 0.5);
+    assert.match(medial.description, /tiny fragment.*not establish.*full anatomical extent/);
+    assert.equal(parts.find((part) => part.abbreviation === "PL").voxelConnectedComponents6, 11);
+    assert.equal(parts.find((part) => part.abbreviation === "CAT").sourceName, "Corticoamygdaloid-transitio");
+  }
+});
+
+test("reflected source affines preserve paired amygdala surface winding and anatomical sides", () => {
+  const raw = readFileSync(new URL("public" + amygdala.rawUrl, root));
+  const view = new DataView(raw.buffer, raw.byteOffset, raw.byteLength);
+  const signedVolume = (part) => {
+    const point = (index) => [0, 1, 2].map((axis) => view.getFloat32(part.offset + index * 12 + axis * 4, true));
+    let sum = 0;
+    for (let i = 0; i < part.triangles; i++) {
+      const [a, b, c] = [0, 1, 2].map((corner) => point(view.getUint32(part.offset + part.vertices * 28 + i * 12 + corner * 4, true)));
+      sum += a[0] * (b[1] * c[2] - b[2] * c[1]) + a[1] * (b[2] * c[0] - b[0] * c[2]) + a[2] * (b[0] * c[1] - b[1] * c[0]);
+    }
+    return sum / 6;
+  };
+  for (const left of amygdala.parts.filter((part) => part.hemisphere === "left")) {
+    const right = amygdala.parts.find((part) => part.hemisphere === "right" && part.label === left.label);
+    assert.ok(left.center[0] < 0 && right.center[0] > 0);
+    assert.equal(left.voxels, right.voxels);
+    assert.equal(left.triangles, right.triangles);
+    assert.ok(Math.abs(signedVolume(left)) > 0);
+    assert.ok(Math.abs(signedVolume(left) - signedVolume(right)) < 1e-6);
+  }
+});
+
+test("standalone targets keep whole-brain source labels and hemisphere search distinct", () => {
+  for (const [id, kind] of [["aseg-16", "brainstem"], ["aseg-10", "thalamus"], ["aseg-49", "thalamus"], ["aseg-18", "amygdala"], ["aseg-54", "amygdala"]]) {
+    assert.equal(subregionForRegion(id), kind);
+    assert.ok(isSubregionKind(kind));
+  }
+  assert.equal(subregionForRegion("aseg-17"), null);
+  assert.equal(subregionForRegion("constructor"), null);
+  assert.equal(isSubregionKind("constructor"), false);
+  assert.equal(isSubregionKind(null), false);
+  assert.deepEqual(matchingSubregions(amygdala.parts, "right medial nucleus", "both").map((part) => part.id), ["amyg-right-7006"]);
+  assert.equal(matchingSubregions(amygdala.parts, "paralaminar", "left").length, 1);
+  assert.equal(matchingSubregions(amygdala.parts, "HATA", "both").length, 0);
 });

@@ -3,7 +3,7 @@ import { OrbitControls } from "three/examples/jsm/controls/OrbitControls.js";
 import { regions, type Region } from "./data";
 import { assetUrl } from "./asset-url.ts";
 import { meshBoundary } from "./mesh-boundary.ts";
-import { perspectiveFraming } from "./viewer-framing.ts";
+import { perspectiveFraming, sphereFocusDistance } from "./viewer-framing.ts";
 
 export type ViewState = {
   selected: string | null;
@@ -146,7 +146,8 @@ export class AtlasViewer {
     this.controls.target.set(0, 5, 10);
     this.controls.enableDamping = true;
     this.controls.dampingFactor = 0.09;
-    this.controls.minDistance = 18;
+    this.controls.minDistance = dataset.fitOnLoad ? 0.5 : 18;
+    if (dataset.fitOnLoad) this.camera.near = 0.05;
     this.controls.maxDistance = 850;
     this.controls.autoRotateSpeed = 0.5;
     this.controls.addEventListener("change", this.invalidate);
@@ -465,7 +466,7 @@ export class AtlasViewer {
     if (!mesh) return;
     const sphere = mesh.geometry.boundingSphere!;
     const target = sphere.center.clone();
-    const distance = Math.max(sphere.radius * 3.6, 35) * this.framing;
+    const distance = this.focusDistance(sphere.radius);
     const dir = new THREE.Vector3()
       .subVectors(this.camera.position, this.controls.target)
       .normalize();
@@ -492,7 +493,7 @@ export class AtlasViewer {
       target: sphere.center,
       position: sphere.center
         .clone()
-        .addScaledVector(dir, Math.max(sphere.radius * 3.6, 35) * this.framing),
+        .addScaledVector(dir, this.focusDistance(sphere.radius)),
     };
     this.invalidate();
   }
@@ -533,14 +534,21 @@ export class AtlasViewer {
         .copy(target)
         .addScaledVector(
           direction,
-          Math.max(sphere.radius * 3.6, 35) * this.framing,
+          this.focusDistance(sphere.radius),
         );
     }
     this.cameraGoal = { position, target };
     this.invalidate();
   }
+  private focusDistance(radius: number) {
+    return sphereFocusDistance(
+      radius,
+      this.framing,
+      this.dataset.fitOnLoad ? 1 : 35,
+    );
+  }
   zoom(amount: number) {
-    this.pointerLeave();
+    this.stopFlight();
     this.camera.position
       .sub(this.controls.target)
       .multiplyScalar(amount)

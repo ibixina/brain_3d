@@ -5,19 +5,26 @@ from skimage.measure import marching_cubes
 
 
 def pack_surfaces(image, winners, entries):
+    return pack_surface_sets([(image, winners, entries)])
+
+
+def pack_surface_sets(sets):
     surfaces = []
     omitted = []
-    for entry in entries:
-        mask = winners == entry['channel']
-        voxels = int(mask.sum())
-        if not voxels:
-            omitted.append({**entry, 'voxels': 0, 'reason': 'No maximum-probability winner voxels'})
-            continue
-        vertices, faces, _, _ = marching_cubes(mask.astype(np.float32), level=0.5)
-        ras = nib.affines.apply_affine(image.affine, vertices)
-        display = ras[:, [0, 2, 1]]
-        display[:, 2] *= -1
-        surfaces.append((entry, display, faces, voxels))
+    for image, winners, entries in sets:
+        for entry in entries:
+            mask = winners == entry['channel']
+            voxels = int(mask.sum())
+            if not voxels:
+                omitted.append({**entry, 'voxels': 0, 'reason': 'No maximum-probability winner voxels'})
+                continue
+            vertices, faces, _, _ = marching_cubes(mask.astype(np.float32), level=0.5)
+            if np.linalg.det(image.affine[:3, :3]) < 0:
+                faces = faces[:, [0, 2, 1]]
+            ras = nib.affines.apply_affine(image.affine, vertices)
+            display = ras[:, [0, 2, 1]]
+            display[:, 2] *= -1
+            surfaces.append((entry, display, faces, voxels))
     all_vertices = np.concatenate([vertices for _, vertices, _, _ in surfaces])
     origin = (all_vertices.min(axis=0) + all_vertices.max(axis=0)) / 2
     blob = bytearray()

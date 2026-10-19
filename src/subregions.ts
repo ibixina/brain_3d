@@ -29,7 +29,40 @@ export type SubregionAtlas = {
   };
   geometry: { compressedBytes: number };
 };
-export type SubregionKind = "brainstem" | "thalamus";
+export const subregionCatalog = {
+  brainstem: {
+    name: "Brainstem",
+    button: "Explore 4 subregions",
+    detail: "Separate brainstem atlas model",
+  },
+  thalamus: {
+    name: "Thalamic",
+    button: "Explore atlas nuclei",
+    detail: "Separate atlas · 23 surfaces per side",
+  },
+  amygdala: {
+    name: "Amygdala",
+    button: "Explore atlas nuclei",
+    detail: "Separate atlas · 9 surfaces per side",
+  },
+};
+export type SubregionKind = keyof typeof subregionCatalog;
+
+const targets: Record<string, SubregionKind> = {
+  "aseg-16": "brainstem",
+  "aseg-10": "thalamus",
+  "aseg-49": "thalamus",
+  "aseg-18": "amygdala",
+  "aseg-54": "amygdala",
+};
+
+export function subregionForRegion(id: string) {
+  return Object.hasOwn(targets, id) ? targets[id] : null;
+}
+
+export function isSubregionKind(value: string | null): value is SubregionKind {
+  return value !== null && Object.hasOwn(subregionCatalog, value);
+}
 
 export function matchingSubregions<T extends SubregionName>(
   parts: T[],

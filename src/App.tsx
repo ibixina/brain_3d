@@ -46,6 +46,12 @@ import {
 } from "./reference-navigation.ts";
 import { regionCamera, regionEnabled, regionView } from "./region-view.ts";
 import {
+  isSubregionKind,
+  subregionCatalog,
+  subregionForRegion,
+  type SubregionKind,
+} from "./subregions.ts";
+import {
   referenceTopicsForRegion,
   referenceKeepsRegion,
 } from "./reference-topics.ts";
@@ -195,7 +201,7 @@ export default function App() {
   const [expanded, setExpanded] = useState<string[]>([]);
   const [tab, setTab] = useState<DetailTab>("overview");
   const [modal, setModal] = useState<
-    "sources" | "help" | "videos" | "brainstem" | "thalamus" | null
+    "sources" | "help" | "videos" | SubregionKind | null
   >(null);
   const [saved, setSaved] = useState<string[]>(readSaved);
   const [savedOnly, setSavedOnly] = useState(false);
@@ -214,6 +220,8 @@ export default function App() {
   const [settings, setSettings] = useState(false);
   const [cameraView, setCameraView] = useState("default");
   const selected = regions.find((p) => p.id === state.selected);
+  const subregionKind = selected ? subregionForRegion(selected.id) : null;
+  const subregionModal = isSubregionKind(modal) ? modal : null;
   const readingReference = sidebar && libraryTab === "reference";
   const hovered = regions.find((p) => p.id === hover?.id);
   const selectedVisible = selected && regionEnabled(selected, state);
@@ -446,9 +454,9 @@ export default function App() {
   }, [section]);
   useEffect(() => {
     viewer.current?.setActive(
-      section === "anatomy" && modal !== "brainstem" && modal !== "thalamus",
+      section === "anatomy" && !subregionModal,
     );
-  }, [section, modal]);
+  }, [section, subregionModal]);
   useEffect(() => () => viewer.current?.dispose(), []);
   useEffect(() => {
     viewer.current?.update(state);
@@ -1507,26 +1515,18 @@ export default function App() {
                   Find current research on PubMed <ArrowUpRight size={12} />
                 </a>
               </div>
-              {["aseg-16", "aseg-10", "aseg-49"].includes(selected.id) && (
+              {subregionKind && (
                 <button
                   className="subregion-open"
-                  onClick={() =>
-                    setModal(
-                      selected.id === "aseg-16" ? "brainstem" : "thalamus",
-                    )
-                  }
+                  onClick={() => setModal(subregionKind)}
                 >
                   <Layers3 size={17} />
                   <span>
                     <strong>
-                      {selected.id === "aseg-16"
-                        ? "Explore 4 subregions"
-                        : "Explore atlas nuclei"}
+                      {subregionCatalog[subregionKind].button}
                     </strong>
                     <small>
-                      {selected.id === "aseg-16"
-                        ? "Separate brainstem atlas model"
-                        : "Separate atlas · 23 surfaces per side"}
+                      {subregionCatalog[subregionKind].detail}
                     </small>
                   </span>
                   <ArrowUpRight size={15} />
@@ -1626,17 +1626,15 @@ export default function App() {
       )}
       <dialog
         ref={modalRef}
-        className={`atlas-dialog${modal === "brainstem" || modal === "thalamus" ? " subregion-dialog" : ""}`}
+        className={`atlas-dialog${subregionModal ? " subregion-dialog" : ""}`}
         aria-label={
-          modal === "thalamus"
-            ? "Thalamic atlas subregions"
-            : modal === "brainstem"
-              ? "Brainstem atlas subregions"
-              : modal === "videos"
-                ? "Dissection video library"
-                : modal === "sources"
-                  ? "Atlas sources and coverage"
-                  : "How to explore"
+          subregionModal
+            ? `${subregionCatalog[subregionModal].name} atlas subregions`
+            : modal === "videos"
+              ? "Dissection video library"
+              : modal === "sources"
+                ? "Atlas sources and coverage"
+                : "How to explore"
         }
         onCancel={() => setModal(null)}
         onClick={(e) => {
@@ -1645,15 +1643,13 @@ export default function App() {
       >
         <div className="dialog-header">
           <span className="eyebrow">
-            {modal === "thalamus"
-              ? "THALAMUS · ATLAS SUBREGIONS"
-              : modal === "brainstem"
-                ? "BRAINSTEM · ATLAS SUBREGIONS"
-                : modal === "sources"
-                  ? "SOURCES & COVERAGE"
-                  : modal === "videos"
-                    ? "THE DISSECTION FILM LIBRARY"
-                    : "EXPLORER GUIDE"}
+            {subregionModal
+              ? `${subregionModal.toUpperCase()} · ATLAS SUBREGIONS`
+              : modal === "sources"
+                ? "SOURCES & COVERAGE"
+                : modal === "videos"
+                  ? "THE DISSECTION FILM LIBRARY"
+                  : "EXPLORER GUIDE"}
           </span>
           <IconButton
             icon={X}
@@ -1661,10 +1657,10 @@ export default function App() {
             onClick={() => setModal(null)}
           />
         </div>
-        {modal === "brainstem" || modal === "thalamus" ? (
+        {subregionModal ? (
           <Suspense fallback={<p role="status">Loading subregion explorer…</p>}>
             <SubregionExplorer
-              kind={modal}
+              kind={subregionModal}
               hemisphere={selected?.hemisphere ?? "both"}
             />
           </Suspense>
@@ -1700,7 +1696,8 @@ export default function App() {
                 inspector also opens a separate, four-compartment
                 probability-atlas model. Thalamus inspectors open a separate
                 nuclear atlas with 23 surfaces per side, from 26 source labels
-                per side.
+                per side. Amygdala inspectors open nine nuclear/area surfaces
+                per side in another independent probability-atlas model.
               </p>
               <strong>What remains outside this atlas</strong>
               <p>
@@ -1711,6 +1708,8 @@ export default function App() {
                 atlas provides four gross compartments, without individual
                 nuclei. A separate thalamic atlas provides selected nuclear
                 surfaces; three source labels per side have no winner surface.
+                A separate amygdala atlas provides nine labels per side, with
+                particularly limited winner coverage of the medial nucleus.
                 Anatomy differs between individuals, and atlas boundaries differ
                 between atlases.
               </p>

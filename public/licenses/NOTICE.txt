@@ -21,6 +21,15 @@ Separate from fsaverage and the MRI templates. Data terms: /licenses/freesurfer.
 Source, method, frame, and checksums: /subregions/thalamus-provenance.json
 Iglesias et al. (2018): https://doi.org/10.1016/j.neuroimage.2018.08.012
 
+Standalone amygdala: modified winner-surface derivatives of FreeSurfer's
+HippoAmyg.zip probability atlas. Only nine amygdala channels per side are
+surfaced after winner competition across all 30 channels. Disconnected
+portions are retained, without extra smoothing or resampling. The source
+supplies reflected left/right probability grids. Separate from fsaverage
+and MRI templates. Data terms: /licenses/freesurfer.txt
+Source, method, frame, and checksums: /subregions/amygdala-provenance.json
+Saygin, Kliemann et al. (2017): https://doi.org/10.1016/j.neuroimage.2017.04.046
+
 Nilearn: Copyright (c) The nilearn developers. /licenses/nilearn.txt
 MNE testing-data: fsaverage source files from the pinned commit recorded
 in /models/atlas.json. FreeSurfer data terms apply.
