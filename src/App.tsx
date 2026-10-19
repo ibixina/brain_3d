@@ -372,7 +372,6 @@ export default function App() {
       const params = new URLSearchParams(location.hash.slice(1));
       const view = params.get("view");
       const origin = referenceOrigin(location.hash);
-      setReturnReference(origin);
       const next = view === "scans" || view === "activities" ? view : "anatomy";
       setSection(next);
       setNavigationVersion((version) => version + 1);
@@ -380,11 +379,12 @@ export default function App() {
       setSettings(false);
       setHover(null);
       setRevealView(null);
+      if (next === "anatomy" && params.has("reference")) {
+        openReferenceRef.current(params.get("reference") || null);
+        return;
+      }
+      setReturnReference(origin);
       if (next === "anatomy") {
-        if (params.has("reference")) {
-          openReferenceRef.current(params.get("reference") || null);
-          return;
-        }
         const position = learningFromHash(location.hash);
         if (position) {
           learningRef.current(position.path, position.step, origin);
