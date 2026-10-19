@@ -2116,3 +2116,36 @@ kbd {
     top: 116px;
   }
 }
+
+.library-body {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-height: 0;
+}
+.anatomical-term-note {
+  border-left: 2px solid #99d9ca66;
+  padding: 2px 0 2px 12px;
+  margin: 4px 0 14px;
+  font-size: 10px;
+  line-height: 1.7;
+  color: #9fb8b2;
+}
+.anatomical-term-note strong {
+  color: #c9e3d9;
+  font-size: 11px;
+  font-weight: 500;
+}
+.anatomical-term-note p {
+  margin: 4px 0;
+}
+.anatomical-term-note a,
+.reference-search-link {
+  color: #a9d6c9;
+  font-size: 10px;
+}
+.reference-search-link {
+  margin-top: 9px;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}

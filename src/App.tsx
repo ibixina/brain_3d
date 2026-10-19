@@ -1,4 +1,11 @@
-import React, { lazy, Suspense, useEffect, useRef, useState } from "react";
+import React, {
+  lazy,
+  Suspense,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+} from "react";
 import {
   ArrowDownToLine,
   ArrowLeft,
@@ -32,6 +39,7 @@ import {
 import type { LucideIcon } from "lucide-react";
 import { AtlasViewer, type ViewState } from "./viewer";
 import { assetUrl } from "./asset-url.ts";
+import { matchedAnatomicalTerms, searchRegions } from "./anatomical-search.ts";
 import { RegionVideos, VideoLibrary } from "./components/DissectionVideos";
 import RegionCallout from "./components/RegionCallout";
 import {
@@ -59,7 +67,14 @@ import {
 } from "./data";
 
 const ImagingWorkspace = lazy(() => import("./components/ImagingWorkspace"));
+const ReferenceLibrary = lazy(() => import("./components/ReferenceLibrary"));
 type Section = "anatomy" | "scans" | "activities";
+type LibraryTab = "structures" | "paths" | "reference";
+const libraryTabs: { id: LibraryTab; label: string }[] = [
+  { id: "structures", label: "Structures" },
+  { id: "paths", label: "Learning paths" },
+  { id: "reference", label: "Reference" },
+];
 
 const defaultView: ViewState = {
   selected: null,
@@ -130,8 +145,13 @@ export default function App() {
   const [learning, setLearning] = useState<LearningPosition | null>(() =>
     learningFromHash(location.hash),
   );
-  const [libraryTab, setLibraryTab] = useState<"structures" | "paths">(
-    "structures",
+  const [libraryTab, setLibraryTab] = useState<LibraryTab>(() =>
+    new URLSearchParams(location.hash.slice(1)).has("reference")
+      ? "reference"
+      : "structures",
+  );
+  const [referenceId, setReferenceId] = useState<string | null>(
+    () => new URLSearchParams(location.hash.slice(1)).get("reference") || null,
   );
   const [state, setState] = useState<ViewState>(() => {
     const position = learningFromHash(location.hash);
@@ -165,10 +185,13 @@ export default function App() {
     [],
   );
   const [toast, setToast] = useState("");
-  const [sidebar, setSidebar] = useState(false);
+  const [sidebar, setSidebar] = useState(() =>
+    new URLSearchParams(location.hash.slice(1)).has("reference"),
+  );
   const [settings, setSettings] = useState(false);
   const [cameraView, setCameraView] = useState("default");
   const selected = regions.find((p) => p.id === state.selected);
+  const readingReference = sidebar && libraryTab === "reference";
   const hovered = regions.find((p) => p.id === hover?.id);
   const selectedVisible =
     selected &&
@@ -218,10 +241,52 @@ export default function App() {
       );
   }
   function openPaths() {
-    setLibraryTab("paths");
+    switchLibraryTab("paths");
     setSidebar(true);
     setSettings(false);
     setHover(null);
+  }
+  function openReference(id: string | null) {
+    setReferenceId(id);
+    setLibraryTab("reference");
+    setSidebar(true);
+    setSettings(false);
+    setHover(null);
+    history.replaceState(
+      null,
+      "",
+      id ? `#reference=${encodeURIComponent(id)}` : "#reference",
+    );
+  }
+  function switchLibraryTab(next: LibraryTab) {
+    if (next === "reference") {
+      openReference(referenceId);
+      return;
+    }
+    setLibraryTab(next);
+    if (new URLSearchParams(location.hash.slice(1)).has("reference"))
+      history.replaceState(null, "", location.pathname + anatomyHash());
+  }
+  function closeLibrary() {
+    setSidebar(false);
+    if (new URLSearchParams(location.hash.slice(1)).has("reference"))
+      history.replaceState(null, "", location.pathname + anatomyHash());
+  }
+  function exploreReferenceRegion(id: string) {
+    const region = regions.find((item) => item.id === id)!;
+    select(id);
+    setState({
+      ...defaultView,
+      selected: id,
+      opacity: region.kind === "cortex" ? 1 : 0.15,
+      hiddenGroups: defaultView.hiddenGroups.filter(
+        (group) => group !== region.group,
+      ),
+    });
+    camera(region.kind === "cortex" ? region.hemisphere : "default");
+    requestAnimationFrame(() =>
+      document.querySelector<HTMLElement>(".region-name")?.focus(),
+    );
   }
   function endLearning(completed = false) {
     setLearning(null);
@@ -246,6 +311,12 @@ export default function App() {
       setSettings(false);
       setHover(null);
       if (next === "anatomy") {
+        if (params.has("reference")) {
+          setReferenceId(params.get("reference") || null);
+          setLibraryTab("reference");
+          setSidebar(true);
+          return;
+        }
         const position = learningFromHash(location.hash);
         if (position) {
           goToLearning(position.path, position.step);
@@ -326,18 +397,22 @@ export default function App() {
       if ((event.ctrlKey || event.metaKey) && event.key === "k" && !modal) {
         event.preventDefault();
         changeSection("anatomy");
+        setLibraryTab("structures");
         setSidebar(true);
         setSettings(false);
         requestAnimationFrame(() => searchRef.current?.focus());
         return;
       }
-      if (input || modal || section !== "anatomy") return;
-      if (event.key === "Escape") {
-        setSettings(false);
-        setSidebar(false);
-        setState((p) => ({ ...p, isolated: false, selected: null }));
-        history.replaceState(null, "", location.pathname);
+      if (event.key === "Escape" && !modal && section === "anatomy") {
+        if (sidebar) closeLibrary();
+        else if (settings) setSettings(false);
+        else closeRegion();
+        document
+          .querySelector<HTMLElement>('[aria-label="Open anatomy library"]')
+          ?.focus();
+        return;
       }
+      if (input || modal || section !== "anatomy") return;
       if (event.key.toLowerCase() === "e")
         setState((p) => ({
           ...p,
@@ -350,16 +425,14 @@ export default function App() {
     };
     window.addEventListener("keydown", handler);
     return () => window.removeEventListener("keydown", handler);
-  }, [modal, section]);
+  }, [modal, section, learning, state.selected, sidebar, settings]);
   const search = query.trim().toLowerCase();
-  const results = regions.filter(
-    (p) =>
-      (!savedOnly || saved.includes(p.id)) &&
-      (!search ||
-        `${p.name} ${p.hemisphere} ${p.group} ${infoFor(p).functions.join(" ")} ${p.key}`
-          .toLowerCase()
-          .includes(search)),
+  const results = useMemo(
+    () =>
+      searchRegions(query).filter((p) => !savedOnly || saved.includes(p.id)),
+    [query, savedOnly, saved],
   );
+  const matchedTerms = matchedAnatomicalTerms(query);
   function toggleGroup(group: string) {
     update({
       hiddenGroups: state.hiddenGroups.includes(group)
@@ -374,6 +447,8 @@ export default function App() {
   }
   function reset() {
     setLearning(null);
+    setSidebar(false);
+    setSettings(false);
     setSection("anatomy");
     setState({ ...defaultView });
     setCameraView("default");
@@ -407,18 +482,22 @@ export default function App() {
     setSidebar(false);
     setSettings(false);
     setHover(null);
-    const hash =
-      next === "anatomy"
-        ? learning
-          ? learningHash(learning.path, learning.step)
-          : state.selected
-            ? `#region=${state.selected}`
-            : ""
-        : `#view=${next}`;
+    const hash = next === "anatomy" ? anatomyHash() : `#view=${next}`;
     history.replaceState(null, "", location.pathname + hash);
   }
+  function anatomyHash() {
+    return learning
+      ? learningHash(learning.path, learning.step)
+      : state.selected
+        ? `#region=${state.selected}`
+        : "";
+  }
   function openLibrary() {
-    setLibraryTab("structures");
+    if (sidebar) {
+      closeLibrary();
+      return;
+    }
+    switchLibraryTab("structures");
     setSidebar((current) => !current);
     setSettings(false);
     setSavedOnly(false);
@@ -435,7 +514,7 @@ export default function App() {
   const controlsDisabled = !!error || !ready;
   return (
     <div
-      className={`app-shell ${section === "anatomy" && selected ? "has-selection" : ""} ${sidebar ? "library-open" : ""} section-${section}`}
+      className={`app-shell ${section === "anatomy" && selected && !readingReference ? "has-selection" : ""} ${sidebar ? "library-open" : ""} section-${section}`}
     >
       <header className="app-header">
         <button className="brand" onClick={reset} aria-label="Cerebra home">
@@ -483,180 +562,243 @@ export default function App() {
       </header>
       <div className="workspace" hidden={section !== "anatomy"}>
         {sidebar && (
-          <aside className="structure-panel" aria-label="Anatomical structures">
+          <aside className="structure-panel" aria-label="Anatomy library">
             <div className="sidebar-heading">
               <span className="eyebrow">EXPLORE ANATOMY</span>
-              <span className="count-badge">{regions.length}</span>
+              {libraryTab === "structures" && (
+                <span className="count-badge">{regions.length}</span>
+              )}
               <IconButton
                 className="mobile-close"
                 icon={X}
-                label="Close structure list"
-                onClick={() => setSidebar(false)}
+                label="Close anatomy library"
+                onClick={closeLibrary}
               />
             </div>
             <h1>
               {libraryTab === "paths"
                 ? "See the connections."
-                : "Find your focus."}
+                : libraryTab === "reference"
+                  ? "Understand the details."
+                  : "Find your focus."}
             </h1>
             <div
               className="library-tabs"
               role="tablist"
               aria-label="Anatomy library categories"
+              onKeyDown={(event) => {
+                if (
+                  !["ArrowLeft", "ArrowRight", "Home", "End"].includes(
+                    event.key,
+                  )
+                )
+                  return;
+                event.preventDefault();
+                const current = libraryTabs.findIndex(
+                  (item) => item.id === libraryTab,
+                );
+                const next =
+                  event.key === "Home"
+                    ? 0
+                    : event.key === "End"
+                      ? 2
+                      : (current + (event.key === "ArrowRight" ? 1 : 2)) % 3;
+                switchLibraryTab(libraryTabs[next].id);
+                document
+                  .getElementById(`library-tab-${libraryTabs[next].id}`)
+                  ?.focus();
+              }}
             >
-              <button
-                role="tab"
-                aria-selected={libraryTab === "structures"}
-                onClick={() => setLibraryTab("structures")}
-              >
-                Structures
-              </button>
-              <button
-                role="tab"
-                aria-selected={libraryTab === "paths"}
-                onClick={() => setLibraryTab("paths")}
-              >
-                Learning paths
-              </button>
+              {libraryTabs.map((item) => (
+                <button
+                  key={item.id}
+                  role="tab"
+                  id={`library-tab-${item.id}`}
+                  aria-controls="library-content"
+                  aria-selected={libraryTab === item.id}
+                  tabIndex={libraryTab === item.id ? 0 : -1}
+                  onClick={() => switchLibraryTab(item.id)}
+                >
+                  {item.label}
+                </button>
+              ))}
             </div>
-            {libraryTab === "paths" ? (
-              <LearningLibrary onStart={(path) => goToLearning(path)} />
-            ) : (
-              <>
-                <div className="search-box">
-                  <Search size={16} />
-                  <input
-                    ref={searchRef}
-                    value={query}
-                    onChange={(event) => setQuery(event.target.value)}
-                    placeholder="Find a brain region…"
-                    aria-label="Search brain regions"
+            <div
+              className="library-body"
+              id="library-content"
+              role="tabpanel"
+              aria-labelledby={`library-tab-${libraryTab}`}
+            >
+              {libraryTab === "reference" ? (
+                <Suspense
+                  fallback={
+                    <p className="learning-intro" role="status">
+                      Loading reference notes…
+                    </p>
+                  }
+                >
+                  <ReferenceLibrary
+                    articleId={referenceId}
+                    onOpen={openReference}
+                    onRegion={exploreReferenceRegion}
                   />
-                  {query ? (
-                    <button
-                      onClick={() => setQuery("")}
-                      aria-label="Clear search"
-                    >
-                      <X size={13} />
-                    </button>
-                  ) : (
-                    <kbd>⌘ K</kbd>
-                  )}
-                </div>
-                <div className="library-toolbar">
-                  <span>
-                    {savedOnly
-                      ? "SAVED REGIONS"
-                      : search
-                        ? `${results.length} RESULTS`
-                        : "BROWSE STRUCTURES"}
-                  </span>
-                  {savedOnly ? (
-                    <button onClick={() => setSavedOnly(false)}>
-                      Show all
-                    </button>
-                  ) : (
-                    <button
-                      className="saved-filter"
-                      onClick={() => setSavedOnly(true)}
-                    >
-                      <Bookmark size={13} /> Saved
-                      {saved.length > 0 ? ` (${saved.length})` : ""}
-                    </button>
-                  )}
-                </div>
-                <div className="structure-list">
-                  {results.length === 0 && (
-                    <div className="empty-state">
-                      <Search size={23} />
-                      <strong>
-                        {savedOnly
-                          ? "Your collection starts here."
-                          : "No matching regions."}
-                      </strong>
-                      <p>
-                        {savedOnly
-                          ? "Save a region using the bookmark in its detail panel."
-                          : "Try an anatomical name or a function such as memory or vision."}
-                      </p>
-                    </div>
-                  )}
-                  {groups.map((group, index) => {
-                    const parts = results.filter((p) => p.group === group);
-                    if (!parts.length) return null;
-                    const open =
-                      search || savedOnly || expanded.includes(group);
-                    return (
-                      <React.Fragment key={group}>
-                        {index === 6 && !search && !savedOnly && (
-                          <div className="list-section-label">
-                            BENEATH THE SURFACE
-                          </div>
+                </Suspense>
+              ) : libraryTab === "paths" ? (
+                <LearningLibrary onStart={(path) => goToLearning(path)} />
+              ) : (
+                <>
+                  <div className="search-box">
+                    <Search size={16} />
+                    <input
+                      ref={searchRef}
+                      value={query}
+                      onChange={(event) => setQuery(event.target.value)}
+                      placeholder="Find a brain region…"
+                      aria-label="Search brain regions"
+                    />
+                    {query ? (
+                      <button
+                        onClick={() => setQuery("")}
+                        aria-label="Clear search"
+                      >
+                        <X size={13} />
+                      </button>
+                    ) : (
+                      <kbd>⌘ K</kbd>
+                    )}
+                  </div>
+                  <div className="library-toolbar">
+                    <span>
+                      {savedOnly
+                        ? "SAVED REGIONS"
+                        : search
+                          ? `${results.length} RESULTS`
+                          : "BROWSE STRUCTURES"}
+                    </span>
+                    {savedOnly ? (
+                      <button onClick={() => setSavedOnly(false)}>
+                        Show all
+                      </button>
+                    ) : (
+                      <button
+                        className="saved-filter"
+                        onClick={() => setSavedOnly(true)}
+                      >
+                        <Bookmark size={13} /> Saved
+                        {saved.length > 0 ? ` (${saved.length})` : ""}
+                      </button>
+                    )}
+                  </div>
+                  <div className="structure-list">
+                    {matchedTerms.map((term) => (
+                      <div className="anatomical-term-note" key={term.name}>
+                        <strong>{term.name}</strong>
+                        <p>{term.note}</p>
+                        <a href={term.source} target="_blank" rel="noreferrer">
+                          About this term ↗
+                        </a>
+                      </div>
+                    ))}
+                    {results.length === 0 && (
+                      <div className="empty-state">
+                        <Search size={23} />
+                        <strong>
+                          {savedOnly
+                            ? "Your collection starts here."
+                            : "No matching regions."}
+                        </strong>
+                        <p>
+                          {savedOnly
+                            ? "Save a region using the bookmark in its detail panel."
+                            : "Try an anatomical name or a function such as memory or vision."}
+                        </p>
+                        {!savedOnly && (
+                          <button
+                            className="reference-search-link"
+                            onClick={() => openReference(null)}
+                          >
+                            Browse the reference notes
+                          </button>
                         )}
-                        <div className={`region-group ${open ? "open" : ""}`}>
-                          <div className="group-row">
-                            <button
-                              className="group-toggle"
-                              aria-expanded={!!open}
-                              onClick={() =>
-                                setExpanded((prev) =>
-                                  prev.includes(group)
-                                    ? prev.filter((x) => x !== group)
-                                    : [...prev, group],
-                                )
-                              }
-                            >
-                              <span
-                                className="color-dot"
-                                style={{ background: groupColors[group] }}
-                              />
-                              <span>{groupTitle(group)}</span>
-                              <small>{parts.length}</small>
-                              <ChevronRight
-                                size={14}
-                                className="group-chevron"
-                              />
-                            </button>
-                            <button
-                              className={`visibility-button ${state.hiddenGroups.includes(group) ? "hidden" : ""}`}
-                              title={`${state.hiddenGroups.includes(group) ? "Show" : "Hide"} ${groupTitle(group)}`}
-                              aria-label={`${state.hiddenGroups.includes(group) ? "Show" : "Hide"} ${groupTitle(group)}`}
-                              onClick={() => toggleGroup(group)}
-                            >
-                              {state.hiddenGroups.includes(group) ? (
-                                <EyeOff size={14} />
-                              ) : (
-                                <Eye size={14} />
-                              )}
-                            </button>
-                          </div>
-                          {open && (
-                            <div className="group-children">
-                              {parts.map((part) => (
-                                <button
-                                  key={part.id}
-                                  className={`region-row ${state.selected === part.id ? "selected" : ""}`}
-                                  onClick={() => select(part.id)}
-                                >
-                                  <span>{part.name}</span>
-                                  <small>
-                                    {part.hemisphere === "left"
-                                      ? "L"
-                                      : part.hemisphere === "right"
-                                        ? "R"
-                                        : "M"}
-                                  </small>
-                                </button>
-                              ))}
+                      </div>
+                    )}
+                    {groups.map((group, index) => {
+                      const parts = results.filter((p) => p.group === group);
+                      if (!parts.length) return null;
+                      const open =
+                        search || savedOnly || expanded.includes(group);
+                      return (
+                        <React.Fragment key={group}>
+                          {index === 6 && !search && !savedOnly && (
+                            <div className="list-section-label">
+                              BENEATH THE SURFACE
                             </div>
                           )}
-                        </div>
-                      </React.Fragment>
-                    );
-                  })}
-                </div>
-              </>
-            )}
+                          <div className={`region-group ${open ? "open" : ""}`}>
+                            <div className="group-row">
+                              <button
+                                className="group-toggle"
+                                aria-expanded={!!open}
+                                onClick={() =>
+                                  setExpanded((prev) =>
+                                    prev.includes(group)
+                                      ? prev.filter((x) => x !== group)
+                                      : [...prev, group],
+                                  )
+                                }
+                              >
+                                <span
+                                  className="color-dot"
+                                  style={{ background: groupColors[group] }}
+                                />
+                                <span>{groupTitle(group)}</span>
+                                <small>{parts.length}</small>
+                                <ChevronRight
+                                  size={14}
+                                  className="group-chevron"
+                                />
+                              </button>
+                              <button
+                                className={`visibility-button ${state.hiddenGroups.includes(group) ? "hidden" : ""}`}
+                                title={`${state.hiddenGroups.includes(group) ? "Show" : "Hide"} ${groupTitle(group)}`}
+                                aria-label={`${state.hiddenGroups.includes(group) ? "Show" : "Hide"} ${groupTitle(group)}`}
+                                onClick={() => toggleGroup(group)}
+                              >
+                                {state.hiddenGroups.includes(group) ? (
+                                  <EyeOff size={14} />
+                                ) : (
+                                  <Eye size={14} />
+                                )}
+                              </button>
+                            </div>
+                            {open && (
+                              <div className="group-children">
+                                {parts.map((part) => (
+                                  <button
+                                    key={part.id}
+                                    className={`region-row ${state.selected === part.id ? "selected" : ""}`}
+                                    onClick={() => select(part.id)}
+                                  >
+                                    <span>{part.name}</span>
+                                    <small>
+                                      {part.hemisphere === "left"
+                                        ? "L"
+                                        : part.hemisphere === "right"
+                                          ? "R"
+                                          : "M"}
+                                    </small>
+                                  </button>
+                                ))}
+                              </div>
+                            )}
+                          </div>
+                        </React.Fragment>
+                      );
+                    })}
+                  </div>
+                </>
+              )}
+            </div>
           </aside>
         )}
         <main className="brain-stage" aria-label="3D brain explorer">
@@ -944,7 +1086,7 @@ export default function App() {
             </select>
           </div>
         </main>
-        {selected && info && (
+        {selected && info && !readingReference && (
           <aside className="detail-panel" aria-label="Region information">
             <>
               <div className="detail-topline">
@@ -1059,6 +1201,18 @@ export default function App() {
                           : "A smoothed surface extracted from the fsaverage aseg label volume. Detail mode loads the surface at its finer sampling resolution."}
                       </p>
                       <p>{info.context}</p>
+                      <button
+                        className="reference-search-link"
+                        onClick={() =>
+                          openReference(
+                            selected.kind === "cortex"
+                              ? "cortical-layers"
+                              : "atlas-boundaries",
+                          )
+                        }
+                      >
+                        Understand what this model shows
+                      </button>
                     </div>
                   </>
                 )}
@@ -1282,9 +1436,9 @@ export default function App() {
               </p>
               <strong>Evidence & updates</strong>
               <p>
-                Source links were checked October 18, 2026. Notes summarize
-                established concepts; this app does not automatically ingest new
-                research. PubMed links open a live literature search.
+                Collections show their own source-check dates. Reference notes
+                were checked October 19, 2026. This app does not automatically
+                ingest new research. PubMed links open a live literature search.
               </p>
             </div>
             <div className="source-grid">

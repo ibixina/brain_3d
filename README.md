@@ -48,7 +48,7 @@ The brain occupies the full canvas. There are no permanent sidebars: the search 
 - The **View** control includes hemispheres, cortical opacity, section planes, labels, natural tissue colors, and slow rotation.
 - Anatomy and Connections tabs provide additional context. Related-region links are curated relationships, not a measured connectome.
 - Save regions in browser storage, copy region links, or export a PNG of the model.
-- Keyboard: Ctrl/Cmd K searches, E toggles explosion, L toggles labels, R resets, Escape returns to the overview.
+- Keyboard: Ctrl/Cmd K searches, E toggles explosion, L toggles labels, R resets. Escape closes an open library or settings panel, then clears the selected region. Library tabs support Left/Right, Home, and End.
 
 ## Guided learning paths
 
@@ -57,6 +57,14 @@ Choose **Explore guided learning paths** on the opening view, or **Learning path
 Use Previous and Next to navigate, the path name to choose another path, and the close control to return to free exploration. The existing Anatomy, Connections, Videos, and finer-model controls remain available. Each stop has a shareable URL such as `#path=memory&step=3`. Keyboard navigation retains focus on the step controls. Deep and buried targets use transparent cortex or isolation; these are display choices, not measured activity.
 
 These are curated educational sequences, not measured fiber pathways, temporal signal animations, or exhaustive systems maps. Each path explains absent geometry and composite labels. References include authored UTHealth Neuroscience Online chapters, neuroscience textbooks, and research models; scope and source details are available under **What this path shows**. Data and citations are maintained in `src/learning-paths.json`.
+
+## Reference notes and anatomical names
+
+The anatomy library's **Reference** tab contains 12 searchable notes on anatomical directions, section planes, folds, gray and white matter, cortical layers, neurons, glia, myelin, synapses, human cell diversity, atlas boundaries, and functional names. Articles link directly to available 3D regions and related topics, identify their sources and evidence type, and state what is not modeled. Shared links use fragments such as `#reference=cortical-layers`. A reference temporarily replaces the region inspector so reading uses one panel. The full catalogue and its styles load on demand, approximately 7.9 kB gzipped together.
+
+Structure search combines terms and recognizes ten terminology groups including Heschl's gyrus, Broca's area, M1, S1, V1, dorsal and ventral striatum, lentiform nucleus, pallidum, and inferior frontal gyrus. For example, `left Heschl's gyrus` finds the left transverse temporal parcel. Source-linked search notes explain approximate or composite mappings; aliases do not imply exact functional boundaries or create additional meshes. The search index is built once, and search results are cached between unrelated UI updates.
+
+Original summaries and source metadata are maintained in `src/reference-data.json`; search mappings are in `src/anatomical-search.ts`. Sources checked October 19, 2026 include UTHealth's authored textbook chapters, Purves et al., FreeSurfer documentation, the original human tissue studies by Langseth et al. (2021) and Siletti et al. (2023), and Allen Institute dataset documentation. Source text, figures, and cellular datasets are not redistributed. These are introductory curated notes, not exhaustive or automatically updated reviews.
 
 ## Brain scans and activity maps
 
@@ -104,7 +112,7 @@ Subcortical geometry is extracted from the FreeSurfer `fsaverage` `aseg.mgz` vol
 
 The model does **not** contain all brain knowledge. Most individual nuclei, cortical layers, neurons, vessels, cranial nerves, fiber pathways, cellular and molecular data, diseases, and recent research findings are not modeled. Listed internal subdivisions are educational notes, not separately segmented meshes. The ventral diencephalon is a composite imaging label. Corpus callosum segments are geometric atlas partitions. Anatomical and functional boundaries vary between people and atlases.
 
-The text is a curated introduction to established concepts. Links to original dataset documentation, textbooks, Allen Brain Map, the Human Connectome Project, and live PubMed searches support further exploration. Reference links were checked October 18, 2026; new research is not automatically ingested. This is an educational reference, not a clinical or diagnostic tool.
+The text is a curated introduction to established concepts. Links to original dataset documentation, textbooks, Allen Brain Map, the Human Connectome Project, and live PubMed searches support further exploration. Collections retain their own checked dates (October 18–19, 2026); new research is not automatically ingested. This is an educational reference, not a clinical or diagnostic tool.
 
 ## Performance
 

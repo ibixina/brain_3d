@@ -1,0 +1,372 @@
+{
+  "checkedOn": "2026-10-19",
+  "provenance": "Original educational summaries written for Cerebra. Sources are linked for verification and further reading; no source text, figures, cellular data, or geometry is redistributed by this catalogue.",
+  "sources": {
+    "orientation": {
+      "title": "UTHealth · Overview of the nervous system, §1.2 & §1.6",
+      "url": "https://nba.uth.tmc.edu/neuroscience/s2/chapter01.html",
+      "kind": "Academic textbook"
+    },
+    "cells": {
+      "title": "UTHealth · Organization of cell types, §8.2–8.18",
+      "url": "https://nba.uth.tmc.edu/neuroscience/s1/chapter08.html",
+      "kind": "Academic textbook"
+    },
+    "layers": {
+      "title": "Purves et al. · An overview of cortical structure (2001)",
+      "url": "https://www.ncbi.nlm.nih.gov/books/NBK10870/",
+      "kind": "Foundational textbook"
+    },
+    "spatial-cells": {
+      "title": "Langseth et al. · Human cortical cell mapping (2021)",
+      "url": "https://doi.org/10.1038/s42003-021-02517-z",
+      "kind": "Original human tissue study"
+    },
+    "myelin": {
+      "title": "UTHealth · Propagation of the action potential, §3.3",
+      "url": "https://nba.uth.tmc.edu/neuroscience/s1/chapter03.html",
+      "kind": "Academic textbook"
+    },
+    "release": {
+      "title": "UTHealth · Mechanisms of neurotransmitter release",
+      "url": "https://nba.uth.tmc.edu/neuroscience/s1/chapter05.html",
+      "kind": "Academic textbook"
+    },
+    "synapses": {
+      "title": "UTHealth · Synaptic transmission in the CNS",
+      "url": "https://nba.uth.tmc.edu/neuroscience/s1/chapter06.html",
+      "kind": "Academic textbook"
+    },
+    "human-census": {
+      "title": "Siletti et al. · Adult human brain cell diversity (2023)",
+      "url": "https://doi.org/10.1126/science.add7046",
+      "kind": "Original human tissue study"
+    },
+    "allen": {
+      "title": "Allen Institute · Human whole-brain cell atlas data",
+      "url": "https://alleninstitute.github.io/abc_atlas_access/descriptions/WHB_dataset.html",
+      "kind": "Dataset documentation"
+    },
+    "parcels": {
+      "title": "FreeSurfer · Cortical parcellation & atlas definitions",
+      "url": "https://surfer.nmr.mgh.harvard.edu/fswiki/CorticalParcellation",
+      "kind": "Model source documentation"
+    },
+    "language": {
+      "title": "UTHealth · Higher cortical functions: language",
+      "url": "https://nba.uth.tmc.edu/neuroscience/s4/chapter08.html",
+      "kind": "Academic textbook"
+    }
+  },
+  "articles": [
+    {
+      "id": "directions",
+      "title": "Finding your bearings",
+      "category": "Orientation",
+      "summary": "Anterior, posterior, medial, and lateral describe positions in the person’s brain.",
+      "aliases": [
+        "rostral",
+        "caudal",
+        "dorsal",
+        "ventral",
+        "superior",
+        "inferior",
+        "left",
+        "right",
+        "ipsilateral",
+        "contralateral"
+      ],
+      "paragraphs": [
+        "Anterior points toward the face; posterior toward the back of the head. Superior is above and inferior below. Medial is toward the midline, lateral away from it. Left and right always refer to the person, even as you rotate the model.",
+        "In the forebrain, dorsal generally means superior and ventral inferior. The neuraxis bends: these terms change orientation in the brainstem and spinal cord. Ipsilateral means the same side; contralateral the opposite side."
+      ],
+      "scope": "A spatial vocabulary, not a separate structure. Use the orientation labels and View camera presets to relate these terms to the model.",
+      "regions": ["lh-precentral", "rh-precentral", "aseg-16"],
+      "related": ["section-planes", "folds"],
+      "sources": ["orientation"]
+    },
+    {
+      "id": "section-planes",
+      "title": "The three section planes",
+      "category": "Orientation",
+      "summary": "Sagittal, coronal, and axial slices reveal different relationships inside the brain.",
+      "aliases": [
+        "horizontal",
+        "transverse",
+        "midsagittal",
+        "MRI",
+        "slice",
+        "cutaway"
+      ],
+      "paragraphs": [
+        "A sagittal plane separates left from right; the midsagittal plane passes through the midline. A coronal plane separates front from back. An axial, or horizontal, plane separates upper from lower portions.",
+        "Brain scans presents these three planes together. Its crosshairs locate one point in a population MRI template. The Anatomy cutaway clips a separate surface atlas; it is not a registered slice of that MRI."
+      ],
+      "scope": "The MRI template and 3D surface have different source data. A plane name describes orientation; it does not establish correspondence between those datasets.",
+      "regions": ["aseg-14", "aseg-16"],
+      "related": ["directions", "gray-white-matter", "atlas-boundaries"],
+      "sources": ["orientation"]
+    },
+    {
+      "id": "folds",
+      "title": "Gyri, sulci, and fissures",
+      "category": "Tissue & structure",
+      "summary": "Raised folds and the grooves between them are the landmarks of the cortical surface.",
+      "aliases": [
+        "gyrus",
+        "sulcus",
+        "fissure",
+        "central sulcus",
+        "Sylvian fissure",
+        "Rolando"
+      ],
+      "paragraphs": [
+        "A gyrus is a ridge of folded cortex; a sulcus is a groove. Fissure is used for some prominent grooves. The central sulcus lies between the precentral and postcentral gyri. The lateral, or Sylvian, fissure separates the temporal lobe from overlying frontal and parietal cortex.",
+        "Desikan–Killiany parcels follow anatomical conventions about these folds. A parcel includes the exposed ridge and adjacent banks down into neighboring sulci."
+      ],
+      "scope": "Grooves are visible in the surface geometry but do not have separate selectable meshes. Folding patterns and parcel borders vary between people.",
+      "regions": [
+        "lh-precentral",
+        "lh-postcentral",
+        "lh-bankssts",
+        "lh-insula"
+      ],
+      "related": ["atlas-boundaries", "cortical-layers"],
+      "sources": ["orientation", "parcels"]
+    },
+    {
+      "id": "gray-white-matter",
+      "title": "Gray matter and white matter",
+      "category": "Tissue & structure",
+      "summary": "Two tissue compartments with different cellular organization, both containing neurons’ processes and glia.",
+      "aliases": [
+        "grey matter",
+        "cortex",
+        "nucleus",
+        "nuclei",
+        "axon",
+        "fiber",
+        "fibre"
+      ],
+      "paragraphs": [
+        "Gray matter includes cell bodies, dendrites, synapses, axons, and glia. It forms cortical sheets and deep nuclei. White matter contains many myelinated axons together with supporting cells; it lies beneath the cerebral cortex.",
+        "The cerebral white matter meshes show segmented tissue compartments. They do not reconstruct individual axons, their direction, or their cortical endpoints."
+      ],
+      "scope": "The tissue colors are a visualization choice. A mesh’s apparent thickness and smoothness are limited by its MRI segmentation and surface processing.",
+      "regions": ["lh-precentral", "aseg-10", "aseg-2", "aseg-41"],
+      "related": ["neurons", "glia", "myelin", "atlas-boundaries"],
+      "sources": ["orientation", "cells"]
+    },
+    {
+      "id": "cortical-layers",
+      "title": "Inside the cortical sheet",
+      "category": "Tissue & structure",
+      "summary": "Most cerebral cortex has six cellular layers; a surface parcel does not show those layers.",
+      "aliases": [
+        "neocortex",
+        "isocortex",
+        "lamina",
+        "laminae",
+        "cytoarchitecture",
+        "layer I",
+        "layer II",
+        "layer III",
+        "layer IV",
+        "layer V",
+        "layer VI"
+      ],
+      "paragraphs": [
+        "Neocortex is conventionally described in six layers, numbered I at the pial surface through VI beside the white matter. Their cell densities, shapes, and connections differ. Layer IV is prominent in many sensory areas; superficial and deep layers have different projection patterns. This is a general organization, not a uniform wiring diagram.",
+        "Not all cortex follows the same six-layer pattern. Hippocampal and other allocortical territories have different organization. Layer boundaries and cell types require microscopic or molecular evidence, rather than a gyral name alone.",
+        "Langseth and colleagues combined in situ sequencing with single-nucleus reference types to map 59,816 cells in sampled human cortical tissue. Such cell maps operate at a different scale from this MRI-derived surface."
+      ],
+      "scope": "None of the six layers is individually modeled here. Loading a finer parcel increases mesh resolution; it does not reveal cellular layers or add histological evidence.",
+      "regions": [
+        "lh-precentral",
+        "lh-postcentral",
+        "lh-pericalcarine",
+        "aseg-17"
+      ],
+      "related": ["cell-diversity", "neurons", "atlas-boundaries"],
+      "sources": ["layers", "spatial-cells"]
+    },
+    {
+      "id": "neurons",
+      "title": "A neuron’s working parts",
+      "category": "Cells & signaling",
+      "summary": "Cell body, dendrites, axon, and terminals provide different parts of neuronal communication.",
+      "aliases": [
+        "soma",
+        "perikaryon",
+        "dendrite",
+        "axon hillock",
+        "initial segment",
+        "spine",
+        "bouton",
+        "nerve cell"
+      ],
+      "paragraphs": [
+        "The soma contains the nucleus and much of the machinery maintaining a neuron. Dendrites and their spines receive many synaptic inputs. An axon carries signals toward terminals that communicate with other cells. The initial segment is a common site where action potentials begin.",
+        "This is a useful starting pattern, not a shape shared by every neuron. Branching, targets, electrical properties, and transmitter systems differ across neuronal classes."
+      ],
+      "scope": "Cells and their processes are below this model’s resolution. The related regions are places containing neurons, not reconstructions of individual cells.",
+      "regions": ["lh-precentral", "aseg-17", "aseg-8"],
+      "related": ["synapses", "myelin", "cell-diversity"],
+      "sources": ["cells"]
+    },
+    {
+      "id": "glia",
+      "title": "Glia: the other cellular partners",
+      "category": "Cells & signaling",
+      "summary": "Astrocytes, oligodendrocytes, microglia, and ependymal cells have distinct roles.",
+      "aliases": [
+        "neuroglia",
+        "astrocyte",
+        "oligodendrocyte",
+        "microglia",
+        "ependymal",
+        "ependymocyte",
+        "supporting cells"
+      ],
+      "paragraphs": [
+        "Astrocytes help regulate the extracellular chemical environment and take up neurotransmitters. Oligodendrocytes make central nervous system myelin. Microglia participate in immune responses and clearance of cellular debris. Ependymal cells line the ventricles; their cilia contribute to movement of ventricular fluid.",
+        "These are broad families. Molecular studies distinguish further types and states within neuronal and non-neuronal populations."
+      ],
+      "scope": "No glial cells or ependymal layer are segmented. A ventricular mesh outlines a fluid compartment, not its microscopic lining.",
+      "regions": ["aseg-2", "aseg-4", "aseg-14"],
+      "related": ["myelin", "cell-diversity", "gray-white-matter"],
+      "sources": ["cells", "human-census"]
+    },
+    {
+      "id": "myelin",
+      "title": "Myelin and rapid conduction",
+      "category": "Cells & signaling",
+      "summary": "Insulating axon segments changes how an electrical signal travels along a fiber.",
+      "aliases": [
+        "myelination",
+        "saltatory conduction",
+        "node of Ranvier",
+        "internode",
+        "action potential",
+        "electrical impulse"
+      ],
+      "paragraphs": [
+        "Myelin reduces membrane capacitance along insulated axon segments. Depolarization spreads between gaps called nodes, where voltage-gated channels regenerate the action potential. This node-to-node renewal is called saltatory conduction.",
+        "Oligodendrocytes form myelin in the central nervous system. White matter is rich in myelinated axons, but its surface mesh cannot show which individual axons are myelinated or how quickly they conduct."
+      ],
+      "scope": "This explanation describes a mechanism. The atlas has no electrical simulation, individual fibers, myelin measurements, or measured conduction speeds.",
+      "regions": ["aseg-2", "aseg-7", "aseg-251"],
+      "related": ["glia", "neurons", "gray-white-matter"],
+      "sources": ["myelin", "cells"]
+    },
+    {
+      "id": "synapses",
+      "title": "How synapses pass a signal",
+      "category": "Cells & signaling",
+      "summary": "Chemical transmission links presynaptic release to receptors on another cell.",
+      "aliases": [
+        "neurotransmitter",
+        "vesicle",
+        "synaptic cleft",
+        "presynaptic",
+        "postsynaptic",
+        "excitation",
+        "inhibition",
+        "EPSP",
+        "IPSP"
+      ],
+      "paragraphs": [
+        "At a typical chemical synapse, terminal depolarization opens calcium channels. Calcium entry promotes vesicle fusion and transmitter release. Transmitter acts on receptors across the synaptic cleft, changing the receiving cell’s electrical or biochemical state.",
+        "Excitatory and inhibitory postsynaptic responses influence whether a neuron fires. Their effects depend on receptors, ion gradients, timing, and the other inputs arriving at that cell. A connection between regions does not specify all these mechanisms."
+      ],
+      "scope": "Synapses are not resolved in these meshes. Region connections are educational associations, not a measured synaptic wiring diagram or a simulation of thought.",
+      "regions": ["aseg-17", "lh-precentral", "aseg-12"],
+      "related": ["neurons", "glia", "cell-diversity"],
+      "sources": ["release", "synapses"]
+    },
+    {
+      "id": "cell-diversity",
+      "title": "What counts as a brain cell type?",
+      "category": "Cells & signaling",
+      "summary": "Shape, physiology, gene expression, and location reveal different aspects of cellular identity.",
+      "aliases": [
+        "transcriptomics",
+        "RNA",
+        "single nucleus",
+        "single cell",
+        "cell census",
+        "Allen",
+        "taxonomy",
+        "molecular atlas"
+      ],
+      "paragraphs": [
+        "Siletti and colleagues profiled more than three million nuclei from adult human brain tissue. Their 2023 study reported 461 clusters and 3,313 subclusters, organized largely along developmental divisions. Those numbers describe a particular transcriptomic classification, not a final universal count of cell types.",
+        "RNA-based grouping helps distinguish populations that a large anatomical label combines. Sampling, analysis, species, age, and cell state matter when comparing taxonomies. The Allen Institute provides the human atlas data and its hierarchy for further exploration."
+      ],
+      "scope": "This reference links to human research; it does not import those cells into the 3D atlas. Cell classes are not assigned to individual mesh vertices, and mouse data must not be presented as measured human anatomy.",
+      "regions": ["aseg-16", "aseg-10", "lh-precentral"],
+      "related": ["neurons", "glia", "cortical-layers", "atlas-boundaries"],
+      "sources": ["human-census", "allen"]
+    },
+    {
+      "id": "atlas-boundaries",
+      "title": "What an atlas boundary means",
+      "category": "Reading the evidence",
+      "summary": "A parcel is a region defined by a particular labeling method, with a particular resolution.",
+      "aliases": [
+        "Desikan Killiany",
+        "FreeSurfer",
+        "parcellation",
+        "segmentation",
+        "Brodmann",
+        "fsaverage",
+        "mesh",
+        "resolution",
+        "functional area"
+      ],
+      "paragraphs": [
+        "FreeSurfer’s Desikan–Killiany atlas divides the cortical surface using gyral anatomy and a learned labeling procedure. Its parcels are not equivalent to Brodmann’s cellular areas or to a functional map measured during a task.",
+        "Cerebra displays 68 cortical parcels plus 36 other segmented parts. A finer model adds geometric faces from a higher-resolution source surface. It does not add new internal structures, prove a functional boundary, or describe every individual’s anatomy."
+      ],
+      "scope": "Surface anatomy, cellular organization, and task activation are distinct measurements. The MRI templates, task maps, and surface model here come from separate sources; their spatial correspondence is not established by opening them in the same site.",
+      "regions": ["lh-parsopercularis", "lh-pericalcarine", "aseg-17"],
+      "related": [
+        "functional-names",
+        "folds",
+        "cortical-layers",
+        "section-planes"
+      ],
+      "sources": ["parcels", "language"]
+    },
+    {
+      "id": "functional-names",
+      "title": "Common names and functional areas",
+      "category": "Reading the evidence",
+      "summary": "Heschl’s gyrus, Broca’s area, and V1 do not all name the same kind of anatomical object.",
+      "aliases": [
+        "Broca",
+        "Heschl",
+        "V1",
+        "M1",
+        "S1",
+        "primary cortex",
+        "synonym",
+        "alias",
+        "language"
+      ],
+      "paragraphs": [
+        "A named gyrus describes a fold. A cytoarchitectonic area describes cellular organization. A functional area is characterized through physiological or behavioral evidence. Their borders need not coincide.",
+        "Structure search recognizes common names and shows the corresponding available parcels. Broca searches lead to the classical left inferior frontal landmarks; these parcels do not delineate an entire language system. Search notes explain each mapping and link its source."
+      ],
+      "scope": "Search aliases are navigation aids. They never create missing geometry or assert that a full parcel has one exclusive function.",
+      "regions": [
+        "lh-transversetemporal",
+        "lh-parsopercularis",
+        "lh-parstriangularis",
+        "lh-pericalcarine"
+      ],
+      "related": ["atlas-boundaries", "cortical-layers", "folds"],
+      "sources": ["parcels", "language"]
+    }
+  ]
+}
