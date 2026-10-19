@@ -1,4 +1,4 @@
-import manifest from "./atlas-manifest.json";
+import manifest from "./atlas-manifest.json" with { type: "json" };
 
 export type Region = {
   id: string;

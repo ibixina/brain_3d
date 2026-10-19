@@ -1,0 +1,489 @@
+{
+  "checkedOn": "2026-10-19",
+  "sources": {
+    "memory": {
+      "title": "UTHealth · Hippocampus and memory circuits",
+      "url": "https://nba.uth.tmc.edu/neuroscience/m/s4/chapter05.html",
+      "kind": "University-authored chapter"
+    },
+    "motor": {
+      "title": "UTHealth · Motor cortex",
+      "url": "https://nba.uth.tmc.edu/neuroscience/m/s3/chapter03.html",
+      "kind": "University-authored chapter"
+    },
+    "basal": {
+      "title": "UTHealth · Basal ganglia",
+      "url": "https://nba.uth.tmc.edu/neuroscience/m/s3/chapter04.html",
+      "kind": "University-authored chapter"
+    },
+    "cerebellum": {
+      "title": "UTHealth · Cerebellum",
+      "url": "https://nba.uth.tmc.edu/neuroscience/m/s3/chapter05.html",
+      "kind": "University-authored chapter"
+    },
+    "vision": {
+      "title": "UTHealth · Visual cortical pathways",
+      "url": "https://nba.uth.tmc.edu/neuroscience/m/s2/chapter15.html",
+      "kind": "University-authored chapter"
+    },
+    "language": {
+      "title": "UTHealth · Language networks",
+      "url": "https://nba.uth.tmc.edu/neuroscience/m/s4/chapter08.html",
+      "kind": "University-authored chapter"
+    },
+    "speech": {
+      "title": "Hickok & Poeppel (2007) · Speech-processing model",
+      "url": "https://doi.org/10.1038/nrn2113",
+      "kind": "Research model and review"
+    },
+    "amygdala": {
+      "title": "UTHealth · Amygdala and its connections",
+      "url": "https://nba.uth.tmc.edu/neuroscience/m/s4/chapter06.html",
+      "kind": "University-authored chapter"
+    },
+    "insula": {
+      "title": "Craig (2009) · Anterior insula and awareness",
+      "url": "https://doi.org/10.1038/nrn2555",
+      "kind": "Research model and review"
+    },
+    "hypothalamus": {
+      "title": "UTHealth · Hypothalamic organization",
+      "url": "https://nba.uth.tmc.edu/neuroscience/m/s4/chapter01.html",
+      "kind": "University-authored chapter"
+    },
+    "csf": {
+      "title": "Purves et al. · The ventricular system",
+      "url": "https://www.ncbi.nlm.nih.gov/books/NBK11083/",
+      "kind": "Textbook chapter"
+    },
+    "barrier": {
+      "title": "Basic Neurochemistry · Blood–CSF barrier",
+      "url": "https://www.ncbi.nlm.nih.gov/books/NBK27998/",
+      "kind": "Textbook chapter"
+    }
+  },
+  "paths": [
+    {
+      "id": "memory",
+      "title": "Memory & learning",
+      "subtitle": "How experiences become memories",
+      "summary": "Meet the medial temporal and diencephalic structures that help link an experience with its context.",
+      "minutes": 5,
+      "tags": [
+        "hippocampus",
+        "learning",
+        "remembering",
+        "limbic"
+      ],
+      "limit": "A learning sequence through selected memory-related regions, not the complete Papez circuit. Fornix, mammillary bodies, hippocampal subfields, and thalamic nuclei are not separately modeled.",
+      "steps": [
+        {
+          "region": "lh-parahippocampal",
+          "title": "Putting an experience in context",
+          "text": "Parahippocampal cortex belongs to the medial temporal region around the hippocampus. Its wider connections provide contextual information used by memory systems.",
+          "prompt": "Find its position on the inner temporal surface.",
+          "source": "memory",
+          "view": {
+            "camera": "right",
+            "opacity": 1,
+            "hemisphere": "left"
+          }
+        },
+        {
+          "region": "lh-entorhinal",
+          "title": "An interface with the hippocampus",
+          "text": "Entorhinal cortex provides a major route into and out of hippocampal circuits. It connects cortical information with processing inside the hippocampal formation.",
+          "prompt": "Compare this cortical parcel with the deeper hippocampus next.",
+          "source": "memory",
+          "view": {
+            "camera": "right",
+            "opacity": 1,
+            "hemisphere": "left"
+          }
+        },
+        {
+          "region": "aseg-17",
+          "title": "Forming new memories",
+          "text": "The hippocampal formation helps establish new declarative memories. Its internal circuitry includes dentate gyrus and CA fields; this surface does not separate those subfields.",
+          "prompt": "Notice the curved structure deep in the temporal lobe.",
+          "source": "memory",
+          "view": {
+            "camera": "left",
+            "opacity": 0.12,
+            "hemisphere": "left"
+          }
+        },
+        {
+          "region": "aseg-10",
+          "title": "A wider memory circuit",
+          "text": "Anterior thalamic nuclei participate in circuits connecting hippocampal-related structures and cingulate cortex. The highlighted mesh represents the whole thalamus, rather than an individual nucleus.",
+          "prompt": "Distinguish the whole structure from the nuclei discussed in the source.",
+          "source": "memory",
+          "view": {
+            "camera": "right",
+            "opacity": 0.12,
+            "hemisphere": "left"
+          }
+        },
+        {
+          "region": "lh-posteriorcingulate",
+          "title": "Returning to the cortex",
+          "text": "Cingulate cortex is part of the wider network communicating with medial temporal structures. The highlighted posterior parcel provides anatomical context, rather than a complete functional boundary.",
+          "prompt": "Look above the corpus callosum on the medial surface.",
+          "source": "memory",
+          "view": {
+            "camera": "right",
+            "opacity": 1,
+            "hemisphere": "left"
+          }
+        }
+      ]
+    },
+    {
+      "id": "movement",
+      "title": "Planning & coordinating movement",
+      "subtitle": "Cortex, basal ganglia, and cerebellum",
+      "summary": "Explore several complementary contributors to voluntary movement, action selection, and coordination.",
+      "minutes": 5,
+      "tags": [
+        "motor",
+        "movement",
+        "basal ganglia",
+        "cerebellum",
+        "coordination"
+      ],
+      "limit": "These regions participate in interacting, parallel loops. The order is instructional, not a signal-flow animation. Spinal cord, substantia nigra, subthalamic nucleus, and individual cerebellar nuclei are not separately modeled.",
+      "steps": [
+        {
+          "region": "lh-precentral",
+          "title": "From plans toward movement",
+          "text": "The precentral gyrus contains much of primary motor cortex. Together with premotor and other regions, motor cortex contributes to organizing and issuing voluntary movement commands.",
+          "prompt": "Find the strip of cortex immediately in front of the central sulcus.",
+          "source": "motor",
+          "view": {
+            "camera": "left",
+            "opacity": 1,
+            "hemisphere": "left"
+          }
+        },
+        {
+          "region": "aseg-12",
+          "title": "Selecting actions",
+          "text": "The putamen is part of the striatum, a major input stage of basal-ganglia circuits. These circuits help shape which actions are enabled and which compete.",
+          "prompt": "Compare its deep position with the cortical motor region.",
+          "source": "basal",
+          "view": {
+            "camera": "left",
+            "opacity": 0.12,
+            "hemisphere": "left"
+          }
+        },
+        {
+          "region": "aseg-13",
+          "title": "Regulating circuit output",
+          "text": "Pallidal circuits influence motor thalamus through inhibitory output. This mesh combines pallidal territory and does not separately resolve the internal and external segments.",
+          "prompt": "Use the source diagram to distinguish segments that this mesh combines.",
+          "source": "basal",
+          "view": {
+            "camera": "left",
+            "opacity": 0.12,
+            "hemisphere": "left"
+          }
+        },
+        {
+          "region": "aseg-10",
+          "title": "Returning information to cortex",
+          "text": "Motor-related thalamic nuclei receive basal-ganglia and cerebellar influences and communicate with cortex. The whole-thalamus mesh also contains many nuclei serving other systems.",
+          "prompt": "Remember that this highlighted structure has sensory and cognitive roles too.",
+          "source": "basal",
+          "view": {
+            "camera": "left",
+            "opacity": 0.12,
+            "hemisphere": "left"
+          }
+        },
+        {
+          "region": "aseg-47",
+          "title": "Timing, correction, and coordination",
+          "text": "Cerebellar circuits help coordinate movement and adjust performance using incoming information. Their organization includes cortical zones and deep nuclei that this hemispheric surface does not individually resolve.",
+          "prompt": "View the folded cerebellar surface beneath the cerebral hemispheres.",
+          "source": "cerebellum",
+          "view": {
+            "camera": "posterior",
+            "opacity": 1,
+            "hemisphere": "both"
+          }
+        }
+      ]
+    },
+    {
+      "id": "vision",
+      "title": "Seeing & recognizing",
+      "subtitle": "From early vision to objects and space",
+      "summary": "Explore occipital visual cortex and the broader temporal and parietal systems that support visual interpretation.",
+      "minutes": 4,
+      "tags": [
+        "vision",
+        "seeing",
+        "visual",
+        "objects",
+        "space"
+      ],
+      "limit": "A cortical overview, not the entire visual pathway. Retina, optic nerves, chiasm, optic tracts, optic radiations, and the lateral geniculate nucleus are not separately modeled. Atlas parcels do not exactly delimit functional visual areas.",
+      "steps": [
+        {
+          "region": "lh-pericalcarine",
+          "title": "Early cortical visual processing",
+          "text": "Primary visual cortex lies around the calcarine sulcus on the medial occipital surface. The highlighted pericalcarine parcel is an anatomical approximation, not an individual functional V1 map.",
+          "prompt": "Locate the visual cortex toward the back and inner face of the hemisphere.",
+          "source": "vision",
+          "view": {
+            "camera": "right",
+            "opacity": 1,
+            "hemisphere": "left"
+          }
+        },
+        {
+          "region": "lh-lateraloccipital",
+          "title": "Beyond the first cortical stage",
+          "text": "Extrastriate occipital cortex supports additional analysis of visual features. Processing is distributed across interconnected visual areas rather than passing through a single recognition center.",
+          "prompt": "Compare this outer occipital surface with the medial first stop.",
+          "source": "vision",
+          "view": {
+            "camera": "left",
+            "opacity": 1,
+            "hemisphere": "left"
+          }
+        },
+        {
+          "region": "lh-fusiform",
+          "title": "Representing complex visual forms",
+          "text": "Ventral temporal regions contribute to recognizing complex visual forms. The fusiform parcel provides broader anatomical context for territories involved in categories such as faces and written forms.",
+          "prompt": "Rotate to see the underside of the temporal lobe.",
+          "source": "vision",
+          "view": {
+            "camera": "inferior",
+            "opacity": 1,
+            "hemisphere": "left"
+          }
+        },
+        {
+          "region": "lh-superiorparietal",
+          "title": "Using vision to guide action",
+          "text": "Posterior parietal visual association regions contribute to spatial processing and the guidance of actions. This complements temporal pathways concerned with identifying visual objects.",
+          "prompt": "Compare the upper parietal position with the ventral temporal stop.",
+          "source": "vision",
+          "view": {
+            "camera": "left",
+            "opacity": 1,
+            "hemisphere": "left"
+          }
+        }
+      ]
+    },
+    {
+      "id": "language",
+      "title": "Listening, language & speech",
+      "subtitle": "A distributed network for communication",
+      "summary": "Follow auditory, temporal, frontal, and parietal contributions to communication, using the left hemisphere as an example.",
+      "minutes": 4,
+      "tags": [
+        "language",
+        "speech",
+        "listening",
+        "auditory",
+        "broca",
+        "wernicke"
+      ],
+      "limit": "Language depends on interacting and individually variable networks, with bilateral contributions. These parcels are not exact Broca or Wernicke territories. The arcuate fasciculus and other language pathways are not modeled.",
+      "steps": [
+        {
+          "region": "lh-transversetemporal",
+          "title": "Beginning with sound",
+          "text": "Transverse temporal cortex includes the region of primary auditory cortex. Auditory analysis supplies information used for speech perception as well as many other kinds of sound.",
+          "prompt": "This buried parcel is isolated so its surface can be inspected.",
+          "source": "language",
+          "view": {
+            "camera": "left",
+            "opacity": 1,
+            "hemisphere": "left",
+            "isolate": true
+          },
+          "note": "The detailed surface is isolated here; return to the whole brain to see its position."
+        },
+        {
+          "region": "lh-superiortemporal",
+          "title": "Interpreting speech sounds",
+          "text": "Superior temporal regions contribute to analyzing speech. Contemporary models distinguish interacting processing streams, rather than assigning all comprehension to one small cortical center.",
+          "prompt": "Compare this temporal territory with the frontal speech-related stop next.",
+          "source": "speech",
+          "view": {
+            "camera": "left",
+            "opacity": 1,
+            "hemisphere": "left"
+          }
+        },
+        {
+          "region": "lh-parsopercularis",
+          "title": "Linking speech and action",
+          "text": "Posterior inferior frontal cortex participates in speech and language networks. The pars opercularis is an anatomical parcel; its roles extend beyond a single language function.",
+          "prompt": "Locate it near the lower frontal surface, above the lateral sulcus.",
+          "source": "language",
+          "view": {
+            "camera": "left",
+            "opacity": 1,
+            "hemisphere": "left"
+          }
+        },
+        {
+          "region": "lh-supramarginal",
+          "title": "A parietal contribution",
+          "text": "Inferior parietal territories participate in the broader language system, including links between sensory representations and speech-related processing. They are part of a distributed network.",
+          "prompt": "Notice how close temporal, parietal, and frontal regions are.",
+          "source": "speech",
+          "view": {
+            "camera": "left",
+            "opacity": 1,
+            "hemisphere": "left"
+          }
+        }
+      ]
+    },
+    {
+      "id": "emotion",
+      "title": "Emotion & bodily state",
+      "subtitle": "Meaning, feeling, and internal regulation",
+      "summary": "Explore a few regions that help relate significant events, bodily signals, and responses.",
+      "minutes": 4,
+      "tags": [
+        "emotion",
+        "amygdala",
+        "insula",
+        "interoception",
+        "homeostasis",
+        "hypothalamus"
+      ],
+      "limit": "This is not a map of discrete emotion centers or a diagnostic model. Insular and cingulate subdivisions are not individually segmented; the ventral diencephalon is a composite label that includes hypothalamic territory and neighboring structures.",
+      "steps": [
+        {
+          "region": "aseg-18",
+          "title": "Learning what matters",
+          "text": "The amygdala participates in emotional learning and interactions with sensory, memory, and bodily-regulation systems. Its functions are broader than a single fear response.",
+          "prompt": "Compare its position with the neighboring hippocampus.",
+          "source": "amygdala",
+          "view": {
+            "camera": "left",
+            "opacity": 0.12,
+            "hemisphere": "left"
+          }
+        },
+        {
+          "region": "lh-insula",
+          "title": "Representing bodily signals",
+          "text": "Insular cortex contributes to processing signals about internal bodily state. Research models associate anterior insular processing with aspects of subjective feeling; this mesh combines anterior and posterior territories.",
+          "prompt": "The insula is normally covered by surrounding cortical opercula.",
+          "source": "insula",
+          "view": {
+            "camera": "left",
+            "opacity": 1,
+            "hemisphere": "left",
+            "isolate": true
+          },
+          "note": "Isolated to reveal the cortex buried within the lateral sulcus."
+        },
+        {
+          "region": "lh-rostralanteriorcingulate",
+          "title": "Connecting feeling and response",
+          "text": "Anterior cingulate cortex interacts with amygdala and other cortical regions involved in emotional behavior. This rostral parcel represents only part of the wider cingulate territory.",
+          "prompt": "Look for this region on the inner frontal surface.",
+          "source": "amygdala",
+          "view": {
+            "camera": "right",
+            "opacity": 1,
+            "hemisphere": "left"
+          }
+        },
+        {
+          "region": "aseg-28",
+          "title": "Anatomical context for homeostasis",
+          "text": "Hypothalamic systems contribute to internal regulation through autonomic and endocrine mechanisms. The selected ventral-diencephalic label provides surrounding anatomical context; it is not a separately segmented hypothalamus.",
+          "prompt": "Read the composite-label distinction before interpreting the highlighted surface.",
+          "source": "hypothalamus",
+          "view": {
+            "camera": "right",
+            "opacity": 0.12,
+            "hemisphere": "left"
+          },
+          "note": "Composite segmentation: individual hypothalamic nuclei are not shown."
+        }
+      ]
+    },
+    {
+      "id": "csf",
+      "title": "Ventricles & cerebrospinal fluid",
+      "subtitle": "The fluid spaces inside the brain",
+      "summary": "Find the choroid plexus and the principal ventricular compartments, and learn how they relate to CSF circulation.",
+      "minutes": 4,
+      "tags": [
+        "ventricles",
+        "csf",
+        "fluid",
+        "choroid plexus",
+        "protection"
+      ],
+      "limit": "This is a tour of selected segmented compartments, not a fluid simulation. Interventricular foramina, cerebral aqueduct, fourth-ventricular outlets, subarachnoid spaces, meninges, and drainage routes are not separately modeled.",
+      "steps": [
+        {
+          "region": "aseg-31",
+          "title": "Producing cerebrospinal fluid",
+          "text": "The choroid plexus is a principal source of CSF and contributes to the blood–CSF barrier. This selected mesh shows the segmented left lateral-ventricular plexus.",
+          "prompt": "The plexus is isolated here to expose its small surface.",
+          "source": "barrier",
+          "view": {
+            "camera": "left",
+            "opacity": 1,
+            "hemisphere": "left",
+            "isolate": true
+          },
+          "note": "Not all choroid plexus in the third and fourth ventricles is separately represented."
+        },
+        {
+          "region": "aseg-4",
+          "title": "The lateral ventricular space",
+          "text": "Each cerebral hemisphere contains a lateral ventricle. CSF communicates with the third ventricle through an interventricular foramen, an opening not separately delineated by this mesh.",
+          "prompt": "This compartment is fluid-filled space, rather than a solid tissue organ.",
+          "source": "csf",
+          "view": {
+            "camera": "left",
+            "opacity": 0.1,
+            "hemisphere": "both"
+          }
+        },
+        {
+          "region": "aseg-14",
+          "title": "The midline third ventricle",
+          "text": "The third ventricle lies in the diencephalon. It communicates with the fourth through the cerebral aqueduct, which passes through the midbrain and is not separately modeled.",
+          "prompt": "Identify the narrow midline compartment between the hemispheres.",
+          "source": "csf",
+          "view": {
+            "camera": "anterior",
+            "opacity": 0.1,
+            "hemisphere": "both"
+          }
+        },
+        {
+          "region": "aseg-15",
+          "title": "The fourth ventricle and beyond",
+          "text": "The fourth ventricle lies between the brainstem and cerebellum. Its outlets connect ventricular CSF with subarachnoid spaces outside the brain; those outlets and spaces are not modeled.",
+          "prompt": "Compare this compartment with the surrounding hindbrain structures.",
+          "source": "csf",
+          "view": {
+            "camera": "left",
+            "opacity": 0.1,
+            "hemisphere": "both"
+          }
+        }
+      ]
+    }
+  ]
+}

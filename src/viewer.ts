@@ -277,7 +277,11 @@ export class AtlasViewer {
       const cortex = region.kind === "cortex";
       if (cortex && state.opacity === 0) mesh.visible = false;
       mesh.material.opacity = cortex ? state.opacity : 1;
-      mesh.material.transparent = mesh.material.opacity < 1;
+      const transparent = mesh.material.opacity < 1;
+      if (mesh.material.transparent !== transparent) {
+        mesh.material.transparent = transparent;
+        mesh.material.needsUpdate = true;
+      }
       mesh.material.depthWrite = mesh.material.opacity > 0.45;
       mesh.renderOrder = cortex && state.opacity < 1 ? 1 : 0;
       const plane =
@@ -403,7 +407,11 @@ export class AtlasViewer {
   private createOutline(color: string) {
     const outline = new THREE.LineSegments(
       new THREE.BufferGeometry(),
-      new THREE.LineBasicMaterial({ color, transparent: true, depthWrite: false }),
+      new THREE.LineBasicMaterial({
+        color,
+        transparent: true,
+        depthWrite: false,
+      }),
     );
     outline.visible = false;
     outline.renderOrder = 2;

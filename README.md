@@ -50,6 +50,14 @@ The brain occupies the full canvas. There are no permanent sidebars: the search 
 - Save regions in browser storage, copy region links, or export a PNG of the model.
 - Keyboard: Ctrl/Cmd K searches, E toggles explosion, L toggles labels, R resets, Escape returns to the overview.
 
+## Guided learning paths
+
+Choose **Explore guided learning paths** on the opening view, or **Learning paths** inside the anatomy library. Six paths cover memory and learning, movement, vision, language, emotion and bodily state, and ventricles and CSF. Their 26 stops use real existing meshes, adapt the camera and visibility, and connect a short explanation with a precise source and an observation prompt.
+
+Use Previous and Next to navigate, the path name to choose another path, and the close control to return to free exploration. The existing Anatomy, Connections, Videos, and finer-model controls remain available. Each stop has a shareable URL such as `#path=memory&step=3`. Keyboard navigation retains focus on the step controls. Deep and buried targets use transparent cortex or isolation; these are display choices, not measured activity.
+
+These are curated educational sequences, not measured fiber pathways, temporal signal animations, or exhaustive systems maps. Each path explains absent geometry and composite labels. References include authored UTHealth Neuroscience Online chapters, neuroscience textbooks, and research models; scope and source details are available under **What this path shows**. Data and citations are maintained in `src/learning-paths.json`.
+
 ## Brain scans and activity maps
 
 Use the top section switch to move between **Anatomy**, **Brain scans**, and **Activations**.
