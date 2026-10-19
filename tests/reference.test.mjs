@@ -14,7 +14,6 @@ import {
 } from "../src/reference.ts";
 import {
   referenceOrigin,
-  referenceRegionView,
   withReferenceOrigin,
 } from "../src/reference-navigation.ts";
 import { learningPaths } from "../src/learning.ts";
@@ -160,34 +159,4 @@ test("article return context survives shared exploration links and rejects malfo
     `#view=scans&from=${"a".repeat(81)}`,
   ])
     assert.equal(referenceOrigin(hash), null);
-});
-
-test("reference-to-model views reveal their actual target without mutating the default scene", () => {
-  const defaults = {
-    selected: null,
-    isolated: false,
-    exploded: 0,
-    explodeMode: "lobes",
-    opacity: 1,
-    hemisphere: "both",
-    hiddenGroups: ["Ventricles", "White matter"],
-    labels: false,
-    autoRotate: false,
-    colorMode: "tissue",
-    section: "none",
-    sectionOffset: 0,
-  };
-  for (const id of new Set(
-    referenceArticles.flatMap((article) => article.regions),
-  )) {
-    const region = atlas.parts.find((part) => part.id === id);
-    const view = referenceRegionView(region, defaults);
-    assert.equal(view.selected, id);
-    assert.equal(view.hiddenGroups.includes(region.group), false);
-    assert.ok(view.opacity > 0);
-    if (region.group === "Ventricles")
-      assert.ok(view.hiddenGroups.includes("Deep structures"));
-  }
-  assert.deepEqual(defaults.hiddenGroups, ["Ventricles", "White matter"]);
-  assert.equal(defaults.opacity, 1);
 });

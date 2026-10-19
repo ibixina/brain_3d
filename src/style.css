@@ -1095,6 +1095,17 @@ kbd {
   color: #9bd9d0;
   font-size: 10px;
   margin: 10px 0 0;
+  align-self: flex-start;
+  padding: 4px 0;
+  text-align: left;
+  min-height: 24px;
+}
+.selection-key:hover {
+  color: #c3eee4;
+}
+.selection-key svg {
+  margin-left: 3px;
+  opacity: 0.7;
 }
 .selection-key span {
   width: 7px;

@@ -16,12 +16,22 @@ The installed Codex CLI's generated protocol includes `account/rateLimitResetCre
 - 20 institution-linked real dissection films, scoped recommendations for every modeled region.
 - 3 native-1-mm structural MRI templates and 117 on-demand measured IBC task-contrast volumes.
 - Research index: 87 IBC protocols, 799 contrast definitions, 48 external HCP references, 20 dataset resources, 15 methods.
-- Thirty tests pass locally and in GitHub Actions, including reference navigation and exploration-link checks; the production build and Pages deployment succeed.
+- Thirty-four tests pass locally, including region visibility presets, reference navigation, and exploration links; the production build passes. Deployment verification for the current batch is recorded below.
 - Rendering stops when idle and outside Anatomy; image volumes and detail meshes are bounded caches. Preserve these properties.
 - All runtime local assets must use `assetUrl()` for Pages subpath support. Heavy new resources should load on demand.
 - Licenses and checksums are retained in the repository. Never casually normalize pinned input files.
 
 ## Latest completed implementation
+
+2026-10-19 (clear region navigation and keyboard batch): All valid plain region URLs now use the same reveal presets as structure-list choices, related-region links, and reference targets. Presets select the matching hemisphere, choose medial/inferior cameras where appropriate, make cortex transparent around deep targets, show the requested group, and clear clipping/explosion. Insula, transverse temporal cortex, choroid plexus, cerebellar white matter, and geometric callosal segments open in isolation because surrounding surfaces otherwise enclose them. These presets use existing MRI-derived geometry and load one finer surface on demand; no anatomy, scientific claims, or data were added.
+
+The compact teal selection key is now a **Reveal** button that restores the current target after visibility, clipping, or camera changes. It retains guided-stop and article-return context. Its hidden status reflects group, hemisphere, opacity, and isolation eligibility, not an occlusion measurement. Whole brain, leaving isolation, and closing details restore both hemispheres and default visibility. Single-hemisphere camera labels distinguish medial and lateral views.
+
+Manual structure selection and cold region/path links focus the region heading. Closing details returns focus to the library dock button. Structure search supports Enter for a single match and Down to the first result. Region-detail tabs now have connected panels and roving focus with Left/Right, Home, and End. The hash listener uses the current guide callback so successive route changes retain appropriate focus behavior.
+
+Validation: all 34 Node tests and the production build pass. Tests cover all 104 regions' display eligibility, hemisphere and unclipped presets, bilateral medial/deep camera choices, enclosed-target isolation, default immutability, and hidden-selection detection. Visual browser checks covered cold thalamus, third ventricle, pericalcarine and callosal URLs; insula search/Enter; multi-result search/Down/Enter; hidden callosal target → Reveal; close-details focus; detail-tab arrow/Home/End behavior; guide entry/next-stop focus; and reference → plexus → Reveal → reference. Phone checks at 390×844 covered the thalamus view, inspector, Reveal, and tabs. Browser error logs were empty. The main JS remains about 114.2 kB gzip; heavy assets, idle rendering, and bounded detail/image caches are unchanged. Deployment verification is pending for this batch.
+
+## Previous implementation
 
 2026-10-19 (protection/circulation and connected exploration batch): Added five source-linked notes on meninges, CSF circulation, blood–brain and blood–CSF interfaces, arterial supply, and venous/lymphatic drainage. There are now 17 reference articles and 19 source records. Notes explicitly distinguish gross anatomy, microscopic barriers, specialized vascular/lymphatic imaging, and the geometry actually present. None of the missing vessels, meninges, junctions, foramina, or flow data were invented or added as meshes.
 
@@ -37,7 +47,7 @@ Previous work remains in place: 104 meshes, six guided paths with 26 stops, 20 s
 
 ## Next batch
 
-First address two concrete usability checks: manual structure-list selection currently drops keyboard focus to the document after the drawer unmounts; also audit ordinary deep-region shared URLs, which still start from opaque cortex unless they carry reference context. Then add carefully sourced cranial-nerve and brainstem/cerebellar organization reference coverage, with appropriate gross-specimen lessons and links to existing whole-region meshes. The model does not yet segment individual cranial nerves, brainstem nuclei, cerebellar lobules, vessels, meninges, or complete white-matter pathways. Research licensed human segmentations and their registration before adding geometry. Consider contextual reference suggestions inside region notes, accessible topic discovery as the library grows, and preserving reading scroll position when returning from an exploration. Keep the default brain canvas free of new permanent controls.
+Add carefully sourced cranial-nerve and brainstem/cerebellar organization reference coverage, with appropriate gross-specimen lessons and links to existing whole-region meshes. The model does not yet segment individual cranial nerves, brainstem nuclei, cerebellar lobules, vessels, meninges, or complete white-matter pathways. Research licensed human segmentations and their registration before adding geometry. Consider contextual reference suggestions inside region notes, accessible topic discovery as the library grows, and preserving reading scroll position when returning from an exploration. Continue testing representative small targets for actual occlusion; automated eligibility checks do not establish that every target is visible from every camera. Keep the default brain canvas free of new permanent controls.
 
 ## Priorities after this batch
 

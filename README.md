@@ -41,14 +41,16 @@ The brain occupies the full canvas. There are no permanent sidebars: the search 
 
 - Drag to rotate; scroll or pinch to zoom; right drag or use two fingers to pan.
 - Click the model or search the anatomy library by structure, hemisphere, or function.
+- Structure-list choices, related-region links, and shared region URLs restore a view suited to the target: the matching hemisphere, medial or inferior camera where useful, and transparent cortex around deep structures. Buried parcels and enclosed compartments open in isolation using their real detail meshes. These are viewing presets, not additional anatomy.
 - Hover to highlight a part in gold and see its name, hemisphere, anatomical group, and a short description. The selected part stays teal, matching the **Reading about** panel; cortical parcel boundaries are outlined. Hover labels clear during dragging, and slow rotation pauses while inspecting a part.
 - Use **Isolate & inspect** to load a finer anatomical surface for the selected region.
+- Use **Reveal** beneath the region name to restore its viewing preset after rotating, hiding groups, or changing cutaways. **Whole brain**, leaving isolation, and closing details restore both hemispheres and the default visibility settings.
 - Use **Explode** and the separation slider to separate visible lobes or individual parcels.
 - Use the eye controls to show or hide anatomical groups.
 - The **View** control includes hemispheres, cortical opacity, section planes, labels, natural tissue colors, and slow rotation.
 - Anatomy and Connections tabs provide additional context. Related-region links are curated relationships, not a measured connectome.
 - Save regions in browser storage, copy region links, or export a PNG of the model.
-- Keyboard: Ctrl/Cmd K searches, E toggles explosion, L toggles labels, R resets. Escape closes an open library or settings panel, then clears the selected region. Library tabs support Left/Right, Home, and End.
+- Keyboard: Ctrl/Cmd K searches, E toggles explosion, L toggles labels, R resets. In structure search, Enter opens a single match and Down focuses the first result. Selecting a structure focuses its heading; closing details returns focus to the library button. Escape closes an open library or settings panel, then clears the selected region. Library and region-detail tabs support Left/Right, Home, and End.
 
 ## Guided learning paths
 
@@ -120,7 +122,7 @@ The text is a curated introduction to established concepts. Links to original da
 
 - The default scene submits **83,547 triangles**. Hidden groups are excluded from rendering and picking.
 - The initial geometry payload is approximately **2.92 MB**, stored as gzip and decoded with the browser's native `DecompressionStream`. A raw binary fallback supports browsers without that API.
-- Detail models load only for the region being inspected; six detail geometries are retained in memory.
+- Detail models load only for the region being inspected, including automatically isolated buried targets; six detail geometries are retained in memory.
 - Rendering stops when the view settles, resumes on interaction, and pauses when the document is hidden. Slow rotation renders continuously when enabled.
 - GPU pixel ratio is capped at 1.75. Normals and sulcal shading are precomputed, and buffer arrays are read without JSON geometry parsing.
 - Fonts are bundled locally. There are no analytics or external network requests until a user follows a reference link.

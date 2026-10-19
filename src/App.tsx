@@ -42,9 +42,9 @@ import { assetUrl } from "./asset-url.ts";
 import { matchedAnatomicalTerms, searchRegions } from "./anatomical-search.ts";
 import {
   referenceOrigin,
-  referenceRegionView,
   withReferenceOrigin,
 } from "./reference-navigation.ts";
+import { regionCamera, regionEnabled, regionView } from "./region-view.ts";
 import { RegionVideos, VideoLibrary } from "./components/DissectionVideos";
 import RegionCallout from "./components/RegionCallout";
 import {
@@ -75,6 +75,9 @@ const ImagingWorkspace = lazy(() => import("./components/ImagingWorkspace"));
 const ReferenceLibrary = lazy(() => import("./components/ReferenceLibrary"));
 type Section = "anatomy" | "scans" | "activities";
 type LibraryTab = "structures" | "paths" | "reference";
+type SelectionOptions = { origin?: string | null; reveal?: boolean };
+const detailTabs = ["overview", "anatomy", "connections", "videos"] as const;
+type DetailTab = (typeof detailTabs)[number];
 const libraryTabs: { id: LibraryTab; label: string }[] = [
   { id: "structures", label: "Structures" },
   { id: "paths", label: "Learning paths" },
@@ -146,6 +149,7 @@ export default function App() {
   const canvasRef = useRef<HTMLDivElement>(null);
   const viewer = useRef<AtlasViewer | null>(null);
   const searchRef = useRef<HTMLInputElement>(null);
+  const regionHeadingRef = useRef<HTMLHeadingElement>(null);
   const modalRef = useRef<HTMLDialogElement>(null);
   const [learning, setLearning] = useState<LearningPosition | null>(() =>
     learningFromHash(location.hash),
@@ -166,13 +170,16 @@ export default function App() {
     if (position) return learningView(position, defaultView);
     const id = new URLSearchParams(location.hash.slice(1)).get("region");
     const region = regions.find((item) => item.id === id);
-    if (region && referenceOrigin(location.hash))
-      return referenceRegionView(region, defaultView);
-    return {
-      ...defaultView,
-      selected: regions.some((p) => p.id === id) ? id : null,
-    };
+    return region ? regionView(region, defaultView) : { ...defaultView };
   });
+  const [revealView, setRevealView] = useState<{ camera: string } | null>(
+    () => {
+      if (learningFromHash(location.hash)) return null;
+      const id = new URLSearchParams(location.hash.slice(1)).get("region");
+      const region = regions.find((item) => item.id === id);
+      return region ? { camera: regionCamera(region) } : null;
+    },
+  );
   const [detailStatus, setDetailStatus] = useState<{
     id: string;
     status: string;
@@ -181,7 +188,7 @@ export default function App() {
   const [error, setError] = useState("");
   const [query, setQuery] = useState("");
   const [expanded, setExpanded] = useState<string[]>([]);
-  const [tab, setTab] = useState("overview");
+  const [tab, setTab] = useState<DetailTab>("overview");
   const [modal, setModal] = useState<"sources" | "help" | "videos" | null>(
     null,
   );
@@ -204,14 +211,7 @@ export default function App() {
   const selected = regions.find((p) => p.id === state.selected);
   const readingReference = sidebar && libraryTab === "reference";
   const hovered = regions.find((p) => p.id === hover?.id);
-  const selectedVisible =
-    selected &&
-    (state.isolated ||
-      (!state.hiddenGroups.includes(selected.group) &&
-        (state.hemisphere === "both" ||
-          selected.hemisphere === "midline" ||
-          selected.hemisphere === state.hemisphere))) &&
-    (selected.kind !== "cortex" || state.opacity > 0);
+  const selectedVisible = selected && regionEnabled(selected, state);
   const info = selected ? infoFor(selected) : null;
   function update(patch: Partial<ViewState>) {
     setState((prev) => ({ ...prev, ...patch }));
@@ -219,14 +219,22 @@ export default function App() {
   function notify(message: string) {
     setToast(message);
   }
-  function select(id: string, origin: string | null = null) {
+  function focusRegion() {
+    requestAnimationFrame(() =>
+      regionHeadingRef.current?.focus({ preventScroll: true }),
+    );
+  }
+  function select(
+    id: string,
+    { origin = null, reveal = false }: SelectionOptions = {},
+  ) {
     setLearning(null);
     setReturnReference(origin);
     setHover(null);
     const region = regions.find((p) => p.id === id)!;
     setState((prev) =>
-      origin
-        ? referenceRegionView(region, defaultView)
+      origin || reveal
+        ? regionView(region, defaultView)
         : {
             ...prev,
             selected: id,
@@ -238,6 +246,7 @@ export default function App() {
                 : prev.hemisphere,
           },
     );
+    setRevealView(origin || reveal ? { camera: regionCamera(region) } : null);
     setTab((current) => (current === "videos" ? current : "overview"));
     setSidebar(false);
     history.replaceState(
@@ -245,6 +254,7 @@ export default function App() {
       "",
       withReferenceOrigin(`#region=${encodeURIComponent(id)}`, origin),
     );
+    focusRegion();
   }
   function goToLearning(
     path: LearningPath,
@@ -253,6 +263,7 @@ export default function App() {
   ) {
     const position = { path, step };
     setLearning(position);
+    setRevealView(null);
     setReturnReference(origin);
     setState(learningView(position, defaultView));
     setSection("anatomy");
@@ -265,10 +276,7 @@ export default function App() {
       "",
       withReferenceOrigin(learningHash(path, step), origin),
     );
-    if (!learning || learning.path.id !== path.id)
-      requestAnimationFrame(() =>
-        document.querySelector<HTMLElement>(".region-name")?.focus(),
-      );
+    if (!learning || learning.path.id !== path.id) focusRegion();
   }
   function openPaths() {
     switchLibraryTab("paths");
@@ -303,11 +311,24 @@ export default function App() {
       history.replaceState(null, "", location.pathname + anatomyHash());
   }
   function exploreReferenceRegion(id: string) {
-    select(id, referenceId);
+    select(id, { origin: referenceId, reveal: true });
     setTab("overview");
-    requestAnimationFrame(() =>
-      document.querySelector<HTMLElement>(".region-name")?.focus(),
+  }
+  function revealSelected() {
+    if (!selected) return;
+    setState(
+      learning
+        ? learningView(learning, defaultView)
+        : regionView(selected, defaultView),
     );
+    setRevealView({
+      camera: learning
+        ? learning.path.steps[learning.step].view.camera
+        : regionCamera(selected),
+    });
+    setSettings(false);
+    setSidebar(false);
+    setHover(null);
   }
   function endLearning(completed = false) {
     setLearning(null);
@@ -322,9 +343,15 @@ export default function App() {
     );
     if (completed)
       notify("Path complete. Keep exploring, or choose another learning path.");
+    focusRegion();
   }
   const selectRef = useRef(select);
   selectRef.current = select;
+  const learningRef = useRef(goToLearning);
+  learningRef.current = goToLearning;
+  useEffect(() => {
+    if (section === "anatomy" && state.selected && !sidebar) focusRegion();
+  }, []);
   useEffect(() => {
     const navigate = () => {
       const params = new URLSearchParams(location.hash.slice(1));
@@ -337,6 +364,7 @@ export default function App() {
       setSidebar(false);
       setSettings(false);
       setHover(null);
+      setRevealView(null);
       if (next === "anatomy") {
         if (params.has("reference")) {
           setReferenceId(params.get("reference") || null);
@@ -346,12 +374,12 @@ export default function App() {
         }
         const position = learningFromHash(location.hash);
         if (position) {
-          goToLearning(position.path, position.step, origin);
+          learningRef.current(position.path, position.step, origin);
           return;
         }
         setLearning(null);
         const region = regions.find((item) => item.id === params.get("region"));
-        if (region) selectRef.current(region.id, origin);
+        if (region) selectRef.current(region.id, { origin, reveal: true });
         else
           setState((current) => ({
             ...current,
@@ -401,9 +429,9 @@ export default function App() {
     viewer.current?.view(camera);
   }, [learning, ready]);
   useEffect(() => {
-    if (!returnReference || learning || !selected || !ready) return;
-    camera(selected.kind === "cortex" ? selected.hemisphere : "default");
-  }, [returnReference, learning, state.selected, ready]);
+    if (!revealView || !ready) return;
+    camera(revealView.camera);
+  }, [revealView, ready]);
   useEffect(() => {
     try {
       localStorage.setItem("cerebra-saved", JSON.stringify(saved));
@@ -486,6 +514,7 @@ export default function App() {
   }
   function reset() {
     setLearning(null);
+    setRevealView(null);
     setReturnReference(null);
     setSidebar(false);
     setSettings(false);
@@ -497,13 +526,29 @@ export default function App() {
   }
   function inspect() {
     if (selected) {
+      if (state.isolated) {
+        wholeBrain();
+        return;
+      }
       update({
-        isolated: !state.isolated,
+        isolated: true,
         opacity: 1,
         exploded: 0,
         section: "none",
       });
     }
+  }
+  function wholeBrain() {
+    update({
+      isolated: false,
+      exploded: 0,
+      hemisphere: "both",
+      opacity: 1,
+      hiddenGroups: [...defaultView.hiddenGroups],
+      section: "none",
+      sectionOffset: 0,
+    });
+    setRevealView({ camera: "default" });
   }
   function camera(name: string) {
     setCameraView(name);
@@ -552,8 +597,14 @@ export default function App() {
   function closeRegion() {
     setLearning(null);
     setReturnReference(null);
-    update({ selected: null, isolated: false });
+    wholeBrain();
+    update({ selected: null });
     history.replaceState(null, "", location.pathname);
+    requestAnimationFrame(() =>
+      document
+        .querySelector<HTMLElement>('[aria-label="Open anatomy library"]')
+        ?.focus({ preventScroll: true }),
+    );
   }
   useEffect(() => {
     document.querySelector(".region-content")?.scrollTo(0, 0);
@@ -700,6 +751,17 @@ export default function App() {
                       ref={searchRef}
                       value={query}
                       onChange={(event) => setQuery(event.target.value)}
+                      onKeyDown={(event) => {
+                        if (event.key === "Enter" && results.length === 1) {
+                          event.preventDefault();
+                          select(results[0].id, { reveal: true });
+                        } else if (event.key === "ArrowDown") {
+                          event.preventDefault();
+                          document
+                            .querySelector<HTMLElement>(".region-row")
+                            ?.focus();
+                        }
+                      }}
                       placeholder="Find a brain region…"
                       aria-label="Search brain regions"
                     />
@@ -824,7 +886,9 @@ export default function App() {
                                   <button
                                     key={part.id}
                                     className={`region-row ${state.selected === part.id ? "selected" : ""}`}
-                                    onClick={() => select(part.id)}
+                                    onClick={() =>
+                                      select(part.id, { reveal: true })
+                                    }
                                   >
                                     <span>{part.name}</span>
                                     <small>
@@ -882,8 +946,15 @@ export default function App() {
             />
             <div className="view-segment">
               <button
-                className={!state.exploded && !state.isolated ? "active" : ""}
-                onClick={() => update({ exploded: 0, isolated: false })}
+                className={
+                  !state.exploded &&
+                  !state.isolated &&
+                  state.hemisphere === "both" &&
+                  state.opacity === 1
+                    ? "active"
+                    : ""
+                }
+                onClick={wholeBrain}
               >
                 <Brain size={16} /> <span>Whole brain</span>
               </button>
@@ -1043,7 +1114,7 @@ export default function App() {
           )}
           {state.isolated && selected && (
             <div className="isolation-notice">
-              <button onClick={() => update({ isolated: false })}>
+              <button onClick={wholeBrain}>
                 <ArrowLeft size={14} /> Back to whole brain
               </button>
               <span>
@@ -1124,8 +1195,12 @@ export default function App() {
               onChange={(e) => camera(e.target.value)}
             >
               <option value="default">Perspective</option>
-              <option value="left">Left lateral</option>
-              <option value="right">Right lateral</option>
+              <option value="left">
+                {state.hemisphere === "right" ? "Right medial" : "Left lateral"}
+              </option>
+              <option value="right">
+                {state.hemisphere === "left" ? "Left medial" : "Right lateral"}
+              </option>
               <option value="anterior">Anterior</option>
               <option value="posterior">Posterior</option>
               <option value="superior">Superior</option>
@@ -1182,7 +1257,7 @@ export default function App() {
                 />
                 {selected.group.toUpperCase()}
               </div>
-              <h2 className="region-name" tabIndex={-1}>
+              <h2 className="region-name" tabIndex={-1} ref={regionHeadingRef}>
                 {selected.name}
               </h2>
               <div className="region-meta">
@@ -1193,23 +1268,55 @@ export default function App() {
                     : "Deep anatomy"}
                 </span>
               </div>
-              <p
+              <button
                 className={`selection-key ${selectedVisible ? "" : "is-hidden"}`}
+                onClick={revealSelected}
+                aria-label="Reveal selected region"
+                title="Restore a clear view of this region"
+                disabled={controlsDisabled}
               >
                 <span />
                 {selectedVisible
-                  ? "Teal highlight on the model"
-                  : "Hidden in this view"}
-              </p>
+                  ? "Teal highlight · Reveal"
+                  : "Hidden in this view · Reveal"}
+                <Focus size={12} />
+              </button>
               <div
                 className="detail-tabs"
                 role="tablist"
                 aria-label="Region details"
+                onKeyDown={(event) => {
+                  if (
+                    !["ArrowLeft", "ArrowRight", "Home", "End"].includes(
+                      event.key,
+                    )
+                  )
+                    return;
+                  event.preventDefault();
+                  const index = detailTabs.indexOf(tab);
+                  const next =
+                    event.key === "Home"
+                      ? 0
+                      : event.key === "End"
+                        ? detailTabs.length - 1
+                        : (index +
+                            (event.key === "ArrowRight"
+                              ? 1
+                              : detailTabs.length - 1)) %
+                          detailTabs.length;
+                  setTab(detailTabs[next]);
+                  document
+                    .getElementById(`region-tab-${detailTabs[next]}`)
+                    ?.focus();
+                }}
               >
-                {["overview", "anatomy", "connections", "videos"].map((t) => (
+                {detailTabs.map((t) => (
                   <button
                     role="tab"
+                    id={`region-tab-${t}`}
+                    aria-controls="region-tab-content"
                     aria-selected={tab === t}
+                    tabIndex={tab === t ? 0 : -1}
                     key={t}
                     className={tab === t ? "active" : ""}
                     onClick={() => setTab(t)}
@@ -1218,7 +1325,12 @@ export default function App() {
                   </button>
                 ))}
               </div>
-              <div className="region-content" role="tabpanel">
+              <div
+                className="region-content"
+                role="tabpanel"
+                id="region-tab-content"
+                aria-labelledby={`region-tab-${tab}`}
+              >
                 {tab === "overview" && (
                   <>
                     {learning && <LearningExplanation position={learning} />}
@@ -1279,7 +1391,10 @@ export default function App() {
                     </p>
                     <div className="related-list">
                       {relatedRegions(selected).map((p) => (
-                        <button key={p.id} onClick={() => select(p.id)}>
+                        <button
+                          key={p.id}
+                          onClick={() => select(p.id, { reveal: true })}
+                        >
                           <span
                             className="color-dot"
                             style={{ background: p.color }}
@@ -1600,8 +1715,10 @@ export default function App() {
               </span>
             </div>
             <p className="help-footnote">
-              All structures can also be selected using the keyboard in the
-              anatomy library.
+              In structure search, Enter opens a single match and Down moves to
+              the results. Selection focuses the region heading. Use arrow keys,
+              Home, and End to move between detail tabs. Reveal restores a clear
+              view after changing visibility or cutaway settings.
             </p>
           </>
         )}

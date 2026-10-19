@@ -1,6 +1,3 @@
-import type { Region } from "./data.ts";
-import type { ViewState } from "./viewer";
-
 export function referenceOrigin(hash: string): string | null {
   const params = new URLSearchParams(hash.replace(/^#/, ""));
   if (!params.has("region") && !params.has("path") && !params.has("view"))
@@ -15,20 +12,4 @@ export function withReferenceOrigin(hash: string, origin: string | null) {
   params.delete("from");
   if (origin) params.set("from", origin);
   return `#${params}`;
-}
-
-export function referenceRegionView(
-  region: Region,
-  defaults: ViewState,
-): ViewState {
-  const hiddenGroups = defaults.hiddenGroups.filter(
-    (group) => group !== region.group,
-  );
-  if (region.group === "Ventricles") hiddenGroups.push("Deep structures");
-  return {
-    ...defaults,
-    selected: region.id,
-    opacity: region.kind === "cortex" ? 1 : 0.15,
-    hiddenGroups,
-  };
 }
