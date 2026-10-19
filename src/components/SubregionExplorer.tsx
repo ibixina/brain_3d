@@ -18,6 +18,7 @@ import {
 } from "../subregion-navigation.ts";
 import "./subregions.css";
 import { thalamicGroupCamera, thalamicGroupSelection } from "../thalamus-guide.ts";
+import ContentBoundary, { ContentRecovery } from "./ContentBoundary";
 
 const ProbabilityEvidence = lazy(() => import("./ProbabilityEvidence"));
 
@@ -39,9 +40,11 @@ function ProbabilityDisclosure({ kind, part, omitted = false, boundary, source }
         <p>{boundary} <a href={source} target="_blank" rel="noreferrer">Boundary reference ↗</a></p>
       )}
       {open && (
-        <Suspense fallback={<p role="status">Loading evidence panel…</p>}>
-          <ProbabilityEvidence kind={kind} part={part} />
-        </Suspense>
+        <ContentBoundary label="Probability evidence">
+          <Suspense fallback={<p role="status">Loading evidence panel…</p>}>
+            <ProbabilityEvidence kind={kind} part={part} />
+          </Suspense>
+        </ContentBoundary>
       )}
     </details>
   );
@@ -91,11 +94,11 @@ export default function SubregionExplorer({
   onRouteChange: (route: SubregionRoute) => void;
 }) {
   const [atlas, setAtlas] = useState<SubregionAtlas | null>(null);
-  const [error, setError] = useState("");
+  const [failed, setFailed] = useState(false);
   useEffect(() => {
     let cancelled = false;
     setAtlas(null);
-    setError("");
+    setFailed(false);
     const request =
       kind === "brainstem"
         ? import("../brainstem-subregions.json")
@@ -112,16 +115,13 @@ export default function SubregionExplorer({
         if (!cancelled) setAtlas(data.default);
       })
       .catch(() => {
-        if (!cancelled)
-          setError(
-            "The atlas reference could not load. Reload the page to try again.",
-          );
+        if (!cancelled) setFailed(true);
       });
     return () => {
       cancelled = true;
     };
   }, [kind]);
-  if (error) return <p role="alert">{error}</p>;
+  if (failed) return <ContentRecovery label="Atlas reference" />;
   if (!atlas) return <p role="status">Loading atlas reference…</p>;
   return (
     <LoadedSubregions

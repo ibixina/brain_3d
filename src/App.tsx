@@ -63,6 +63,7 @@ import {
 } from "./reference-topics.ts";
 import { RegionVideos, VideoLibrary } from "./components/DissectionVideos";
 import RegionCallout from "./components/RegionCallout";
+import ContentBoundary from "./components/ContentBoundary";
 import {
   LearningLibrary,
   LearningHeader,
@@ -814,23 +815,25 @@ export default function App() {
               aria-labelledby={`library-tab-${libraryTab}`}
             >
               {libraryTab === "reference" ? (
-                <Suspense
-                  fallback={
-                    <p className="learning-intro" role="status">
-                      Loading reference notes…
-                    </p>
-                  }
-                >
-                  <ReferenceLibrary
-                    articleId={referenceId}
-                    onOpen={openReference}
-                    onRegion={exploreReferenceRegion}
-                    selectedRegion={selected}
-                    selectionVisible={!!selectedVisible}
-                    isolated={state.isolated}
-                    onShowModel={showReferenceModel}
-                  />
-                </Suspense>
+                <ContentBoundary label="Reference notes">
+                  <Suspense
+                    fallback={
+                      <p className="learning-intro" role="status">
+                        Loading reference notes…
+                      </p>
+                    }
+                  >
+                    <ReferenceLibrary
+                      articleId={referenceId}
+                      onOpen={openReference}
+                      onRegion={exploreReferenceRegion}
+                      selectedRegion={selected}
+                      selectionVisible={!!selectedVisible}
+                      isolated={state.isolated}
+                      onShowModel={showReferenceModel}
+                    />
+                  </Suspense>
+                </ContentBoundary>
               ) : libraryTab === "paths" ? (
                 <LearningLibrary onStart={(path) => goToLearning(path)} />
               ) : (
@@ -1633,24 +1636,30 @@ export default function App() {
         </div>
       )}
       {section !== "anatomy" && (
-        <Suspense
-          fallback={
-            <div className="section-loading">
-              <LoaderCircle className="spin" size={24} />
-              Loading imaging workspace…
-            </div>
-          }
+        <ContentBoundary
+          key={section}
+          label={section === "scans" ? "Brain scans" : "Activity maps"}
+          className="workspace-recovery"
         >
-          <ImagingWorkspace
-            key={navigationVersion}
-            mode={section}
-            referenceOrigin={returnReference}
-            onReturnReference={() => {
-              setSection("anatomy");
-              openReference(returnReference);
-            }}
-          />
-        </Suspense>
+          <Suspense
+            fallback={
+              <div className="section-loading">
+                <LoaderCircle className="spin" size={24} />
+                Loading imaging workspace…
+              </div>
+            }
+          >
+            <ImagingWorkspace
+              key={navigationVersion}
+              mode={section}
+              referenceOrigin={returnReference}
+              onReturnReference={() => {
+                setSection("anatomy");
+                openReference(returnReference);
+              }}
+            />
+          </Suspense>
+        </ContentBoundary>
       )}
       {hover &&
         hovered &&
@@ -1708,14 +1717,18 @@ export default function App() {
           />
         </div>
         {subregionModal ? (
-          <Suspense fallback={<p role="status">Loading subregion explorer…</p>}>
-            <SubregionExplorer
-              key={`${subregionModal}-${navigationVersion}`}
-              kind={subregionModal}
-              route={atlasRoute ?? defaultSubregionRoute(subregionModal, selected?.hemisphere ?? "both")}
-              onRouteChange={changeSubregionRoute}
-            />
-          </Suspense>
+          <ContentBoundary
+            label="Atlas explorer"
+            key={`${subregionModal}-${navigationVersion}`}
+          >
+            <Suspense fallback={<p role="status">Loading subregion explorer…</p>}>
+              <SubregionExplorer
+                kind={subregionModal}
+                route={atlasRoute ?? defaultSubregionRoute(subregionModal, selected?.hemisphere ?? "both")}
+                onRouteChange={changeSubregionRoute}
+              />
+            </Suspense>
+          </ContentBoundary>
         ) : modal === "sources" ? (
           <>
             <h2>Atlas sources & coverage</h2>
