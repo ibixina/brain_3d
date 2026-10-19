@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import { ChevronDown, Focus, Minus, Plus, Split } from "lucide-react";
+import { ChevronDown, Focus, Link, Minus, Plus, Split } from "lucide-react";
 import { AtlasViewer, type ViewState } from "../viewer";
 import { assetUrl } from "../asset-url.ts";
 import {
@@ -9,6 +9,12 @@ import {
   type SubregionAtlas,
   type SubregionKind,
 } from "../subregions.ts";
+import {
+  resolveSubregionRoute,
+  subregionViews,
+  type SubregionRoute,
+  type SubregionView,
+} from "../subregion-navigation.ts";
 import "./subregions.css";
 
 const initial: ViewState = {
@@ -47,10 +53,12 @@ const atlasNotes: Record<SubregionKind, { scope: string; protocol: string }> = {
 
 export default function SubregionExplorer({
   kind,
-  hemisphere = "both",
+  route,
+  onRouteChange,
 }: {
   kind: SubregionKind;
-  hemisphere?: string;
+  route: SubregionRoute;
+  onRouteChange: (route: SubregionRoute) => void;
 }) {
   const [atlas, setAtlas] = useState<SubregionAtlas | null>(null);
   const [error, setError] = useState("");
@@ -84,10 +92,11 @@ export default function SubregionExplorer({
   if (!atlas) return <p role="status">Loading atlas reference…</p>;
   return (
     <LoadedSubregions
-      key={`${kind}-${hemisphere}`}
+      key={kind}
       atlas={atlas}
       kind={kind}
-      hemisphere={hemisphere}
+      route={route}
+      onRouteChange={onRouteChange}
     />
   );
 }
@@ -95,26 +104,40 @@ export default function SubregionExplorer({
 function LoadedSubregions({
   atlas,
   kind,
-  hemisphere,
+  route,
+  onRouteChange,
 }: {
   atlas: SubregionAtlas;
   kind: SubregionKind;
-  hemisphere: string;
+  route: SubregionRoute;
+  onRouteChange: (route: SubregionRoute) => void;
 }) {
   const large = atlas.parts.length > 8;
   const name = subregionCatalog[kind].name;
   const partWord = kind === "thalamus" ? "nucleus" : "subregion";
-  const start = { ...initial, hemisphere: large ? hemisphere : "both" };
+  const resolved = resolveSubregionRoute(route, atlas.parts);
   const host = useRef<HTMLDivElement>(null);
   const viewer = useRef<AtlasViewer | null>(null);
   const reading = useRef<HTMLHeadingElement>(null);
   const panel = useRef<HTMLElement>(null);
-  const [state, setState] = useState(start);
+  const [state, setState] = useState<ViewState>(() => ({
+    ...initial,
+    selected: resolved.selected,
+    hemisphere: resolved.hemisphere,
+    isolated: resolved.isolated,
+    exploded: resolved.exploded,
+  }));
+  const [camera, setCamera] = useState(resolved.camera);
   const [ready, setReady] = useState(false);
   const [error, setError] = useState("");
   const [attempt, setAttempt] = useState(0);
   const [query, setQuery] = useState("");
-  const [choosing, setChoosing] = useState(true);
+  const [choosing, setChoosing] = useState(!resolved.selected);
+  const [shareMessage, setShareMessage] = useState("");
+  const [shareFailed, setShareFailed] = useState(false);
+  const shareInput = useRef<HTMLInputElement>(null);
+  const routeChange = useRef(onRouteChange);
+  routeChange.current = onRouteChange;
   const [hover, setHover] = useState<{
     id: string;
     x: number;
@@ -155,7 +178,34 @@ function LoadedSubregions({
   };
   const chooseRef = useRef(choose);
   chooseRef.current = choose;
-  const lastHemisphere = useRef(state.hemisphere);
+
+  useEffect(() => {
+    routeChange.current({
+      kind,
+      hemisphere: state.hemisphere as SubregionRoute["hemisphere"],
+      selected: state.selected,
+      isolated: state.isolated,
+      exploded: state.exploded,
+      camera,
+    });
+    setShareMessage("");
+    setShareFailed(false);
+  }, [kind, state, camera]);
+
+  useEffect(() => {
+    if (resolved.selected) reading.current?.focus({ preventScroll: true });
+  }, []);
+
+  async function copyLink() {
+    try {
+      await navigator.clipboard.writeText(location.href);
+      setShareMessage("Atlas link copied.");
+    } catch {
+      setShareFailed(true);
+      setShareMessage("Select and copy the link below.");
+      requestAnimationFrame(() => shareInput.current?.select());
+    }
+  }
 
   useEffect(() => {
     if (!host.current) return;
@@ -197,10 +247,11 @@ function LoadedSubregions({
 
   useEffect(() => {
     viewer.current?.update(state);
-    if (lastHemisphere.current !== state.hemisphere)
-      viewer.current?.view("default");
-    lastHemisphere.current = state.hemisphere;
   }, [state, ready]);
+
+  useEffect(() => {
+    if (ready) viewer.current?.view(camera);
+  }, [camera, ready, state.hemisphere, state.isolated, state.exploded]);
 
   return (
     <div className="subregion-explorer">
@@ -286,6 +337,12 @@ function LoadedSubregions({
             ? `${visible.length} selectable surfaces from ${visible.length + omitted.length} source labels${state.hemisphere === "both" ? " across both sides" : ` on the ${state.hemisphere}`}.`
             : "Select a surface or a name to inspect one of four atlas compartments."}
         </p>
+        {route.selected && !resolved.selected && (
+          <p className="subregion-link-notice" role="status">
+            The linked part is unavailable in this atlas or hemisphere.
+            Showing the available surfaces instead.
+          </p>
+        )}
         {large && (
           <>
             <label className="subregion-hemisphere">
@@ -310,15 +367,32 @@ function LoadedSubregions({
                 <option value="both">Both</option>
               </select>
             </label>
-            <button
-              className="subregion-picker"
-              aria-expanded={choosing}
-              onClick={() => setChoosing((value) => !value)}
-            >
-              Choose {selected ? `another ${partWord}` : `a ${partWord}`}
-              <ChevronDown size={14} />
-            </button>
           </>
+        )}
+        <label className="subregion-viewpoint">
+          Viewpoint
+          <select
+            aria-label="Subregion anatomical viewpoint"
+            value={camera}
+            disabled={!ready}
+            onChange={(event) => setCamera(event.target.value as SubregionView)}
+          >
+            {Object.entries(subregionViews).map(([value, label]) => (
+              <option key={value} value={value}>
+                {label}
+              </option>
+            ))}
+          </select>
+        </label>
+        {large && (
+          <button
+            className="subregion-picker"
+            aria-expanded={choosing}
+            onClick={() => setChoosing((value) => !value)}
+          >
+            Choose {selected ? `another ${partWord}` : `a ${partWord}`}
+            <ChevronDown size={14} />
+          </button>
         )}
         {(!large || choosing) && (
           <div className={large ? "subregion-chooser" : ""}>
@@ -409,6 +483,25 @@ function LoadedSubregions({
             All parts
           </button>
         </div>
+        <button className="subregion-share" onClick={copyLink}>
+          <Link size={14} /> Copy this atlas view
+        </button>
+        <p className="subregion-share-hint">
+          Shares the side, part, layout and chosen viewpoint. Manual rotation
+          and zoom are not saved.
+        </p>
+        {shareMessage && (
+          <p className="subregion-share-status" role="status">{shareMessage}</p>
+        )}
+        {shareFailed && (
+          <input
+            ref={shareInput}
+            className="subregion-share-url"
+            aria-label="Atlas view link"
+            readOnly
+            value={location.href}
+          />
+        )}
         {omitted.length > 0 && (
           <details className="subregion-omitted">
             <summary>{omitted.length} source labels without a surface</summary>

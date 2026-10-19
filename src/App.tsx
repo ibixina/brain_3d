@@ -52,6 +52,12 @@ import {
   type SubregionKind,
 } from "./subregions.ts";
 import {
+  defaultSubregionRoute,
+  subregionRouteFromHash,
+  withSubregionRoute,
+  type SubregionRoute,
+} from "./subregion-navigation.ts";
+import {
   referenceTopicsForRegion,
   referenceKeepsRegion,
 } from "./reference-topics.ts";
@@ -200,9 +206,15 @@ export default function App() {
   const [query, setQuery] = useState("");
   const [expanded, setExpanded] = useState<string[]>([]);
   const [tab, setTab] = useState<DetailTab>("overview");
+  const [atlasRoute, setAtlasRoute] = useState(() =>
+    subregionRouteFromHash(
+      location.hash,
+      regions.find((part) => part.id === state.selected),
+    ),
+  );
   const [modal, setModal] = useState<
     "sources" | "help" | "videos" | SubregionKind | null
-  >(null);
+  >(atlasRoute?.kind ?? null);
   const [saved, setSaved] = useState<string[]>(readSaved);
   const [savedOnly, setSavedOnly] = useState(false);
   const [hover, setHover] = useState<{
@@ -386,14 +398,26 @@ export default function App() {
   const learningRef = useRef(goToLearning);
   learningRef.current = goToLearning;
   useEffect(() => {
-    if (section === "anatomy" && state.selected && !sidebar) focusRegion();
+    if (section === "anatomy" && state.selected && !sidebar && !subregionModal)
+      focusRegion();
   }, []);
   useEffect(() => {
     const navigate = () => {
-      const params = new URLSearchParams(location.hash.slice(1));
+      const hash = location.hash;
+      const params = new URLSearchParams(hash.slice(1));
       const view = params.get("view");
-      const origin = referenceOrigin(location.hash);
+      const origin = referenceOrigin(hash);
       const next = view === "scans" || view === "activities" ? view : "anatomy";
+      const position = learningFromHash(hash);
+      const parentId = position
+        ? position.path.steps[position.step].region
+        : params.get("region");
+      const nextAtlas = subregionRouteFromHash(
+        hash,
+        regions.find((part) => part.id === parentId),
+      );
+      setAtlasRoute(nextAtlas);
+      setModal(nextAtlas?.kind ?? null);
       setSection(next);
       setNavigationVersion((version) => version + 1);
       setSidebar(false);
@@ -406,9 +430,9 @@ export default function App() {
       }
       setReturnReference(origin);
       if (next === "anatomy") {
-        const position = learningFromHash(location.hash);
         if (position) {
           learningRef.current(position.path, position.step, origin);
+          if (nextAtlas) history.replaceState(null, "", hash);
           return;
         }
         setLearning(null);
@@ -420,6 +444,7 @@ export default function App() {
             selected: null,
             isolated: false,
           }));
+        if (nextAtlas) history.replaceState(null, "", hash);
       }
     };
     window.addEventListener("hashchange", navigate);
@@ -621,6 +646,28 @@ export default function App() {
           : "",
       returnReference,
     );
+  }
+  function openSubregions(kind: SubregionKind) {
+    const route = defaultSubregionRoute(kind, selected?.hemisphere ?? "both");
+    setAtlasRoute(route);
+    setModal(kind);
+    changeSubregionRoute(route);
+  }
+  function changeSubregionRoute(route: SubregionRoute) {
+    history.replaceState(
+      null, "", location.pathname + withSubregionRoute(anatomyHash(), route),
+    );
+  }
+  function closeModal() {
+    modalRef.current?.close();
+    if (subregionModal) {
+      history.replaceState(null, "", location.pathname + anatomyHash());
+      requestAnimationFrame(() =>
+        document.querySelector<HTMLButtonElement>(".subregion-open")?.focus({ preventScroll: true }),
+      );
+    }
+    setAtlasRoute(null);
+    setModal(null);
   }
   function openLibrary() {
     if (sidebar) {
@@ -1518,7 +1565,7 @@ export default function App() {
               {subregionKind && (
                 <button
                   className="subregion-open"
-                  onClick={() => setModal(subregionKind)}
+                  onClick={() => openSubregions(subregionKind)}
                 >
                   <Layers3 size={17} />
                   <span>
@@ -1636,9 +1683,12 @@ export default function App() {
                 ? "Atlas sources and coverage"
                 : "How to explore"
         }
-        onCancel={() => setModal(null)}
+        onCancel={(event) => {
+          event.preventDefault();
+          closeModal();
+        }}
         onClick={(e) => {
-          if (e.target === e.currentTarget) setModal(null);
+          if (e.target === e.currentTarget) closeModal();
         }}
       >
         <div className="dialog-header">
@@ -1654,14 +1704,16 @@ export default function App() {
           <IconButton
             icon={X}
             label="Close dialog"
-            onClick={() => setModal(null)}
+            onClick={closeModal}
           />
         </div>
         {subregionModal ? (
           <Suspense fallback={<p role="status">Loading subregion explorer…</p>}>
             <SubregionExplorer
+              key={`${subregionModal}-${navigationVersion}`}
               kind={subregionModal}
-              hemisphere={selected?.hemisphere ?? "both"}
+              route={atlasRoute ?? defaultSubregionRoute(subregionModal, selected?.hemisphere ?? "both")}
+              onRouteChange={changeSubregionRoute}
             />
           </Suspense>
         ) : modal === "sources" ? (

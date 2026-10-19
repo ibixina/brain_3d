@@ -264,7 +264,8 @@
   }
 }
 
-.subregion-hemisphere {
+.subregion-hemisphere,
+.subregion-viewpoint {
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -274,6 +275,8 @@
   font-size: 11px;
 }
 .subregion-hemisphere select,
+.subregion-viewpoint select,
+.subregion-share-url,
 .subregion-chooser input {
   border: 1px solid #ffffff25;
   border-radius: 7px;
@@ -284,6 +287,34 @@
 }
 .subregion-hemisphere select {
   width: 120px;
+}
+.subregion-viewpoint select {
+  width: 175px;
+  min-width: 0;
+}
+.subregion-explorer .subregion-share {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  width: 100%;
+  margin-top: 14px;
+}
+.subregion-share-hint,
+.subregion-share-status,
+.subregion-link-notice {
+  color: #a5bac9;
+  font-size: 10px;
+  line-height: 1.7;
+  margin: 8px 0;
+}
+.subregion-share-status {
+  color: #a8f3df;
+}
+.subregion-share-url {
+  width: 100%;
+  box-sizing: border-box;
+  font-size: 11px;
 }
 .subregion-explorer .subregion-picker {
   display: flex;
