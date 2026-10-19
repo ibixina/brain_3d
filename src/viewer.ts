@@ -27,6 +27,7 @@ export type ViewerDataset = {
   compressedUrl: string;
   rawUrl: string;
   fitOnLoad?: boolean;
+  explodeFromCenter?: boolean;
   label?: string;
 };
 const defaultDataset: ViewerDataset = {
@@ -331,7 +332,10 @@ export class AtlasViewer {
             ? 35
             : 0;
       if (direction.length() < 1) direction.set(0, -1, 0);
-      direction.normalize().multiplyScalar(state.exploded * 90);
+      if (this.dataset.explodeFromCenter) {
+        direction.copy(center).sub(new THREE.Vector3(0, 5, 10));
+        direction.multiplyScalar(state.exploded * 3);
+      } else direction.normalize().multiplyScalar(state.exploded * 90);
       mesh.userData.explode = state.isolated ? new THREE.Vector3() : direction;
       if ((!state.isolated || !selected) && mesh.geometry !== this.base.get(id))
         mesh.geometry = this.base.get(id)!;

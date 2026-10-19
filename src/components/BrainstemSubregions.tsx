@@ -56,6 +56,7 @@ export default function BrainstemSubregions() {
           compressedUrl: atlas.compressedUrl,
           rawUrl: atlas.rawUrl,
           fitOnLoad: true,
+          explodeFromCenter: true,
           label:
             "Interactive brainstem atlas subdivisions. Drag to rotate, scroll to zoom, right-drag to pan. Use the four part buttons for keyboard access.",
         },
