@@ -45,7 +45,10 @@ import {
   withReferenceOrigin,
 } from "./reference-navigation.ts";
 import { regionCamera, regionEnabled, regionView } from "./region-view.ts";
-import { referenceTopicsForRegion } from "./reference-topics.ts";
+import {
+  referenceTopicsForRegion,
+  referenceKeepsRegion,
+} from "./reference-topics.ts";
 import { RegionVideos, VideoLibrary } from "./components/DissectionVideos";
 import RegionCallout from "./components/RegionCallout";
 import {
@@ -289,6 +292,12 @@ export default function App() {
     setHover(null);
   }
   function openReference(id: string | null) {
+    if (selected && !referenceKeepsRegion(selected, id, returnReference)) {
+      setLearning(null);
+      setReturnReference(null);
+      wholeBrain();
+      update({ selected: null });
+    }
     setReferenceId(id);
     setLibraryTab("reference");
     setSidebar(true);
@@ -351,6 +360,8 @@ export default function App() {
   }
   const selectRef = useRef(select);
   selectRef.current = select;
+  const openReferenceRef = useRef(openReference);
+  openReferenceRef.current = openReference;
   const learningRef = useRef(goToLearning);
   learningRef.current = goToLearning;
   useEffect(() => {
@@ -371,9 +382,7 @@ export default function App() {
       setRevealView(null);
       if (next === "anatomy") {
         if (params.has("reference")) {
-          setReferenceId(params.get("reference") || null);
-          setLibraryTab("reference");
-          setSidebar(true);
+          openReferenceRef.current(params.get("reference") || null);
           return;
         }
         const position = learningFromHash(location.hash);
@@ -1373,7 +1382,11 @@ export default function App() {
                             key={topic.id}
                             onClick={() => openReference(topic.id)}
                           >
-                            {topic.title} <ArrowUpRight size={12} />
+                            <span>
+                              {topic.title}
+                              <small>{topic.reading?.label}</small>
+                            </span>
+                            <ArrowUpRight size={12} />
                           </button>
                         ))}
                       </div>

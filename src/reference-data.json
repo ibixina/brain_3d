@@ -229,7 +229,12 @@
           "id": "f_hxX_xvHQY",
           "note": "See corresponding section orientations on human specimens."
         }
-      ]
+      ],
+      "reading": {
+        "groups": ["Ventricles"],
+        "label": "Spatial context",
+        "priority": 2
+      }
     },
     {
       "id": "folds",
@@ -256,7 +261,19 @@
         "lh-insula"
       ],
       "related": ["atlas-boundaries", "cortical-layers"],
-      "sources": ["orientation", "parcels"]
+      "sources": ["orientation", "parcels"],
+      "reading": {
+        "groups": [
+          "Frontal",
+          "Temporal",
+          "Parietal",
+          "Occipital",
+          "Limbic",
+          "Insula"
+        ],
+        "label": "Surface anatomy",
+        "priority": 2
+      }
     },
     {
       "id": "gray-white-matter",
@@ -297,7 +314,12 @@
           "id": "PazaHElk6wc",
           "note": "Cortical and subcortical fiber anatomy on real specimens; individual axons are not resolved."
         }
-      ]
+      ],
+      "reading": {
+        "groups": ["Deep structures", "White matter"],
+        "label": "Tissue context",
+        "priority": 2
+      }
     },
     {
       "id": "meninges",
@@ -382,7 +404,12 @@
           "id": "zqQ6iKw5DjY",
           "note": "Human specimen sections, casts, and diagrams showing ventricular anatomy. Opens the institutional film on its original channel."
         }
-      ]
+      ],
+      "reading": {
+        "groups": ["Ventricles"],
+        "label": "Fluid spaces & flow",
+        "priority": 0
+      }
     },
     {
       "id": "brain-barriers",
@@ -414,7 +441,12 @@
           "id": "zqQ6iKw5DjY",
           "note": "Ventricular and plexus context on real specimens; a gross dissection does not resolve endothelial or epithelial tight junctions."
         }
-      ]
+      ],
+      "reading": {
+        "keys": ["choroid-plexus"],
+        "label": "Microscopic interfaces",
+        "priority": 1
+      }
     },
     {
       "id": "arterial-supply",
@@ -550,7 +582,12 @@
           "id": "t2",
           "note": "Compare brainstem, cerebellum, and fourth-ventricle relationships in linked population-template slices. Small nuclei and individual nerves are not labeled."
         }
-      ]
+      ],
+      "reading": {
+        "keys": ["brainstem"],
+        "label": "Gross anatomy",
+        "priority": 0
+      }
     },
     {
       "id": "cranial-nerves",
@@ -695,7 +732,12 @@
           "id": "_JXb_lGgaQQ",
           "note": "Utah’s brainstem lesson combines human specimens and reflex demonstrations. Gross views do not resolve every nerve nucleus."
         }
-      ]
+      ],
+      "reading": {
+        "keys": ["brainstem"],
+        "label": "Nerves & relationships",
+        "priority": 1
+      }
     },
     {
       "id": "cerebellum-organization",
@@ -750,7 +792,12 @@
           "id": "movement",
           "note": "Place the cerebellar stop within a selected motor-system learning sequence. This is not a measured tract or signal animation."
         }
-      ]
+      ],
+      "reading": {
+        "keys": ["cerebellar-cortex", "cerebellar-white-matter"],
+        "label": "Gross anatomy",
+        "priority": 0
+      }
     },
     {
       "id": "cerebellar-circuit",
@@ -791,7 +838,12 @@
           "id": "mpO4lTDr1to",
           "note": "Orient the gross cerebellum on a specimen before reading its microscopic circuit. The film is not cellular imaging of these synapses."
         }
-      ]
+      ],
+      "reading": {
+        "keys": ["cerebellar-cortex", "cerebellar-white-matter"],
+        "label": "Cellular context",
+        "priority": 0
+      }
     },
     {
       "id": "cortical-layers",
@@ -836,7 +888,19 @@
           "id": "akjdkBeFNLE",
           "note": "Gross cortical localization on human specimens. This film does not reveal the six microscopic cortical layers."
         }
-      ]
+      ],
+      "reading": {
+        "groups": [
+          "Frontal",
+          "Temporal",
+          "Parietal",
+          "Occipital",
+          "Limbic",
+          "Insula"
+        ],
+        "label": "Tissue context",
+        "priority": 1
+      }
     },
     {
       "id": "neurons",
@@ -860,7 +924,12 @@
       "scope": "Cells and their processes are below this model’s resolution. The related regions are places containing neurons, not reconstructions of individual cells.",
       "regions": ["lh-precentral", "aseg-17", "aseg-8"],
       "related": ["synapses", "myelin", "cell-diversity"],
-      "sources": ["cells"]
+      "sources": ["cells"],
+      "reading": {
+        "groups": ["Deep structures"],
+        "label": "Cellular context",
+        "priority": 1
+      }
     },
     {
       "id": "glia",
@@ -905,7 +974,12 @@
       "scope": "This explanation describes a mechanism. The atlas has no electrical simulation, individual fibers, myelin measurements, or measured conduction speeds.",
       "regions": ["aseg-2", "aseg-7", "aseg-251"],
       "related": ["glia", "neurons", "gray-white-matter"],
-      "sources": ["myelin", "cells"]
+      "sources": ["myelin", "cells"],
+      "reading": {
+        "groups": ["White matter"],
+        "label": "Axon insulation",
+        "priority": 1
+      }
     },
     {
       "id": "synapses",
@@ -958,6 +1032,7 @@
     },
     {
       "id": "atlas-boundaries",
+      "context": "all",
       "title": "What an atlas boundary means",
       "category": "Reading the evidence",
       "summary": "A parcel is a region defined by a particular labeling method, with a particular resolution.",
@@ -984,7 +1059,12 @@
         "cortical-layers",
         "section-planes"
       ],
-      "sources": ["parcels", "language"]
+      "sources": ["parcels", "language"],
+      "reading": {
+        "groups": ["Deep structures", "White matter"],
+        "label": "Model limits",
+        "priority": 3
+      }
     },
     {
       "id": "functional-names",
@@ -1021,7 +1101,19 @@
           "id": "language",
           "note": "Follow four anatomical stops in a distributed language system, with limits on classical localization."
         }
-      ]
+      ],
+      "reading": {
+        "ids": [
+          "lh-parsopercularis",
+          "lh-parstriangularis",
+          "lh-transversetemporal",
+          "rh-transversetemporal",
+          "lh-pericalcarine",
+          "rh-pericalcarine"
+        ],
+        "label": "Names & evidence",
+        "priority": 0
+      }
     }
   ]
 }

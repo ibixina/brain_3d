@@ -1,0 +1,315 @@
+[
+  {
+    "id": "directions",
+    "title": "Finding your bearings",
+    "regions": [
+      "lh-precentral",
+      "rh-precentral",
+      "aseg-16"
+    ]
+  },
+  {
+    "id": "section-planes",
+    "title": "The three section planes",
+    "regions": [
+      "aseg-14",
+      "aseg-16"
+    ],
+    "reading": {
+      "groups": [
+        "Ventricles"
+      ],
+      "label": "Spatial context",
+      "priority": 2
+    }
+  },
+  {
+    "id": "folds",
+    "title": "Gyri, sulci, and fissures",
+    "regions": [
+      "lh-precentral",
+      "lh-postcentral",
+      "lh-bankssts",
+      "lh-insula"
+    ],
+    "reading": {
+      "groups": [
+        "Frontal",
+        "Temporal",
+        "Parietal",
+        "Occipital",
+        "Limbic",
+        "Insula"
+      ],
+      "label": "Surface anatomy",
+      "priority": 2
+    }
+  },
+  {
+    "id": "gray-white-matter",
+    "title": "Gray matter and white matter",
+    "regions": [
+      "lh-precentral",
+      "aseg-10",
+      "aseg-2",
+      "aseg-41"
+    ],
+    "reading": {
+      "groups": [
+        "Deep structures",
+        "White matter"
+      ],
+      "label": "Tissue context",
+      "priority": 2
+    }
+  },
+  {
+    "id": "meninges",
+    "title": "The coverings around the brain",
+    "regions": [
+      "lh-superiorfrontal",
+      "lh-insula",
+      "aseg-8"
+    ]
+  },
+  {
+    "id": "csf-circulation",
+    "title": "Following cerebrospinal fluid",
+    "regions": [
+      "aseg-31",
+      "aseg-4",
+      "aseg-14",
+      "aseg-15"
+    ],
+    "reading": {
+      "groups": [
+        "Ventricles"
+      ],
+      "label": "Fluid spaces & flow",
+      "priority": 0
+    }
+  },
+  {
+    "id": "brain-barriers",
+    "title": "Two different blood–brain interfaces",
+    "regions": [
+      "aseg-31",
+      "aseg-4",
+      "lh-precentral"
+    ],
+    "reading": {
+      "keys": [
+        "choroid-plexus"
+      ],
+      "label": "Microscopic interfaces",
+      "priority": 1
+    }
+  },
+  {
+    "id": "arterial-supply",
+    "title": "How blood reaches the brain",
+    "regions": [
+      "lh-paracentral",
+      "lh-precentral",
+      "lh-pericalcarine",
+      "aseg-10",
+      "aseg-16"
+    ]
+  },
+  {
+    "id": "venous-drainage",
+    "title": "Veins, sinuses, and lymphatics",
+    "regions": [
+      "lh-superiorfrontal",
+      "aseg-10",
+      "aseg-14"
+    ]
+  },
+  {
+    "id": "brainstem-organization",
+    "title": "Brainstem levels and landmarks",
+    "regions": [
+      "aseg-16",
+      "aseg-15",
+      "aseg-8"
+    ],
+    "reading": {
+      "keys": [
+        "brainstem"
+      ],
+      "label": "Gross anatomy",
+      "priority": 0
+    }
+  },
+  {
+    "id": "cranial-nerves",
+    "title": "The twelve cranial nerves",
+    "regions": [
+      "aseg-16"
+    ],
+    "reading": {
+      "keys": [
+        "brainstem"
+      ],
+      "label": "Nerves & relationships",
+      "priority": 1
+    }
+  },
+  {
+    "id": "cerebellum-organization",
+    "title": "Cerebellar lobes and connections",
+    "regions": [
+      "aseg-8",
+      "aseg-47",
+      "aseg-7",
+      "aseg-46",
+      "aseg-16"
+    ],
+    "reading": {
+      "keys": [
+        "cerebellar-cortex",
+        "cerebellar-white-matter"
+      ],
+      "label": "Gross anatomy",
+      "priority": 0
+    }
+  },
+  {
+    "id": "cerebellar-circuit",
+    "title": "Inside the cerebellar circuit",
+    "regions": [
+      "aseg-8",
+      "aseg-7",
+      "aseg-16"
+    ],
+    "reading": {
+      "keys": [
+        "cerebellar-cortex",
+        "cerebellar-white-matter"
+      ],
+      "label": "Cellular context",
+      "priority": 0
+    }
+  },
+  {
+    "id": "cortical-layers",
+    "title": "Inside the cortical sheet",
+    "regions": [
+      "lh-precentral",
+      "lh-postcentral",
+      "lh-pericalcarine",
+      "aseg-17"
+    ],
+    "reading": {
+      "groups": [
+        "Frontal",
+        "Temporal",
+        "Parietal",
+        "Occipital",
+        "Limbic",
+        "Insula"
+      ],
+      "label": "Tissue context",
+      "priority": 1
+    }
+  },
+  {
+    "id": "neurons",
+    "title": "A neuron’s working parts",
+    "regions": [
+      "lh-precentral",
+      "aseg-17",
+      "aseg-8"
+    ],
+    "reading": {
+      "groups": [
+        "Deep structures"
+      ],
+      "label": "Cellular context",
+      "priority": 1
+    }
+  },
+  {
+    "id": "glia",
+    "title": "Glia: the other cellular partners",
+    "regions": [
+      "aseg-2",
+      "aseg-4",
+      "aseg-14"
+    ]
+  },
+  {
+    "id": "myelin",
+    "title": "Myelin and rapid conduction",
+    "regions": [
+      "aseg-2",
+      "aseg-7",
+      "aseg-251"
+    ],
+    "reading": {
+      "groups": [
+        "White matter"
+      ],
+      "label": "Axon insulation",
+      "priority": 1
+    }
+  },
+  {
+    "id": "synapses",
+    "title": "How synapses pass a signal",
+    "regions": [
+      "aseg-17",
+      "lh-precentral",
+      "aseg-12"
+    ]
+  },
+  {
+    "id": "cell-diversity",
+    "title": "What counts as a brain cell type?",
+    "regions": [
+      "aseg-16",
+      "aseg-10",
+      "lh-precentral"
+    ]
+  },
+  {
+    "id": "atlas-boundaries",
+    "title": "What an atlas boundary means",
+    "regions": [
+      "lh-parsopercularis",
+      "lh-pericalcarine",
+      "aseg-17"
+    ],
+    "context": "all",
+    "reading": {
+      "groups": [
+        "Deep structures",
+        "White matter"
+      ],
+      "label": "Model limits",
+      "priority": 3
+    }
+  },
+  {
+    "id": "functional-names",
+    "title": "Common names and functional areas",
+    "regions": [
+      "lh-transversetemporal",
+      "lh-parsopercularis",
+      "lh-parstriangularis",
+      "lh-pericalcarine"
+    ],
+    "reading": {
+      "ids": [
+        "lh-parsopercularis",
+        "lh-parstriangularis",
+        "lh-transversetemporal",
+        "rh-transversetemporal",
+        "lh-pericalcarine",
+        "rh-pericalcarine"
+      ],
+      "label": "Names & evidence",
+      "priority": 0
+    }
+  }
+]

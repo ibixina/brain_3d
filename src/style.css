@@ -2191,4 +2191,12 @@ kbd {
   text-decoration: none;
   border-bottom: 1px solid var(--line);
   margin: 0;
+  padding: 8px 0;
+}
+.region-reference-notes .reference-search-link small {
+  display: block;
+  margin: 3px 0;
+  color: var(--muted);
+  font-size: 10px;
+  font-weight: 400;
 }

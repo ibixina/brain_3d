@@ -21,7 +21,10 @@ import { dissectionVideos } from "../src/videos.ts";
 import {
   regionReferenceTopics,
   referenceTopicsForRegion,
+  referenceKeepsRegion,
 } from "../src/reference-topics.ts";
+import { buildReferenceTopics } from "../scripts/build_reference_topics.mjs";
+import catalogue from "../src/reference-data.json" with { type: "json" };
 import atlas from "../src/atlas-manifest.json" with { type: "json" };
 
 test("anatomical aliases find available parcels while respecting hemisphere and combined terms", () => {
@@ -152,27 +155,103 @@ test("cranial-nerve comparison covers I–XII in order with sources and explicit
   assert.deepEqual(article.regions, ["aseg-16"]);
 });
 
-test("contextual reading suggestions link real region keys to matching source articles", () => {
+test("compact topic index stays synchronized with the lazy catalogue", () => {
+  assert.deepEqual(
+    regionReferenceTopics,
+    buildReferenceTopics(catalogue.articles),
+    "Run node scripts/build_reference_topics.mjs after editing reference titles, model links, or reading scopes",
+  );
   for (const topic of regionReferenceTopics) {
     const article = referenceArticles.find((item) => item.id === topic.id);
     assert.equal(article?.title, topic.title);
-    for (const key of topic.keys) {
-      const targets = atlas.parts.filter((part) => part.key === key);
-      assert.ok(targets.length > 0, key);
-      assert.ok(
-        targets.every((region) =>
-          referenceTopicsForRegion(region).includes(topic),
-        ),
-      );
-      assert.ok(targets.some((region) => article.regions.includes(region.id)));
+    assert.ok(topic.context === undefined || topic.context === "all");
+    const scope = topic.reading;
+    if (!scope) continue;
+    assert.ok(scope.label && Number.isFinite(scope.priority));
+    assert.ok(
+      [scope.ids, scope.keys, scope.groups].some((items) => items?.length),
+    );
+    for (const [selector, field] of [
+      ["ids", "id"],
+      ["keys", "key"],
+      ["groups", "group"],
+    ]) {
+      for (const value of scope[selector] ?? [])
+        assert.ok(
+          atlas.parts.some((region) => region[field] === value),
+          `${topic.id}: ${value}`,
+        );
     }
   }
-  assert.equal(referenceTopicsForRegion({ key: "brainstem" }).length, 2);
+});
+
+test("every mesh offers bounded reading suggestions with explicit context", () => {
+  for (const region of atlas.parts) {
+    const topics = referenceTopicsForRegion(region);
+    assert.ok(topics.length >= 2 && topics.length <= 3, region.id);
+    assert.equal(new Set(topics.map((topic) => topic.id)).size, topics.length);
+    assert.ok(topics.every((topic) => topic.reading.label));
+    assert.ok(topics.every((topic) => referenceKeepsRegion(region, topic.id)));
+  }
+  const suggested = (id) =>
+    referenceTopicsForRegion(
+      atlas.parts.find((region) => region.id === id),
+    ).map((topic) => topic.id);
+  assert.deepEqual(suggested("aseg-16"), [
+    "brainstem-organization",
+    "cranial-nerves",
+  ]);
+  assert.deepEqual(suggested("aseg-7"), [
+    "cerebellum-organization",
+    "cerebellar-circuit",
+    "myelin",
+  ]);
+  assert.deepEqual(suggested("aseg-17"), [
+    "neurons",
+    "gray-white-matter",
+    "atlas-boundaries",
+  ]);
+  assert.deepEqual(suggested("aseg-31"), [
+    "csf-circulation",
+    "brain-barriers",
+    "section-planes",
+  ]);
+  assert.deepEqual(suggested("lh-parsopercularis"), [
+    "functional-names",
+    "cortical-layers",
+    "folds",
+  ]);
+  assert.deepEqual(suggested("rh-parsopercularis"), [
+    "cortical-layers",
+    "folds",
+  ]);
+});
+
+test("reference context retains explicit model links and guide returns while rejecting unrelated highlights", () => {
+  for (const article of referenceArticles) {
+    for (const id of article.regions) {
+      const region = atlas.parts.find((region) => region.id === id);
+      assert.equal(
+        referenceKeepsRegion(region, article.id),
+        true,
+        `${article.id}: ${id}`,
+      );
+    }
+  }
+  const brainstem = atlas.parts.find((region) => region.id === "aseg-16");
+  const hippocampus = atlas.parts.find((region) => region.id === "aseg-17");
+  assert.equal(referenceKeepsRegion(brainstem, "cortical-layers"), false);
+  assert.equal(referenceKeepsRegion(hippocampus, "brain-barriers"), false);
   assert.equal(
-    referenceTopicsForRegion({ key: "cerebellar-cortex" }).length,
-    2,
+    referenceKeepsRegion(hippocampus, "brain-barriers", "brain-barriers"),
+    true,
   );
-  assert.deepEqual(referenceTopicsForRegion({ key: "precentral" }), []);
+  assert.equal(referenceKeepsRegion(brainstem, null), true);
+  assert.equal(referenceKeepsRegion(brainstem, "atlas-boundaries"), true);
+  assert.equal(
+    referenceKeepsRegion(brainstem, "missing-note", "missing-note"),
+    false,
+  );
 });
 
 test("reference explorations resolve to retained specimen films, real paths, and valid MRI views", () => {
