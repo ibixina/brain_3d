@@ -94,6 +94,13 @@ export const anatomicalTerms: AnatomicalTerm[] = [
     note: "This gyrus is represented by three anatomical parcels: pars opercularis, pars triangularis, and pars orbitalis, in each hemisphere.",
     source: "https://surfer.nmr.mgh.harvard.edu/fswiki/CorticalParcellation",
   },
+  {
+    name: "Hypothalamus · composite context",
+    aliases: ["hypothalamus", "hypothalamic region"],
+    keys: ["ventral-diencephalon"],
+    note: "Only the broader ventral-diencephalon label is available. It includes hypothalamic and neighboring territories; it does not separately segment the hypothalamus or its nuclei.",
+    source: "https://surfer.nmr.mgh.harvard.edu/fswiki/SubcorticalSegmentation",
+  },
 ];
 
 export function normalizeSearch(value: string) {

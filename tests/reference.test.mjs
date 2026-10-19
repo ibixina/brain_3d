@@ -26,6 +26,7 @@ import {
 import { buildReferenceTopics } from "../scripts/build_reference_topics.mjs";
 import catalogue from "../src/reference-data.json" with { type: "json" };
 import atlas from "../src/atlas-manifest.json" with { type: "json" };
+import { infoFor } from "../src/data.ts";
 
 test("anatomical aliases find available parcels while respecting hemisphere and combined terms", () => {
   assert.deepEqual(
@@ -47,6 +48,14 @@ test("anatomical aliases find available parcels while respecting hemisphere and 
   );
   assert.equal(searchRegions("lh IFG").length, 3);
   assert.equal(searchRegions("left hippocampus")[0].id, "aseg-17");
+  assert.deepEqual(
+    searchRegions("left hypothalamus").map((item) => item.id),
+    ["aseg-28"],
+  );
+  assert.deepEqual(
+    searchRegions("right hypothalamus").map((item) => item.id),
+    ["aseg-60"],
+  );
   assert.equal(searchRegions("memory impossible-term").length, 0);
   assert.equal(searchRegions("  ").length, atlas.parts.length);
 });
@@ -423,6 +432,52 @@ test("amygdala notes link bilateral gross anatomy and distinguish human experime
   }
   assert.equal(
     referenceExplorations(evidence).find((link) => link.kind === "path").id,
+    "emotion",
+  );
+});
+
+test("hypothalamic reading preserves composite labels and separates physiological routes and species", () => {
+  const anatomy = referenceArticles.find(
+    (article) => article.id === "hypothalamic-anatomy",
+  );
+  const systems = referenceArticles.find(
+    (article) => article.id === "hypothalamic-systems",
+  );
+  for (const id of ["aseg-28", "aseg-60"]) {
+    const region = atlas.parts.find((part) => part.id === id);
+    assert.deepEqual(
+      referenceTopicsForRegion(region)
+        .slice(0, 2)
+        .map((topic) => topic.id),
+      [anatomy.id, systems.id],
+    );
+    assert.equal(
+      infoFor(region).source,
+      referenceSources["aseg-boundaries"].url,
+    );
+    assert.ok(anatomy.regions.includes(id));
+    assert.ok(systems.regions.includes(id));
+  }
+  assert.match(anatomy.scope, /no separate hypothalamus mesh/);
+  assert.match(anatomy.scope, /does not establish their exact extent/);
+  assert.deepEqual(systems.regions, ["aseg-28", "aseg-60"]);
+  assert.deepEqual(
+    systems.comparison.rows.slice(0, 2).map((row) => row.label),
+    ["Posterior-pituitary route", "Anterior-pituitary route"],
+  );
+  assert.match(referenceSources["scn-transplant"].kind, /hamster.*transplant/);
+  assert.match(referenceSources["agrp-feeding"].kind, /mouse.*optogenetics/);
+  assert.ok(searchReference("suprachiasmatic").includes(anatomy));
+  assert.ok(searchReference("mammillary").includes(anatomy));
+  assert.ok(searchReference("vasopressin portal").includes(systems));
+  assert.ok(searchReference("Aponte AgRP").includes(systems));
+  for (const note of [anatomy, systems]) {
+    const links = referenceExplorations(note);
+    assert.ok(links.some((link) => link.kind === "video"));
+    assert.ok(links.some((link) => link.kind === "scan"));
+  }
+  assert.equal(
+    referenceExplorations(systems).find((link) => link.kind === "path").id,
     "emotion",
   );
 });

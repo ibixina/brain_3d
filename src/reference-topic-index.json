@@ -308,6 +308,40 @@
     }
   },
   {
+    "id": "hypothalamic-anatomy",
+    "title": "Ventral diencephalon and hypothalamus",
+    "regions": [
+      "aseg-28",
+      "aseg-60",
+      "aseg-14",
+      "aseg-10",
+      "aseg-49",
+      "aseg-16"
+    ],
+    "reading": {
+      "keys": [
+        "ventral-diencephalon"
+      ],
+      "label": "Composite anatomy",
+      "priority": -2
+    }
+  },
+  {
+    "id": "hypothalamic-systems",
+    "title": "Hypothalamic control and experimental evidence",
+    "regions": [
+      "aseg-28",
+      "aseg-60"
+    ],
+    "reading": {
+      "keys": [
+        "ventral-diencephalon"
+      ],
+      "label": "Systems & evidence",
+      "priority": -1
+    }
+  },
+  {
     "id": "hippocampal-formation",
     "title": "Inside the hippocampal formation",
     "regions": [

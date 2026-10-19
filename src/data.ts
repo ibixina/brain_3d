@@ -35,6 +35,18 @@ const amygdala = ut + "s4/chapter06.html";
 const basal = ut + "s3/chapter04.html";
 const cerebellum = ut + "s3/chapter05.html";
 const general = "https://www.ncbi.nlm.nih.gov/books/NBK10915/";
+const subcorticalReferences: Record<string, string> = {
+  hippocampus: memory,
+  amygdala,
+  "ventral-diencephalon":
+    "https://surfer.nmr.mgh.harvard.edu/fswiki/SubcorticalSegmentation",
+  "caudate-nucleus": basal,
+  putamen: basal,
+  "globus-pallidus": basal,
+  "nucleus-accumbens": basal,
+  "cerebellar-cortex": cerebellum,
+  "cerebellar-white-matter": cerebellum,
+};
 const cortical: Record<string, [string, string[], string, string[]]> = {
   bankssts: [
     "The banks lining the superior temporal sulcus sit between the superior and middle temporal gyri. This association territory participates in the interpretation of complex social and sensory information.",
@@ -459,21 +471,7 @@ export function infoFor(region: Region): Info {
       connections: s[4],
       context:
         "Subdivisions listed here describe internal anatomy. They are not individually segmented in this reference mesh. Individual anatomy and functional organization vary.",
-      source:
-        region.key === "amygdala"
-          ? amygdala
-          : region.key === "hippocampus"
-            ? memory
-            : [
-                  "caudate-nucleus",
-                  "putamen",
-                  "globus-pallidus",
-                  "nucleus-accumbens",
-                ].includes(region.key)
-              ? basal
-              : region.key.includes("cerebellar")
-                ? cerebellum
-                : general,
+      source: subcorticalReferences[region.key] ?? general,
     };
   return {
     summary:

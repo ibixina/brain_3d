@@ -276,6 +276,31 @@
       "title": "Feinstein et al. · Fear and panic with bilateral amygdala damage (2013)",
       "url": "https://pubmed.ncbi.nlm.nih.gov/23377128/",
       "kind": "Original human lesion and experimental interoception study"
+    },
+    "hypothalamic-anatomy": {
+      "title": "Dougherty · Hypothalamic structural organization (reviewed 2020)",
+      "url": "https://nba.uth.tmc.edu/neuroscience/s4/chapter01.html",
+      "kind": "Academic textbook"
+    },
+    "hypothalamic-pituitary": {
+      "title": "Dougherty · Hypothalamic control of pituitary hormones (reviewed 2020)",
+      "url": "https://nba.uth.tmc.edu/neuroscience/s4/chapter02.html",
+      "kind": "Academic textbook"
+    },
+    "hypothalamic-autonomic": {
+      "title": "Dougherty · Central autonomic control and thermoregulation (reviewed 2020)",
+      "url": "https://nba.uth.tmc.edu/neuroscience/s4/chapter03.html",
+      "kind": "Academic textbook"
+    },
+    "scn-transplant": {
+      "title": "Ralph et al. · Suprachiasmatic grafts and circadian period (1990)",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/2305266/",
+      "kind": "Original hamster lesion and neural-transplant study"
+    },
+    "agrp-feeding": {
+      "title": "Aponte, Atasoy & Sternson · AgRP activation and feeding (2011)",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/21209617/",
+      "kind": "Original mouse cell-specific optogenetics and feeding study"
     }
   },
   "articles": [
@@ -1260,7 +1285,8 @@
         "basal-ganglia-anatomy",
         "hippocampal-circuit",
         "section-planes",
-        "atlas-boundaries"
+        "atlas-boundaries",
+        "hypothalamic-anatomy"
       ],
       "sources": [
         "thalamic-anatomy",
@@ -1504,7 +1530,8 @@
         "hippocampal-formation",
         "basal-ganglia-anatomy",
         "section-planes",
-        "atlas-boundaries"
+        "atlas-boundaries",
+        "hypothalamic-anatomy"
       ],
       "sources": [
         "hippocampus-sections",
@@ -1678,6 +1705,258 @@
           "kind": "scan",
           "id": "t1",
           "note": "Inspect structural tissue contrast in a population average. These are not the experimental participants or a measurement of fear."
+        }
+      ]
+    },
+    {
+      "id": "hypothalamic-anatomy",
+      "title": "Ventral diencephalon and hypothalamus",
+      "category": "Hypothalamus & homeostasis",
+      "summary": "Separate a composite imaging label from hypothalamic nuclei, nearby territories, and the landmarks used to describe them.",
+      "aliases": [
+        "hypothalamic sulcus",
+        "optic chiasm",
+        "tuber cinereum",
+        "median eminence",
+        "infundibulum",
+        "pituitary",
+        "preoptic",
+        "suprachiasmatic",
+        "SCN",
+        "paraventricular",
+        "PVN",
+        "PVH",
+        "supraoptic",
+        "SON",
+        "arcuate",
+        "ARC",
+        "dorsomedial",
+        "ventromedial",
+        "DMH",
+        "VMH",
+        "lateral hypothalamic area",
+        "mammillary bodies",
+        "periventricular zone",
+        "tuberal",
+        "ventral diencephalon",
+        "geniculates"
+      ],
+      "paragraphs": [
+        "The selectable ventral diencephalon is a composite FreeSurfer imaging label. Its documented convention includes hypothalamic territory and neighboring structures such as geniculate regions, basal forebrain, and parts of ventral tegmentum. It is not a segmented hypothalamus or a single physiological unit. The source convention even includes some tissue that belongs anatomically to the midbrain.",
+        "Hypothalamic anatomy is described relative to the third ventricle, optic chiasm, tuber cinereum, and mammillary bodies. Longitudinal periventricular, medial, and lateral zones intersect anterior/preoptic, tuberal, and posterior regional descriptions. These are different anatomical organizing schemes, not equivalent mesh partitions.",
+        "The selected names in the comparison have distinct neuronal populations and connections. Most cannot be located precisely from a smooth composite surface. Neither a teal highlight nor finer sampling identifies the SCN, arcuate nucleus, or a particular hormone-producing cell group.",
+        "The model links provide bilateral composite labels plus neighboring thalamus, third ventricle, and brainstem. Specimen lessons and MRI help orient those gross relationships. Their independent data do not supply nuclear boundaries missing from the 3D model."
+      ],
+      "scope": "There is no separate hypothalamus mesh. Individual hypothalamic nuclei, pituitary lobes, optic chiasm, median eminence, infundibular stalk, mammillary bodies, and their fibers or portal vessels are not individually reconstructed. The ventral-diencephalon mesh does not establish their exact extent or prove that every listed structure is fully included. Finer mode refines the composite surface. This is a selected anatomical introduction, not a complete hypothalamic atlas.",
+      "regions": [
+        "aseg-28",
+        "aseg-60",
+        "aseg-14",
+        "aseg-10",
+        "aseg-49",
+        "aseg-16"
+      ],
+      "related": [
+        "hypothalamic-systems",
+        "thalamic-anatomy",
+        "amygdala-anatomy",
+        "hippocampal-circuit",
+        "atlas-boundaries"
+      ],
+      "sources": [
+        "aseg-boundaries",
+        "hypothalamic-anatomy",
+        "hypothalamic-autonomic",
+        "hypothalamic-pituitary"
+      ],
+      "reading": {
+        "keys": ["ventral-diencephalon"],
+        "label": "Composite anatomy",
+        "priority": -2
+      },
+      "comparison": {
+        "caption": "Selected hypothalamic names — none is a separate selectable mesh",
+        "columns": ["Nucleus, area, or territory", "Selected distinction"],
+        "rows": [
+          {
+            "label": "Preoptic / anterior region",
+            "summary": "Anterior territories involved in autonomic and temperature regulation.",
+            "detail": "A regional grouping, not one universal nucleus or an outline in the composite model.",
+            "source": "hypothalamic-autonomic"
+          },
+          {
+            "label": "Suprachiasmatic nucleus · SCN",
+            "summary": "A named anterior hypothalamic nucleus associated with circadian timing.",
+            "detail": "The systems note distinguishes hamster transplantation evidence from human atlas anatomy.",
+            "source": "hypothalamic-anatomy"
+          },
+          {
+            "label": "Paraventricular / supraoptic · PVN / SON",
+            "summary": "Distinct nuclei containing magnocellular neurosecretory neurons.",
+            "detail": "PVN also contains other cell populations. Neither label is separated here.",
+            "source": "hypothalamic-pituitary"
+          },
+          {
+            "label": "Arcuate nucleus · ARC",
+            "summary": "A tuberal-region nucleus near the floor of the third ventricle.",
+            "detail": "A named territory containing multiple cell populations; no AgRP/POMC cell map is modeled.",
+            "source": "hypothalamic-anatomy"
+          },
+          {
+            "label": "Dorsomedial / ventromedial · DMH / VMH",
+            "summary": "Separate nuclei in the medial tuberal region.",
+            "detail": "Their names and selected behavioral/metabolic roles do not define a single appetite switch.",
+            "source": "hypothalamic-anatomy"
+          },
+          {
+            "label": "Lateral hypothalamic area",
+            "summary": "A lateral territory containing pathways and neuronal populations.",
+            "detail": "An area is not equivalent to one nucleus or one kind of neuron.",
+            "source": "hypothalamic-anatomy"
+          },
+          {
+            "label": "Mammillary region",
+            "summary": "Posterior landmarks and nuclei linked with memory-related circuits.",
+            "detail": "Mammillary bodies and mammillothalamic fibers are not separately modeled.",
+            "source": "hypothalamic-anatomy"
+          },
+          {
+            "label": "Other territories in the composite label",
+            "summary": "The source convention groups geniculate, basal-forebrain, and ventral-tegmental regions with hypothalamic territory.",
+            "detail": "The label is not a precise stand-in for any one of these structures. Consult the segmentation definition.",
+            "source": "aseg-boundaries"
+          }
+        ]
+      },
+      "explorations": [
+        {
+          "kind": "video",
+          "id": "ANlfIEv83hg",
+          "note": "Utah’s hypothalamus specimen lesson supplies gross anatomical orientation. It does not label every hypothalamic nucleus."
+        },
+        {
+          "kind": "video",
+          "id": "ErpxEwlWww4",
+          "note": "UBC’s hypothalamic and limbic lesson shows surrounding human specimen anatomy. Its named structures are more specific than the composite mesh."
+        },
+        {
+          "kind": "scan",
+          "id": "t1",
+          "note": "Inspect deep midline relationships in a structural population template. It is separate from the surface model and has no bundled hypothalamic nuclear labels."
+        }
+      ]
+    },
+    {
+      "id": "hypothalamic-systems",
+      "title": "Hypothalamic control and experimental evidence",
+      "category": "Hypothalamus & homeostasis",
+      "summary": "Distinguish hormonal and neural output routes, then examine specific circadian and feeding experiments.",
+      "aliases": [
+        "homeostasis",
+        "neuroendocrine",
+        "magnocellular",
+        "parvocellular",
+        "neurohypophysis",
+        "adenohypophysis",
+        "posterior pituitary",
+        "anterior pituitary",
+        "hypophyseal portal",
+        "vasopressin",
+        "ADH",
+        "oxytocin",
+        "autonomic",
+        "circadian",
+        "SCN",
+        "AgRP",
+        "AGRP",
+        "POMC",
+        "agouti-related peptide",
+        "feeding",
+        "Ralph",
+        "Aponte",
+        "optogenetics"
+      ],
+      "paragraphs": [
+        "Two hypothalamic–pituitary routes differ anatomically. Magnocellular neurons in supraoptic and paraventricular nuclei send axons to the posterior pituitary, where vasopressin and oxytocin enter blood from nerve terminals. For anterior-pituitary control, hypothalamic releasing or inhibiting signals reach the gland through portal vessels from the median eminence. Anterior-pituitary cells produce their own hormones.",
+        "Hypothalamic autonomic connections include PVN projections toward brainstem and spinal autonomic systems. These neural routes interact with visceral inputs and wider cortical/limbic networks. Endocrine secretion and autonomic outflow are different routes, even when related signals arise within one named nucleus.",
+        "Ralph and colleagues (1990) transplanted suprachiasmatic-region tissue into hamsters made arrhythmic by lesions. Grafts restored overt circadian rhythms with the period of the donor genotype rather than the host genotype. This supports a pacemaker role for cells in that region. The experiment did not establish that every body rhythm, sleep stage, or human chronotype is controlled by a single isolated clock.",
+        "Aponte, Atasoy and Sternson (2011) used cell-specific channelrhodopsin stimulation in mice. Activating AgRP neurons in the arcuate region rapidly evoked feeding, including in well-fed animals; the effect depended on stimulation and the number of activated neurons. The study demonstrates sufficiency under those experimental conditions. It does not measure a person’s subjective hunger or reduce normal feeding to one cell population.",
+        "The human composite meshes, population MRI templates, and statistical task maps are different from both animal experiments. None displays hormone concentration, real-time autonomic output, the donor graft, or the stimulated neurons. The linked guide provides anatomical context without animating those physiological processes."
+      ],
+      "scope": "This is a selected written systems account. There are no separate hypothalamic nuclei, pituitary lobes, portal vessels, hormonal time series, circadian recordings, experimental grafts, or optogenetic traces in the viewer. Model links identify the actual composite ventral-diencephalon labels, not a precisely segmented SCN or arcuate nucleus. Homeostatic regulation involves many regions, cell types, feedback signals, and timescales beyond this introduction.",
+      "regions": ["aseg-28", "aseg-60"],
+      "related": [
+        "hypothalamic-anatomy",
+        "amygdala-evidence",
+        "thalamic-circuits",
+        "synapses",
+        "brainstem-organization"
+      ],
+      "sources": [
+        "hypothalamic-pituitary",
+        "hypothalamic-autonomic",
+        "scn-transplant",
+        "agrp-feeding"
+      ],
+      "reading": {
+        "keys": ["ventral-diencephalon"],
+        "label": "Systems & evidence",
+        "priority": -1
+      },
+      "comparison": {
+        "caption": "Selected output routes and experiments — different kinds of evidence",
+        "columns": [
+          "Route or experiment",
+          "Relationship and interpretation limit"
+        ],
+        "rows": [
+          {
+            "label": "Posterior-pituitary route",
+            "summary": "Hypothalamic magnocellular axons terminate in the neurohypophysis and release vasopressin or oxytocin into blood.",
+            "detail": "The hormones are synthesized in hypothalamic neurons; the gland and individual axons are not modeled.",
+            "source": "hypothalamic-pituitary"
+          },
+          {
+            "label": "Anterior-pituitary route",
+            "summary": "Hypothalamic signals enter portal blood near the median eminence and regulate endocrine cells in the adenohypophysis.",
+            "detail": "This vascular connection differs from direct posterior-pituitary axon terminals. No portal circulation is reconstructed.",
+            "source": "hypothalamic-pituitary"
+          },
+          {
+            "label": "Autonomic neural routes",
+            "summary": "PVN and other hypothalamic territories influence brainstem and spinal autonomic networks.",
+            "detail": "The whole brainstem/composite meshes do not identify individual pre-autonomic neurons or descending tracts.",
+            "source": "hypothalamic-autonomic"
+          },
+          {
+            "label": "Circadian transplantation · hamsters",
+            "summary": "Restored rhythms followed the donor suprachiasmatic-region genotype’s period.",
+            "detail": "A lesion-and-graft experiment supports a regional pacemaker contribution; it is not a human sleep simulation.",
+            "source": "scn-transplant"
+          },
+          {
+            "label": "AgRP activation · mice",
+            "summary": "Targeted optical activation rapidly evoked feeding in the experimental animals.",
+            "detail": "Sufficiency during stimulation differs from a complete account of ordinary feeding, necessity in every context, or measured human hunger.",
+            "source": "agrp-feeding"
+          }
+        ]
+      },
+      "explorations": [
+        {
+          "kind": "path",
+          "id": "emotion",
+          "note": "Visit selected amygdala, insular, cingulate, and composite diencephalic context. This is not a hormonal or autonomic simulation."
+        },
+        {
+          "kind": "video",
+          "id": "ANlfIEv83hg",
+          "note": "Use Utah’s human specimen lesson for orientation. It does not record the cited animal experiments or circulating hormones."
+        },
+        {
+          "kind": "scan",
+          "id": "t1",
+          "note": "Open structural population-template slices. This is not a hormone assay, circadian time series, or cell-specific activity measurement."
         }
       ]
     },
