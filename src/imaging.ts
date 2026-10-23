@@ -171,6 +171,8 @@ export function slicePixels(
     opacity: number;
     polarity: Polarity;
     backgroundGrid?: Grid;
+    /** Overrides the signed overlay: RGB (0-255) and opacity for a voxel on `grid`. */
+    colorAt?: (voxel: number) => [number[], number] | null;
   },
 ) {
   const [horizontal, vertical] = planeDimensions[plane];
@@ -213,17 +215,24 @@ export function slicePixels(
       const gray = scan[offset]
         ? clamp((scan[offset] - 127.5) * options.contrast + 127.5, 0, 255)
         : 0;
-      const color = overlay
-        ? activityColor(
-            overlay[overlayOffset] * 0.01,
-            options.threshold,
-            options.maximum,
-            options.polarity,
-          )
-        : null;
+      let color: number[] | null = null,
+        opacity = options.opacity;
+      if (options.colorAt) {
+        const custom = gray ? options.colorAt(overlayOffset) : null;
+        if (custom) {
+          color = custom[0];
+          opacity *= custom[1];
+        }
+      } else if (overlay)
+        color = activityColor(
+          overlay[overlayOffset] * 0.01,
+          options.threshold,
+          options.maximum,
+          options.polarity,
+        );
       for (let c = 0; c < 3; c++)
         pixels[pixel + c] = color
-          ? gray * (1 - options.opacity) + color[c] * options.opacity
+          ? gray * (1 - opacity) + color[c] * opacity
           : gray;
       pixels[pixel + 3] = 255;
     }

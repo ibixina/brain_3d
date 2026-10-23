@@ -90,6 +90,7 @@ import {
 
 const SubregionExplorer = lazy(() => import("./components/SubregionExplorer"));
 const ImagingWorkspace = lazy(() => import("./components/ImagingWorkspace"));
+const ActivityCompare = lazy(() => import("./components/ActivityCompare"));
 const ReferenceLibrary = lazy(() => import("./components/ReferenceLibrary"));
 type Section = "anatomy" | "scans" | "activities";
 type LibraryTab = "structures" | "paths" | "reference";
@@ -164,6 +165,10 @@ export default function App() {
     return view === "scans" || view === "activities" ? view : "anatomy";
   });
   const [navigationVersion, setNavigationVersion] = useState(0);
+  // Older shared links name one IBC map; they open the single-person viewer.
+  const [singleMaps, setSingleMaps] = useState(() =>
+    new URLSearchParams(location.hash.slice(1)).has("map"),
+  );
   const canvasRef = useRef<HTMLDivElement>(null);
   const viewer = useRef<AtlasViewer | null>(null);
   const searchRef = useRef<HTMLInputElement>(null);
@@ -420,6 +425,7 @@ export default function App() {
       setAtlasRoute(nextAtlas);
       setModal(nextAtlas?.kind ?? null);
       setSection(next);
+      setSingleMaps(params.has("map"));
       setNavigationVersion((version) => version + 1);
       setSidebar(false);
       setSettings(false);
@@ -1654,15 +1660,39 @@ export default function App() {
               </div>
             }
           >
-            <ImagingWorkspace
-              key={navigationVersion}
-              mode={section}
-              referenceOrigin={returnReference}
-              onReturnReference={() => {
-                setSection("anatomy");
-                openReference(returnReference);
-              }}
-            />
+            {section === "activities" && !singleMaps ? (
+              <ActivityCompare
+                key={navigationVersion}
+                referenceOrigin={returnReference}
+                onReturnReference={() => {
+                  setSection("anatomy");
+                  openReference(returnReference);
+                }}
+                onSingleMaps={() => setSingleMaps(true)}
+              />
+            ) : (
+              <ImagingWorkspace
+                key={navigationVersion}
+                mode={section}
+                referenceOrigin={returnReference}
+                onReturnReference={() => {
+                  setSection("anatomy");
+                  openReference(returnReference);
+                }}
+                onCompare={
+                  section === "activities"
+                    ? () => {
+                        setSingleMaps(false);
+                        history.replaceState(
+                          null,
+                          "",
+                          location.pathname + "#view=activities",
+                        );
+                      }
+                    : undefined
+                }
+              />
+            )}
           </Suspense>
         </ContentBoundary>
       )}

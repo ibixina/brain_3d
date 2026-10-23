@@ -51,10 +51,12 @@ export default function ImagingWorkspace({
   mode,
   referenceOrigin = null,
   onReturnReference,
+  onCompare,
 }: {
   mode: Mode;
   referenceOrigin?: string | null;
   onReturnReference?: () => void;
+  onCompare?: () => void;
 }) {
   const {
     value: manifest,
@@ -168,6 +170,11 @@ export default function ImagingWorkspace({
           {referenceOrigin && (
             <button className="reference-return" onClick={onReturnReference}>
               <ArrowLeft size={12} /> Back to reference note
+            </button>
+          )}
+          {onCompare && !referenceOrigin && (
+            <button className="reference-return" onClick={onCompare}>
+              <ArrowLeft size={12} /> Compare activities
             </button>
           )}
           <span className="eyebrow">

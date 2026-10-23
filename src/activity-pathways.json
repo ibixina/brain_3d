@@ -1,0 +1,56 @@
+{
+  "checkedOn": "2026-10-23",
+  "pathways": [
+    {
+      "id": "blindsight",
+      "title": "Blindsight",
+      "category": "Evidence pathways",
+      "description": "Responding to things in a blind part of the visual field, without seeing them, after damage to primary visual cortex.",
+      "summary": "There are too few coordinate studies for a meta-analysis: the NeuroQuery corpus has six that mention blindsight, with different designs, including single-patient studies and one study of healthy volunteers. This entry instead highlights the routes that patient and monkey studies point to: visual signals that reach the thalamus, superior colliculus, motion area hMT+, and amygdala without passing through V1.",
+      "roles": [
+        {
+          "role": "damaged",
+          "parts": ["lh-pericalcarine", "rh-pericalcarine"],
+          "label": "Damaged: primary visual cortex (V1)",
+          "text": "Blindsight follows damage to V1. When one side is damaged, the opposite half of the visual field becomes blind (hemianopia), yet some patients can still detect or locate stimuli there. In this model, the pericalcarine parcel approximates V1 around the calcarine sulcus. Real lesions usually affect one side, not both.",
+          "sources": [
+            { "label": "Weiskrantz et al. 1974, Brain 97:709–728", "url": "https://doi.org/10.1093/brain/97.1.709" },
+            { "label": "Ajina et al. 2015, eLife 4:e08935", "url": "https://doi.org/10.7554/eLife.08935" }
+          ]
+        },
+        {
+          "role": "route",
+          "parts": ["aseg-10", "aseg-49", "lh-lateraloccipital", "rh-lateraloccipital"],
+          "label": "Route: lateral geniculate nucleus → motion area hMT+",
+          "text": "Among 17 adults with V1 damage, everyone with measurable blindsight had an intact white-matter pathway from the lateral geniculate nucleus (LGN) to motion area hMT+. In those without blindsight, the pathway was impaired or could not be measured. In macaques with V1 lesions, temporarily inactivating the LGN abolished V1-independent fMRI responses and the animals' detection of stimuli. The LGN is part of the thalamus, which this model shows as one surface. hMT+ lies at the occipitotemporal junction, mostly within the model's lateral occipital parcel.",
+          "sources": [
+            { "label": "Ajina et al. 2015, eLife 4:e08935", "url": "https://doi.org/10.7554/eLife.08935" },
+            { "label": "Schmid et al. 2010, Nature 466:373–377 (macaques)", "url": "https://doi.org/10.1038/nature09179" },
+            { "label": "Ajina et al. 2015, Brain 138:164–178", "url": "https://doi.org/10.1093/brain/awu328" }
+          ]
+        },
+        {
+          "role": "route",
+          "parts": ["aseg-16", "aseg-10", "aseg-49"],
+          "label": "Route: superior colliculus → pulvinar",
+          "text": "In macaques with V1 lesions, selectively blocking the pathway from the superior colliculus to the ventrolateral pulvinar impaired visually guided eye movements to targets in the blind field. In humans, diffusion imaging traced fibers from the superior colliculus through the pulvinar to the amygdala. The superior colliculus sits in the midbrain and the pulvinar in the thalamus; this model highlights the whole brainstem and thalamus surfaces.",
+          "sources": [
+            { "label": "Kinoshita et al. 2019, Nature Communications 10:135 (macaques)", "url": "https://doi.org/10.1038/s41467-018-08058-0" },
+            { "label": "Tamietto et al. 2012, Current Biology 22:1449–1455", "url": "https://doi.org/10.1016/j.cub.2012.06.006" }
+          ]
+        },
+        {
+          "role": "route",
+          "parts": ["aseg-18", "aseg-54"],
+          "label": "Emotional faces: amygdala (“affective blindsight”)",
+          "text": "Patient GY's amygdala responded differently to fearful faces shown in his blind field. These responses covaried with activity in the posterior thalamus and superior colliculus. A patient made cortically blind by damage to both visual cortices could still guess facial expressions; fMRI showed right amygdala activation during this unconscious processing.",
+          "sources": [
+            { "label": "Morris et al. 2001, Brain 124:1241–1252", "url": "https://doi.org/10.1093/brain/124.6.1241" },
+            { "label": "Pegna et al. 2005, Nature Neuroscience 8:24–25", "url": "https://doi.org/10.1038/nn1364" }
+          ]
+        }
+      ],
+      "caution": "This is a literature-based pathway, not an activation map. Evidence comes from few patients and from monkey experiments. Researchers still debate which route matters most for each blindsight ability. Highlighted surfaces are whole model parts, because the model does not separate the LGN, pulvinar, superior colliculus, or hMT+."
+    }
+  ]
+}

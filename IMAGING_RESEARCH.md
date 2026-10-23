@@ -40,6 +40,12 @@ The 87 protocol entries and 799 contrast rows come from related but different sn
 
 HCP reference maps are linked from [NeuroVault collection 457](https://neurovault.org/collections/457/); they are **not** the local IBC examples, even where task names overlap. The HCP collection states specific access and use terms. No HCP map volumes, participant-level HCP data, or other access-controlled imaging were downloaded. External releases and provider requirements may change.
 
+## Activity comparison meta-analyses
+
+Added October 23, 2026. **Compare activities** (the Activations section) bundles 53 new coordinate-based meta-analyses computed from the BSD-licensed [NeuroQuery corpus](https://github.com/neuroquery/neuroquery_data) (commit `4580f86267fb7c14ac1f601e298cbed898d79f2d`; 13,459 articles and about 469,000 reported coordinates). For each activity, studies whose title, abstract, or keywords mention its terms (`scripts/activity-catalog.json`; 33–918 studies) are compared with all other corpus studies. The estimator is NiMARE 0.22.1's MKDA chi-square (10 mm binary kernels), with two-sided Benjamini–Hochberg FDR at q < 0.01, keeping positive effects. Both the uniformity ("consistently reported") and association ("more likely than in other studies") z maps are stored, on the same 2 mm grid as the IBC maps, with the proportion of studies reporting a peak within 10 mm. A few association maps have few or no significant voxels (sleep 0, meditation 7, deception 63); their consistency maps remain.
+
+These are literature summaries, not measurements of one experiment. Term matching includes every coordinate reported by a matching paper, the corpus treats Talairach coordinates as MNI, and activities with more studies reach significance more easily. The neurosynth-data repository was considered and not used, because it now marks itself deprecated for new analyses. NeuroStore's larger 2026 release states no data license. Blindsight has six corpus studies and is presented as a cited evidence pathway (`src/activity-pathways.json`), not as a map.
+
 ## Imaging and recording methods
 
 | Method | Measures / use | Limitation | Source |

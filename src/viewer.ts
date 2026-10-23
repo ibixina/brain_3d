@@ -33,6 +33,8 @@ export type ViewerDataset = {
   }[];
   fitOnLoad?: boolean;
   explodeFromCenter?: boolean;
+  /** Multiplies preset camera distances, for viewers embedded in smaller panels. */
+  distanceScale?: number;
   label?: string;
 };
 const defaultDataset: ViewerDataset = {
@@ -49,7 +51,14 @@ type Callbacks = {
   stats: (fps: number, triangles: number) => void;
   detail: (id: string, status: "loading" | "ready" | "error") => void;
   label: (points: { id: string; x: number; y: number }[]) => void;
+  point?: (id: string, display: [number, number, number]) => void;
 };
+/** Per-vertex RGB (0-1) and mix weight; weight 0 keeps the tissue color. */
+export type Painter = (
+  region: ViewerRegion,
+  positions: ArrayLike<number>,
+  normals: ArrayLike<number>,
+) => { color: Float32Array; weight: Float32Array } | null;
 const initial: ViewState = {
   selected: null,
   isolated: false,
@@ -123,6 +132,17 @@ export class AtlasViewer {
   private hoverOutline = this.createOutline("#ffe0a0");
   private selectionOutline = this.createOutline("#b6fff3");
   private framing = 1;
+  private painter: Painter | null = null;
+  private paintVersion = 0;
+  private marker = new THREE.Mesh(
+    new THREE.SphereGeometry(2.6, 20, 14),
+    new THREE.MeshBasicMaterial({
+      color: "#ffffff",
+      depthTest: false,
+      transparent: true,
+      opacity: 0.95,
+    }),
+  );
   constructor(
     private element: HTMLElement,
     private callbacks: Callbacks,
@@ -159,6 +179,9 @@ export class AtlasViewer {
     this.controls.addEventListener("start", this.stopFlight);
     this.scene.add(this.root);
     this.root.add(this.hoverOutline, this.selectionOutline);
+    this.marker.visible = false;
+    this.marker.renderOrder = 5;
+    this.root.add(this.marker);
     this.scene.add(new THREE.HemisphereLight(0xf3f3de, 0x384b43, 1.7));
     const key = new THREE.DirectionalLight(0xfff7e7, 2.5);
     key.position.set(-160, 220, -150);
@@ -218,6 +241,7 @@ export class AtlasViewer {
           region.vertices,
           region.triangles,
           region.color,
+          region,
         );
         const material = new THREE.MeshStandardMaterial({
           color: 0xffffff,
@@ -252,6 +276,7 @@ export class AtlasViewer {
     vertices: number,
     triangles: number,
     color: string,
+    region?: ViewerRegion,
   ) {
     const geometry = new THREE.BufferGeometry();
     geometry.setAttribute(
@@ -276,26 +301,65 @@ export class AtlasViewer {
         1,
       ),
     );
-    this.recolor(geometry, color);
+    this.recolor(geometry, color, region);
     geometry.computeBoundingSphere();
     geometry.computeBoundingBox();
     return geometry;
   }
-  private recolor(geometry: THREE.BufferGeometry, color: string) {
+  private recolor(
+    geometry: THREE.BufferGeometry,
+    color: string,
+    region?: ViewerRegion,
+  ) {
     const shade = geometry.userData.shade as Float32Array;
     const rgb = new THREE.Color(color);
     const attribute = geometry.getAttribute("color");
     const values = attribute
       ? attribute.array
       : new Float32Array(shade.length * 3);
+    const paint =
+      this.painter && region
+        ? this.painter(
+            region,
+            geometry.getAttribute("position").array,
+            geometry.getAttribute("normal").array,
+          )
+        : null;
+    const tint = new THREE.Color();
     for (let i = 0; i < shade.length; i++) {
-      values[i * 3] = rgb.r * shade[i];
-      values[i * 3 + 1] = rgb.g * shade[i];
-      values[i * 3 + 2] = rgb.b * shade[i];
+      const weight = paint ? paint.weight[i] : 0;
+      if (weight > 0) {
+        tint.setRGB(
+          paint!.color[i * 3],
+          paint!.color[i * 3 + 1],
+          paint!.color[i * 3 + 2],
+          THREE.SRGBColorSpace,
+        );
+      }
+      const lit = 0.55 + 0.45 * shade[i];
+      values[i * 3] = rgb.r * shade[i] * (1 - weight) + tint.r * lit * weight;
+      values[i * 3 + 1] =
+        rgb.g * shade[i] * (1 - weight) + tint.g * lit * weight;
+      values[i * 3 + 2] =
+        rgb.b * shade[i] * (1 - weight) + tint.b * lit * weight;
     }
     if (attribute) attribute.needsUpdate = true;
     else geometry.setAttribute("color", new THREE.BufferAttribute(values, 3));
     geometry.userData.color = color;
+    geometry.userData.paint = this.paintVersion;
+  }
+  /** Paint per-vertex activity colors; null restores plain tissue. */
+  setPainter(painter: Painter | null) {
+    this.painter = painter;
+    this.paintVersion++;
+    for (const mesh of this.meshes.values()) this.applyAppearance(mesh);
+    this.invalidate();
+  }
+  /** Show a marker at a renderer-space point, or hide it. */
+  setMarker(point: [number, number, number] | null) {
+    this.marker.visible = !!point;
+    if (point) this.marker.position.set(...point);
+    this.invalidate();
   }
   update(state: ViewState) {
     const previous = this.state;
@@ -398,6 +462,7 @@ export class AtlasViewer {
             region.detail.vertices,
             region.detail.triangles,
             region.color,
+            region,
           ),
         );
         // Limit retained detail geometry when visiting many regions.
@@ -426,8 +491,9 @@ export class AtlasViewer {
     }
   }
   private surfaceColor(region: ViewerRegion) {
-    if (this.state.selected === region.id) return "#40b8b0";
-    if (this.hovered === region.id) return "#e3a637";
+    // Painted activity stays visible; selection and hover use emissive light and outlines.
+    if (!this.painter && this.state.selected === region.id) return "#40b8b0";
+    if (!this.painter && this.hovered === region.id) return "#e3a637";
     if (this.state.colorMode !== "tissue") return region.color;
     if (region.group === "Ventricles") return "#85bfd3";
     return region.kind === "cortex" ? "#c6ada2" : "#b9ada0";
@@ -437,12 +503,26 @@ export class AtlasViewer {
     const selected = this.state.selected === region.id;
     const hovered = this.hovered === region.id;
     const color = this.surfaceColor(region);
-    if (mesh.geometry.userData.color !== color)
-      this.recolor(mesh.geometry, color);
+    if (
+      mesh.geometry.userData.color !== color ||
+      mesh.geometry.userData.paint !== this.paintVersion
+    )
+      this.recolor(mesh.geometry, color, region);
     mesh.material.emissive.set(
-      selected ? "#3ca99d" : hovered ? "#b97e25" : "#000000",
+      this.painter
+        ? selected
+          ? "#ffffff"
+          : hovered
+            ? "#ffe0a0"
+            : "#000000"
+        : selected
+          ? "#3ca99d"
+          : hovered
+            ? "#b97e25"
+            : "#000000",
     );
-    mesh.material.emissiveIntensity = selected || hovered ? 0.22 : 0;
+    mesh.material.emissiveIntensity =
+      selected || hovered ? (this.painter ? 0.12 : 0.22) : 0;
     mesh.material.polygonOffset = selected || hovered;
     mesh.material.polygonOffsetFactor = 1;
     mesh.material.polygonOffsetUnits = 1;
@@ -535,7 +615,11 @@ export class AtlasViewer {
     }
     const position = new THREE.Vector3(...(coords as [number, number, number]))
       .sub(target)
-      .multiplyScalar(this.framing * (1 + this.state.exploded * 0.7))
+      .multiplyScalar(
+        this.framing *
+          (1 + this.state.exploded * 0.7) *
+          (this.dataset.distanceScale ?? 1),
+      )
       .add(target);
     const regionMesh =
       this.state.isolated && this.state.selected
@@ -647,8 +731,11 @@ export class AtlasViewer {
     )
       return;
     const hit = this.hit(event);
-    if (hit)
-      this.callbacks.select((hit.object.userData.region as ViewerRegion).id);
+    if (!hit) return;
+    const id = (hit.object.userData.region as ViewerRegion).id;
+    this.callbacks.select(id);
+    const local = hit.point.clone().sub(hit.object.position);
+    this.callbacks.point?.(id, [local.x, local.y, local.z]);
   };
   private pointerMove = (event: PointerEvent) => {
     if (event.buttons || event.pointerType === "touch") return;
@@ -828,6 +915,8 @@ export class AtlasViewer {
     for (const mesh of this.meshes.values()) mesh.material.dispose();
     for (const g of this.base.values()) g.dispose();
     for (const g of this.detailed.values()) g.dispose();
+    this.marker.geometry.dispose();
+    this.marker.material.dispose();
     for (const outline of [this.hoverOutline, this.selectionOutline]) {
       outline.geometry.dispose();
       outline.material.dispose();

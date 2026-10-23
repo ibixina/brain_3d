@@ -41,6 +41,13 @@ Source, method, frame, and per-hemisphere file checksums:
 /subregions/hippocampus-provenance.json
 Iglesias et al. (2015): https://doi.org/10.1016/j.neuroimage.2015.04.042
 
+Activity comparisons: derived meta-analyses of the NeuroQuery corpus
+(https://github.com/neuroquery/neuroquery_data, commit 4580f862...).
+Copyright (c) 2019, jeromedockes. BSD 3-Clause: /licenses/neuroquery-data.txt
+Computed with NiMARE (MKDA chi-square, FDR q < 0.01); method, inputs, and
+checksums: /activity/manifest.json. Dockes et al. (2020):
+https://doi.org/10.7554/eLife.53385. Not endorsed by the NeuroQuery authors.
+
 Nilearn: Copyright (c) The nilearn developers. /licenses/nilearn.txt
 MNE testing-data: fsaverage source files from the pinned commit recorded
 in /models/atlas.json. FreeSurfer data terms apply.

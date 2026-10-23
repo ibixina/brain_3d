@@ -1,0 +1,3215 @@
+{
+ "checkedOn": "2026-10-23",
+ "grid": {
+  "shape": [
+   97,
+   115,
+   97
+  ],
+  "origin": [
+   -96,
+   -132,
+   -78
+  ],
+  "spacing": [
+   2,
+   2,
+   2
+  ],
+  "orientation": "RAS+",
+  "order": "x-fastest (Fortran)",
+  "space": "MNI152 (NiMARE 2 mm template grid, padded to the shared imaging grid)"
+ },
+ "layout": [
+  {
+   "name": "consistency",
+   "dtype": "<i2",
+   "scale": 0.01,
+   "meaning": "FDR-significant positive uniformity z; zero elsewhere"
+  },
+  {
+   "name": "specificity",
+   "dtype": "<i2",
+   "scale": 0.01,
+   "meaning": "FDR-significant positive association z; zero elsewhere"
+  },
+  {
+   "name": "proportion",
+   "dtype": "u1",
+   "scale": 0.005,
+   "meaning": "Proportion of selected studies with a reported peak within 10 mm"
+  }
+ ],
+ "method": {
+  "corpus": "NeuroQuery version 1 corpus: 13,459 articles with extracted peak coordinates. The corpus treats all coordinates as MNI, although some articles report Talairach coordinates (differences of up to about 1 cm).",
+  "corpusSource": "https://github.com/neuroquery/neuroquery_data/tree/4580f86267fb7c14ac1f601e298cbed898d79f2d",
+  "corpusLicense": "BSD-3-Clause",
+  "corpusReference": "https://doi.org/10.7554/eLife.53385",
+  "selection": "A study is included when any listed term occurs at least once in its title, abstract, or keywords, using the NeuroQuery 156,521-term count features. All of that study's reported coordinates are used.",
+  "estimator": "NiMARE MKDAChi2, binary 10 mm spheres; selected studies compared with all remaining corpus studies",
+  "correction": "Benjamini-Hochberg FDR, q < 0.01, two-sided; positive effects retained",
+  "software": "NiMARE 0.22.1",
+  "softwareReference": "https://doi.org/10.52294/001c.87681",
+  "minimumStudies": 30
+ },
+ "labels": {
+  "asset": {
+   "url": "/activity/labels.volume",
+   "bytes": 42906,
+   "rawBytes": 1082035,
+   "sha256": "a845108668bc1bc9ea7abd8293565040e16823eeacc111112dcd4bca8c67367d"
+  },
+  "parts": [
+   {
+    "id": "lh-bankssts",
+    "name": "Banks of the superior temporal sulcus",
+    "hemisphere": "left",
+    "group": "Temporal"
+   },
+   {
+    "id": "lh-caudalanteriorcingulate",
+    "name": "Caudal anterior cingulate",
+    "hemisphere": "left",
+    "group": "Limbic"
+   },
+   {
+    "id": "lh-caudalmiddlefrontal",
+    "name": "Caudal middle frontal gyrus",
+    "hemisphere": "left",
+    "group": "Frontal"
+   },
+   {
+    "id": "lh-cuneus",
+    "name": "Cuneus",
+    "hemisphere": "left",
+    "group": "Occipital"
+   },
+   {
+    "id": "lh-entorhinal",
+    "name": "Entorhinal cortex",
+    "hemisphere": "left",
+    "group": "Temporal"
+   },
+   {
+    "id": "lh-fusiform",
+    "name": "Fusiform gyrus",
+    "hemisphere": "left",
+    "group": "Temporal"
+   },
+   {
+    "id": "lh-inferiorparietal",
+    "name": "Inferior parietal lobule",
+    "hemisphere": "left",
+    "group": "Parietal"
+   },
+   {
+    "id": "lh-inferiortemporal",
+    "name": "Inferior temporal gyrus",
+    "hemisphere": "left",
+    "group": "Temporal"
+   },
+   {
+    "id": "lh-isthmuscingulate",
+    "name": "Isthmus of the cingulate",
+    "hemisphere": "left",
+    "group": "Limbic"
+   },
+   {
+    "id": "lh-lateraloccipital",
+    "name": "Lateral occipital cortex",
+    "hemisphere": "left",
+    "group": "Occipital"
+   },
+   {
+    "id": "lh-lateralorbitofrontal",
+    "name": "Lateral orbitofrontal cortex",
+    "hemisphere": "left",
+    "group": "Frontal"
+   },
+   {
+    "id": "lh-lingual",
+    "name": "Lingual gyrus",
+    "hemisphere": "left",
+    "group": "Occipital"
+   },
+   {
+    "id": "lh-medialorbitofrontal",
+    "name": "Medial orbitofrontal cortex",
+    "hemisphere": "left",
+    "group": "Frontal"
+   },
+   {
+    "id": "lh-middletemporal",
+    "name": "Middle temporal gyrus",
+    "hemisphere": "left",
+    "group": "Temporal"
+   },
+   {
+    "id": "lh-parahippocampal",
+    "name": "Parahippocampal gyrus",
+    "hemisphere": "left",
+    "group": "Temporal"
+   },
+   {
+    "id": "lh-paracentral",
+    "name": "Paracentral lobule",
+    "hemisphere": "left",
+    "group": "Frontal"
+   },
+   {
+    "id": "lh-parsopercularis",
+    "name": "Pars opercularis",
+    "hemisphere": "left",
+    "group": "Frontal"
+   },
+   {
+    "id": "lh-parsorbitalis",
+    "name": "Pars orbitalis",
+    "hemisphere": "left",
+    "group": "Frontal"
+   },
+   {
+    "id": "lh-parstriangularis",
+    "name": "Pars triangularis",
+    "hemisphere": "left",
+    "group": "Frontal"
+   },
+   {
+    "id": "lh-pericalcarine",
+    "name": "Pericalcarine cortex",
+    "hemisphere": "left",
+    "group": "Occipital"
+   },
+   {
+    "id": "lh-postcentral",
+    "name": "Postcentral gyrus",
+    "hemisphere": "left",
+    "group": "Parietal"
+   },
+   {
+    "id": "lh-posteriorcingulate",
+    "name": "Posterior cingulate cortex",
+    "hemisphere": "left",
+    "group": "Limbic"
+   },
+   {
+    "id": "lh-precentral",
+    "name": "Precentral gyrus",
+    "hemisphere": "left",
+    "group": "Frontal"
+   },
+   {
+    "id": "lh-precuneus",
+    "name": "Precuneus",
+    "hemisphere": "left",
+    "group": "Parietal"
+   },
+   {
+    "id": "lh-rostralanteriorcingulate",
+    "name": "Rostral anterior cingulate",
+    "hemisphere": "left",
+    "group": "Limbic"
+   },
+   {
+    "id": "lh-rostralmiddlefrontal",
+    "name": "Rostral middle frontal gyrus",
+    "hemisphere": "left",
+    "group": "Frontal"
+   },
+   {
+    "id": "lh-superiorfrontal",
+    "name": "Superior frontal gyrus",
+    "hemisphere": "left",
+    "group": "Frontal"
+   },
+   {
+    "id": "lh-superiorparietal",
+    "name": "Superior parietal lobule",
+    "hemisphere": "left",
+    "group": "Parietal"
+   },
+   {
+    "id": "lh-superiortemporal",
+    "name": "Superior temporal gyrus",
+    "hemisphere": "left",
+    "group": "Temporal"
+   },
+   {
+    "id": "lh-supramarginal",
+    "name": "Supramarginal gyrus",
+    "hemisphere": "left",
+    "group": "Parietal"
+   },
+   {
+    "id": "lh-frontalpole",
+    "name": "Frontal pole",
+    "hemisphere": "left",
+    "group": "Frontal"
+   },
+   {
+    "id": "lh-temporalpole",
+    "name": "Temporal pole",
+    "hemisphere": "left",
+    "group": "Temporal"
+   },
+   {
+    "id": "lh-transversetemporal",
+    "name": "Transverse temporal gyrus",
+    "hemisphere": "left",
+    "group": "Temporal"
+   },
+   {
+    "id": "lh-insula",
+    "name": "Insular cortex",
+    "hemisphere": "left",
+    "group": "Insula"
+   },
+   {
+    "id": "rh-bankssts",
+    "name": "Banks of the superior temporal sulcus",
+    "hemisphere": "right",
+    "group": "Temporal"
+   },
+   {
+    "id": "rh-caudalanteriorcingulate",
+    "name": "Caudal anterior cingulate",
+    "hemisphere": "right",
+    "group": "Limbic"
+   },
+   {
+    "id": "rh-caudalmiddlefrontal",
+    "name": "Caudal middle frontal gyrus",
+    "hemisphere": "right",
+    "group": "Frontal"
+   },
+   {
+    "id": "rh-cuneus",
+    "name": "Cuneus",
+    "hemisphere": "right",
+    "group": "Occipital"
+   },
+   {
+    "id": "rh-entorhinal",
+    "name": "Entorhinal cortex",
+    "hemisphere": "right",
+    "group": "Temporal"
+   },
+   {
+    "id": "rh-fusiform",
+    "name": "Fusiform gyrus",
+    "hemisphere": "right",
+    "group": "Temporal"
+   },
+   {
+    "id": "rh-inferiorparietal",
+    "name": "Inferior parietal lobule",
+    "hemisphere": "right",
+    "group": "Parietal"
+   },
+   {
+    "id": "rh-inferiortemporal",
+    "name": "Inferior temporal gyrus",
+    "hemisphere": "right",
+    "group": "Temporal"
+   },
+   {
+    "id": "rh-isthmuscingulate",
+    "name": "Isthmus of the cingulate",
+    "hemisphere": "right",
+    "group": "Limbic"
+   },
+   {
+    "id": "rh-lateraloccipital",
+    "name": "Lateral occipital cortex",
+    "hemisphere": "right",
+    "group": "Occipital"
+   },
+   {
+    "id": "rh-lateralorbitofrontal",
+    "name": "Lateral orbitofrontal cortex",
+    "hemisphere": "right",
+    "group": "Frontal"
+   },
+   {
+    "id": "rh-lingual",
+    "name": "Lingual gyrus",
+    "hemisphere": "right",
+    "group": "Occipital"
+   },
+   {
+    "id": "rh-medialorbitofrontal",
+    "name": "Medial orbitofrontal cortex",
+    "hemisphere": "right",
+    "group": "Frontal"
+   },
+   {
+    "id": "rh-middletemporal",
+    "name": "Middle temporal gyrus",
+    "hemisphere": "right",
+    "group": "Temporal"
+   },
+   {
+    "id": "rh-parahippocampal",
+    "name": "Parahippocampal gyrus",
+    "hemisphere": "right",
+    "group": "Temporal"
+   },
+   {
+    "id": "rh-paracentral",
+    "name": "Paracentral lobule",
+    "hemisphere": "right",
+    "group": "Frontal"
+   },
+   {
+    "id": "rh-parsopercularis",
+    "name": "Pars opercularis",
+    "hemisphere": "right",
+    "group": "Frontal"
+   },
+   {
+    "id": "rh-parsorbitalis",
+    "name": "Pars orbitalis",
+    "hemisphere": "right",
+    "group": "Frontal"
+   },
+   {
+    "id": "rh-parstriangularis",
+    "name": "Pars triangularis",
+    "hemisphere": "right",
+    "group": "Frontal"
+   },
+   {
+    "id": "rh-pericalcarine",
+    "name": "Pericalcarine cortex",
+    "hemisphere": "right",
+    "group": "Occipital"
+   },
+   {
+    "id": "rh-postcentral",
+    "name": "Postcentral gyrus",
+    "hemisphere": "right",
+    "group": "Parietal"
+   },
+   {
+    "id": "rh-posteriorcingulate",
+    "name": "Posterior cingulate cortex",
+    "hemisphere": "right",
+    "group": "Limbic"
+   },
+   {
+    "id": "rh-precentral",
+    "name": "Precentral gyrus",
+    "hemisphere": "right",
+    "group": "Frontal"
+   },
+   {
+    "id": "rh-precuneus",
+    "name": "Precuneus",
+    "hemisphere": "right",
+    "group": "Parietal"
+   },
+   {
+    "id": "rh-rostralanteriorcingulate",
+    "name": "Rostral anterior cingulate",
+    "hemisphere": "right",
+    "group": "Limbic"
+   },
+   {
+    "id": "rh-rostralmiddlefrontal",
+    "name": "Rostral middle frontal gyrus",
+    "hemisphere": "right",
+    "group": "Frontal"
+   },
+   {
+    "id": "rh-superiorfrontal",
+    "name": "Superior frontal gyrus",
+    "hemisphere": "right",
+    "group": "Frontal"
+   },
+   {
+    "id": "rh-superiorparietal",
+    "name": "Superior parietal lobule",
+    "hemisphere": "right",
+    "group": "Parietal"
+   },
+   {
+    "id": "rh-superiortemporal",
+    "name": "Superior temporal gyrus",
+    "hemisphere": "right",
+    "group": "Temporal"
+   },
+   {
+    "id": "rh-supramarginal",
+    "name": "Supramarginal gyrus",
+    "hemisphere": "right",
+    "group": "Parietal"
+   },
+   {
+    "id": "rh-frontalpole",
+    "name": "Frontal pole",
+    "hemisphere": "right",
+    "group": "Frontal"
+   },
+   {
+    "id": "rh-temporalpole",
+    "name": "Temporal pole",
+    "hemisphere": "right",
+    "group": "Temporal"
+   },
+   {
+    "id": "rh-transversetemporal",
+    "name": "Transverse temporal gyrus",
+    "hemisphere": "right",
+    "group": "Temporal"
+   },
+   {
+    "id": "rh-insula",
+    "name": "Insular cortex",
+    "hemisphere": "right",
+    "group": "Insula"
+   },
+   {
+    "id": "aseg-2",
+    "name": "Cerebral white matter",
+    "hemisphere": "left",
+    "group": "White matter"
+   },
+   {
+    "id": "aseg-4",
+    "name": "Lateral ventricle",
+    "hemisphere": "left",
+    "group": "Ventricles"
+   },
+   {
+    "id": "aseg-5",
+    "name": "Inferior lateral ventricle",
+    "hemisphere": "left",
+    "group": "Ventricles"
+   },
+   {
+    "id": "aseg-7",
+    "name": "Cerebellar white matter",
+    "hemisphere": "left",
+    "group": "White matter"
+   },
+   {
+    "id": "aseg-8",
+    "name": "Cerebellar cortex",
+    "hemisphere": "left",
+    "group": "Cerebellum"
+   },
+   {
+    "id": "aseg-10",
+    "name": "Thalamus",
+    "hemisphere": "left",
+    "group": "Deep structures"
+   },
+   {
+    "id": "aseg-11",
+    "name": "Caudate nucleus",
+    "hemisphere": "left",
+    "group": "Deep structures"
+   },
+   {
+    "id": "aseg-12",
+    "name": "Putamen",
+    "hemisphere": "left",
+    "group": "Deep structures"
+   },
+   {
+    "id": "aseg-13",
+    "name": "Globus pallidus",
+    "hemisphere": "left",
+    "group": "Deep structures"
+   },
+   {
+    "id": "aseg-14",
+    "name": "Third ventricle",
+    "hemisphere": "midline",
+    "group": "Ventricles"
+   },
+   {
+    "id": "aseg-15",
+    "name": "Fourth ventricle",
+    "hemisphere": "midline",
+    "group": "Ventricles"
+   },
+   {
+    "id": "aseg-16",
+    "name": "Brainstem",
+    "hemisphere": "midline",
+    "group": "Brainstem"
+   },
+   {
+    "id": "aseg-17",
+    "name": "Hippocampus",
+    "hemisphere": "left",
+    "group": "Deep structures"
+   },
+   {
+    "id": "aseg-18",
+    "name": "Amygdala",
+    "hemisphere": "left",
+    "group": "Deep structures"
+   },
+   {
+    "id": "aseg-26",
+    "name": "Nucleus accumbens",
+    "hemisphere": "left",
+    "group": "Deep structures"
+   },
+   {
+    "id": "aseg-28",
+    "name": "Ventral diencephalon",
+    "hemisphere": "left",
+    "group": "Deep structures"
+   },
+   {
+    "id": "aseg-31",
+    "name": "Choroid plexus",
+    "hemisphere": "left",
+    "group": "Ventricles"
+   },
+   {
+    "id": "aseg-41",
+    "name": "Cerebral white matter",
+    "hemisphere": "right",
+    "group": "White matter"
+   },
+   {
+    "id": "aseg-43",
+    "name": "Lateral ventricle",
+    "hemisphere": "right",
+    "group": "Ventricles"
+   },
+   {
+    "id": "aseg-44",
+    "name": "Inferior lateral ventricle",
+    "hemisphere": "right",
+    "group": "Ventricles"
+   },
+   {
+    "id": "aseg-46",
+    "name": "Cerebellar white matter",
+    "hemisphere": "right",
+    "group": "White matter"
+   },
+   {
+    "id": "aseg-47",
+    "name": "Cerebellar cortex",
+    "hemisphere": "right",
+    "group": "Cerebellum"
+   },
+   {
+    "id": "aseg-49",
+    "name": "Thalamus",
+    "hemisphere": "right",
+    "group": "Deep structures"
+   },
+   {
+    "id": "aseg-50",
+    "name": "Caudate nucleus",
+    "hemisphere": "right",
+    "group": "Deep structures"
+   },
+   {
+    "id": "aseg-51",
+    "name": "Putamen",
+    "hemisphere": "right",
+    "group": "Deep structures"
+   },
+   {
+    "id": "aseg-52",
+    "name": "Globus pallidus",
+    "hemisphere": "right",
+    "group": "Deep structures"
+   },
+   {
+    "id": "aseg-53",
+    "name": "Hippocampus",
+    "hemisphere": "right",
+    "group": "Deep structures"
+   },
+   {
+    "id": "aseg-54",
+    "name": "Amygdala",
+    "hemisphere": "right",
+    "group": "Deep structures"
+   },
+   {
+    "id": "aseg-58",
+    "name": "Nucleus accumbens",
+    "hemisphere": "right",
+    "group": "Deep structures"
+   },
+   {
+    "id": "aseg-60",
+    "name": "Ventral diencephalon",
+    "hemisphere": "right",
+    "group": "Deep structures"
+   },
+   {
+    "id": "aseg-63",
+    "name": "Choroid plexus",
+    "hemisphere": "right",
+    "group": "Ventricles"
+   },
+   {
+    "id": "aseg-251",
+    "name": "Corpus callosum \u00b7 posterior",
+    "hemisphere": "midline",
+    "group": "White matter"
+   },
+   {
+    "id": "aseg-252",
+    "name": "Corpus callosum \u00b7 mid-posterior",
+    "hemisphere": "midline",
+    "group": "White matter"
+   },
+   {
+    "id": "aseg-253",
+    "name": "Corpus callosum \u00b7 central",
+    "hemisphere": "midline",
+    "group": "White matter"
+   },
+   {
+    "id": "aseg-254",
+    "name": "Corpus callosum \u00b7 mid-anterior",
+    "hemisphere": "midline",
+    "group": "White matter"
+   },
+   {
+    "id": "aseg-255",
+    "name": "Corpus callosum \u00b7 anterior",
+    "hemisphere": "midline",
+    "group": "White matter"
+   }
+  ],
+  "method": "fsaverage aseg labels (MNI305) mapped to the 2 mm MNI152 grid with FreeSurfer's MNI305-to-MNI152 matrix, using the majority of eight 1 mm subsamples. Cortical ribbon voxels take the Desikan-Killiany label of the nearest fsaverage6 pial vertex.",
+  "mni305ToMni152": [
+   [
+    0.9975,
+    -0.0073,
+    0.0176,
+    -0.0429
+   ],
+   [
+    0.0146,
+    1.0009,
+    -0.0024,
+    1.5496
+   ],
+   [
+    -0.013,
+    -0.0093,
+    0.9971,
+    1.184
+   ],
+   [
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ]
+  ]
+ },
+ "activities": [
+  {
+   "id": "watching-films",
+   "title": "Watching films",
+   "category": "Seeing & hearing",
+   "terms": [
+    "movie",
+    "movies",
+    "film",
+    "films"
+   ],
+   "description": "Studies that describe movies or film clips, including naturalistic viewing and films used to evoke emotions.",
+   "kind": "meta-analysis",
+   "studies": 112,
+   "maps": {
+    "consistency": {
+     "voxels": 8663,
+     "cutoff": 3.79,
+     "peakVoxel": [
+      24,
+      32,
+      40
+     ],
+     "peakZ": 10.35
+    },
+    "specificity": {
+     "voxels": 3920,
+     "cutoff": 3.76,
+     "peakVoxel": [
+      63,
+      21,
+      26
+     ],
+     "peakZ": 9.49
+    }
+   },
+   "peakProportion": 0.304,
+   "peakProportionVoxel": [
+    24,
+    32,
+    40
+   ],
+   "asset": {
+    "url": "/activity/watching-films.maps",
+    "bytes": 145013,
+    "rawBytes": 5410175,
+    "sha256": "186aaa90936ff3e99c91afbd9609d752d6a54f42b4833f525a5f573d7ac83e58"
+   }
+  },
+  {
+   "id": "music",
+   "title": "Listening to music",
+   "category": "Seeing & hearing",
+   "terms": [
+    "music",
+    "musical"
+   ],
+   "description": "Studies about music, from listening and musical training to melody, harmony, and musical emotion.",
+   "kind": "meta-analysis",
+   "studies": 208,
+   "maps": {
+    "consistency": {
+     "voxels": 21546,
+     "cutoff": 3.39,
+     "peakVoxel": [
+      21,
+      57,
+      43
+     ],
+     "peakZ": 19.33
+    },
+    "specificity": {
+     "voxels": 8261,
+     "cutoff": 3.57,
+     "peakVoxel": [
+      76,
+      57,
+      41
+     ],
+     "peakZ": 13.48
+    }
+   },
+   "peakProportion": 0.341,
+   "peakProportionVoxel": [
+    21,
+    57,
+    43
+   ],
+   "asset": {
+    "url": "/activity/music.maps",
+    "bytes": 181059,
+    "rawBytes": 5410175,
+    "sha256": "b3484839ed420095b61c7873ff60c645348306cb6d90a23f4a7a7aac1ae9cf6a"
+   }
+  },
+  {
+   "id": "faces",
+   "title": "Seeing faces",
+   "category": "Seeing & hearing",
+   "terms": [
+    "faces",
+    "face perception"
+   ],
+   "description": "Studies about viewing or recognizing faces, often including emotional expressions.",
+   "kind": "meta-analysis",
+   "studies": 688,
+   "maps": {
+    "consistency": {
+     "voxels": 42601,
+     "cutoff": 2.99,
+     "peakVoxel": [
+      69,
+      41,
+      29
+     ],
+     "peakZ": 32.25
+    },
+    "specificity": {
+     "voxels": 20091,
+     "cutoff": 3.26,
+     "peakVoxel": [
+      69,
+      40,
+      28
+     ],
+     "peakZ": 21.84
+    }
+   },
+   "peakProportion": 0.324,
+   "peakProportionVoxel": [
+    69,
+    41,
+    29
+   ],
+   "asset": {
+    "url": "/activity/faces.maps",
+    "bytes": 223591,
+    "rawBytes": 5410175,
+    "sha256": "98aeeea97580d1969e1276ae0f2b33d016ce044b15395ceaa117d9d2ef52d2b7"
+   }
+  },
+  {
+   "id": "scenes",
+   "title": "Viewing scenes and places",
+   "category": "Seeing & hearing",
+   "terms": [
+    "scene",
+    "scenes"
+   ],
+   "description": "Studies about viewing scenes, landscapes, and buildings.",
+   "kind": "meta-analysis",
+   "studies": 259,
+   "maps": {
+    "consistency": {
+     "voxels": 27283,
+     "cutoff": 3.18,
+     "peakVoxel": [
+      35,
+      45,
+      33
+     ],
+     "peakZ": 16.48
+    },
+    "specificity": {
+     "voxels": 14061,
+     "cutoff": 3.42,
+     "peakVoxel": [
+      61,
+      44,
+      34
+     ],
+     "peakZ": 13.14
+    }
+   },
+   "peakProportion": 0.297,
+   "peakProportionVoxel": [
+    35,
+    45,
+    33
+   ],
+   "asset": {
+    "url": "/activity/scenes.maps",
+    "bytes": 202999,
+    "rawBytes": 5410175,
+    "sha256": "5f9c1ee823524a7a89fc9b9264aaa3b96bf55c12c443f61e59d739963ef22b08"
+   }
+  },
+  {
+   "id": "visual-motion",
+   "title": "Seeing motion",
+   "category": "Seeing & hearing",
+   "terms": [
+    "visual motion",
+    "motion perception"
+   ],
+   "description": "Studies about perceiving moving visual stimuli.",
+   "kind": "meta-analysis",
+   "studies": 84,
+   "maps": {
+    "consistency": {
+     "voxels": 17035,
+     "cutoff": 3.64,
+     "peakVoxel": [
+      71,
+      34,
+      39
+     ],
+     "peakZ": 23.75
+    },
+    "specificity": {
+     "voxels": 7806,
+     "cutoff": 3.58,
+     "peakVoxel": [
+      68,
+      34,
+      40
+     ],
+     "peakZ": 15.68
+    }
+   },
+   "peakProportion": 0.595,
+   "peakProportionVoxel": [
+    71,
+    34,
+    39
+   ],
+   "asset": {
+    "url": "/activity/visual-motion.maps",
+    "bytes": 133870,
+    "rawBytes": 5410175,
+    "sha256": "95676f4cd50fafe763edd7f0001e6fd1f1ce5a2d34d0d0865badb9dce4acf60a"
+   }
+  },
+  {
+   "id": "voices",
+   "title": "Hearing voices",
+   "category": "Seeing & hearing",
+   "terms": [
+    "voice",
+    "voices"
+   ],
+   "description": "Studies about human voices, including vocal identity and emotion. Some also study voice-hearing experiences.",
+   "kind": "meta-analysis",
+   "studies": 136,
+   "maps": {
+    "consistency": {
+     "voxels": 19953,
+     "cutoff": 3.62,
+     "peakVoxel": [
+      77,
+      54,
+      41
+     ],
+     "peakZ": 23.26
+    },
+    "specificity": {
+     "voxels": 10707,
+     "cutoff": 3.5,
+     "peakVoxel": [
+      78,
+      56,
+      41
+     ],
+     "peakZ": 18.79
+    }
+   },
+   "peakProportion": 0.507,
+   "peakProportionVoxel": [
+    77,
+    54,
+    41
+   ],
+   "asset": {
+    "url": "/activity/voices.maps",
+    "bytes": 170632,
+    "rawBytes": 5410175,
+    "sha256": "2c903fd695b95dd8feea537454ceeb3e9919d07ccbd686f7b776b57bb02fa91b"
+   }
+  },
+  {
+   "id": "beauty",
+   "title": "Finding things beautiful",
+   "category": "Seeing & hearing",
+   "terms": [
+    "beauty",
+    "aesthetic"
+   ],
+   "description": "Studies about aesthetic judgments and beauty in faces, art, music, and other stimuli.",
+   "kind": "meta-analysis",
+   "studies": 38,
+   "maps": {
+    "consistency": {
+     "voxels": 4279,
+     "cutoff": 4.04,
+     "peakVoxel": [
+      25,
+      69,
+      53
+     ],
+     "peakZ": 10.2
+    },
+    "specificity": {
+     "voxels": 33,
+     "cutoff": 4.84,
+     "peakVoxel": [
+      65,
+      33,
+      10
+     ],
+     "peakZ": 5.7
+    }
+   },
+   "peakProportion": 0.395,
+   "peakProportionVoxel": [
+    25,
+    69,
+    53
+   ],
+   "asset": {
+    "url": "/activity/beauty.maps",
+    "bytes": 73663,
+    "rawBytes": 5410175,
+    "sha256": "b1bef20d10311aad0afc1d8b42fa41771592c2b753b7602de7cc65562f5cc01c"
+   }
+  },
+  {
+   "id": "pain",
+   "title": "Feeling pain",
+   "category": "Body & senses",
+   "terms": [
+    "pain",
+    "painful"
+   ],
+   "description": "Studies about painful stimulation, pain perception, and some chronic pain conditions.",
+   "kind": "meta-analysis",
+   "studies": 531,
+   "maps": {
+    "consistency": {
+     "voxels": 40395,
+     "cutoff": 2.88,
+     "peakVoxel": [
+      31,
+      73,
+      39
+     ],
+     "peakZ": 23.14
+    },
+    "specificity": {
+     "voxels": 38047,
+     "cutoff": 3.09,
+     "peakVoxel": [
+      69,
+      68,
+      40
+     ],
+     "peakZ": 14.12
+    }
+   },
+   "peakProportion": 0.296,
+   "peakProportionVoxel": [
+    31,
+    73,
+    39
+   ],
+   "asset": {
+    "url": "/activity/pain.maps",
+    "bytes": 258313,
+    "rawBytes": 5410175,
+    "sha256": "6475a51acb49487ed7e2e7eda35ffdbe278dd66536eb7feb01231e6c5f267b8b"
+   }
+  },
+  {
+   "id": "touch",
+   "title": "Touch",
+   "category": "Body & senses",
+   "terms": [
+    "touch",
+    "tactile"
+   ],
+   "description": "Studies about touch and tactile stimulation of the skin.",
+   "kind": "meta-analysis",
+   "studies": 194,
+   "maps": {
+    "consistency": {
+     "voxels": 29835,
+     "cutoff": 3.14,
+     "peakVoxel": [
+      21,
+      54,
+      48
+     ],
+     "peakZ": 19.33
+    },
+    "specificity": {
+     "voxels": 17074,
+     "cutoff": 3.37,
+     "peakVoxel": [
+      72,
+      55,
+      50
+     ],
+     "peakZ": 16.46
+    }
+   },
+   "peakProportion": 0.376,
+   "peakProportionVoxel": [
+    21,
+    54,
+    48
+   ],
+   "asset": {
+    "url": "/activity/touch.maps",
+    "bytes": 210787,
+    "rawBytes": 5410175,
+    "sha256": "76a627dc27feea114b963544ff2d0d8440926dae2d75770fe10d48c026e72e48"
+   }
+  },
+  {
+   "id": "taste",
+   "title": "Taste",
+   "category": "Body & senses",
+   "terms": [
+    "taste",
+    "gustatory"
+   ],
+   "description": "Studies about tastes and flavors delivered to the mouth.",
+   "kind": "meta-analysis",
+   "studies": 94,
+   "maps": {
+    "consistency": {
+     "voxels": 18080,
+     "cutoff": 3.41,
+     "peakVoxel": [
+      67,
+      69,
+      37
+     ],
+     "peakZ": 12.32
+    },
+    "specificity": {
+     "voxels": 8573,
+     "cutoff": 3.56,
+     "peakVoxel": [
+      66,
+      68,
+      36
+     ],
+     "peakZ": 10.08
+    }
+   },
+   "peakProportion": 0.351,
+   "peakProportionVoxel": [
+    67,
+    69,
+    37
+   ],
+   "asset": {
+    "url": "/activity/taste.maps",
+    "bytes": 145444,
+    "rawBytes": 5410175,
+    "sha256": "89441bdb4dba1100996ee0c06935164102fe0620fa0aa3c4e75cb28b09de8cd6"
+   }
+  },
+  {
+   "id": "smell",
+   "title": "Smell",
+   "category": "Body & senses",
+   "terms": [
+    "olfactory",
+    "olfaction",
+    "odor",
+    "odors",
+    "smell"
+   ],
+   "description": "Studies about odors and the sense of smell.",
+   "kind": "meta-analysis",
+   "studies": 100,
+   "maps": {
+    "consistency": {
+     "voxels": 8746,
+     "cutoff": 3.95,
+     "peakVoxel": [
+      38,
+      65,
+      33
+     ],
+     "peakZ": 15.32
+    },
+    "specificity": {
+     "voxels": 2981,
+     "cutoff": 3.83,
+     "peakVoxel": [
+      36,
+      67,
+      30
+     ],
+     "peakZ": 8.6
+    }
+   },
+   "peakProportion": 0.37,
+   "peakProportionVoxel": [
+    38,
+    65,
+    33
+   ],
+   "asset": {
+    "url": "/activity/smell.maps",
+    "bytes": 123787,
+    "rawBytes": 5410175,
+    "sha256": "55a30ebb70037df9356c15c50ba205d6bc5d5676c69d90a8295af23de7e562b3"
+   }
+  },
+  {
+   "id": "food",
+   "title": "Food and hunger",
+   "category": "Body & senses",
+   "terms": [
+    "food",
+    "hunger"
+   ],
+   "description": "Studies about food cues, eating, appetite, and hunger.",
+   "kind": "meta-analysis",
+   "studies": 218,
+   "maps": {
+    "consistency": {
+     "voxels": 23633,
+     "cutoff": 3.26,
+     "peakVoxel": [
+      29,
+      63,
+      41
+     ],
+     "peakZ": 15.53
+    },
+    "specificity": {
+     "voxels": 5864,
+     "cutoff": 3.65,
+     "peakVoxel": [
+      29,
+      63,
+      41
+     ],
+     "peakZ": 10.05
+    }
+   },
+   "peakProportion": 0.275,
+   "peakProportionVoxel": [
+    29,
+    63,
+    41
+   ],
+   "asset": {
+    "url": "/activity/food.maps",
+    "bytes": 171408,
+    "rawBytes": 5410175,
+    "sha256": "5cb995a967c4ea402bd05a54eefb42f53bb0521d02131a198b586571b12d570f"
+   }
+  },
+  {
+   "id": "interoception",
+   "title": "Sensing the inner body",
+   "category": "Body & senses",
+   "terms": [
+    "interoception",
+    "interoceptive"
+   ],
+   "description": "Studies about sensing internal bodily signals, such as heartbeat or breathing.",
+   "kind": "meta-analysis",
+   "studies": 127,
+   "maps": {
+    "consistency": {
+     "voxels": 15849,
+     "cutoff": 3.44,
+     "peakVoxel": [
+      66,
+      75,
+      37
+     ],
+     "peakZ": 16.35
+    },
+    "specificity": {
+     "voxels": 3100,
+     "cutoff": 3.82,
+     "peakVoxel": [
+      67,
+      61,
+      43
+     ],
+     "peakZ": 8.29
+    }
+   },
+   "peakProportion": 0.37,
+   "peakProportionVoxel": [
+    66,
+    75,
+    37
+   ],
+   "asset": {
+    "url": "/activity/interoception.maps",
+    "bytes": 143656,
+    "rawBytes": 5410175,
+    "sha256": "97bf99ca15db08adf671c93ea240766e76a29fc5131e36aa22ae9c12f1d51af1"
+   }
+  },
+  {
+   "id": "reading",
+   "title": "Reading",
+   "category": "Language",
+   "terms": [
+    "reading"
+   ],
+   "description": "Studies about reading words, sentences, and text, including reading development and dyslexia.",
+   "kind": "meta-analysis",
+   "studies": 515,
+   "maps": {
+    "consistency": {
+     "voxels": 43452,
+     "cutoff": 2.88,
+     "peakVoxel": [
+      25,
+      71,
+      53
+     ],
+     "peakZ": 32.55
+    },
+    "specificity": {
+     "voxels": 37846,
+     "cutoff": 3.13,
+     "peakVoxel": [
+      26,
+      40,
+      32
+     ],
+     "peakZ": 15.84
+    }
+   },
+   "peakProportion": 0.41,
+   "peakProportionVoxel": [
+    25,
+    71,
+    53
+   ],
+   "asset": {
+    "url": "/activity/reading.maps",
+    "bytes": 271337,
+    "rawBytes": 5410175,
+    "sha256": "aaddd99372f4323406eb75b02d8858cb21a7c2b8a9f8b72b33c3d150933f3881"
+   }
+  },
+  {
+   "id": "speech-listening",
+   "title": "Listening to speech",
+   "category": "Language",
+   "terms": [
+    "speech perception",
+    "spoken"
+   ],
+   "description": "Studies about hearing and understanding spoken language.",
+   "kind": "meta-analysis",
+   "studies": 271,
+   "maps": {
+    "consistency": {
+     "voxels": 32265,
+     "cutoff": 3.01,
+     "peakVoxel": [
+      19,
+      55,
+      41
+     ],
+     "peakZ": 30.06
+    },
+    "specificity": {
+     "voxels": 16667,
+     "cutoff": 3.37,
+     "peakVoxel": [
+      19,
+      56,
+      40
+     ],
+     "peakZ": 21.22
+    }
+   },
+   "peakProportion": 0.469,
+   "peakProportionVoxel": [
+    19,
+    55,
+    41
+   ],
+   "asset": {
+    "url": "/activity/speech-listening.maps",
+    "bytes": 212523,
+    "rawBytes": 5410175,
+    "sha256": "1180f5128cc5f19c4257457693d76d2410aa30bccd910a1365a510e7b6b31f20"
+   }
+  },
+  {
+   "id": "speaking",
+   "title": "Speaking",
+   "category": "Language",
+   "terms": [
+    "speech production",
+    "speaking"
+   ],
+   "description": "Studies about producing speech aloud or preparing to speak.",
+   "kind": "meta-analysis",
+   "studies": 185,
+   "maps": {
+    "consistency": {
+     "voxels": 32326,
+     "cutoff": 3.2,
+     "peakVoxel": [
+      23,
+      63,
+      57
+     ],
+     "peakZ": 15.65
+    },
+    "specificity": {
+     "voxels": 22648,
+     "cutoff": 3.29,
+     "peakVoxel": [
+      19,
+      63,
+      50
+     ],
+     "peakZ": 14.54
+    }
+   },
+   "peakProportion": 0.351,
+   "peakProportionVoxel": [
+    23,
+    63,
+    57
+   ],
+   "asset": {
+    "url": "/activity/speaking.maps",
+    "bytes": 229044,
+    "rawBytes": 5410175,
+    "sha256": "7875db48194cc64d3e8b4d132611ad2a0513ede0063949d10f2cd7afa511d25e"
+   }
+  },
+  {
+   "id": "word-meaning",
+   "title": "Understanding word meaning",
+   "category": "Language",
+   "terms": [
+    "semantic",
+    "semantics"
+   ],
+   "description": "Studies about meaning in words, concepts, and semantic knowledge.",
+   "kind": "meta-analysis",
+   "studies": 774,
+   "maps": {
+    "consistency": {
+     "voxels": 48689,
+     "cutoff": 2.85,
+     "peakVoxel": [
+      25,
+      73,
+      51
+     ],
+     "peakZ": 35.68
+    },
+    "specificity": {
+     "voxels": 41101,
+     "cutoff": 3.12,
+     "peakVoxel": [
+      22,
+      78,
+      45
+     ],
+     "peakZ": 19.03
+    }
+   },
+   "peakProportion": 0.371,
+   "peakProportionVoxel": [
+    25,
+    73,
+    51
+   ],
+   "asset": {
+    "url": "/activity/word-meaning.maps",
+    "bytes": 283129,
+    "rawBytes": 5410175,
+    "sha256": "13779b1bf06f9b846f6f5947f4aa1812560f10e71903dbff39eeacec0739ce56"
+   }
+  },
+  {
+   "id": "grammar",
+   "title": "Grammar and sentence structure",
+   "category": "Language",
+   "terms": [
+    "syntactic",
+    "syntax"
+   ],
+   "description": "Studies about syntax and building sentence structure.",
+   "kind": "meta-analysis",
+   "studies": 150,
+   "maps": {
+    "consistency": {
+     "voxels": 24716,
+     "cutoff": 3.32,
+     "peakVoxel": [
+      23,
+      73,
+      49
+     ],
+     "peakZ": 29.54
+    },
+    "specificity": {
+     "voxels": 10173,
+     "cutoff": 3.51,
+     "peakVoxel": [
+      24,
+      74,
+      47
+     ],
+     "peakZ": 15.95
+    }
+   },
+   "peakProportion": 0.567,
+   "peakProportionVoxel": [
+    23,
+    73,
+    49
+   ],
+   "asset": {
+    "url": "/activity/grammar.maps",
+    "bytes": 175877,
+    "rawBytes": 5410175,
+    "sha256": "0f01a53f5d80393dfc59ffaa7e31fe208487453abb8161b5d5bc775d95ad5a2d"
+   }
+  },
+  {
+   "id": "stories",
+   "title": "Following stories",
+   "category": "Language",
+   "terms": [
+    "stories",
+    "story",
+    "narrative",
+    "narratives"
+   ],
+   "description": "Studies about stories and narratives, read or heard.",
+   "kind": "meta-analysis",
+   "studies": 138,
+   "maps": {
+    "consistency": {
+     "voxels": 19480,
+     "cutoff": 3.45,
+     "peakVoxel": [
+      23,
+      37,
+      49
+     ],
+     "peakZ": 13.78
+    },
+    "specificity": {
+     "voxels": 24522,
+     "cutoff": 3.27,
+     "peakVoxel": [
+      20,
+      39,
+      49
+     ],
+     "peakZ": 12.3
+    }
+   },
+   "peakProportion": 0.37,
+   "peakProportionVoxel": [
+    23,
+    37,
+    49
+   ],
+   "asset": {
+    "url": "/activity/stories.maps",
+    "bytes": 209480,
+    "rawBytes": 5410175,
+    "sha256": "c1812ab9d1c9902323dc576a11e48895fa99ef34ac105a78140628bd255b3d8c"
+   }
+  },
+  {
+   "id": "sign-language",
+   "title": "Sign language",
+   "category": "Language",
+   "terms": [
+    "sign language"
+   ],
+   "description": "Studies about producing or understanding signed languages.",
+   "kind": "meta-analysis",
+   "studies": 47,
+   "maps": {
+    "consistency": {
+     "voxels": 15018,
+     "cutoff": 3.8,
+     "peakVoxel": [
+      21,
+      47,
+      41
+     ],
+     "peakZ": 10.18
+    },
+    "specificity": {
+     "voxels": 20927,
+     "cutoff": 3.32,
+     "peakVoxel": [
+      22,
+      44,
+      40
+     ],
+     "peakZ": 9.8
+    }
+   },
+   "peakProportion": 0.489,
+   "peakProportionVoxel": [
+    21,
+    47,
+    41
+   ],
+   "asset": {
+    "url": "/activity/sign-language.maps",
+    "bytes": 157549,
+    "rawBytes": 5410175,
+    "sha256": "0a839a180d09b3ee4fae1709f00d1cca492769d5023c11ccf128bc44f3c706af"
+   }
+  },
+  {
+   "id": "anger",
+   "title": "Anger",
+   "category": "Feelings",
+   "terms": [
+    "anger",
+    "angry"
+   ],
+   "description": "Studies about anger, often using angry faces or provocation tasks.",
+   "kind": "meta-analysis",
+   "studies": 222,
+   "maps": {
+    "consistency": {
+     "voxels": 17700,
+     "cutoff": 3.53,
+     "peakVoxel": [
+      59,
+      65,
+      31
+     ],
+     "peakZ": 24.18
+    },
+    "specificity": {
+     "voxels": 2806,
+     "cutoff": 3.84,
+     "peakVoxel": [
+      59,
+      65,
+      30
+     ],
+     "peakZ": 12.97
+    }
+   },
+   "peakProportion": 0.396,
+   "peakProportionVoxel": [
+    59,
+    65,
+    31
+   ],
+   "asset": {
+    "url": "/activity/anger.maps",
+    "bytes": 160884,
+    "rawBytes": 5410175,
+    "sha256": "5ac312c86a256f9d0f33f9735fb0794b5e1c299d3f7344b6be3426d369ea30c5"
+   }
+  },
+  {
+   "id": "fear",
+   "title": "Fear",
+   "category": "Feelings",
+   "terms": [
+    "fear",
+    "fearful"
+   ],
+   "description": "Studies about fear, including fearful faces, threat, and fear learning.",
+   "kind": "meta-analysis",
+   "studies": 504,
+   "maps": {
+    "consistency": {
+     "voxels": 36936,
+     "cutoff": 2.93,
+     "peakVoxel": [
+      37,
+      64,
+      31
+     ],
+     "peakZ": 35.22
+    },
+    "specificity": {
+     "voxels": 9531,
+     "cutoff": 3.43,
+     "peakVoxel": [
+      60,
+      66,
+      31
+     ],
+     "peakZ": 18.88
+    }
+   },
+   "peakProportion": 0.395,
+   "peakProportionVoxel": [
+    37,
+    64,
+    31
+   ],
+   "asset": {
+    "url": "/activity/fear.maps",
+    "bytes": 193869,
+    "rawBytes": 5410175,
+    "sha256": "f9f3693b58d1bd7a0acdf4cf58c9b82b32a60f58e82216811fd7b4776903a2c3"
+   }
+  },
+  {
+   "id": "sadness",
+   "title": "Sadness",
+   "category": "Feelings",
+   "terms": [
+    "sadness",
+    "sad"
+   ],
+   "description": "Studies about sadness, sad faces, and sad mood induction.",
+   "kind": "meta-analysis",
+   "studies": 203,
+   "maps": {
+    "consistency": {
+     "voxels": 18119,
+     "cutoff": 3.44,
+     "peakVoxel": [
+      35,
+      63,
+      31
+     ],
+     "peakZ": 16.25
+    },
+    "specificity": {
+     "voxels": 2048,
+     "cutoff": 3.91,
+     "peakVoxel": [
+      33,
+      64,
+      29
+     ],
+     "peakZ": 8.45
+    }
+   },
+   "peakProportion": 0.3,
+   "peakProportionVoxel": [
+    35,
+    63,
+    31
+   ],
+   "asset": {
+    "url": "/activity/sadness.maps",
+    "bytes": 160940,
+    "rawBytes": 5410175,
+    "sha256": "e641548314ac331adb89e7d95726bddb8e404bc46e09f67792051518f5bc11df"
+   }
+  },
+  {
+   "id": "happiness",
+   "title": "Happiness",
+   "category": "Feelings",
+   "terms": [
+    "happiness",
+    "happy"
+   ],
+   "description": "Studies about happiness, often using happy faces or positive mood induction.",
+   "kind": "meta-analysis",
+   "studies": 268,
+   "maps": {
+    "consistency": {
+     "voxels": 21785,
+     "cutoff": 3.34,
+     "peakVoxel": [
+      37,
+      63,
+      31
+     ],
+     "peakZ": 24.54
+    },
+    "specificity": {
+     "voxels": 3762,
+     "cutoff": 3.75,
+     "peakVoxel": [
+      38,
+      64,
+      30
+     ],
+     "peakZ": 12.75
+    }
+   },
+   "peakProportion": 0.373,
+   "peakProportionVoxel": [
+    37,
+    63,
+    31
+   ],
+   "asset": {
+    "url": "/activity/happiness.maps",
+    "bytes": 165723,
+    "rawBytes": 5410175,
+    "sha256": "5151b38347d99a29dd77927aac39a0d5f15977db7ff4a321b2787f8f17c7d669"
+   }
+  },
+  {
+   "id": "disgust",
+   "title": "Disgust",
+   "category": "Feelings",
+   "terms": [
+    "disgust"
+   ],
+   "description": "Studies about disgust, from disgusting images to disgusted faces.",
+   "kind": "meta-analysis",
+   "studies": 100,
+   "maps": {
+    "consistency": {
+     "voxels": 14166,
+     "cutoff": 3.73,
+     "peakVoxel": [
+      35,
+      64,
+      31
+     ],
+     "peakZ": 15.57
+    },
+    "specificity": {
+     "voxels": 6914,
+     "cutoff": 3.61,
+     "peakVoxel": [
+      36,
+      84,
+      28
+     ],
+     "peakZ": 9.53
+    }
+   },
+   "peakProportion": 0.41,
+   "peakProportionVoxel": [
+    35,
+    64,
+    31
+   ],
+   "asset": {
+    "url": "/activity/disgust.maps",
+    "bytes": 142358,
+    "rawBytes": 5410175,
+    "sha256": "83ab767a79e410f903c79f3ab791610b18a903e40e58655c783357ae05579976"
+   }
+  },
+  {
+   "id": "anxiety",
+   "title": "Anxiety",
+   "category": "Feelings",
+   "terms": [
+    "anxiety"
+   ],
+   "description": "Studies about anxiety states, anxious traits, and anxiety disorders.",
+   "kind": "meta-analysis",
+   "studies": 395,
+   "maps": {
+    "consistency": {
+     "voxels": 27181,
+     "cutoff": 3.21,
+     "peakVoxel": [
+      60,
+      63,
+      31
+     ],
+     "peakZ": 21.3
+    },
+    "specificity": {
+     "voxels": 3540,
+     "cutoff": 3.68,
+     "peakVoxel": [
+      57,
+      65,
+      31
+     ],
+     "peakZ": 10.03
+    }
+   },
+   "peakProportion": 0.273,
+   "peakProportionVoxel": [
+    60,
+    63,
+    31
+   ],
+   "asset": {
+    "url": "/activity/anxiety.maps",
+    "bytes": 167084,
+    "rawBytes": 5410175,
+    "sha256": "610c99f1efa5bc563c5d4aab1d0b1b538dffaf2243c1abbebf2e42cb28185bc1"
+   }
+  },
+  {
+   "id": "reward",
+   "title": "Getting a reward",
+   "category": "Feelings",
+   "terms": [
+    "reward",
+    "monetary reward"
+   ],
+   "description": "Studies about expecting or receiving rewards, often money.",
+   "kind": "meta-analysis",
+   "studies": 847,
+   "maps": {
+    "consistency": {
+     "voxels": 45233,
+     "cutoff": 2.87,
+     "peakVoxel": [
+      55,
+      71,
+      39
+     ],
+     "peakZ": 40.91
+    },
+    "specificity": {
+     "voxels": 24184,
+     "cutoff": 3.24,
+     "peakVoxel": [
+      54,
+      71,
+      36
+     ],
+     "peakZ": 26.57
+    }
+   },
+   "peakProportion": 0.373,
+   "peakProportionVoxel": [
+    55,
+    71,
+    39
+   ],
+   "asset": {
+    "url": "/activity/reward.maps",
+    "bytes": 231969,
+    "rawBytes": 5410175,
+    "sha256": "87c08c3fd5b42ca4af46a267eceeceb1db8b6815c9858f762a0de0876ce8b4ea"
+   }
+  },
+  {
+   "id": "humor",
+   "title": "Humor and laughter",
+   "category": "Feelings",
+   "terms": [
+    "humor",
+    "humour",
+    "laughter",
+    "jokes"
+   ],
+   "description": "Studies about finding things funny, jokes, and laughter.",
+   "kind": "meta-analysis",
+   "studies": 33,
+   "maps": {
+    "consistency": {
+     "voxels": 3246,
+     "cutoff": 4.24,
+     "peakVoxel": [
+      49,
+      61,
+      41
+     ],
+     "peakZ": 9.01
+    },
+    "specificity": {
+     "voxels": 266,
+     "cutoff": 4.38,
+     "peakVoxel": [
+      69,
+      43,
+      44
+     ],
+     "peakZ": 7.25
+    }
+   },
+   "peakProportion": 0.394,
+   "peakProportionVoxel": [
+    49,
+    61,
+    41
+   ],
+   "asset": {
+    "url": "/activity/humor.maps",
+    "bytes": 69852,
+    "rawBytes": 5410175,
+    "sha256": "c352e7f3659ba4ff0a0255cab7854266c5e81f1a82c51bce0165acd897659bc9"
+   }
+  },
+  {
+   "id": "craving",
+   "title": "Craving",
+   "category": "Feelings",
+   "terms": [
+    "craving"
+   ],
+   "description": "Studies about craving, often for drugs, alcohol, nicotine, or food.",
+   "kind": "meta-analysis",
+   "studies": 116,
+   "maps": {
+    "consistency": {
+     "voxels": 11037,
+     "cutoff": 3.61,
+     "peakVoxel": [
+      47,
+      87,
+      45
+     ],
+     "peakZ": 9.22
+    },
+    "specificity": {
+     "voxels": 285,
+     "cutoff": 4.37,
+     "peakVoxel": [
+      43,
+      89,
+      48
+     ],
+     "peakZ": 6.5
+    }
+   },
+   "peakProportion": 0.233,
+   "peakProportionVoxel": [
+    47,
+    87,
+    45
+   ],
+   "asset": {
+    "url": "/activity/craving.maps",
+    "bytes": 124686,
+    "rawBytes": 5410175,
+    "sha256": "d1ac445fe8273cf4d2eeca353020b0322ef5821f69cc240d558afb226d70e34a"
+   }
+  },
+  {
+   "id": "emotion-regulation",
+   "title": "Calming emotions",
+   "category": "Feelings",
+   "terms": [
+    "emotion regulation",
+    "reappraisal"
+   ],
+   "description": "Studies about regulating emotions, especially by reappraising a situation.",
+   "kind": "meta-analysis",
+   "studies": 341,
+   "maps": {
+    "consistency": {
+     "voxels": 30686,
+     "cutoff": 3.17,
+     "peakVoxel": [
+      37,
+      64,
+      31
+     ],
+     "peakZ": 16.99
+    },
+    "specificity": {
+     "voxels": 8468,
+     "cutoff": 3.54,
+     "peakVoxel": [
+      57,
+      66,
+      33
+     ],
+     "peakZ": 8.68
+    }
+   },
+   "peakProportion": 0.258,
+   "peakProportionVoxel": [
+    37,
+    64,
+    31
+   ],
+   "asset": {
+    "url": "/activity/emotion-regulation.maps",
+    "bytes": 188598,
+    "rawBytes": 5410175,
+    "sha256": "cd8876357c5af8d1aa95369aac331ee2056a368fc6fa2a5aede45263719f4e49"
+   }
+  },
+  {
+   "id": "working-memory",
+   "title": "Holding information in mind",
+   "category": "Thinking & memory",
+   "terms": [
+    "working memory"
+   ],
+   "description": "Studies about working memory: briefly keeping and using information.",
+   "kind": "meta-analysis",
+   "studies": 918,
+   "maps": {
+    "consistency": {
+     "voxels": 46047,
+     "cutoff": 2.8,
+     "peakVoxel": [
+      47,
+      73,
+      63
+     ],
+     "peakZ": 36.95
+    },
+    "specificity": {
+     "voxels": 27346,
+     "cutoff": 3.22,
+     "peakVoxel": [
+      63,
+      68,
+      67
+     ],
+     "peakZ": 15.9
+    }
+   },
+   "peakProportion": 0.337,
+   "peakProportionVoxel": [
+    47,
+    73,
+    63
+   ],
+   "asset": {
+    "url": "/activity/working-memory.maps",
+    "bytes": 248323,
+    "rawBytes": 5410175,
+    "sha256": "6f848d646cf8b33e71c557ee34223ba647412b829cbf363ddd29f4ea3efc100a"
+   }
+  },
+  {
+   "id": "remembering",
+   "title": "Remembering past events",
+   "category": "Thinking & memory",
+   "terms": [
+    "episodic memory",
+    "autobiographical memory",
+    "memory retrieval"
+   ],
+   "description": "Studies about episodic and autobiographical memory and retrieving memories.",
+   "kind": "meta-analysis",
+   "studies": 566,
+   "maps": {
+    "consistency": {
+     "voxels": 43863,
+     "cutoff": 2.94,
+     "peakVoxel": [
+      34,
+      49,
+      33
+     ],
+     "peakZ": 21.85
+    },
+    "specificity": {
+     "voxels": 56125,
+     "cutoff": 3.03,
+     "peakVoxel": [
+      34,
+      49,
+      33
+     ],
+     "peakZ": 17.39
+    }
+   },
+   "peakProportion": 0.295,
+   "peakProportionVoxel": [
+    34,
+    49,
+    33
+   ],
+   "asset": {
+    "url": "/activity/remembering.maps",
+    "bytes": 301183,
+    "rawBytes": 5410175,
+    "sha256": "47e33b4634d5e5ba8e0f33c06639a84c182124c235caa9d572fd00bf489d9068"
+   }
+  },
+  {
+   "id": "arithmetic",
+   "title": "Mental arithmetic",
+   "category": "Thinking & memory",
+   "terms": [
+    "arithmetic",
+    "calculation",
+    "mental arithmetic"
+   ],
+   "description": "Studies about calculation and arithmetic problems.",
+   "kind": "meta-analysis",
+   "studies": 140,
+   "maps": {
+    "consistency": {
+     "voxels": 20152,
+     "cutoff": 3.56,
+     "peakVoxel": [
+      35,
+      34,
+      61
+     ],
+     "peakZ": 18.35
+    },
+    "specificity": {
+     "voxels": 12404,
+     "cutoff": 3.46,
+     "peakVoxel": [
+      66,
+      44,
+      61
+     ],
+     "peakZ": 10.95
+    }
+   },
+   "peakProportion": 0.421,
+   "peakProportionVoxel": [
+    35,
+    34,
+    61
+   ],
+   "asset": {
+    "url": "/activity/arithmetic.maps",
+    "bytes": 179202,
+    "rawBytes": 5410175,
+    "sha256": "d0e5e847cb928e83177afb4be090c8b360177ae7f3749d2160fd4bb5bd66e57a"
+   }
+  },
+  {
+   "id": "decisions",
+   "title": "Making decisions",
+   "category": "Thinking & memory",
+   "terms": [
+    "decision making"
+   ],
+   "description": "Studies about choosing between options, value, and risk.",
+   "kind": "meta-analysis",
+   "studies": 541,
+   "maps": {
+    "consistency": {
+     "voxels": 37593,
+     "cutoff": 3.07,
+     "peakVoxel": [
+      67,
+      77,
+      38
+     ],
+     "peakZ": 25.61
+    },
+    "specificity": {
+     "voxels": 9114,
+     "cutoff": 3.53,
+     "peakVoxel": [
+      54,
+      72,
+      36
+     ],
+     "peakZ": 11.12
+    }
+   },
+   "peakProportion": 0.301,
+   "peakProportionVoxel": [
+    67,
+    77,
+    38
+   ],
+   "asset": {
+    "url": "/activity/decisions.maps",
+    "bytes": 197716,
+    "rawBytes": 5410175,
+    "sha256": "26bfb05184fb6c324fce1d93ac708b2248aa97319bcb2acfe60413e106b058eb"
+   }
+  },
+  {
+   "id": "stopping",
+   "title": "Stopping an action",
+   "category": "Thinking & memory",
+   "terms": [
+    "response inhibition",
+    "stop signal"
+   ],
+   "description": "Studies about cancelling or withholding a planned response.",
+   "kind": "meta-analysis",
+   "studies": 274,
+   "maps": {
+    "consistency": {
+     "voxels": 31384,
+     "cutoff": 3.09,
+     "peakVoxel": [
+      67,
+      76,
+      37
+     ],
+     "peakZ": 22.77
+    },
+    "specificity": {
+     "voxels": 6854,
+     "cutoff": 3.61,
+     "peakVoxel": [
+      68,
+      73,
+      36
+     ],
+     "peakZ": 8.86
+    }
+   },
+   "peakProportion": 0.361,
+   "peakProportionVoxel": [
+    67,
+    76,
+    37
+   ],
+   "asset": {
+    "url": "/activity/stopping.maps",
+    "bytes": 185265,
+    "rawBytes": 5410175,
+    "sha256": "facbe988aca440ca84c183ace8de222bc53ef3d7658defdd642141661d89db82"
+   }
+  },
+  {
+   "id": "attention",
+   "title": "Focusing attention",
+   "category": "Thinking & memory",
+   "terms": [
+    "spatial attention",
+    "visual attention",
+    "selective attention"
+   ],
+   "description": "Studies about directing attention to locations, objects, or features.",
+   "kind": "meta-analysis",
+   "studies": 325,
+   "maps": {
+    "consistency": {
+     "voxels": 33352,
+     "cutoff": 3.09,
+     "peakVoxel": [
+      35,
+      37,
+      63
+     ],
+     "peakZ": 19.17
+    },
+    "specificity": {
+     "voxels": 10342,
+     "cutoff": 3.5,
+     "peakVoxel": [
+      60,
+      35,
+      63
+     ],
+     "peakZ": 9.44
+    }
+   },
+   "peakProportion": 0.286,
+   "peakProportionVoxel": [
+    35,
+    37,
+    63
+   ],
+   "asset": {
+    "url": "/activity/attention.maps",
+    "bytes": 193788,
+    "rawBytes": 5410175,
+    "sha256": "0112a9ffd3576331cfe6d3dcdafbbf5457e9fbcd43e0e326cba420c15626de3b"
+   }
+  },
+  {
+   "id": "imagery",
+   "title": "Imagining pictures",
+   "category": "Thinking & memory",
+   "terms": [
+    "mental imagery",
+    "visual imagery"
+   ],
+   "description": "Studies about creating mental images without seeing them.",
+   "kind": "meta-analysis",
+   "studies": 124,
+   "maps": {
+    "consistency": {
+     "voxels": 16435,
+     "cutoff": 3.62,
+     "peakVoxel": [
+      47,
+      74,
+      62
+     ],
+     "peakZ": 11.35
+    },
+    "specificity": {
+     "voxels": 14419,
+     "cutoff": 3.42,
+     "peakVoxel": [
+      40,
+      38,
+      69
+     ],
+     "peakZ": 8.25
+    }
+   },
+   "peakProportion": 0.331,
+   "peakProportionVoxel": [
+    47,
+    74,
+    62
+   ],
+   "asset": {
+    "url": "/activity/imagery.maps",
+    "bytes": 180017,
+    "rawBytes": 5410175,
+    "sha256": "5d8c59dd4758ab8ecf41ccd8c8a758843179eec2e68aa2756828eb9d41f94f9f"
+   }
+  },
+  {
+   "id": "navigation",
+   "title": "Finding your way",
+   "category": "Thinking & memory",
+   "terms": [
+    "navigation",
+    "spatial navigation",
+    "wayfinding"
+   ],
+   "description": "Studies about spatial navigation in real or virtual environments.",
+   "kind": "meta-analysis",
+   "studies": 82,
+   "maps": {
+    "consistency": {
+     "voxels": 14482,
+     "cutoff": 3.47,
+     "peakVoxel": [
+      61,
+      44,
+      35
+     ],
+     "peakZ": 13.45
+    },
+    "specificity": {
+     "voxels": 11157,
+     "cutoff": 3.49,
+     "peakVoxel": [
+      61,
+      44,
+      35
+     ],
+     "peakZ": 11.92
+    }
+   },
+   "peakProportion": 0.402,
+   "peakProportionVoxel": [
+    61,
+    44,
+    35
+   ],
+   "asset": {
+    "url": "/activity/navigation.maps",
+    "bytes": 146971,
+    "rawBytes": 5410175,
+    "sha256": "a9166d65df23604de532fa9122907238a5954c6a7e0b8c45fce24df5172eb501"
+   }
+  },
+  {
+   "id": "creativity",
+   "title": "Being creative",
+   "category": "Thinking & memory",
+   "terms": [
+    "creativity",
+    "creative",
+    "divergent thinking"
+   ],
+   "description": "Studies about creative thinking and generating new ideas.",
+   "kind": "meta-analysis",
+   "studies": 65,
+   "maps": {
+    "consistency": {
+     "voxels": 4986,
+     "cutoff": 3.94,
+     "peakVoxel": [
+      44,
+      72,
+      67
+     ],
+     "peakZ": 9.13
+    },
+    "specificity": {
+     "voxels": 236,
+     "cutoff": 4.41,
+     "peakVoxel": [
+      31,
+      17,
+      36
+     ],
+     "peakZ": 6.47
+    }
+   },
+   "peakProportion": 0.292,
+   "peakProportionVoxel": [
+    44,
+    72,
+    67
+   ],
+   "asset": {
+    "url": "/activity/creativity.maps",
+    "bytes": 99013,
+    "rawBytes": 5410175,
+    "sha256": "e538e1f3fa6f92ea61b35230fd2cd7ada1391df1ca042787d9e904b066584f92"
+   }
+  },
+  {
+   "id": "mentalizing",
+   "title": "Understanding others' minds",
+   "category": "Social life",
+   "terms": [
+    "mentalizing",
+    "mentalising",
+    "mental states"
+   ],
+   "description": "Studies about inferring other people's beliefs, intentions, and mental states.",
+   "kind": "meta-analysis",
+   "studies": 284,
+   "maps": {
+    "consistency": {
+     "voxels": 33318,
+     "cutoff": 3.02,
+     "peakVoxel": [
+      45,
+      93,
+      52
+     ],
+     "peakZ": 19.96
+    },
+    "specificity": {
+     "voxels": 25806,
+     "cutoff": 3.26,
+     "peakVoxel": [
+      45,
+      94,
+      55
+     ],
+     "peakZ": 16.58
+    }
+   },
+   "peakProportion": 0.349,
+   "peakProportionVoxel": [
+    45,
+    93,
+    52
+   ],
+   "asset": {
+    "url": "/activity/mentalizing.maps",
+    "bytes": 234545,
+    "rawBytes": 5410175,
+    "sha256": "c93697b40405b090add3402dbf8ed080d3d9af8275fe6fa7c7949f1174216e5a"
+   }
+  },
+  {
+   "id": "empathy",
+   "title": "Empathy",
+   "category": "Social life",
+   "terms": [
+    "empathy",
+    "empathic"
+   ],
+   "description": "Studies about sharing or understanding another person's feelings, often their pain.",
+   "kind": "meta-analysis",
+   "studies": 235,
+   "maps": {
+    "consistency": {
+     "voxels": 29610,
+     "cutoff": 3.07,
+     "peakVoxel": [
+      27,
+      75,
+      38
+     ],
+     "peakZ": 15.22
+    },
+    "specificity": {
+     "voxels": 12847,
+     "cutoff": 3.45,
+     "peakVoxel": [
+      80,
+      54,
+      56
+     ],
+     "peakZ": 9.21
+    }
+   },
+   "peakProportion": 0.302,
+   "peakProportionVoxel": [
+    27,
+    75,
+    38
+   ],
+   "asset": {
+    "url": "/activity/empathy.maps",
+    "bytes": 206908,
+    "rawBytes": 5410175,
+    "sha256": "08072b418a1d3c672857adb0d8feca8e3ef6b9c4126d5dc45edea22ed85e7500"
+   }
+  },
+  {
+   "id": "self",
+   "title": "Thinking about yourself",
+   "category": "Social life",
+   "terms": [
+    "self referential"
+   ],
+   "description": "Studies about self-referential judgments, such as whether a word describes you.",
+   "kind": "meta-analysis",
+   "studies": 170,
+   "maps": {
+    "consistency": {
+     "voxels": 17590,
+     "cutoff": 3.49,
+     "peakVoxel": [
+      49,
+      39,
+      51
+     ],
+     "peakZ": 16.93
+    },
+    "specificity": {
+     "voxels": 11832,
+     "cutoff": 3.47,
+     "peakVoxel": [
+      49,
+      39,
+      51
+     ],
+     "peakZ": 9.94
+    }
+   },
+   "peakProportion": 0.341,
+   "peakProportionVoxel": [
+    49,
+    39,
+    51
+   ],
+   "asset": {
+    "url": "/activity/self.maps",
+    "bytes": 180284,
+    "rawBytes": 5410175,
+    "sha256": "dd2202d1df723155ebbf3937c0fe336dc43df15069e3e213c32d7954d4f89b3f"
+   }
+  },
+  {
+   "id": "moral",
+   "title": "Moral judgment",
+   "category": "Social life",
+   "terms": [
+    "moral"
+   ],
+   "description": "Studies about judging right and wrong and moral dilemmas.",
+   "kind": "meta-analysis",
+   "studies": 91,
+   "maps": {
+    "consistency": {
+     "voxels": 14058,
+     "cutoff": 3.46,
+     "peakVoxel": [
+      45,
+      92,
+      53
+     ],
+     "peakZ": 13.41
+    },
+    "specificity": {
+     "voxels": 7110,
+     "cutoff": 3.61,
+     "peakVoxel": [
+      49,
+      94,
+      55
+     ],
+     "peakZ": 10.27
+    }
+   },
+   "peakProportion": 0.363,
+   "peakProportionVoxel": [
+    45,
+    92,
+    53
+   ],
+   "asset": {
+    "url": "/activity/moral.maps",
+    "bytes": 138231,
+    "rawBytes": 5410175,
+    "sha256": "c049e06e39a5d53a5a31043bd5eba4de1b5697ee636464410c6a8c530b327caa"
+   }
+  },
+  {
+   "id": "deception",
+   "title": "Lying",
+   "category": "Social life",
+   "terms": [
+    "deception",
+    "lying"
+   ],
+   "description": "Studies about telling lies or deceiving others.",
+   "kind": "meta-analysis",
+   "studies": 71,
+   "maps": {
+    "consistency": {
+     "voxels": 7131,
+     "cutoff": 3.96,
+     "peakVoxel": [
+      68,
+      75,
+      38
+     ],
+     "peakZ": 10.88
+    },
+    "specificity": {
+     "voxels": 63,
+     "cutoff": 4.69,
+     "peakVoxel": [
+      54,
+      75,
+      74
+     ],
+     "peakZ": 6.11
+    }
+   },
+   "peakProportion": 0.31,
+   "peakProportionVoxel": [
+    68,
+    75,
+    38
+   ],
+   "asset": {
+    "url": "/activity/deception.maps",
+    "bytes": 97798,
+    "rawBytes": 5410175,
+    "sha256": "a8a04dcd94398e8a2adbdc9d8c2831f1bc45aa2f53d5b99d7c085746ae5bbc1e"
+   }
+  },
+  {
+   "id": "finger-tapping",
+   "title": "Finger tapping",
+   "category": "Movement",
+   "terms": [
+    "finger tapping"
+   ],
+   "description": "Studies about repeated finger movements.",
+   "kind": "meta-analysis",
+   "studies": 68,
+   "maps": {
+    "consistency": {
+     "voxels": 15132,
+     "cutoff": 3.75,
+     "peakVoxel": [
+      27,
+      56,
+      65
+     ],
+     "peakZ": 15.3
+    },
+    "specificity": {
+     "voxels": 12180,
+     "cutoff": 3.46,
+     "peakVoxel": [
+      58,
+      39,
+      24
+     ],
+     "peakZ": 13.1
+    }
+   },
+   "peakProportion": 0.485,
+   "peakProportionVoxel": [
+    27,
+    56,
+    65
+   ],
+   "asset": {
+    "url": "/activity/finger-tapping.maps",
+    "bytes": 139604,
+    "rawBytes": 5410175,
+    "sha256": "b614e428c00d6eb828bd1f8a6e1928af0872f670f061e55cfdc64518fda8fe6e"
+   }
+  },
+  {
+   "id": "eye-movements",
+   "title": "Moving the eyes",
+   "category": "Movement",
+   "terms": [
+    "saccades",
+    "saccadic",
+    "eye movements"
+   ],
+   "description": "Studies about saccades and other eye movements.",
+   "kind": "meta-analysis",
+   "studies": 116,
+   "maps": {
+    "consistency": {
+     "voxels": 21774,
+     "cutoff": 3.4,
+     "peakVoxel": [
+      48,
+      67,
+      68
+     ],
+     "peakZ": 15.2
+    },
+    "specificity": {
+     "voxels": 9852,
+     "cutoff": 3.52,
+     "peakVoxel": [
+      59,
+      37,
+      67
+     ],
+     "peakZ": 10.11
+    }
+   },
+   "peakProportion": 0.362,
+   "peakProportionVoxel": [
+    48,
+    67,
+    68
+   ],
+   "asset": {
+    "url": "/activity/eye-movements.maps",
+    "bytes": 156985,
+    "rawBytes": 5410175,
+    "sha256": "30bae9b8190a06897d88bc746c3aeda4761da15f72e3559395653129534f9bbb"
+   }
+  },
+  {
+   "id": "grasping",
+   "title": "Grasping",
+   "category": "Movement",
+   "terms": [
+    "grasping"
+   ],
+   "description": "Studies about grasping objects, performed or observed.",
+   "kind": "meta-analysis",
+   "studies": 71,
+   "maps": {
+    "consistency": {
+     "voxels": 17559,
+     "cutoff": 3.45,
+     "peakVoxel": [
+      28,
+      46,
+      61
+     ],
+     "peakZ": 17.49
+    },
+    "specificity": {
+     "voxels": 7647,
+     "cutoff": 3.59,
+     "peakVoxel": [
+      30,
+      48,
+      66
+     ],
+     "peakZ": 11.77
+    }
+   },
+   "peakProportion": 0.507,
+   "peakProportionVoxel": [
+    28,
+    46,
+    61
+   ],
+   "asset": {
+    "url": "/activity/grasping.maps",
+    "bytes": 126819,
+    "rawBytes": 5410175,
+    "sha256": "607c1c2ba56a31c9e41bf11ceb8371333a5e5022c7f606f56045274d558e2018"
+   }
+  },
+  {
+   "id": "motor-imagery",
+   "title": "Imagining movement",
+   "category": "Movement",
+   "terms": [
+    "motor imagery"
+   ],
+   "description": "Studies about imagining a movement without performing it.",
+   "kind": "meta-analysis",
+   "studies": 98,
+   "maps": {
+    "consistency": {
+     "voxels": 26505,
+     "cutoff": 3.59,
+     "peakVoxel": [
+      47,
+      64,
+      69
+     ],
+     "peakZ": 19.68
+    },
+    "specificity": {
+     "voxels": 32152,
+     "cutoff": 3.19,
+     "peakVoxel": [
+      48,
+      64,
+      70
+     ],
+     "peakZ": 15.3
+    }
+   },
+   "peakProportion": 0.551,
+   "peakProportionVoxel": [
+    47,
+    64,
+    69
+   ],
+   "asset": {
+    "url": "/activity/motor-imagery.maps",
+    "bytes": 202192,
+    "rawBytes": 5410175,
+    "sha256": "87322faaa9f00ebd23ed2620a8969da675b8fdfb38c7eec947564dae3e7a91c3"
+   }
+  },
+  {
+   "id": "action-observation",
+   "title": "Watching others move",
+   "category": "Movement",
+   "terms": [
+    "action observation"
+   ],
+   "description": "Studies about observing other people's actions.",
+   "kind": "meta-analysis",
+   "studies": 114,
+   "maps": {
+    "consistency": {
+     "voxels": 23242,
+     "cutoff": 3.59,
+     "peakVoxel": [
+      71,
+      33,
+      39
+     ],
+     "peakZ": 15.59
+    },
+    "specificity": {
+     "voxels": 30393,
+     "cutoff": 3.21,
+     "peakVoxel": [
+      23,
+      28,
+      42
+     ],
+     "peakZ": 13.26
+    }
+   },
+   "peakProportion": 0.447,
+   "peakProportionVoxel": [
+    71,
+    33,
+    39
+   ],
+   "asset": {
+    "url": "/activity/action-observation.maps",
+    "bytes": 216724,
+    "rawBytes": 5410175,
+    "sha256": "e42aa23d429800de27c7f082cae3122b8723f5b8f2ed74cb5914f28b4b2e30c4"
+   }
+  },
+  {
+   "id": "imitation",
+   "title": "Imitating",
+   "category": "Movement",
+   "terms": [
+    "imitation"
+   ],
+   "description": "Studies about copying another person's movements or expressions.",
+   "kind": "meta-analysis",
+   "studies": 70,
+   "maps": {
+    "consistency": {
+     "voxels": 13405,
+     "cutoff": 3.64,
+     "peakVoxel": [
+      21,
+      69,
+      54
+     ],
+     "peakZ": 9.48
+    },
+    "specificity": {
+     "voxels": 10029,
+     "cutoff": 3.52,
+     "peakVoxel": [
+      38,
+      31,
+      10
+     ],
+     "peakZ": 8.35
+    }
+   },
+   "peakProportion": 0.343,
+   "peakProportionVoxel": [
+    21,
+    69,
+    54
+   ],
+   "asset": {
+    "url": "/activity/imitation.maps",
+    "bytes": 141225,
+    "rawBytes": 5410175,
+    "sha256": "abeac39ec77c164eb63d57467d0bb6cdc0beb862f73a2ab4c83164aeedf60b8c"
+   }
+  },
+  {
+   "id": "walking",
+   "title": "Walking",
+   "category": "Movement",
+   "terms": [
+    "walking",
+    "gait"
+   ],
+   "description": "Studies about walking and gait, usually imagined or simulated in the scanner.",
+   "kind": "meta-analysis",
+   "studies": 62,
+   "maps": {
+    "consistency": {
+     "voxels": 6032,
+     "cutoff": 3.99,
+     "peakVoxel": [
+      47,
+      67,
+      69
+     ],
+     "peakZ": 12.11
+    },
+    "specificity": {
+     "voxels": 6285,
+     "cutoff": 3.64,
+     "peakVoxel": [
+      49,
+      56,
+      73
+     ],
+     "peakZ": 10.92
+    }
+   },
+   "peakProportion": 0.387,
+   "peakProportionVoxel": [
+    47,
+    67,
+    69
+   ],
+   "asset": {
+    "url": "/activity/walking.maps",
+    "bytes": 110334,
+    "rawBytes": 5410175,
+    "sha256": "3e0acef4c31635edd04bfdba79491fd468d40a75a2210bf0b7262ca82ebab016"
+   }
+  },
+  {
+   "id": "sleep",
+   "title": "Sleep and sleep loss",
+   "category": "States",
+   "terms": [
+    "sleep",
+    "sleep deprivation"
+   ],
+   "description": "Studies about sleep stages, sleep deprivation, and sleep disorders.",
+   "kind": "meta-analysis",
+   "studies": 141,
+   "maps": {
+    "consistency": {
+     "voxels": 6885,
+     "cutoff": 3.7,
+     "peakVoxel": [
+      33,
+      72,
+      41
+     ],
+     "peakZ": 9.64
+    },
+    "specificity": {
+     "voxels": 0,
+     "cutoff": null,
+     "peakVoxel": [
+      0,
+      0,
+      0
+     ],
+     "peakZ": 0.0
+    }
+   },
+   "peakProportion": 0.22,
+   "peakProportionVoxel": [
+    33,
+    72,
+    41
+   ],
+   "asset": {
+    "url": "/activity/sleep.maps",
+    "bytes": 128475,
+    "rawBytes": 5410175,
+    "sha256": "eb4c800ba8b9fe2533eecd4c034b769d6f8410b254d59313ff0faf3f0231a908"
+   }
+  },
+  {
+   "id": "meditation",
+   "title": "Meditation",
+   "category": "States",
+   "terms": [
+    "meditation",
+    "mindfulness"
+   ],
+   "description": "Studies about meditation practice and mindfulness.",
+   "kind": "meta-analysis",
+   "studies": 80,
+   "maps": {
+    "consistency": {
+     "voxels": 6095,
+     "cutoff": 3.74,
+     "peakVoxel": [
+      50,
+      89,
+      43
+     ],
+     "peakZ": 8.79
+    },
+    "specificity": {
+     "voxels": 7,
+     "cutoff": 5.14,
+     "peakVoxel": [
+      56,
+      91,
+      46
+     ],
+     "peakZ": 5.48
+    }
+   },
+   "peakProportion": 0.237,
+   "peakProportionVoxel": [
+    50,
+    89,
+    43
+   ],
+   "asset": {
+    "url": "/activity/meditation.maps",
+    "bytes": 99452,
+    "rawBytes": 5410175,
+    "sha256": "8ff38b031e4f0154f11ffc8bd48859b2ca1254fd0348da4b75ea467e7f9a3ffa"
+   }
+  }
+ ],
+ "sources": [
+  {
+   "file": "aseg.mgz",
+   "url": "https://raw.githubusercontent.com/mne-tools/mne-testing-data/33ef2a6f6345a1adf8764f8f63725f0ed9e4bb92/subjects/fsaverage/mri/aseg.mgz",
+   "sha256": "b55ef817e5e5bd1a3d76d4a2305283eef16fbff199ead3d840dd4b0fa8205e48"
+  },
+  {
+   "file": "fsaverage6.tar.gz",
+   "url": "https://osf.io/jzxyr/download",
+   "sha256": "ffab4ce0e067079388b863edca7f3c9aefa870b151511b8f91f48031a5576757"
+  },
+  {
+   "file": "lh.aparc.annot",
+   "url": "https://raw.githubusercontent.com/mne-tools/mne-testing-data/33ef2a6f6345a1adf8764f8f63725f0ed9e4bb92/subjects/fsaverage/label/lh.aparc.annot",
+   "sha256": "39b1acde9a32b4227631eb51cbcd8dff84e2138c57bf9f96d74026f2c17f1480"
+  },
+  {
+   "file": "nq_LICENSE",
+   "url": "https://raw.githubusercontent.com/neuroquery/neuroquery_data/4580f86267fb7c14ac1f601e298cbed898d79f2d/LICENSE",
+   "sha256": "f2448f4467b33827570df47be6173d64bca5c8a45c1b1815793321f47571fd3d"
+  },
+  {
+   "file": "nq_abstract.npz",
+   "url": "https://raw.githubusercontent.com/neuroquery/neuroquery_data/4580f86267fb7c14ac1f601e298cbed898d79f2d/data/data-neuroquery_version-1_vocab-neuroquery156521_source-abstract_type-count_features.npz",
+   "sha256": "1afb653a7c638377dae3ac9785e0e7ba04d62d89ecbd4c2b2dee8514365138c8"
+  },
+  {
+   "file": "nq_coordinates.tsv.gz",
+   "url": "https://raw.githubusercontent.com/neuroquery/neuroquery_data/4580f86267fb7c14ac1f601e298cbed898d79f2d/data/data-neuroquery_version-1_coordinates.tsv.gz",
+   "sha256": "b97cf50346dc8a6f78b3c02c8a19680679d7dbdf35f760a1032e46c2cad3666c"
+  },
+  {
+   "file": "nq_keywords.npz",
+   "url": "https://raw.githubusercontent.com/neuroquery/neuroquery_data/4580f86267fb7c14ac1f601e298cbed898d79f2d/data/data-neuroquery_version-1_vocab-neuroquery156521_source-keywords_type-count_features.npz",
+   "sha256": "dcdef30aa83e794cde4ff04a554d76446ca1599f1c304eb45286ad201479a2e1"
+  },
+  {
+   "file": "nq_metadata.tsv.gz",
+   "url": "https://raw.githubusercontent.com/neuroquery/neuroquery_data/4580f86267fb7c14ac1f601e298cbed898d79f2d/data/data-neuroquery_version-1_metadata.tsv.gz",
+   "sha256": "d84d2c7b2e2ca1692381419833fde043fb42d279014104c3c957feeeece140ea"
+  },
+  {
+   "file": "nq_title.npz",
+   "url": "https://raw.githubusercontent.com/neuroquery/neuroquery_data/4580f86267fb7c14ac1f601e298cbed898d79f2d/data/data-neuroquery_version-1_vocab-neuroquery156521_source-title_type-count_features.npz",
+   "sha256": "ce0f1aa8453531bbe9f9132ddc645648a9c59edac5583bb8f29a4255e74bdf31"
+  },
+  {
+   "file": "nq_vocabulary.txt",
+   "url": "https://raw.githubusercontent.com/neuroquery/neuroquery_data/4580f86267fb7c14ac1f601e298cbed898d79f2d/data/data-neuroquery_version-1_vocab-neuroquery156521_vocabulary.txt",
+   "sha256": "54a768ac2cd266f38a3010a20fd8b10abb107677776c8bda7060c8f9a4517793"
+  },
+  {
+   "file": "rh.aparc.annot",
+   "url": "https://raw.githubusercontent.com/mne-tools/mne-testing-data/33ef2a6f6345a1adf8764f8f63725f0ed9e4bb92/subjects/fsaverage/label/rh.aparc.annot",
+   "sha256": "6a326aed325d313e6e0d10f67630efcd8d3b8343c50d3e108e005f626614badb"
+  }
+ ]
+}

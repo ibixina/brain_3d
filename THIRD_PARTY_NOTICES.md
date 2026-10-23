@@ -107,6 +107,17 @@ Local maps are modified derivatives from public [NeuroVault collection 4438](htt
 - The retained IBC contrast-definition table originates from public_analysis_code, commit `2d9a6852bc7e3b164adef28b02b4d38d386c53ac`. Copyright (c) 2013–2023 The IBC developers. The Simplified BSD license is retained in [public/licenses/ibc-analysis-code.txt](public/licenses/ibc-analysis-code.txt).
 - The protocol index compiles factual task names, ontology tags, and source links from https://individual-brain-charting.github.io/docs/tasks.html. Long protocol descriptions, task stimuli, and demonstration footage are not copied.
 
+## NeuroQuery corpus activity meta-analyses
+
+The activity comparison maps are **derived data** computed from the [NeuroQuery data repository](https://github.com/neuroquery/neuroquery_data) at commit `4580f86267fb7c14ac1f601e298cbed898d79f2d`: reported peak coordinates for 13,459 published studies, their titles, and term-count features. That repository is distributed under the BSD 3-Clause License, Copyright (c) 2019, jeromedockes. Its full text is retained in [public/licenses/neuroquery-data.txt](public/licenses/neuroquery-data.txt). Input checksums are in `scripts/activity-checksums.json`; the method, grid, and derivative checksums are in [public/activity/manifest.json](public/activity/manifest.json).
+
+- Each map is a new coordinate-based meta-analysis: NiMARE's MKDA chi-square estimator (10 mm binary kernels), comparing studies whose title, abstract, or keywords mention an activity's terms with all other corpus studies, with Benjamini–Hochberg FDR correction at q < 0.01. They are not NeuroQuery's own predictive maps, and neither the NeuroQuery authors nor the original study authors endorse them.
+- `public/activity/studies.json` lists the PubMed IDs and titles of the included studies. Abstracts, full text, and figures are not redistributed.
+- Dockès, Poldrack, Primet, and colleagues (2020). NeuroQuery, comprehensive meta-analysis of human brain mapping. eLife 9, e53385. https://doi.org/10.7554/eLife.53385
+- Salo, Yarkoni, Nichols, and colleagues (2023). NiMARE: Neuroimaging Meta-Analysis Research Environment. Aperture Neuro 3. https://doi.org/10.52294/001c.87681. NiMARE (MIT License) runs only in the build script and is not bundled.
+- The anatomical label grid that summarizes these maps by model part is a modified derivative of the fsaverage aseg and Desikan–Killiany annotation described above, mapped to MNI152 with FreeSurfer's documented MNI305-to-MNI152 matrix (https://surfer.nmr.mgh.harvard.edu/fswiki/CoordinateSystems). FreeSurfer data terms apply.
+- The blindsight entry in `src/activity-pathways.json` contains original short summaries of cited studies with DOI links. No paper text, figures, or patient data are copied.
+
 ## Linked HCP research metadata
 
 The research index retains factual metadata and direct links for 48 maps in [NeuroVault collection 457](https://neurovault.org/collections/457/). These are a different cohort from the local IBC maps. No HCP image volumes are redistributed. The collection's specific HCP registration and data-use requirements remain applicable. Cite Van Essen and colleagues, The WU-Minn Human Connectome Project: An overview (2013), https://doi.org/10.1016/j.neuroimage.2013.05.041.

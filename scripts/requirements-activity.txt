@@ -1,0 +1,8 @@
+# Activity meta-analysis builder (Python 3.12): scripts/build_activity_maps.py
+nimare==0.22.1
+nilearn==0.13.1
+nibabel==5.4.2
+numpy==2.5.4
+pandas==3.1.0
+scipy==1.18.1
+scikit-learn==1.9.1
