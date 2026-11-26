@@ -1,0 +1,170 @@
+{
+  "checkedOn": "2026-11-26",
+  "source": "https://orbit.dtu.dk/files/110363325/IglesiasNI2015.pdf#page=7",
+  "sourceLabel": "2015 ex vivo MRI protocol · Table 2 ↗",
+  "sourceTitle": "Iglesias et al. (2015), Table 2: protocol for manual segmentation of ex vivo MRI data",
+  "note": "These are concise readings of the 2015 protocol’s boundaries in ex vivo MRI contrast. This viewer shows surfaces from a later FreeSurfer probability-atlas download in symmetric template space; it does not reproduce those postmortem scans, their contrast, or histological layers. Current protocol output adds head/body labels and retains its own naming.",
+  "labels": {
+    "Hippocampal_tail": {
+      "text": "The 2015 protocol marked the tail where the fornix first became fully connected to the hippocampus, then used a whole-hippocampus umbrella label posteriorly. The authors cautioned that the tail was difficult to annotate reliably.",
+      "neighbors": []
+    },
+    "alveus": {
+      "text": "A white-matter covering along the superior hippocampal rim, directly beside the CA fields. The protocol distinguishes it from the fimbria: anteriorly it borders the amygdala, and posteriorly it joins the fimbria/fornix.",
+      "neighbors": [
+        "CA1-head",
+        "CA1-body",
+        "fimbria",
+        "HATA"
+      ]
+    },
+    "parasubiculum": {
+      "text": "The medial-most subicular cortex in this protocol. Presubiculum lies lateral to it and entorhinal cortex medial to it; the latter is not a surface in this subregion viewer.",
+      "neighbors": [
+        "presubiculum-head",
+        "presubiculum-body"
+      ]
+    },
+    "presubiculum-head": {
+      "text": "The protocol places presubiculum between parasubiculum medially and subiculum laterally. This atlas subdivides presubiculum into head and body; those suffixes are from the later output hierarchy.",
+      "neighbors": [
+        "parasubiculum",
+        "subiculum-head",
+        "subiculum-body"
+      ]
+    },
+    "presubiculum-body": {
+      "text": "The protocol places presubiculum between parasubiculum medially and subiculum laterally. This atlas subdivides presubiculum into head and body; those suffixes are from the later output hierarchy.",
+      "neighbors": [
+        "parasubiculum",
+        "subiculum-body"
+      ]
+    },
+    "subiculum-head": {
+      "text": "In the 2015 ex vivo contrast protocol, subiculum begins lateral to presubiculum and transitions laterally into CA1. The authors did not segment prosubiculum as a separate label.",
+      "neighbors": [
+        "presubiculum-head",
+        "CA1-head"
+      ]
+    },
+    "subiculum-body": {
+      "text": "In the 2015 ex vivo contrast protocol, subiculum begins lateral to presubiculum and transitions laterally into CA1. The authors did not segment prosubiculum as a separate label.",
+      "neighbors": [
+        "presubiculum-body",
+        "CA1-body"
+      ]
+    },
+    "CA1-head": {
+      "text": "The protocol describes CA1 as a transition from subiculum; it labels the hippocampal molecular layer separately where visible. CA2 and CA3 were combined as CA2/3 because MRI contrast and preliminary rater boundaries did not reliably separate them.",
+      "neighbors": [
+        "subiculum-head",
+        "CA3-head",
+        "molecular_layer_HP-head"
+      ]
+    },
+    "CA1-body": {
+      "text": "The protocol describes CA1 as a transition from subiculum; it labels the hippocampal molecular layer separately where visible. CA2 and CA3 were combined as CA2/3 because MRI contrast and preliminary rater boundaries did not reliably separate them.",
+      "neighbors": [
+        "subiculum-body",
+        "CA3-body",
+        "molecular_layer_HP-body"
+      ]
+    },
+    "CA3-head": {
+      "text": "This download calls the label CA3-head. The 2015 protocol calls the corresponding combined field CA2/3: the authors merged CA2 and CA3 because MRI contrast and preliminary rater delineations did not separate them reliably. Current FreeSurfer documentation likewise says CA2 is included in CA3.",
+      "neighbors": [
+        "CA1-head",
+        "CA4-head",
+        "molecular_layer_HP-head",
+        "GC-ML-DG-head"
+      ]
+    },
+    "CA3-body": {
+      "text": "This download calls the label CA3-body. The 2015 protocol calls the corresponding combined field CA2/3: the authors merged CA2 and CA3 because MRI contrast and preliminary rater delineations did not separate them reliably. Current FreeSurfer documentation likewise says CA2 is included in CA3.",
+      "neighbors": [
+        "CA1-body",
+        "CA4-body",
+        "molecular_layer_HP-body",
+        "GC-ML-DG-body"
+      ]
+    },
+    "CA4-head": {
+      "text": "The protocol uses CA4 for hilar territory within the dentate gyrus. It notes that visibility of particular strata depended on brain quality and image resolution; the label is not a complete map of hilar cell types.",
+      "neighbors": [
+        "CA3-head",
+        "GC-ML-DG-head"
+      ]
+    },
+    "CA4-body": {
+      "text": "The protocol uses CA4 for hilar territory within the dentate gyrus. It notes that visibility of particular strata depended on brain quality and image resolution; the label is not a complete map of hilar cell types.",
+      "neighbors": [
+        "CA3-body",
+        "GC-ML-DG-body"
+      ]
+    },
+    "GC-ML-DG-head": {
+      "text": "GC-ML-DG is the download’s grouped dentate label. In Table 2, granule-cell dentate territory is distinguished from CA4, while molecular-layer visibility varied; current version 21 documentation describes GC-ML-DG as an internal label that may be merged into CA4 in another output hierarchy.",
+      "neighbors": [
+        "CA3-head",
+        "CA4-head",
+        "molecular_layer_HP-head"
+      ]
+    },
+    "GC-ML-DG-body": {
+      "text": "GC-ML-DG is the download’s grouped dentate label. In Table 2, granule-cell dentate territory is distinguished from CA4, while molecular-layer visibility varied; current version 21 documentation describes GC-ML-DG as an internal label that may be merged into CA4 in another output hierarchy.",
+      "neighbors": [
+        "CA3-body",
+        "CA4-body",
+        "molecular_layer_HP-body"
+      ]
+    },
+    "molecular_layer_HP-head": {
+      "text": "The 2015 protocol traces a dark band that follows hippocampal folds, above subiculum and between CA fields, dentate gyrus, and the fissure. This is a protocol-defined MRI label, not a rendering of individual cells or synapses.",
+      "neighbors": [
+        "CA1-head",
+        "CA3-head",
+        "hippocampal-fissure"
+      ]
+    },
+    "molecular_layer_HP-body": {
+      "text": "The 2015 protocol traces a dark band that follows hippocampal folds, above subiculum and between CA fields, dentate gyrus, and the fissure. This is a protocol-defined MRI label, not a rendering of individual cells or synapses.",
+      "neighbors": [
+        "CA1-body",
+        "CA3-body",
+        "hippocampal-fissure"
+      ]
+    },
+    "hippocampal-fissure": {
+      "text": "A space that opens medially and becomes a narrow remnant between molecular layers in the protocol. It is a fissure-space label, not neural tissue; the solid surface encloses a mask for viewing.",
+      "neighbors": [
+        "molecular_layer_HP-head",
+        "molecular_layer_HP-body"
+      ]
+    },
+    "fimbria": {
+      "text": "A white-matter continuation of the alveus that forms the fornix and exits posteriorly near mid-body in the protocol. This surface ends at the atlas label; it does not reconstruct the full fornix or individual axons.",
+      "neighbors": [
+        "alveus"
+      ]
+    },
+    "HATA": {
+      "text": "The hippocampus–amygdala transition area sits at the medial, superior edge of the hippocampus in the protocol. It borders alveus laterally and the inferior horn of the lateral ventricle medially. HATA is distinct from the amygdala atlas’s corticoamygdaloid transition label (CAT).",
+      "neighbors": [
+        "alveus"
+      ]
+    }
+  },
+  "readingScope": "The atlas labels are protocol-dependent regional estimates, not proof of microscopic borders, measured activity, or a universal subdivision scheme.",
+  "reading": [
+    {
+      "id": "hippocampal-formation",
+      "label": "Regional anatomy & atlas limits"
+    },
+    {
+      "id": "hippocampal-circuit",
+      "label": "Circuit pathways & human evidence"
+    }
+  ],
+  "protocolSource": "https://surfer.nmr.mgh.harvard.edu/fswiki/HippocampalSubfieldsAndNucleiOfAmygdala",
+  "protocolSourceLabel": "Current v21 output hierarchy ↗"
+}

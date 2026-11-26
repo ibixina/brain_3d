@@ -24,6 +24,9 @@ export type SubregionAtlas = {
   boundaries?: {
     checkedOn: string;
     source: string;
+    sourceLabel?: string;
+    protocolSource?: string;
+    protocolSourceLabel?: string;
     sourceTitle: string;
     note: string;
     labels: Record<string, { text: string; neighbors: string[] }>;

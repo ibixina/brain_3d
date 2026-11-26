@@ -136,7 +136,10 @@ export default function SubregionExplorer({
                 import("../amygdala-boundaries.json"),
               ]).then(([atlas, boundaries]) => ({ default: { ...atlas.default, boundaries: boundaries.default } }))
             : kind === "hippocampus"
-              ? import("../hippocampus-subregions.json")
+              ? Promise.all([
+                  import("../hippocampus-subregions.json"),
+                  import("../hippocampus-boundaries.json"),
+                ]).then(([atlas, boundaries]) => ({ default: { ...atlas.default, boundaries: boundaries.default } }))
               : import("../cerebellum-subregions.json");
     void request
       .then((data) => {
@@ -627,16 +630,19 @@ function LoadedSubregions({
             <h4>Boundary protocol</h4>
             <p>{protocol.text}</p>
             <p className="subregion-boundary-note">{atlas.boundaries.note}</p>
-            <a className="subregion-boundary-source" href={atlas.boundaries.source} title={atlas.boundaries.sourceTitle} target="_blank" rel="noreferrer">Ex vivo MRI protocol · Table 2 ↗</a>
-            <h4>Explore selected neighbors</h4>
-            <p className="subregion-boundary-note">Choose a label to isolate its existing surface.</p>
-            <div className="subregion-neighbors">
-              {neighbors.map((part) => (
-                <button key={part.id} disabled={!ready} onClick={() => choose(part.id, true)} aria-label={`Inspect ${subregionName(part)}`}>
-                  {subregionName(part)}<ChevronRight size={13} aria-hidden="true" />
-                </button>
-              ))}
-            </div>
+            <a className="subregion-boundary-source" href={atlas.boundaries.source} title={atlas.boundaries.sourceTitle} target="_blank" rel="noreferrer">{atlas.boundaries.sourceLabel ?? "Ex vivo MRI protocol · Table 2 ↗"}</a>
+            {atlas.boundaries.protocolSource && <a className="subregion-boundary-source" href={atlas.boundaries.protocolSource} target="_blank" rel="noreferrer">{atlas.boundaries.protocolSourceLabel ?? "Current output labels ↗"}</a>}
+            {neighbors.length > 0 && <>
+              <h4>Explore selected neighbors</h4>
+              <p className="subregion-boundary-note">Choose a label to isolate its existing surface.</p>
+              <div className="subregion-neighbors">
+                {neighbors.map((part) => (
+                  <button key={part.id} disabled={!ready} onClick={() => choose(part.id, true)} aria-label={`Inspect ${subregionName(part)}`}>
+                    {subregionName(part)}<ChevronRight size={13} aria-hidden="true" />
+                  </button>
+                ))}
+              </div>
+            </>}
           </section>
         )}
         <div className="subregion-selection">
