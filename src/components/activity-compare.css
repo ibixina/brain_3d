@@ -125,6 +125,15 @@
   overflow: hidden;
   text-overflow: ellipsis;
 }
+.lens-label-full,
+.lens-label-compact {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.lens-label-compact {
+  display: none;
+}
 .lens-switch button.active,
 .stage-switch button.active {
   background: #9dd8d315;
@@ -559,7 +568,7 @@
 @media (max-width: 600px) {
   .compare-slots {
     grid-template-columns: minmax(0, 1fr);
-    gap: 8px;
+    gap: 44px 8px;
   }
   .slot-swap {
     left: auto;
@@ -575,9 +584,37 @@
   }
   .lens-switch button,
   .stage-switch button {
+    flex: 1 1 calc(33.333% - 4px);
+    justify-content: center;
     font-size: 10px;
-    padding: 6px 8px;
+    min-width: 0;
+    min-height: 44px;
+    padding: 6px 5px;
     max-width: 100%;
+  }
+  .lens-switch .lens-label-full {
+    display: none;
+  }
+  .lens-switch .lens-label-compact {
+    display: inline;
+  }
+  .stage-switch button {
+    flex-basis: calc(50% - 4px);
+  }
+  .slot-clear,
+  .slot-swap {
+    width: 44px;
+    min-width: 44px;
+    min-height: 44px;
+  }
+  .compare-totals button,
+  .compare-region-list > button,
+  .compare-chooser-group > button {
+    min-height: 44px;
+  }
+  .pathway-parts button {
+    min-height: 44px;
+    padding-inline: 12px;
   }
   .stage-switch .stage-split {
     display: none;

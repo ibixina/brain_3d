@@ -70,6 +70,14 @@ type Studies = { lists: Record<string, number[]>; titles: Record<string, string>
 
 const pathways = pathwayData.pathways as Pathway[];
 const lenses: Lens[] = ["overlap", "a", "b", "a-only", "b-only", "shared"];
+const compactLensLabels: Record<Lens, string> = {
+  overlap: "Overlap",
+  a: "All A",
+  b: "All B",
+  "a-only": "Only A",
+  "b-only": "Only B",
+  shared: "Shared",
+};
 const defaultA = "meta:reading",
   defaultB = "meta:watching-films";
 const cameraViews = [
@@ -717,23 +725,24 @@ export default function ActivityCompare({
         <div className="lens-switch" role="group" aria-label="What to show">
           {lenses
             .filter((item) => bKey || item === "a")
-            .map((item) => (
-              <button
-                key={item}
-                aria-pressed={effectiveLens === item}
-                className={effectiveLens === item ? "active" : ""}
-                onClick={() => setLens(item)}
-              >
-                <i className={`lens-swatch lens-${item}`} aria-hidden="true" />
-                {item === "a" && entryA
-                  ? bKey
-                    ? `All ${entryA.title}`
-                    : entryA.title
-                  : item === "b" && entryB
-                    ? `All ${entryB.title}`
-                    : lensLabels[item]}
-              </button>
-            ))}
+            .map((item) => {
+              const fullLabel = item === "a" && entryA
+                ? (bKey ? `All ${entryA.title}` : entryA.title)
+                : item === "b" && entryB ? `All ${entryB.title}` : lensLabels[item];
+              return (
+                <button
+                  key={item}
+                  aria-label={fullLabel}
+                  aria-pressed={effectiveLens === item}
+                  className={effectiveLens === item ? "active" : ""}
+                  onClick={() => setLens(item)}
+                >
+                  <i className={`lens-swatch lens-${item}`} aria-hidden="true" />
+                  <span className="lens-label-full">{fullLabel}</span>
+                  <span className="lens-label-compact">{compactLensLabels[item]}</span>
+                </button>
+              );
+            })}
         </div>
         <div className="stage-switch" role="group" aria-label="View">
           {(
