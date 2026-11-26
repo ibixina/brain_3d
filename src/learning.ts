@@ -24,6 +24,8 @@ export type LearningPath = {
   minutes: number;
   tags: string[];
   limit: string;
+  checkedOn?: string;
+  relatedSources?: string[];
   steps: LearningStop[];
 };
 export type LearningPosition = { path: LearningPath; step: number };

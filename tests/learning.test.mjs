@@ -26,12 +26,16 @@ const defaults = {
 };
 
 test("guided paths retain real mesh targets, complete explanations, sources, and valid views", () => {
-  assert.equal(learningPaths.length, 6);
-  assert.equal(new Set(learningPaths.map((path) => path.id)).size, 6);
-  assert.equal(learningPaths.flatMap((path) => path.steps).length, 26);
+  assert.equal(learningPaths.length, 7);
+  assert.equal(new Set(learningPaths.map((path) => path.id)).size, 7);
+  assert.equal(learningPaths.flatMap((path) => path.steps).length, 31);
   for (const path of learningPaths) {
     assert.ok(path.summary && path.limit && path.tags.length);
     assert.ok(path.steps.length >= 4);
+    for (const id of path.relatedSources ?? []) {
+      assert.ok(learningSources[id], `${path.id}: related source exists`);
+      assert.equal(new URL(learningSources[id].url).protocol, "https:");
+    }
     for (const [step, stop] of path.steps.entries()) {
       const region = atlas.parts.find((part) => part.id === stop.region);
       assert.ok(region, `${path.id}: real anatomical target`);
@@ -89,6 +93,22 @@ test("path discovery searches system names and aliases and combines terms", () =
   assert.equal(filterLearningPaths("basal ganglia")[0].id, "movement");
   assert.equal(filterLearningPaths("csf")[0].id, "csf");
   assert.equal(filterLearningPaths("speech auditory")[0].id, "language");
+  assert.equal(filterLearningPaths("callosum tractography")[0].id, "callosum");
   assert.equal(filterLearningPaths("memory unrelated-term").length, 0);
   assert.equal(filterLearningPaths("   ").length, learningPaths.length);
+});
+
+test("corpus callosum tour visits the five real FreeSurfer segments and distinguishes their method from DTI topography", () => {
+  const path = learningPaths.find((item) => item.id === "callosum");
+  assert.ok(path);
+  assert.deepEqual(path.steps.map((step) => step.region), [
+    "aseg-251", "aseg-252", "aseg-253", "aseg-254", "aseg-255",
+  ]);
+  assert.ok(path.steps.every((step) => !step.view.isolate && step.view.opacity === 0.15 && step.view.hemisphere === "both"));
+  assert.equal(path.checkedOn, "2026-11-26");
+  assert.deepEqual(path.relatedSources, ["callosalTopography"]);
+  assert.match(path.limit, /different boundaries/);
+  assert.match(path.limit, /not direct axon tracing/);
+  assert.equal(learningSources.callosal.url, "https://surfer.nmr.mgh.harvard.edu/fswiki/mri_cc");
+  assert.equal(learningSources.callosalTopography.url, "https://pubmed.ncbi.nlm.nih.gov/16854598/");
 });

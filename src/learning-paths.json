@@ -60,6 +60,16 @@
       "title": "Basic Neurochemistry · Blood–CSF barrier",
       "url": "https://www.ncbi.nlm.nih.gov/books/NBK27998/",
       "kind": "Textbook chapter"
+    },
+    "callosal": {
+      "title": "FreeSurfer · Corpus callosum subdivision method",
+      "url": "https://surfer.nmr.mgh.harvard.edu/fswiki/mri_cc",
+      "kind": "Official segmentation documentation"
+    },
+    "callosalTopography": {
+      "title": "Hofer & Frahm (2006) · Human callosal fiber topography",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/16854598/",
+      "kind": "Primary diffusion MRI tractography study"
     }
   },
   "paths": [
@@ -480,6 +490,87 @@
           "view": {
             "camera": "left",
             "opacity": 0.1,
+            "hemisphere": "both"
+          }
+        }
+      ]
+    },
+    {
+      "id": "callosum",
+      "title": "Across the corpus callosum",
+      "subtitle": "Five midline segments and a map of interhemispheric fibers",
+      "summary": "Move from the posterior to anterior callosum. Compare the model’s geometric labels with a separate human diffusion-tractography study that estimated where callosal fibers reach broad cortical territories.",
+      "minutes": 4,
+      "checkedOn": "2026-11-26",
+      "tags": [
+        "corpus callosum",
+        "white matter",
+        "commissure",
+        "interhemispheric",
+        "tractography"
+      ],
+      "relatedSources": [
+        "callosalTopography"
+      ],
+      "limit": "The five surfaces use FreeSurfer’s geometric segmentation, spaced along the callosum’s primary eigendirection. Hofer and Frahm used diffusion tensor tractography to estimate five cortical projection territories with different boundaries. Their findings are population-level tractography estimates, not direct axon tracing, and do not assign each mesh or voxel to a cortical target.",
+      "steps": [
+        {
+          "region": "aseg-251",
+          "title": "Posterior callosum",
+          "text": "This is FreeSurfer’s posterior geometric segment. Hofer and Frahm’s separate diffusion-tractography map placed parietal, temporal, and occipital projections toward the posterior end; the boundaries are not interchangeable.",
+          "prompt": "Inspect the back of the curved callosal body on the midline.",
+          "source": "callosal",
+          "view": {
+            "camera": "default",
+            "opacity": 0.15,
+            "hemisphere": "both"
+          }
+        },
+        {
+          "region": "aseg-252",
+          "title": "Mid-posterior callosum",
+          "text": "This is the next equal-distance FreeSurfer segment moving toward the front. In the independent tractography scheme, primary sensory projections occupied a posterior-body territory; this mesh does not delineate those fibers.",
+          "prompt": "Move one segment forward and compare its position with the central body.",
+          "source": "callosal",
+          "view": {
+            "camera": "default",
+            "opacity": 0.15,
+            "hemisphere": "both"
+          }
+        },
+        {
+          "region": "aseg-253",
+          "title": "Central callosum",
+          "text": "This central FreeSurfer segment is a positional label. Hofer and Frahm estimated a primary motor projection territory around the midbody from diffusion tractography; the atlas mesh is not a tract reconstruction.",
+          "prompt": "Compare the middle of the callosum with the anterior and posterior segments.",
+          "source": "callosal",
+          "view": {
+            "camera": "default",
+            "opacity": 0.15,
+            "hemisphere": "both"
+          }
+        },
+        {
+          "region": "aseg-254",
+          "title": "Mid-anterior callosum",
+          "text": "This is a geometric segment between the central body and the anterior label. The independent tractography study associated a more anterior territory with premotor and supplementary motor projections, using boundaries that differ from FreeSurfer’s.",
+          "prompt": "Continue toward the frontal end of the midline bridge.",
+          "source": "callosal",
+          "view": {
+            "camera": "default",
+            "opacity": 0.15,
+            "hemisphere": "both"
+          }
+        },
+        {
+          "region": "aseg-255",
+          "title": "Anterior callosum",
+          "text": "This is FreeSurfer’s anterior geometric segment. Hofer and Frahm’s diffusion-tractography scheme placed prefrontal projections at the anterior end, but neither this surface nor that population result specifies an individual’s exact axons.",
+          "prompt": "Finish at the front of the callosum, beneath the medial frontal cortex.",
+          "source": "callosal",
+          "view": {
+            "camera": "default",
+            "opacity": 0.15,
             "hemisphere": "both"
           }
         }

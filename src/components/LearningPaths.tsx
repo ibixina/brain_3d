@@ -103,6 +103,9 @@ export function LearningExplanation({
 }) {
   const stop = position.path.steps[position.step];
   const source = learningSources[stop.source];
+  const relatedSources = (position.path.relatedSources ?? []).map(
+    (id) => learningSources[id],
+  );
   return (
     <section
       className="learning-explanation"
@@ -124,8 +127,13 @@ export function LearningExplanation({
         <summary>What this path shows</summary>
         <p>{position.path.summary}</p>
         <p>{position.path.limit}</p>
+        {relatedSources.map((item) => (
+          <a key={item.url} href={item.url} target="_blank" rel="noreferrer">
+            <BookOpen size={13} /> {item.title} <ArrowUpRight size={12} />
+          </a>
+        ))}
         <span className="learning-step-label">
-          {source.kind} · Checked {learningCheckDate}
+          {source.kind} · Checked {position.path.checkedOn ?? learningCheckDate}
         </span>
       </details>
     </section>
