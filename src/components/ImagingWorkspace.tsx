@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { lazy, Suspense, useEffect, useRef, useState } from "react";
 import {
   Activity,
   ArrowLeft,
@@ -22,6 +22,7 @@ import "./imaging.css";
 import { withReferenceOrigin } from "../reference-navigation.ts";
 
 type Mode = "scans" | "activities";
+const XtractWorkspace = lazy(() => import("./XtractWorkspace"));
 const taskSummaries: Record<string, string> = {
   ArchiStandard:
     "Sentence reading and listening, mental arithmetic, checkerboards, and instructed button presses.",
@@ -66,6 +67,13 @@ export default function ImagingWorkspace({
   const [scanId, setScanId] = useState(
     () => new URLSearchParams(location.hash.slice(1)).get("scan") || "t1",
   );
+  const [tractId, setTractId] = useState(
+    () => new URLSearchParams(location.hash.slice(1)).get("tract") || "ac",
+  );
+  const [tractAtlasOpen, setTractAtlasOpen] = useState(
+    () => new URLSearchParams(location.hash.slice(1)).has("tract"),
+  );
+  const showTractAtlas = mode === "scans" && tractAtlasOpen;
   const [mapId, setMapId] = useState(
     () =>
       new URLSearchParams(location.hash.slice(1)).get("map") || "ibc-100941",
@@ -90,10 +98,16 @@ export default function ImagingWorkspace({
     manifest?.scans.find(
       (item) => item.id === (mode === "activities" ? "t1" : scanId),
     ) ?? manifest?.scans[0];
+  const pageEyebrow = mode === "scans"
+    ? showTractAtlas ? "POPULATION DIFFUSION MRI" : "INSIDE THE ANATOMY"
+    : "MEASURED TASK RESPONSES";
+  const pageHeading = mode === "scans"
+    ? showTractAtlas ? "White matter pathways." : "Brain scans."
+    : "The brain at work.";
   useEffect(() => {
     if (scan && scanId !== scan.id && mode === "scans") setScanId(scan.id);
   }, [scan?.id, scanId, mode]);
-  const structural = useVolume(scan?.asset);
+  const structural = useVolume(showTractAtlas ? undefined : scan?.asset);
   const activation = useVolume(
     mode === "activities" ? active?.asset : undefined,
   );
@@ -106,24 +120,28 @@ export default function ImagingWorkspace({
   }, [mode, active]);
   useEffect(() => {
     const params = new URLSearchParams({ view: mode });
-    params.set(
-      mode === "scans" ? "scan" : "map",
-      mode === "scans" ? scanId : active?.id || mapId,
-    );
+    if (mode === "scans" && tractAtlasOpen) {
+      params.set("tract", tractId);
+    } else {
+      params.set(
+        mode === "scans" ? "scan" : "map",
+        mode === "scans" ? scanId : active?.id || mapId,
+      );
+    }
     history.replaceState(
       null,
       "",
       withReferenceOrigin(`#${params}`, referenceOrigin),
     );
     setChooser(false);
-  }, [mode, scanId, active?.id, mapId, referenceOrigin]);
+  }, [mode, scanId, active?.id, mapId, referenceOrigin, tractAtlasOpen, tractId]);
   const error =
     manifestError ||
-    structural.error ||
+    (!showTractAtlas && structural.error) ||
     (mode === "activities" ? activation.error : "");
   const loading =
     !manifest ||
-    !structural.data ||
+    (!showTractAtlas && !structural.data) ||
     (mode === "activities" && !activation.data);
   const world = manifest ? worldPoint(point, manifest.grid) : [0, 0, 0];
   const value =
@@ -178,11 +196,9 @@ export default function ImagingWorkspace({
             </button>
           )}
           <span className="eyebrow">
-            {mode === "scans"
-              ? "INSIDE THE ANATOMY"
-              : "MEASURED TASK RESPONSES"}
+            {pageEyebrow}
           </span>
-          <h1>{mode === "scans" ? "Brain scans." : "The brain at work."}</h1>
+          <h1>{pageHeading}</h1>
         </div>
         <button
           className="research-index-button"
@@ -193,7 +209,18 @@ export default function ImagingWorkspace({
           <ArrowUpRight size={13} />
         </button>
       </div>
-      <div className="imaging-layout">
+      {showTractAtlas && (
+        <Suspense
+          fallback={
+            <div className="imaging-message" role="status">
+              <LoaderCircle className="spin" size={22} /> Loading pathway atlas…
+            </div>
+          }
+        >
+          <XtractWorkspace selectedId={tractId} onSelect={setTractId} />
+        </Suspense>
+      )}
+      <div className="imaging-layout" hidden={showTractAtlas} aria-hidden={showTractAtlas}>
         <div className="scan-stage">
           <div className="scan-stage-title">
             <span className="scan-status-dot" />
@@ -515,7 +542,10 @@ export default function ImagingWorkspace({
                 key={item.id}
                 aria-pressed={scanId === item.id}
                 className={scanId === item.id ? "active" : ""}
-                onClick={() => setScanId(item.id)}
+                onClick={() => {
+                  setScanId(item.id);
+                  setTractAtlasOpen(false);
+                }}
               >
                 {item.id.toUpperCase()}
                 <small>
@@ -523,6 +553,14 @@ export default function ImagingWorkspace({
                 </small>
               </button>
             ))}
+            <button
+              aria-pressed={tractAtlasOpen}
+              className={tractAtlasOpen ? "active" : ""}
+              onClick={() => setTractAtlasOpen((open) => !open)}
+            >
+              Tracts
+              <small>42 pathways</small>
+            </button>
           </div>
         ) : (
           <button

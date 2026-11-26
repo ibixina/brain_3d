@@ -1,0 +1,1455 @@
+{
+  "version": 1,
+  "checkedOn": "2026-11-26",
+  "title": "Xtract population white-matter pathway atlas",
+  "grid": {
+    "shape": [
+      97,
+      115,
+      97
+    ],
+    "origin": [
+      -96.0,
+      -132.0,
+      -78.0
+    ],
+    "spacing": [
+      2.0,
+      2.0,
+      2.0
+    ],
+    "orientation": "RAS+",
+    "order": "x-fastest (Fortran)",
+    "space": "MNI152 standard space"
+  },
+  "sourceGrid": {
+    "shape": [
+      193,
+      229,
+      193
+    ],
+    "origin": [
+      -96.0,
+      -132.0,
+      -78.0
+    ],
+    "spacing": [
+      1.0,
+      1.0,
+      1.0
+    ]
+  },
+  "encoding": {
+    "dtype": "uint16",
+    "byteOrder": "little-endian",
+    "order": "x-fastest (Fortran)",
+    "compression": "gzip",
+    "scale": 65535,
+    "displayThresholdDefaultPercent": 5,
+    "method": "Source values are sampled at every second voxel; values are rounded to uint16 with maximum quantization error below 0.000008."
+  },
+  "channels": [
+    {
+      "channel": 0,
+      "id": "ac",
+      "name": "Anterior Commissure",
+      "sourceName": "Anterior Commissure",
+      "subjects": {
+        "hcp": 1061,
+        "blsa": 949,
+        "vu": 302,
+        "subjects": 2312
+      },
+      "nonzeroVoxelsAt2mm": 35485,
+      "peak": {
+        "index": [
+          49,
+          68,
+          36
+        ],
+        "probability": 0.9909169673919678,
+        "rasMm": [
+          2.0,
+          4.0,
+          -6.0
+        ]
+      },
+      "asset": {
+        "url": "/tractography/xtract/channels/ac.u16.bin",
+        "bytes": 71896,
+        "rawBytes": 2164070,
+        "sha256": "134205c1e63c2704e9bddd052c6fa905554c701f104a0b475fc742a596596113",
+        "compressedSha256": "a78e3d8a5ceed160967c11adfb833af48ab07a387629b4ca2d2e4debead0c019"
+      }
+    },
+    {
+      "channel": 1,
+      "id": "af_l",
+      "name": "Arcuate Fasciculus left",
+      "sourceName": "Arcuate Fascile left",
+      "subjects": {
+        "hcp": 1061,
+        "blsa": 960,
+        "vu": 302,
+        "subjects": 2323
+      },
+      "nonzeroVoxelsAt2mm": 52088,
+      "peak": {
+        "index": [
+          30,
+          59,
+          51
+        ],
+        "probability": 1.0,
+        "rasMm": [
+          -36.0,
+          -14.0,
+          24.0
+        ]
+      },
+      "asset": {
+        "url": "/tractography/xtract/channels/af_l.u16.bin",
+        "bytes": 111187,
+        "rawBytes": 2164070,
+        "sha256": "77afdb70c88f2eaee2fea810f182ce762648a13ebf6d9a9cfae56961bb185189",
+        "compressedSha256": "7d3a04853dd73b8ba2365dd8d3edc270334513d5a07b61e7054b6a64d46fdc02"
+      }
+    },
+    {
+      "channel": 2,
+      "id": "af_r",
+      "name": "Arcuate Fasciculus right",
+      "sourceName": "Arcuate Fascile right",
+      "subjects": {
+        "hcp": 1061,
+        "blsa": 960,
+        "vu": 302,
+        "subjects": 2323
+      },
+      "nonzeroVoxelsAt2mm": 52319,
+      "peak": {
+        "index": [
+          65,
+          48,
+          52
+        ],
+        "probability": 1.0,
+        "rasMm": [
+          34.0,
+          -36.0,
+          26.0
+        ]
+      },
+      "asset": {
+        "url": "/tractography/xtract/channels/af_r.u16.bin",
+        "bytes": 112088,
+        "rawBytes": 2164070,
+        "sha256": "26db0f2cb26be4ac3f511ebccd2879e5ac3a30f8f88fa559949f6f335531957b",
+        "compressedSha256": "981a60bd1684ca97fe6a1a103facfe4fad61f303fd7ccc25dc311c7a90e3f34d"
+      }
+    },
+    {
+      "channel": 3,
+      "id": "ar_l",
+      "name": "Acoustic Radiation left",
+      "sourceName": "Acoustic Radiation left",
+      "subjects": {
+        "hcp": 1061,
+        "blsa": 834,
+        "vu": 288,
+        "subjects": 2183
+      },
+      "nonzeroVoxelsAt2mm": 8822,
+      "peak": {
+        "index": [
+          36,
+          53,
+          40
+        ],
+        "probability": 0.9894640445709229,
+        "rasMm": [
+          -24.0,
+          -26.0,
+          2.0
+        ]
+      },
+      "asset": {
+        "url": "/tractography/xtract/channels/ar_l.u16.bin",
+        "bytes": 22001,
+        "rawBytes": 2164070,
+        "sha256": "6f69df94985b4dae1abda9345c0951ec462bf4319d285c8ca472ace93b058900",
+        "compressedSha256": "a2a033b7b5eb3d9d62eb4d90b349a44cfb00a155d97d612f04ea36c2ae3bc94a"
+      }
+    },
+    {
+      "channel": 4,
+      "id": "ar_r",
+      "name": "Acoustic Radiation right",
+      "sourceName": "Acoustic Radiation right",
+      "subjects": {
+        "hcp": 1061,
+        "blsa": 903,
+        "vu": 283,
+        "subjects": 2247
+      },
+      "nonzeroVoxelsAt2mm": 7520,
+      "peak": {
+        "index": [
+          60,
+          54,
+          40
+        ],
+        "probability": 0.9924343824386597,
+        "rasMm": [
+          24.0,
+          -24.0,
+          2.0
+        ]
+      },
+      "asset": {
+        "url": "/tractography/xtract/channels/ar_r.u16.bin",
+        "bytes": 18966,
+        "rawBytes": 2164070,
+        "sha256": "5106b989b522285588198c6f2294b3754cd11df586bfc5c5fe7476b3cdd3d5e5",
+        "compressedSha256": "b5fff8a43440dad64bc0950395b6bdfdcf270bf894fa1ab05cf90dd5075dc7dc"
+      }
+    },
+    {
+      "channel": 5,
+      "id": "atr_l",
+      "name": "Anterior Thalamic Radiation left",
+      "sourceName": "Anterior Thalamic Radiation left",
+      "subjects": {
+        "hcp": 1061,
+        "blsa": 960,
+        "vu": 302,
+        "subjects": 2323
+      },
+      "nonzeroVoxelsAt2mm": 28186,
+      "peak": {
+        "index": [
+          43,
+          62,
+          37
+        ],
+        "probability": 1.0,
+        "rasMm": [
+          -10.0,
+          -8.0,
+          -4.0
+        ]
+      },
+      "asset": {
+        "url": "/tractography/xtract/channels/atr_l.u16.bin",
+        "bytes": 63452,
+        "rawBytes": 2164070,
+        "sha256": "f08033f796b5437c0a6109468f663efd445b3db253a9fa1c21b5262f93babcb2",
+        "compressedSha256": "7bac527613843d38196593ec3b66d8d3e9ca1b2efcf8d7d2696c61ca12f353fd"
+      }
+    },
+    {
+      "channel": 6,
+      "id": "atr_r",
+      "name": "Anterior Thalamic Radiation right",
+      "sourceName": "Anterior Thalamic Radiation right",
+      "subjects": {
+        "hcp": 1061,
+        "blsa": 960,
+        "vu": 302,
+        "subjects": 2323
+      },
+      "nonzeroVoxelsAt2mm": 27906,
+      "peak": {
+        "index": [
+          51,
+          60,
+          35
+        ],
+        "probability": 1.0,
+        "rasMm": [
+          6.0,
+          -12.0,
+          -8.0
+        ]
+      },
+      "asset": {
+        "url": "/tractography/xtract/channels/atr_r.u16.bin",
+        "bytes": 62692,
+        "rawBytes": 2164070,
+        "sha256": "9672213b54e0a9ca6ff5ff96a8a36afa677212a5f7ab238e70f7d0ef93d17f73",
+        "compressedSha256": "d587673d0dd5e15b89431f0c47571154d07a943fcba2b1db527f3fca3a71dcff"
+      }
+    },
+    {
+      "channel": 7,
+      "id": "cbd_l",
+      "name": "Cingulum Bundle Dorsal left",
+      "sourceName": "Cingulum Bundle Dorsal left",
+      "subjects": {
+        "hcp": 1061,
+        "blsa": 959,
+        "vu": 265,
+        "subjects": 2285
+      },
+      "nonzeroVoxelsAt2mm": 21674,
+      "peak": {
+        "index": [
+          44,
+          52,
+          55
+        ],
+        "probability": 0.9956236481666565,
+        "rasMm": [
+          -8.0,
+          -28.0,
+          32.0
+        ]
+      },
+      "asset": {
+        "url": "/tractography/xtract/channels/cbd_l.u16.bin",
+        "bytes": 50897,
+        "rawBytes": 2164070,
+        "sha256": "b2de4e5a7b02aa196f57ea1c1348ce647a0123a56a0c0872ba97b1c240410041",
+        "compressedSha256": "d30f46777b88029dffffa10bbe373b8ddfa994df88e0db7a3248090b9c2b3384"
+      }
+    },
+    {
+      "channel": 8,
+      "id": "cbd_r",
+      "name": "Cingulum Bundle Dorsal right",
+      "sourceName": "Cingulum Bundle Dorsal right",
+      "subjects": {
+        "hcp": 1061,
+        "blsa": 960,
+        "vu": 263,
+        "subjects": 2284
+      },
+      "nonzeroVoxelsAt2mm": 21914,
+      "peak": {
+        "index": [
+          52,
+          53,
+          55
+        ],
+        "probability": 0.9938703775405884,
+        "rasMm": [
+          8.0,
+          -26.0,
+          32.0
+        ]
+      },
+      "asset": {
+        "url": "/tractography/xtract/channels/cbd_r.u16.bin",
+        "bytes": 51033,
+        "rawBytes": 2164070,
+        "sha256": "862a4eb4b92fcb970e70c0b5883b8fd7e5b135275956535e4fcf06695e15211f",
+        "compressedSha256": "a824648cdc5971d8d641f3c44133177704ab4f2e536686a45e7e7e675fb9640c"
+      }
+    },
+    {
+      "channel": 9,
+      "id": "cbp_l",
+      "name": "Cingulum Bundle Parahippocampal left",
+      "sourceName": "Cingulum Bundle Parahippocampal left",
+      "subjects": {
+        "hcp": 1061,
+        "blsa": 852,
+        "vu": 213,
+        "subjects": 2126
+      },
+      "nonzeroVoxelsAt2mm": 3070,
+      "peak": {
+        "index": [
+          45,
+          77,
+          50
+        ],
+        "probability": 0.9957666993141174,
+        "rasMm": [
+          -6.0,
+          22.0,
+          22.0
+        ]
+      },
+      "asset": {
+        "url": "/tractography/xtract/channels/cbp_l.u16.bin",
+        "bytes": 9805,
+        "rawBytes": 2164070,
+        "sha256": "1fa455349238a70424328510f0e294ed4f4b16861534a4acf44ecb211d1a6da9",
+        "compressedSha256": "66b1eda7121d497324bace063b35c862172df5a77bb2c731f358449c52d720fb"
+      }
+    },
+    {
+      "channel": 10,
+      "id": "cbp_r",
+      "name": "Cingulum Bundle Parahippocampal right",
+      "sourceName": "Cingulum Bundle Parahippocampal right",
+      "subjects": {
+        "hcp": 1061,
+        "blsa": 831,
+        "vu": 219,
+        "subjects": 2111
+      },
+      "nonzeroVoxelsAt2mm": 3317,
+      "peak": {
+        "index": [
+          51,
+          81,
+          36
+        ],
+        "probability": 0.988631010055542,
+        "rasMm": [
+          6.0,
+          30.0,
+          -6.0
+        ]
+      },
+      "asset": {
+        "url": "/tractography/xtract/channels/cbp_r.u16.bin",
+        "bytes": 10189,
+        "rawBytes": 2164070,
+        "sha256": "b811fbe1f86f3496fd813c9f04ed97299ac6613e4bd952be89ff70cc9126afee",
+        "compressedSha256": "7475c5843b40ce5d7d65ef7c6a808ca102912658310639b57ce1c3880f0477a9"
+      }
+    },
+    {
+      "channel": 11,
+      "id": "cbt_l",
+      "name": "Cingulum Bundle Temporal left",
+      "sourceName": "Cingulum Bundle Temporal left",
+      "subjects": {
+        "hcp": 1061,
+        "blsa": 960,
+        "vu": 294,
+        "subjects": 2315
+      },
+      "nonzeroVoxelsAt2mm": 4934,
+      "peak": {
+        "index": [
+          36,
+          51,
+          31
+        ],
+        "probability": 1.0,
+        "rasMm": [
+          -24.0,
+          -30.0,
+          -16.0
+        ]
+      },
+      "asset": {
+        "url": "/tractography/xtract/channels/cbt_l.u16.bin",
+        "bytes": 13963,
+        "rawBytes": 2164070,
+        "sha256": "8c4c59b75e44c34bf7d55ba6b0f4fbcaa4e9aa8b245c79274598e922ea63fd1f",
+        "compressedSha256": "27637fdeb89381980cdc913ffa247effd03e66bc2b5f2485d71fbcec9d677e7e"
+      }
+    },
+    {
+      "channel": 12,
+      "id": "cbt_r",
+      "name": "Cingulum Bundle Temporal right",
+      "sourceName": "Cingulum Bundle Temporal right",
+      "subjects": {
+        "hcp": 1061,
+        "blsa": 960,
+        "vu": 296,
+        "subjects": 2317
+      },
+      "nonzeroVoxelsAt2mm": 5215,
+      "peak": {
+        "index": [
+          59,
+          50,
+          33
+        ],
+        "probability": 0.9995684027671814,
+        "rasMm": [
+          22.0,
+          -32.0,
+          -12.0
+        ]
+      },
+      "asset": {
+        "url": "/tractography/xtract/channels/cbt_r.u16.bin",
+        "bytes": 14560,
+        "rawBytes": 2164070,
+        "sha256": "74ea4d7a2a629ae4da6789e2dc5bcb79579565e483314fba7507fac98f48d54c",
+        "compressedSha256": "078f743e5a52083ecf9e5391a6da3132c79d5efcc8aa9223485714fabfb71bf2"
+      }
+    },
+    {
+      "channel": 13,
+      "id": "cst_l",
+      "name": "Corticospinal Tract left",
+      "sourceName": "Corticospinal Tract left",
+      "subjects": {
+        "hcp": 1061,
+        "blsa": 957,
+        "vu": 287,
+        "subjects": 2305
+      },
+      "nonzeroVoxelsAt2mm": 22043,
+      "peak": {
+        "index": [
+          42,
+          55,
+          30
+        ],
+        "probability": 0.9986984729766846,
+        "rasMm": [
+          -12.0,
+          -22.0,
+          -18.0
+        ]
+      },
+      "asset": {
+        "url": "/tractography/xtract/channels/cst_l.u16.bin",
+        "bytes": 49519,
+        "rawBytes": 2164070,
+        "sha256": "81b9682efadf2ca926a73b07dc3838c99eebad2693af2933da7e25790fa0c8ab",
+        "compressedSha256": "9ea9c68994cc739ceab80e295b15a7022cd2672573713f55f8cebc0f6088e14b"
+      }
+    },
+    {
+      "channel": 14,
+      "id": "cst_r",
+      "name": "Corticospinal Tract right",
+      "sourceName": "Corticospinal Tract right",
+      "subjects": {
+        "hcp": 1061,
+        "blsa": 958,
+        "vu": 287,
+        "subjects": 2306
+      },
+      "nonzeroVoxelsAt2mm": 22730,
+      "peak": {
+        "index": [
+          54,
+          55,
+          32
+        ],
+        "probability": 1.0,
+        "rasMm": [
+          12.0,
+          -22.0,
+          -14.0
+        ]
+      },
+      "asset": {
+        "url": "/tractography/xtract/channels/cst_r.u16.bin",
+        "bytes": 51589,
+        "rawBytes": 2164070,
+        "sha256": "33f29c2357caffea99a8f3718870199662a7f9a29e2fddf11e58ee172018682f",
+        "compressedSha256": "291ba615aed300b9c7f71e2600818b922a3570c3ad3fd7fdedf21b15c327fe94"
+      }
+    },
+    {
+      "channel": 15,
+      "id": "fa_l",
+      "name": "Frontal Aslant left",
+      "sourceName": "Frontal Aslant left",
+      "subjects": {
+        "hcp": 1061,
+        "blsa": 960,
+        "vu": 302,
+        "subjects": 2323
+      },
+      "nonzeroVoxelsAt2mm": 17975,
+      "peak": {
+        "index": [
+          37,
+          74,
+          54
+        ],
+        "probability": 0.9995695352554321,
+        "rasMm": [
+          -22.0,
+          16.0,
+          30.0
+        ]
+      },
+      "asset": {
+        "url": "/tractography/xtract/channels/fa_l.u16.bin",
+        "bytes": 42292,
+        "rawBytes": 2164070,
+        "sha256": "0020a350121ed8209a9947235da2db972e76b03a737893f51bebcaceee3920fb",
+        "compressedSha256": "fb2291103ba0a21f3372c306037199eb4fbd3474108e5b48a767ee801653ca1f"
+      }
+    },
+    {
+      "channel": 16,
+      "id": "fa_r",
+      "name": "Frontal Aslant right",
+      "sourceName": "Frontal Aslant right",
+      "subjects": {
+        "hcp": 1061,
+        "blsa": 960,
+        "vu": 302,
+        "subjects": 2323
+      },
+      "nonzeroVoxelsAt2mm": 17776,
+      "peak": {
+        "index": [
+          67,
+          73,
+          47
+        ],
+        "probability": 1.0,
+        "rasMm": [
+          38.0,
+          14.0,
+          16.0
+        ]
+      },
+      "asset": {
+        "url": "/tractography/xtract/channels/fa_r.u16.bin",
+        "bytes": 41630,
+        "rawBytes": 2164070,
+        "sha256": "4a8bd4bd1d7bb9c8b44fdb5f3b1f5da129138d7a4837ddefe8f1f9e04622acde",
+        "compressedSha256": "3b777c1586d706c52935f081ae671997269842c4ef6357e444ff10ddcc7fcec7"
+      }
+    },
+    {
+      "channel": 17,
+      "id": "fma",
+      "name": "Forceps Major",
+      "sourceName": "Forceps Major",
+      "subjects": {
+        "hcp": 1061,
+        "blsa": 960,
+        "vu": 301,
+        "subjects": 2322
+      },
+      "nonzeroVoxelsAt2mm": 31711,
+      "peak": {
+        "index": [
+          57,
+          43,
+          46
+        ],
+        "probability": 0.9995693564414978,
+        "rasMm": [
+          18.0,
+          -46.0,
+          14.0
+        ]
+      },
+      "asset": {
+        "url": "/tractography/xtract/channels/fma.u16.bin",
+        "bytes": 71046,
+        "rawBytes": 2164070,
+        "sha256": "d301dce8d07ad83e174ba973d6423b8cc9a957d5e07a6cfbfd63a6a816bd610f",
+        "compressedSha256": "6b6ac021b48b706eed6cd7ef2736eb452fb764d04e5ba605ae908527a2b409a6"
+      }
+    },
+    {
+      "channel": 18,
+      "id": "fmi",
+      "name": "Forceps Minor",
+      "sourceName": "Forceps Minor",
+      "subjects": {
+        "hcp": 1061,
+        "blsa": 960,
+        "vu": 302,
+        "subjects": 2323
+      },
+      "nonzeroVoxelsAt2mm": 30075,
+      "peak": {
+        "index": [
+          55,
+          85,
+          35
+        ],
+        "probability": 1.0,
+        "rasMm": [
+          14.0,
+          38.0,
+          -8.0
+        ]
+      },
+      "asset": {
+        "url": "/tractography/xtract/channels/fmi.u16.bin",
+        "bytes": 68591,
+        "rawBytes": 2164070,
+        "sha256": "cc7c0206d1902dfe72ba431a86b5becffca2e097feb6b7fb7bc10fad6f39f863",
+        "compressedSha256": "db0e7def5cf8e76e3be788b761f7323c0c99a51d6793c100aad3f5137690d088"
+      }
+    },
+    {
+      "channel": 19,
+      "id": "fx_l",
+      "name": "Fornix left",
+      "sourceName": "Fornix left",
+      "subjects": {
+        "hcp": 1058,
+        "blsa": 899,
+        "vu": 244,
+        "subjects": 2201
+      },
+      "nonzeroVoxelsAt2mm": 16610,
+      "peak": {
+        "index": [
+          31,
+          60,
+          30
+        ],
+        "probability": 0.9886415004730225,
+        "rasMm": [
+          -34.0,
+          -12.0,
+          -18.0
+        ]
+      },
+      "asset": {
+        "url": "/tractography/xtract/channels/fx_l.u16.bin",
+        "bytes": 38184,
+        "rawBytes": 2164070,
+        "sha256": "a369c14c2352eb18a81ec1c7a3709f81b629c4238329a6d2c4b5e78a662c3545",
+        "compressedSha256": "ec034b92e2e10410ac1191326fd108e543268db46aff9ba3322ab1d9b9cd398d"
+      }
+    },
+    {
+      "channel": 20,
+      "id": "fx_r",
+      "name": "Fornix right",
+      "sourceName": "Fornix right",
+      "subjects": {
+        "hcp": 1060,
+        "blsa": 904,
+        "vu": 222,
+        "subjects": 2186
+      },
+      "nonzeroVoxelsAt2mm": 15346,
+      "peak": {
+        "index": [
+          49,
+          63,
+          47
+        ],
+        "probability": 0.9949679970741272,
+        "rasMm": [
+          2.0,
+          -6.0,
+          16.0
+        ]
+      },
+      "asset": {
+        "url": "/tractography/xtract/channels/fx_r.u16.bin",
+        "bytes": 36040,
+        "rawBytes": 2164070,
+        "sha256": "e6e46af99c6a8883b9bf2040c1d164784e9847b07d428c84e951c16e85ab18ba",
+        "compressedSha256": "8f00bfa55c57869202bfef5f5b2dcea064ce6932afbcaef78c69160e5890c343"
+      }
+    },
+    {
+      "channel": 21,
+      "id": "ifo_l",
+      "name": "Inferior Fronto-occipital Fasciculus left",
+      "sourceName": "Inferior Fronto-occipital Fasciculus left",
+      "subjects": {
+        "hcp": 1061,
+        "blsa": 960,
+        "vu": 301,
+        "subjects": 2322
+      },
+      "nonzeroVoxelsAt2mm": 50878,
+      "peak": {
+        "index": [
+          32,
+          66,
+          34
+        ],
+        "probability": 1.0,
+        "rasMm": [
+          -32.0,
+          0.0,
+          -10.0
+        ]
+      },
+      "asset": {
+        "url": "/tractography/xtract/channels/ifo_l.u16.bin",
+        "bytes": 110005,
+        "rawBytes": 2164070,
+        "sha256": "6f1d83a53abb959ee5af3d18e92a73d2bbaec966e20086f892814fa7f7c46a68",
+        "compressedSha256": "e0e434b8c8b6f7066711a6a4885bb23df5babf1f2b6ccec9941148947bdfdd6d"
+      }
+    },
+    {
+      "channel": 22,
+      "id": "ifo_r",
+      "name": "Inferior Fronto-occipital Fasciculus right",
+      "sourceName": "Inferior Fronto-occipital Fasciculus right",
+      "subjects": {
+        "hcp": 1061,
+        "blsa": 960,
+        "vu": 301,
+        "subjects": 2322
+      },
+      "nonzeroVoxelsAt2mm": 49421,
+      "peak": {
+        "index": [
+          64,
+          68,
+          34
+        ],
+        "probability": 0.9995693564414978,
+        "rasMm": [
+          32.0,
+          4.0,
+          -10.0
+        ]
+      },
+      "asset": {
+        "url": "/tractography/xtract/channels/ifo_r.u16.bin",
+        "bytes": 106974,
+        "rawBytes": 2164070,
+        "sha256": "a1756e901a7fc902f3a061a0ebf16828db5f747541d4d18a4e73713e981dc20a",
+        "compressedSha256": "eaff47e6f0f0290c5ab55701b1c26f44a4370a14afe40feefe1d19913ae5f217"
+      }
+    },
+    {
+      "channel": 23,
+      "id": "ilf_l",
+      "name": "Inferior Longitudinal Fasciculus left",
+      "sourceName": "Inferior Longitudinal Fasciculus left",
+      "subjects": {
+        "hcp": 1061,
+        "blsa": 959,
+        "vu": 301,
+        "subjects": 2321
+      },
+      "nonzeroVoxelsAt2mm": 30822,
+      "peak": {
+        "index": [
+          25,
+          54,
+          31
+        ],
+        "probability": 0.9995691776275635,
+        "rasMm": [
+          -46.0,
+          -24.0,
+          -16.0
+        ]
+      },
+      "asset": {
+        "url": "/tractography/xtract/channels/ilf_l.u16.bin",
+        "bytes": 67474,
+        "rawBytes": 2164070,
+        "sha256": "f3e7580ed991cef38624604749120585a96e6139366eabddbf68f97ea2429c8f",
+        "compressedSha256": "fdcaf8aacf0480ee814b8772db0c381e8df97a56a1f7afe9eec0e357971626b2"
+      }
+    },
+    {
+      "channel": 24,
+      "id": "ilf_r",
+      "name": "Inferior Longitudinal Fasciculus right",
+      "sourceName": "Inferior Longitudinal Fasciculus right",
+      "subjects": {
+        "hcp": 1061,
+        "blsa": 960,
+        "vu": 302,
+        "subjects": 2323
+      },
+      "nonzeroVoxelsAt2mm": 31545,
+      "peak": {
+        "index": [
+          71,
+          50,
+          32
+        ],
+        "probability": 0.9995695352554321,
+        "rasMm": [
+          46.0,
+          -32.0,
+          -14.0
+        ]
+      },
+      "asset": {
+        "url": "/tractography/xtract/channels/ilf_r.u16.bin",
+        "bytes": 69615,
+        "rawBytes": 2164070,
+        "sha256": "1cc16cfc23ad3f0b6916ebb8bb2fb72120a714017c2c45d42385c874b2dec3d8",
+        "compressedSha256": "06cf1c7984606d3cfe6deb9250da04f5a3e80cef0def4c8a9cba0d6c13d26223"
+      }
+    },
+    {
+      "channel": 25,
+      "id": "mcp",
+      "name": "Middle Cerebellar Peduncle",
+      "sourceName": "Middle Cerebellar Peduncle",
+      "subjects": {
+        "hcp": 1061,
+        "blsa": 951,
+        "vu": 285,
+        "subjects": 2297
+      },
+      "nonzeroVoxelsAt2mm": 28155,
+      "peak": {
+        "index": [
+          39,
+          47,
+          19
+        ],
+        "probability": 0.9856334328651428,
+        "rasMm": [
+          -18.0,
+          -38.0,
+          -40.0
+        ]
+      },
+      "asset": {
+        "url": "/tractography/xtract/channels/mcp.u16.bin",
+        "bytes": 62113,
+        "rawBytes": 2164070,
+        "sha256": "b763b0757c0c266124e818b3cfc174878350ddc380d094a6d8a630203f49b67f",
+        "compressedSha256": "b1b7b20102e1041a0108235875c683c68aae984c0c0f5f79fbd9cc3a70689745"
+      }
+    },
+    {
+      "channel": 26,
+      "id": "mdlf_l",
+      "name": "Medio-Dorsal Longitudinal Fasciculus left",
+      "sourceName": "Medio-Dorsal Longitudinal Fasciculus left",
+      "subjects": {
+        "hcp": 1061,
+        "blsa": 959,
+        "vu": 302,
+        "subjects": 2322
+      },
+      "nonzeroVoxelsAt2mm": 42415,
+      "peak": {
+        "index": [
+          26,
+          63,
+          31
+        ],
+        "probability": 1.0,
+        "rasMm": [
+          -44.0,
+          -6.0,
+          -16.0
+        ]
+      },
+      "asset": {
+        "url": "/tractography/xtract/channels/mdlf_l.u16.bin",
+        "bytes": 91533,
+        "rawBytes": 2164070,
+        "sha256": "58ae23cfd78119aa1eb007e1b7841120397fd98bfff789041bfe248b339d5e3b",
+        "compressedSha256": "86ceff87f2d2249f996b7db2e6c008ddbee8e5ce230ed09260054a59fd8b6968"
+      }
+    },
+    {
+      "channel": 27,
+      "id": "mdlf_r",
+      "name": "Medio-Dorsal Longitudinal Fasciculus right",
+      "sourceName": "Medio-Dorsal Longitudinal Fasciculus right",
+      "subjects": {
+        "hcp": 1061,
+        "blsa": 960,
+        "vu": 302,
+        "subjects": 2323
+      },
+      "nonzeroVoxelsAt2mm": 42079,
+      "peak": {
+        "index": [
+          70,
+          62,
+          33
+        ],
+        "probability": 1.0,
+        "rasMm": [
+          44.0,
+          -8.0,
+          -12.0
+        ]
+      },
+      "asset": {
+        "url": "/tractography/xtract/channels/mdlf_r.u16.bin",
+        "bytes": 90977,
+        "rawBytes": 2164070,
+        "sha256": "1e47d5e04758fbf6f1a06a6e65689e213ca13792e1b19aec47c2149788c8a43a",
+        "compressedSha256": "2c7033d51cc8ac9e04f4ebf7109b854681053e0bfe88e0e2430ca6af7618f36f"
+      }
+    },
+    {
+      "channel": 28,
+      "id": "or_l",
+      "name": "Optic Radiation left",
+      "sourceName": "Optic Radiation left",
+      "subjects": {
+        "hcp": 1061,
+        "blsa": 960,
+        "vu": 302,
+        "subjects": 2323
+      },
+      "nonzeroVoxelsAt2mm": 28702,
+      "peak": {
+        "index": [
+          36,
+          55,
+          35
+        ],
+        "probability": 1.0,
+        "rasMm": [
+          -24.0,
+          -22.0,
+          -8.0
+        ]
+      },
+      "asset": {
+        "url": "/tractography/xtract/channels/or_l.u16.bin",
+        "bytes": 64632,
+        "rawBytes": 2164070,
+        "sha256": "a2530d8e22d658cf3ac62926e7d0a35651b300d60b2fc42b4afc1ac4839283e7",
+        "compressedSha256": "04b0ddd985acafb2d409923b6540cfa4314620798aba075c69f7277eca8252e4"
+      }
+    },
+    {
+      "channel": 29,
+      "id": "or_r",
+      "name": "Optic Radiation right",
+      "sourceName": "Optic Radiation right",
+      "subjects": {
+        "hcp": 1061,
+        "blsa": 960,
+        "vu": 302,
+        "subjects": 2323
+      },
+      "nonzeroVoxelsAt2mm": 28806,
+      "peak": {
+        "index": [
+          58,
+          55,
+          34
+        ],
+        "probability": 1.0,
+        "rasMm": [
+          20.0,
+          -22.0,
+          -10.0
+        ]
+      },
+      "asset": {
+        "url": "/tractography/xtract/channels/or_r.u16.bin",
+        "bytes": 64747,
+        "rawBytes": 2164070,
+        "sha256": "7bdee90547f46aa9679cc83c4306b3140943a75a5417addf794e23616ad6fbaa",
+        "compressedSha256": "8bc44cc3174503f3323552a629cabbe805396a6ac9c11bb9bb5f3c9e0cbe21d5"
+      }
+    },
+    {
+      "channel": 30,
+      "id": "slf1_l",
+      "name": "Superior Longitudinal Fasciculus 1 left",
+      "sourceName": "Superior Longitudinal Fasciculus 1 left",
+      "subjects": {
+        "hcp": 1061,
+        "blsa": 957,
+        "vu": 299,
+        "subjects": 2317
+      },
+      "nonzeroVoxelsAt2mm": 41002,
+      "peak": {
+        "index": [
+          38,
+          50,
+          62
+        ],
+        "probability": 0.9900733828544617,
+        "rasMm": [
+          -20.0,
+          -32.0,
+          46.0
+        ]
+      },
+      "asset": {
+        "url": "/tractography/xtract/channels/slf1_l.u16.bin",
+        "bytes": 85890,
+        "rawBytes": 2164070,
+        "sha256": "0e5bd270051dc551dfb46bc2aaa7e3b275945f17d77601f0a14b0e17a7d3d1f2",
+        "compressedSha256": "3f37ddfb5fcea249ca58a95982ccbc86fb0126279d505fb1e27071be40e65a44"
+      }
+    },
+    {
+      "channel": 31,
+      "id": "slf1_r",
+      "name": "Superior Longitudinal Fasciculus 1 right",
+      "sourceName": "Superior Longitudinal Fasciculus 1 right",
+      "subjects": {
+        "hcp": 1061,
+        "blsa": 955,
+        "vu": 301,
+        "subjects": 2317
+      },
+      "nonzeroVoxelsAt2mm": 40349,
+      "peak": {
+        "index": [
+          58,
+          47,
+          62
+        ],
+        "probability": 0.9943892955780029,
+        "rasMm": [
+          20.0,
+          -38.0,
+          46.0
+        ]
+      },
+      "asset": {
+        "url": "/tractography/xtract/channels/slf1_r.u16.bin",
+        "bytes": 83949,
+        "rawBytes": 2164070,
+        "sha256": "26ad332b54e18fb6d6e9f6034df218b8883a6a49a264b8b24445165ebc8f80d2",
+        "compressedSha256": "a97c533550ddd380e16dcab5f040a3add530376e46ece4af27b2518cf357d720"
+      }
+    },
+    {
+      "channel": 32,
+      "id": "slf2_l",
+      "name": "Superior Longitudinal Fasciculus 2 left",
+      "sourceName": "Superior Longitudinal Fasciculus 2 left",
+      "subjects": {
+        "hcp": 1061,
+        "blsa": 957,
+        "vu": 291,
+        "subjects": 2309
+      },
+      "nonzeroVoxelsAt2mm": 31760,
+      "peak": {
+        "index": [
+          31,
+          52,
+          57
+        ],
+        "probability": 0.9735816121101379,
+        "rasMm": [
+          -34.0,
+          -28.0,
+          36.0
+        ]
+      },
+      "asset": {
+        "url": "/tractography/xtract/channels/slf2_l.u16.bin",
+        "bytes": 67902,
+        "rawBytes": 2164070,
+        "sha256": "39151c4a12b4faacb4c389d91806d6dcab8023e46ecfba27c860cbd7a6f9495a",
+        "compressedSha256": "2055c2a57c488ecf777d2c6d31fab6c7c2bed481b7fdea4fdc55414010bf67e7"
+      }
+    },
+    {
+      "channel": 33,
+      "id": "slf2_r",
+      "name": "Superior Longitudinal Fasciculus 2 right",
+      "sourceName": "Superior Longitudinal Fasciculus 2 right",
+      "subjects": {
+        "hcp": 1061,
+        "blsa": 954,
+        "vu": 289,
+        "subjects": 2304
+      },
+      "nonzeroVoxelsAt2mm": 32567,
+      "peak": {
+        "index": [
+          65,
+          51,
+          56
+        ],
+        "probability": 0.9713541865348816,
+        "rasMm": [
+          34.0,
+          -30.0,
+          34.0
+        ]
+      },
+      "asset": {
+        "url": "/tractography/xtract/channels/slf2_r.u16.bin",
+        "bytes": 60285,
+        "rawBytes": 2164070,
+        "sha256": "e219962ff030a8b8cc361a3b6535259969d2c8e6ad3a3a164cd5bb9e98c720b9",
+        "compressedSha256": "8108aa104fa4db9a15fb2c2a64327b695fdda6371959b2369c7178e01de6c389"
+      }
+    },
+    {
+      "channel": 34,
+      "id": "slf3_l",
+      "name": "Superior Longitudinal Fasciculus 3 left",
+      "sourceName": "Superior Longitudinal Fasciculus 3 left",
+      "subjects": {
+        "hcp": 1061,
+        "blsa": 959,
+        "vu": 298,
+        "subjects": 2318
+      },
+      "nonzeroVoxelsAt2mm": 33258,
+      "peak": {
+        "index": [
+          28,
+          50,
+          54
+        ],
+        "probability": 0.9939603209495544,
+        "rasMm": [
+          -40.0,
+          -32.0,
+          30.0
+        ]
+      },
+      "asset": {
+        "url": "/tractography/xtract/channels/slf3_l.u16.bin",
+        "bytes": 72226,
+        "rawBytes": 2164070,
+        "sha256": "038d1d3dd881e47ebb344a7cf045a6ed6476f1484d96d8e5dcfedd7e8b48cb4a",
+        "compressedSha256": "a4cfbfb28373652080af762236931c99d2582c0cdf4f3e6fa0cae1e85239e49d"
+      }
+    },
+    {
+      "channel": 35,
+      "id": "slf3_r",
+      "name": "Superior Longitudinal Fasciculus 3 right",
+      "sourceName": "Superior Longitudinal Fasciculus 3 right",
+      "subjects": {
+        "hcp": 1061,
+        "blsa": 960,
+        "vu": 297,
+        "subjects": 2318
+      },
+      "nonzeroVoxelsAt2mm": 34697,
+      "peak": {
+        "index": [
+          67,
+          51,
+          55
+        ],
+        "probability": 0.9939603209495544,
+        "rasMm": [
+          38.0,
+          -30.0,
+          32.0
+        ]
+      },
+      "asset": {
+        "url": "/tractography/xtract/channels/slf3_r.u16.bin",
+        "bytes": 74764,
+        "rawBytes": 2164070,
+        "sha256": "16c36b55e055c4090f9a9d1f986de09671b031667be20bb0344a2832e2c4ddb5",
+        "compressedSha256": "17433c75a4f466bcafbf209b0e7cf0858cd82936012bc3119b3a79d300994901"
+      }
+    },
+    {
+      "channel": 36,
+      "id": "str_l",
+      "name": "Superior Thalamic Radiation left",
+      "sourceName": "Superior Thalamic Radiation left",
+      "subjects": {
+        "hcp": 1061,
+        "blsa": 960,
+        "vu": 302,
+        "subjects": 2323
+      },
+      "nonzeroVoxelsAt2mm": 21048,
+      "peak": {
+        "index": [
+          42,
+          58,
+          37
+        ],
+        "probability": 1.0,
+        "rasMm": [
+          -12.0,
+          -16.0,
+          -4.0
+        ]
+      },
+      "asset": {
+        "url": "/tractography/xtract/channels/str_l.u16.bin",
+        "bytes": 48040,
+        "rawBytes": 2164070,
+        "sha256": "02941cb698db2ba43bad9f295bd8d4d901167281bcff37d8204e3866703f948e",
+        "compressedSha256": "6416cbb5bc02dedaacbbdfc0a1a233f4858d698dc8629b78ea88dfb76b8e9b77"
+      }
+    },
+    {
+      "channel": 37,
+      "id": "str_r",
+      "name": "Superior Thalamic Radiation right",
+      "sourceName": "Superior Thalamic Radiation right",
+      "subjects": {
+        "hcp": 1061,
+        "blsa": 960,
+        "vu": 302,
+        "subjects": 2323
+      },
+      "nonzeroVoxelsAt2mm": 19774,
+      "peak": {
+        "index": [
+          53,
+          57,
+          37
+        ],
+        "probability": 1.0,
+        "rasMm": [
+          10.0,
+          -18.0,
+          -4.0
+        ]
+      },
+      "asset": {
+        "url": "/tractography/xtract/channels/str_r.u16.bin",
+        "bytes": 45280,
+        "rawBytes": 2164070,
+        "sha256": "65ba68813096076f66ba4368724ee7dccc7b4be74c5fd2916abcca9b732bfa5b",
+        "compressedSha256": "c40e33fb73f4b44585e384ef1dea3e514c392ec2a3a301d331d3844ce7baf1ba"
+      }
+    },
+    {
+      "channel": 38,
+      "id": "uf_l",
+      "name": "Uncinate Fasciculus left",
+      "sourceName": "Uncinate Fasciculus left",
+      "subjects": {
+        "hcp": 1061,
+        "blsa": 959,
+        "vu": 302,
+        "subjects": 2322
+      },
+      "nonzeroVoxelsAt2mm": 24491,
+      "peak": {
+        "index": [
+          32,
+          70,
+          34
+        ],
+        "probability": 1.0,
+        "rasMm": [
+          -32.0,
+          8.0,
+          -10.0
+        ]
+      },
+      "asset": {
+        "url": "/tractography/xtract/channels/uf_l.u16.bin",
+        "bytes": 54709,
+        "rawBytes": 2164070,
+        "sha256": "0b47c0559ea3a98fefe49f248677f2dc5dd7c8635735d6b0344bc2cafbab5d3e",
+        "compressedSha256": "8fc323001b6daa672115b9c22f1a1a053fcff48438f76085c7e2bce925e43902"
+      }
+    },
+    {
+      "channel": 39,
+      "id": "uf_r",
+      "name": "Uncinate Fasciculus right",
+      "sourceName": "Uncinate Fasciculus right",
+      "subjects": {
+        "hcp": 1061,
+        "blsa": 960,
+        "vu": 302,
+        "subjects": 2323
+      },
+      "nonzeroVoxelsAt2mm": 22632,
+      "peak": {
+        "index": [
+          64,
+          69,
+          34
+        ],
+        "probability": 1.0,
+        "rasMm": [
+          32.0,
+          6.0,
+          -10.0
+        ]
+      },
+      "asset": {
+        "url": "/tractography/xtract/channels/uf_r.u16.bin",
+        "bytes": 51271,
+        "rawBytes": 2164070,
+        "sha256": "a69f27ce6d784d2f43c018d1d5988d0cba509caa4ee3519731172b89993b4267",
+        "compressedSha256": "d9098609ae105d27f6e1cd1a83a8b81ddbd4b4892e1e2eed5de3253e8b42d315"
+      }
+    },
+    {
+      "channel": 40,
+      "id": "vof_l",
+      "name": "Vertical Occipital Fasciculus left",
+      "sourceName": "Vertical Occipital Fasciculus left",
+      "subjects": {
+        "hcp": 1061,
+        "blsa": 960,
+        "vu": 302,
+        "subjects": 2323
+      },
+      "nonzeroVoxelsAt2mm": 17003,
+      "peak": {
+        "index": [
+          32,
+          27,
+          40
+        ],
+        "probability": 1.0,
+        "rasMm": [
+          -32.0,
+          -78.0,
+          2.0
+        ]
+      },
+      "asset": {
+        "url": "/tractography/xtract/channels/vof_l.u16.bin",
+        "bytes": 39388,
+        "rawBytes": 2164070,
+        "sha256": "cbcea6236b99a2497625b8dc3baa78aaa43dfce7e442f13d2b99eefbd28d52b6",
+        "compressedSha256": "0cb06954333390554b0edf057420da25f44b7342e76c57709b0dab64a508a916"
+      }
+    },
+    {
+      "channel": 41,
+      "id": "vof_r",
+      "name": "Vertical Occipital Fasciculus right",
+      "sourceName": "Vertical Occipital Fasciculus right",
+      "subjects": {
+        "hcp": 1061,
+        "blsa": 960,
+        "vu": 302,
+        "subjects": 2323
+      },
+      "nonzeroVoxelsAt2mm": 15529,
+      "peak": {
+        "index": [
+          63,
+          26,
+          40
+        ],
+        "probability": 1.0,
+        "rasMm": [
+          30.0,
+          -80.0,
+          2.0
+        ]
+      },
+      "asset": {
+        "url": "/tractography/xtract/channels/vof_r.u16.bin",
+        "bytes": 36288,
+        "rawBytes": 2164070,
+        "sha256": "9c8434de055c3555e8225acb94b13efa314880b00bef04e46af61460fd9b0d9e",
+        "compressedSha256": "ac737947eafcb4a8dca7390716b3608f36cb756c48c6c7800807f6e6b04fdc6b"
+      }
+    }
+  ],
+  "source": {
+    "repository": "https://github.com/MASILab/Pandora-WhiteMatterAtlas",
+    "commit": "2caf44296666c13aa5c4d7d1c88d14fe553d9553",
+    "nifti": "https://raw.githubusercontent.com/MASILab/Pandora-WhiteMatterAtlas/2caf44296666c13aa5c4d7d1c88d14fe553d9553/Xtract/Xtract.nii.gz",
+    "metadata": "https://raw.githubusercontent.com/MASILab/Pandora-WhiteMatterAtlas/2caf44296666c13aa5c4d7d1c88d14fe553d9553/Xtract/Xtract_info.csv",
+    "licenseFile": "https://raw.githubusercontent.com/MASILab/Pandora-WhiteMatterAtlas/2caf44296666c13aa5c4d7d1c88d14fe553d9553/license.txt",
+    "license": "CC BY 4.0",
+    "paper": "https://doi.org/10.1007/s12021-020-09497-1",
+    "method": "https://fsl.fmrib.ox.ac.uk/fsl/docs/diffusion/xtract.html",
+    "niftiSha256": "0cd04c6a41910fe1a25bf0e28a9ae3f18c912819bc51025aecd648d430fd11aa",
+    "metadataSha256": "4c113b30ecea7df2905fa56d43ae95f492b38fe505104acb77bf2287630bf314",
+    "licenseSha256": "cbd5af318286b74656f145dff5091907cc23d6d8c9ad09e0291ec2497792ba41",
+    "licenseDisplaySha256": "9e5f1b3c610b9c2da5c313bf81d577a7d1acec686bdb0384edefa6df0f90cd94"
+  },
+  "attribution": "Pandora white matter atlas: Hansen et al. (2021), derived from CC BY 4.0 source data. Cerebra's 2-mm grid and uint16 files are marked modifications.",
+  "interpretation": "Each value is a voxelwise population overlap from diffusion-MRI tractography. Contributors vary by bundle and are listed per pathway. These maps do not trace individual axons or measure an individual's tract certainty. The MNI152 maps are shown independently and are not overlaid on Cerebra's ICBM152 2009c MRI or its surface meshes."
+}
