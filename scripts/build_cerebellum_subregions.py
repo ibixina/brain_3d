@@ -108,7 +108,7 @@ def build():
             attribution='Derived Diedrichsen Lab atlas data · CC BY (upstream version unspecified)',
             shape=list(image.shape), affine=image.affine.tolist(), spacingMm=list(map(float, image.header.get_zooms()[:3])),
             frame='MNI152NLin2009cSymC (MNISym), recentered independently; not registered to the fsaverage whole-brain model or bundled MRI templates',
-            method='Published categorical dseg labels are used unchanged, including background. Marching cubes at 0.5 on each binary label mask; no additional smoothing or resampling. All disconnected components are retained. Display colors are softened from the supplied lookup table. Source probability distributions are not loaded or summarized in this viewer.',
+            method='Published categorical dseg labels are used unchanged, including background. Marching cubes at 0.5 on each binary label mask; no additional smoothing or resampling. All disconnected components are retained. Display colors are softened from the supplied lookup table. Full native probability channels can be explored separately on demand; they do not alter these categorical surfaces.',
             displayTransform='[R,S,-A], recentered for a standalone view', displayOrigin=origin,
             coverage='34 labels: 28 lobular compartments (including eight vermal labels) and six deep-nucleus compartments (three pairs). I–IV are combined. Interposed combines emboliform and globose. Tiny fastigial label fragments are not complete nuclei.',
         ),

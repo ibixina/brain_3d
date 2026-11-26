@@ -26,7 +26,17 @@ reoriented and recentered for an independent 3D view, geometry packed and
 gzip-compressed, and display colors softened. No smoothing or resampling.
 The supplied categorical labels and lookup table remain unchanged; the
 original NIfTI bytes are retained in losslessly gzipped form. Probability
-distributions were not used to recompute labels or confidence values.
+distributions were not used to recompute surface labels or confidence values.
+
+Additional probability display (2026-10-19): original uint8 channels from
+atl-Anatom_space-MNISym_probseg.nii are separated in native x-fastest order
+and losslessly gzip-compressed, with original NIfTI scaling retained. Native
+categorical labels are also packed unchanged as uint8 context. No new
+quantization, interpolation, thresholding, resampling, or renormalization.
+The display samples exact native voxels; the source scaling's small endpoint
+rounding above 1 is clamped only for display. The categorical map is shown
+independently and is not recomputed. Probability-source and output hashes:
+/subregions/cerebellum-probability/manifest.json
 
 Original papers, figures, and software retain their own rights. No study
 figures, paper text, or toolbox code is included. This is a derived educational

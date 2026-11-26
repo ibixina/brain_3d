@@ -1,0 +1,845 @@
+{
+  "version": 1,
+  "kind": "cerebellum",
+  "checkedOn": "2026-10-19",
+  "grid": {
+    "shape": [
+      153,
+      100,
+      79
+    ],
+    "origin": [
+      -76.0,
+      -103.0,
+      -70.0
+    ],
+    "spacing": [
+      1,
+      1,
+      1
+    ],
+    "orientation": "RAS",
+    "space": "MNI152NLin2009cSymC (MNISym)"
+  },
+  "encoding": {
+    "dtype": "uint8",
+    "order": "x-fastest",
+    "slope": 0.003921568859368563,
+    "intercept": 0.0,
+    "displayEndpointTolerance": 1e-06
+  },
+  "labels": {
+    "url": "/subregions/cerebellum-probability/labels.u8.gz",
+    "bytes": 25123,
+    "rawBytes": 1208700,
+    "sha256": "e02c105a110686caa21d63137e5962c6cfb55acfabe95ce81ba3592dba605672",
+    "compressedSha256": "848ecd52f0fdebe22a4e9fcb9ba45f783d56bbce8e2c3dc5adf5f8e9d0d18b0b"
+  },
+  "entries": {
+    "cereb-1": {
+      "label": 1,
+      "channel": 0,
+      "sourceName": "Left_I_IV",
+      "asset": {
+        "url": "/subregions/cerebellum-probability/1.u8.gz",
+        "bytes": 16231,
+        "rawBytes": 1208700,
+        "sha256": "4a823277535d336fbff1da40dbb5557e681ee08047a9597b3e6e3d4d020b1a9f",
+        "compressedSha256": "27ab69880ac0143a5390003c6eca2ae0177dcfc189833edb8011ce8131108316"
+      },
+      "positiveVoxels": 12697,
+      "categoricalVoxels": 4567,
+      "peak": {
+        "index": [
+          67,
+          58,
+          52
+        ],
+        "storedValue": 255,
+        "categoricalLabel": 1
+      }
+    },
+    "cereb-2": {
+      "label": 2,
+      "channel": 1,
+      "sourceName": "Right_I_IV",
+      "asset": {
+        "url": "/subregions/cerebellum-probability/2.u8.gz",
+        "bytes": 16995,
+        "rawBytes": 1208700,
+        "sha256": "676c431663d93e1603fc720ce03310872b9381a73cfb29ca779a2249763396e5",
+        "compressedSha256": "bfbfdcf1d6838802d9a2a752a047d52d949a1604f212e8ffc17e25c94479f086"
+      },
+      "positiveVoxels": 13342,
+      "categoricalVoxels": 5524,
+      "peak": {
+        "index": [
+          78,
+          51,
+          66
+        ],
+        "storedValue": 255,
+        "categoricalLabel": 2
+      }
+    },
+    "cereb-3": {
+      "label": 3,
+      "channel": 2,
+      "sourceName": "Left_V",
+      "asset": {
+        "url": "/subregions/cerebellum-probability/3.u8.gz",
+        "bytes": 20825,
+        "rawBytes": 1208700,
+        "sha256": "d11976fa192220b5112dca0280312c2ed5fdc89b843668cf85546735e8cb1689",
+        "compressedSha256": "cd1359cfb9fdc5f5ed1d2f959d8b088006ce712d99f2ebce949ff1d4f0c3dc2d"
+      },
+      "positiveVoxels": 17691,
+      "categoricalVoxels": 5854,
+      "peak": {
+        "index": [
+          65,
+          47,
+          57
+        ],
+        "storedValue": 255,
+        "categoricalLabel": 3
+      }
+    },
+    "cereb-4": {
+      "label": 4,
+      "channel": 3,
+      "sourceName": "Right_V",
+      "asset": {
+        "url": "/subregions/cerebellum-probability/4.u8.gz",
+        "bytes": 20319,
+        "rawBytes": 1208700,
+        "sha256": "3626fc06e401da7cc41bedadfaf4463bdb42a044ed5ddb8b4a4faa52469e5158",
+        "compressedSha256": "9ef356ec5bf15524086b85a21c72154efde1f34fd7394202a0046395a4aae2ac"
+      },
+      "positiveVoxels": 16476,
+      "categoricalVoxels": 5975,
+      "peak": {
+        "index": [
+          78,
+          38,
+          58
+        ],
+        "storedValue": 255,
+        "categoricalLabel": 4
+      }
+    },
+    "cereb-5": {
+      "label": 5,
+      "channel": 4,
+      "sourceName": "Left_VI",
+      "asset": {
+        "url": "/subregions/cerebellum-probability/5.u8.gz",
+        "bytes": 29013,
+        "rawBytes": 1208700,
+        "sha256": "5d2438d5f2cef344abc60b17ab726c923dccfe51c86efa90b7dec7d4b90fed6f",
+        "compressedSha256": "a0885339af4b3cf732dbab833164152fe0ea9f27139e2d6f306b65df97d4116c"
+      },
+      "positiveVoxels": 26382,
+      "categoricalVoxels": 12898,
+      "peak": {
+        "index": [
+          38,
+          52,
+          41
+        ],
+        "storedValue": 255,
+        "categoricalLabel": 5
+      }
+    },
+    "cereb-6": {
+      "label": 6,
+      "channel": 5,
+      "sourceName": "Vermis_VI",
+      "asset": {
+        "url": "/subregions/cerebellum-probability/6.u8.gz",
+        "bytes": 8884,
+        "rawBytes": 1208700,
+        "sha256": "044090f62a826a62d087bb2f5c03d30fed38314b76d3f98037f186abb0c9c343",
+        "compressedSha256": "3282266f2a161cf65a4a6e9a84bbc63f78fb13d7aa9fd5f05db1de47e1a2de18"
+      },
+      "positiveVoxels": 6565,
+      "categoricalVoxels": 2653,
+      "peak": {
+        "index": [
+          73,
+          27,
+          50
+        ],
+        "storedValue": 255,
+        "categoricalLabel": 6
+      }
+    },
+    "cereb-7": {
+      "label": 7,
+      "channel": 6,
+      "sourceName": "Right_VI",
+      "asset": {
+        "url": "/subregions/cerebellum-probability/7.u8.gz",
+        "bytes": 28163,
+        "rawBytes": 1208700,
+        "sha256": "3435b5c4a8fc87d952bce53ce093e8be9ecf5e57c5196bfc05c6021db68694af",
+        "compressedSha256": "45e3d0dffc00474181a32e417987be37a685e1e50e2487c775851409bebbacba"
+      },
+      "positiveVoxels": 25170,
+      "categoricalVoxels": 11505,
+      "peak": {
+        "index": [
+          84,
+          26,
+          52
+        ],
+        "storedValue": 255,
+        "categoricalLabel": 7
+      }
+    },
+    "cereb-8": {
+      "label": 8,
+      "channel": 7,
+      "sourceName": "Left_CrusI",
+      "asset": {
+        "url": "/subregions/cerebellum-probability/8.u8.gz",
+        "bytes": 36115,
+        "rawBytes": 1208700,
+        "sha256": "abeeecf1a5d298f5df2c6c64234fb2ebeb06f2c8111aced1c6a2cdc9dfb3802f",
+        "compressedSha256": "ea766e12bbc792108b354d73aba55179b170cfe57108fe4c40ac1b27aeafbec5"
+      },
+      "positiveVoxels": 35483,
+      "categoricalVoxels": 20323,
+      "peak": {
+        "index": [
+          21,
+          39,
+          35
+        ],
+        "storedValue": 255,
+        "categoricalLabel": 8
+      }
+    },
+    "cereb-9": {
+      "label": 9,
+      "channel": 8,
+      "sourceName": "Vermis_CrusI",
+      "asset": {
+        "url": "/subregions/cerebellum-probability/9.u8.gz",
+        "bytes": 2706,
+        "rawBytes": 1208700,
+        "sha256": "1372ec682cb747d885b5047dca1fad29a5b2a38416cc18ec7cfcfa87cc606b5c",
+        "compressedSha256": "aec45852a16abd480bd6745d0fd6bd8aacd3fd0c573c731d0a688a17821570e7"
+      },
+      "positiveVoxels": 1322,
+      "categoricalVoxels": 20,
+      "peak": {
+        "index": [
+          72,
+          24,
+          45
+        ],
+        "storedValue": 161,
+        "categoricalLabel": 9
+      }
+    },
+    "cereb-10": {
+      "label": 10,
+      "channel": 9,
+      "sourceName": "Right_CrusI",
+      "asset": {
+        "url": "/subregions/cerebellum-probability/10.u8.gz",
+        "bytes": 36769,
+        "rawBytes": 1208700,
+        "sha256": "5b0c156222eaf080aa776300e345eacf09066513c46c94d19770d28867f40568",
+        "compressedSha256": "e46588b40ce9a6cb7438182263c082292d0ac740eb4d1de95e651b799ac470f5"
+      },
+      "positiveVoxels": 35395,
+      "categoricalVoxels": 19104,
+      "peak": {
+        "index": [
+          87,
+          20,
+          48
+        ],
+        "storedValue": 255,
+        "categoricalLabel": 10
+      }
+    },
+    "cereb-11": {
+      "label": 11,
+      "channel": 10,
+      "sourceName": "Left_CrusII",
+      "asset": {
+        "url": "/subregions/cerebellum-probability/11.u8.gz",
+        "bytes": 37215,
+        "rawBytes": 1208700,
+        "sha256": "e1338cf30e45b8b8de0e8a3a28222dfd3583fa195f27ada0d1420cc6667da8e5",
+        "compressedSha256": "1b171187e99d02f74e78b0016255203b9906cc015ae58ef677f0fe4bd1ea5781"
+      },
+      "positiveVoxels": 34205,
+      "categoricalVoxels": 14877,
+      "peak": {
+        "index": [
+          28,
+          37,
+          20
+        ],
+        "storedValue": 255,
+        "categoricalLabel": 11
+      }
+    },
+    "cereb-12": {
+      "label": 12,
+      "channel": 11,
+      "sourceName": "Vermis_CrusII",
+      "asset": {
+        "url": "/subregions/cerebellum-probability/12.u8.gz",
+        "bytes": 4507,
+        "rawBytes": 1208700,
+        "sha256": "aeffdd2e5ea2e628ecdaa08c2aee7fb59d3ec085fbed27d70b92853f81cf3547",
+        "compressedSha256": "067fc55c147132b834fff1bb9911e251bd7334b406fd4595e5a3501b4f1321ad"
+      },
+      "positiveVoxels": 2670,
+      "categoricalVoxels": 603,
+      "peak": {
+        "index": [
+          75,
+          26,
+          40
+        ],
+        "storedValue": 242,
+        "categoricalLabel": 12
+      }
+    },
+    "cereb-13": {
+      "label": 13,
+      "channel": 12,
+      "sourceName": "Right_CrusII",
+      "asset": {
+        "url": "/subregions/cerebellum-probability/13.u8.gz",
+        "bytes": 36184,
+        "rawBytes": 1208700,
+        "sha256": "4d35cb4a91287a3220d4b86a1711637ee70e1bd76f064fa02ee25ab51cead313",
+        "compressedSha256": "06c44b0d7d7f20b0eeaa4be13affde363361b9c46f0d1772c360980af01bf96a"
+      },
+      "positiveVoxels": 33620,
+      "categoricalVoxels": 13658,
+      "peak": {
+        "index": [
+          80,
+          18,
+          36
+        ],
+        "storedValue": 255,
+        "categoricalLabel": 13
+      }
+    },
+    "cereb-14": {
+      "label": 14,
+      "channel": 13,
+      "sourceName": "Left_VIIb",
+      "asset": {
+        "url": "/subregions/cerebellum-probability/14.u8.gz",
+        "bytes": 29426,
+        "rawBytes": 1208700,
+        "sha256": "2ff71885b3e3b92bd7f8b6bcf1555af416124d8cbf829abc5a3ee30f52ce72f9",
+        "compressedSha256": "2a8daaabe320921bc541994156ba75691bc1d6b4e9f32f4428a165d97f338fbd"
+      },
+      "positiveVoxels": 27130,
+      "categoricalVoxels": 7571,
+      "peak": {
+        "index": [
+          44,
+          35,
+          16
+        ],
+        "storedValue": 254,
+        "categoricalLabel": 14
+      }
+    },
+    "cereb-15": {
+      "label": 15,
+      "channel": 14,
+      "sourceName": "Vermis_VIIb",
+      "asset": {
+        "url": "/subregions/cerebellum-probability/15.u8.gz",
+        "bytes": 4576,
+        "rawBytes": 1208700,
+        "sha256": "deb68d8b87931eaa35d70df8020bb5e562b431e178c9bf41456dbe6c8a64db0a",
+        "compressedSha256": "d94b2fc227b07d8da54db5b1c96ec4fbfb317408ca5097cde52cdb9a26c43aa8"
+      },
+      "positiveVoxels": 2917,
+      "categoricalVoxels": 297,
+      "peak": {
+        "index": [
+          73,
+          34,
+          39
+        ],
+        "storedValue": 234,
+        "categoricalLabel": 15
+      }
+    },
+    "cereb-16": {
+      "label": 16,
+      "channel": 15,
+      "sourceName": "Right_VIIb",
+      "asset": {
+        "url": "/subregions/cerebellum-probability/16.u8.gz",
+        "bytes": 26247,
+        "rawBytes": 1208700,
+        "sha256": "a014a0424ffbb0b2deef87178196b08d027b246830fb7bdad4c26b02d3371e2e",
+        "compressedSha256": "04b5112c3da723857e2d5ed9cb2056e21e8213c9abef67cdd0c5b154a5de2e76"
+      },
+      "positiveVoxels": 23569,
+      "categoricalVoxels": 7649,
+      "peak": {
+        "index": [
+          115,
+          40,
+          14
+        ],
+        "storedValue": 226,
+        "categoricalLabel": 16
+      }
+    },
+    "cereb-17": {
+      "label": 17,
+      "channel": 16,
+      "sourceName": "Left_VIIIa",
+      "asset": {
+        "url": "/subregions/cerebellum-probability/17.u8.gz",
+        "bytes": 26888,
+        "rawBytes": 1208700,
+        "sha256": "8c016ff85006597137bdba19a1cac95cded65f65aab7664bfea961341a722f49",
+        "compressedSha256": "722df302537cc72f7b69f05e06809cfb4b8d3237d3d9ebcc2b39154e71980cb2"
+      },
+      "positiveVoxels": 24179,
+      "categoricalVoxels": 7590,
+      "peak": {
+        "index": [
+          46,
+          45,
+          10
+        ],
+        "storedValue": 255,
+        "categoricalLabel": 17
+      }
+    },
+    "cereb-18": {
+      "label": 18,
+      "channel": 17,
+      "sourceName": "Vermis_VIIIa",
+      "asset": {
+        "url": "/subregions/cerebellum-probability/18.u8.gz",
+        "bytes": 6925,
+        "rawBytes": 1208700,
+        "sha256": "e9c129d2680012a0d582b36228f6f26c89a732b2676b9171a8722c549cc507bc",
+        "compressedSha256": "bd9521f846d9bb5c67b4a9fd51a6b3dad985e406e8ff9c119a72f1d61389e9de"
+      },
+      "positiveVoxels": 4715,
+      "categoricalVoxels": 1755,
+      "peak": {
+        "index": [
+          76,
+          39,
+          38
+        ],
+        "storedValue": 252,
+        "categoricalLabel": 18
+      }
+    },
+    "cereb-19": {
+      "label": 19,
+      "channel": 18,
+      "sourceName": "Right_VIIIa",
+      "asset": {
+        "url": "/subregions/cerebellum-probability/19.u8.gz",
+        "bytes": 25991,
+        "rawBytes": 1208700,
+        "sha256": "dd4079c185d60c8c44212b6f89c2707062b26e6dd76019024e4e8b61a34b18bb",
+        "compressedSha256": "1167a0901a8ad3b31956a5b550285bf45d10e7db040f22b702ee70430c02487f"
+      },
+      "positiveVoxels": 23159,
+      "categoricalVoxels": 7213,
+      "peak": {
+        "index": [
+          95,
+          35,
+          12
+        ],
+        "storedValue": 255,
+        "categoricalLabel": 19
+      }
+    },
+    "cereb-20": {
+      "label": 20,
+      "channel": 19,
+      "sourceName": "Left_VIIIb",
+      "asset": {
+        "url": "/subregions/cerebellum-probability/20.u8.gz",
+        "bytes": 20978,
+        "rawBytes": 1208700,
+        "sha256": "2a79c35eaa6d43d07e411e331ec30e5bf2a796059c0a86554743fd1dbb819737",
+        "compressedSha256": "8f4d758fa7a5cf698a1de821abebc6acaf310f714fe0c3b53174a660f6c56e38"
+      },
+      "positiveVoxels": 18206,
+      "categoricalVoxels": 6286,
+      "peak": {
+        "index": [
+          58,
+          52,
+          8
+        ],
+        "storedValue": 255,
+        "categoricalLabel": 20
+      }
+    },
+    "cereb-21": {
+      "label": 21,
+      "channel": 20,
+      "sourceName": "Vermis_VIIIb",
+      "asset": {
+        "url": "/subregions/cerebellum-probability/21.u8.gz",
+        "bytes": 5395,
+        "rawBytes": 1208700,
+        "sha256": "645b3ebaf6c61d7950c0b4cec85e144394f743b52a75c982af717af80866b764",
+        "compressedSha256": "f887347d0f6e5a0dba3e6cd6ef249f721c98d3e0225361285b70b393e22fab34"
+      },
+      "positiveVoxels": 3570,
+      "categoricalVoxels": 852,
+      "peak": {
+        "index": [
+          74,
+          40,
+          30
+        ],
+        "storedValue": 242,
+        "categoricalLabel": 21
+      }
+    },
+    "cereb-22": {
+      "label": 22,
+      "channel": 21,
+      "sourceName": "Right_VIIIb",
+      "asset": {
+        "url": "/subregions/cerebellum-probability/22.u8.gz",
+        "bytes": 20805,
+        "rawBytes": 1208700,
+        "sha256": "0cce5b9337388890b9f001ed887eb769c0fd8752b53b770065f3681113b83843",
+        "compressedSha256": "abe5985ae58f4a72dc846873fa074d20facb88aa541da96e9342e983fb9c9116"
+      },
+      "positiveVoxels": 18574,
+      "categoricalVoxels": 6149,
+      "peak": {
+        "index": [
+          93,
+          50,
+          8
+        ],
+        "storedValue": 255,
+        "categoricalLabel": 22
+      }
+    },
+    "cereb-23": {
+      "label": 23,
+      "channel": 22,
+      "sourceName": "Left_IX",
+      "asset": {
+        "url": "/subregions/cerebellum-probability/23.u8.gz",
+        "bytes": 16854,
+        "rawBytes": 1208700,
+        "sha256": "92be0585fd90b624b038159e6f30c7cfaef24eb2bbea0648c6a9b2832a67354b",
+        "compressedSha256": "4cefc1a193cbbfc7c7068f7f023c6f1b226ed2e6cfbede7dbec2eab78bee09c8"
+      },
+      "positiveVoxels": 13420,
+      "categoricalVoxels": 4907,
+      "peak": {
+        "index": [
+          72,
+          47,
+          21
+        ],
+        "storedValue": 255,
+        "categoricalLabel": 23
+      }
+    },
+    "cereb-24": {
+      "label": 24,
+      "channel": 23,
+      "sourceName": "Vermis_IX",
+      "asset": {
+        "url": "/subregions/cerebellum-probability/24.u8.gz",
+        "bytes": 6139,
+        "rawBytes": 1208700,
+        "sha256": "0f04df655904168845a68361a90f709f1f3fea994206afcbd9964486213b7ec9",
+        "compressedSha256": "ecf0be5ced6e211f9b3fc31fbdf6f61fde88bab059d3a3f0adb4c171712062b4"
+      },
+      "positiveVoxels": 4086,
+      "categoricalVoxels": 1021,
+      "peak": {
+        "index": [
+          76,
+          47,
+          32
+        ],
+        "storedValue": 255,
+        "categoricalLabel": 24
+      }
+    },
+    "cereb-25": {
+      "label": 25,
+      "channel": 24,
+      "sourceName": "Right_IX",
+      "asset": {
+        "url": "/subregions/cerebellum-probability/25.u8.gz",
+        "bytes": 16561,
+        "rawBytes": 1208700,
+        "sha256": "301a5d3bbdfc5f1eed0591349d3ebc86c812be12681a3d43ab987573a2519ed6",
+        "compressedSha256": "a21ad946e355c9d6d4087226411038b9d01e967d31b400555a4a8f6933284a55"
+      },
+      "positiveVoxels": 13231,
+      "categoricalVoxels": 5183,
+      "peak": {
+        "index": [
+          77,
+          43,
+          18
+        ],
+        "storedValue": 255,
+        "categoricalLabel": 25
+      }
+    },
+    "cereb-26": {
+      "label": 26,
+      "channel": 25,
+      "sourceName": "Left_X",
+      "asset": {
+        "url": "/subregions/cerebellum-probability/26.u8.gz",
+        "bytes": 6183,
+        "rawBytes": 1208700,
+        "sha256": "3dceaee95445845bb3c8138edae0aeb87e8c7532b57dc8dc4111971ba1a556f7",
+        "compressedSha256": "e07679a5f6a3183d9ac217b16612fac9e8ba908fc8259096ddca7e58006920f4"
+      },
+      "positiveVoxels": 4228,
+      "categoricalVoxels": 967,
+      "peak": {
+        "index": [
+          52,
+          66,
+          23
+        ],
+        "storedValue": 238,
+        "categoricalLabel": 26
+      }
+    },
+    "cereb-27": {
+      "label": 27,
+      "channel": 26,
+      "sourceName": "Vermis_X",
+      "asset": {
+        "url": "/subregions/cerebellum-probability/27.u8.gz",
+        "bytes": 3719,
+        "rawBytes": 1208700,
+        "sha256": "94c70275cc151b845263f54202a06284d4e6fc7ec2a472bd187602e4ee1bd672",
+        "compressedSha256": "553d4deb482d707901c3c58d98db13347dbaef724230b54bb0f9f121b34699ab"
+      },
+      "positiveVoxels": 1995,
+      "categoricalVoxels": 550,
+      "peak": {
+        "index": [
+          75,
+          55,
+          34
+        ],
+        "storedValue": 255,
+        "categoricalLabel": 27
+      }
+    },
+    "cereb-28": {
+      "label": 28,
+      "channel": 27,
+      "sourceName": "Right_X",
+      "asset": {
+        "url": "/subregions/cerebellum-probability/28.u8.gz",
+        "bytes": 6318,
+        "rawBytes": 1208700,
+        "sha256": "55f0fe3c45d58f4e98e16916809783587c5ded449267aaaa58087d88bdaeea69",
+        "compressedSha256": "15b6c0e3ec4b6349dbf4471d63ee9515cecb691c7eb47609ce58f678e3b28f0a"
+      },
+      "positiveVoxels": 4347,
+      "categoricalVoxels": 945,
+      "peak": {
+        "index": [
+          99,
+          64,
+          23
+        ],
+        "storedValue": 254,
+        "categoricalLabel": 28
+      }
+    },
+    "cereb-29": {
+      "label": 29,
+      "channel": 28,
+      "sourceName": "Left_Dentate",
+      "asset": {
+        "url": "/subregions/cerebellum-probability/29.u8.gz",
+        "bytes": 9114,
+        "rawBytes": 1208700,
+        "sha256": "a3feaebfca172e2239137d4e3ffd310a9a173ed309d73b2684284b936ffa41a5",
+        "compressedSha256": "d1fa25bf80f5afecb32cc54d8f21dc545bbffc3ce33c6a405f6bfb47f960ee79"
+      },
+      "positiveVoxels": 6896,
+      "categoricalVoxels": 2075,
+      "peak": {
+        "index": [
+          58,
+          43,
+          34
+        ],
+        "storedValue": 233,
+        "categoricalLabel": 29
+      }
+    },
+    "cereb-30": {
+      "label": 30,
+      "channel": 29,
+      "sourceName": "Right_Dentate",
+      "asset": {
+        "url": "/subregions/cerebellum-probability/30.u8.gz",
+        "bytes": 9337,
+        "rawBytes": 1208700,
+        "sha256": "62018decdbc4206592bff508e846e32fadfb19f8c9c8e181f68a059b05b26066",
+        "compressedSha256": "13c8a77ba49a8db5b5cf0467f3751ea300708fc03678b16c0fef64c6687db08a"
+      },
+      "positiveVoxels": 7100,
+      "categoricalVoxels": 2197,
+      "peak": {
+        "index": [
+          94,
+          43,
+          34
+        ],
+        "storedValue": 233,
+        "categoricalLabel": 30
+      }
+    },
+    "cereb-31": {
+      "label": 31,
+      "channel": 30,
+      "sourceName": "Left_Interposed",
+      "asset": {
+        "url": "/subregions/cerebellum-probability/31.u8.gz",
+        "bytes": 3134,
+        "rawBytes": 1208700,
+        "sha256": "b95c3b9e963748e2545e48c58f136883e1f248808e2139c475d8abdaaf5d87fd",
+        "compressedSha256": "6a885326891c463961fdb703b65c1342d37ba9273a6d521194857e6c60e8fe2b"
+      },
+      "positiveVoxels": 1622,
+      "categoricalVoxels": 255,
+      "peak": {
+        "index": [
+          69,
+          43,
+          39
+        ],
+        "storedValue": 196,
+        "categoricalLabel": 31
+      }
+    },
+    "cereb-32": {
+      "label": 32,
+      "channel": 31,
+      "sourceName": "Right_Interposed",
+      "asset": {
+        "url": "/subregions/cerebellum-probability/32.u8.gz",
+        "bytes": 3252,
+        "rawBytes": 1208700,
+        "sha256": "d09cc60fe87f29301d9e1bab3a1dc1c5c1d54aaafd29aca6258f3de9f6529a5f",
+        "compressedSha256": "7b9419e096cb83b04fd9910fa0ccc286aec4b53d3cd40854a6f8b261e8876538"
+      },
+      "positiveVoxels": 1692,
+      "categoricalVoxels": 277,
+      "peak": {
+        "index": [
+          82,
+          43,
+          39
+        ],
+        "storedValue": 193,
+        "categoricalLabel": 32
+      }
+    },
+    "cereb-33": {
+      "label": 33,
+      "channel": 32,
+      "sourceName": "Left_Fastigial",
+      "asset": {
+        "url": "/subregions/cerebellum-probability/33.u8.gz",
+        "bytes": 1626,
+        "rawBytes": 1208700,
+        "sha256": "89bbc2d28b9789c5c9a3d023eb4f432092d2e3870f8558d93c0eb0062bcec020",
+        "compressedSha256": "c7cb29c27a01b6701389982e7cb5392e93f3e4084fa1e71ce780ac2a58c22df9"
+      },
+      "positiveVoxels": 335,
+      "categoricalVoxels": 2,
+      "peak": {
+        "index": [
+          74,
+          49,
+          42
+        ],
+        "storedValue": 61,
+        "categoricalLabel": 0
+      }
+    },
+    "cereb-34": {
+      "label": 34,
+      "channel": 33,
+      "sourceName": "Right_Fastigial",
+      "asset": {
+        "url": "/subregions/cerebellum-probability/34.u8.gz",
+        "bytes": 1589,
+        "rawBytes": 1208700,
+        "sha256": "4b3f833d6d2d72f59c0d63c5f04aa807c23b2eae3cbbfd87fa86431ac034f29d",
+        "compressedSha256": "148188f480a9097174c148de92993cba21c3198f74ba8b419df074072bd817d0"
+      },
+      "positiveVoxels": 277,
+      "categoricalVoxels": 5,
+      "peak": {
+        "index": [
+          78,
+          49,
+          42
+        ],
+        "storedValue": 65,
+        "categoricalLabel": 0
+      }
+    }
+  },
+  "source": {
+    "url": "https://raw.githubusercontent.com/DiedrichsenLab/cerebellar_atlases/6857dfa732de6dd60c94da2f84d0b15ccf316618/Diedrichsen_2009/atl-Anatom_space-MNISym_probseg.nii",
+    "sha256": "df9525c4f57be8b2c577dc61b16e765898aa6fa3b79c77a78f925c5f3e8214ff",
+    "bytes": 41096152,
+    "commit": "6857dfa732de6dd60c94da2f84d0b15ccf316618",
+    "documentation": "https://github.com/DiedrichsenLab/cerebellar_atlases/tree/6857dfa732de6dd60c94da2f84d0b15ccf316618/Diedrichsen_2009",
+    "studies": [
+      {
+        "title": "Diedrichsen et al. (2009), lobular atlas",
+        "url": "https://doi.org/10.1016/j.neuroimage.2009.01.045"
+      },
+      {
+        "title": "Diedrichsen et al. (2011), deep nuclei",
+        "url": "https://doi.org/10.1016/j.neuroimage.2010.10.035"
+      }
+    ],
+    "license": "/licenses/diedrichsen-atlas-notice.txt",
+    "categoricalSha256": "3749c701422f10d6b5153bfd467a2f115be485a065178e7d4ee89f48e1ccb5fa",
+    "lookupSha256": "dc682c847972bd37badaa979526cf22a25bc79cdf50f4f49c107391c517fe7ad",
+    "permissionSha256": "f6c544b949f5a20059f9f154c93d892909f2a9bf6bba74396a9b15a5df55246e"
+  },
+  "method": "Native uint8 probability channels are separated and losslessly gzip-compressed in x-fastest order. Source slope and intercept are retained; no interpolation, resampling, thresholding, renormalization, or new quantization. Coordinates and sampling stay in the original 1 mm grid. Peak uses the first maximum in C-array order. The published categorical volume is shown independently, not recomputed. Rounded endpoint scaling slightly above 1 is clamped only for display.",
+  "interpretation": "Lobular channels (1\u201328) and nuclear channels (29\u201334) derive from different participant groups. There is no background probability channel. Values must not be renormalized together or used to invent a background probability. The categorical map can say background at a label\u2019s probability peak. The images show atlas label probabilities, not MRI intensities, task activation, individual anatomy, or an accuracy score."
+}

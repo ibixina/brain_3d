@@ -10,6 +10,7 @@ import {
   type SubregionAtlas,
   type SubregionKind,
   type SubregionName,
+  type Subregion,
 } from "../subregions.ts";
 import {
   resolveSubregionRoute,
@@ -22,6 +23,21 @@ import { thalamicGroupCamera, thalamicGroupSelection } from "../thalamus-guide.t
 import ContentBoundary, { ContentRecovery } from "./ContentBoundary";
 
 const ProbabilityEvidence = lazy(() => import("./ProbabilityEvidence"));
+const CerebellarProbability = lazy(() => import("./CerebellarProbability"));
+
+function CerebellarProbabilityDisclosure({ part, parts }: { part: Subregion; parts: Subregion[] }) {
+  const [open, setOpen] = useState(false);
+  return (
+    <details className="subregion-probability" onToggle={(event) => setOpen(event.currentTarget.open)}>
+      <summary>Explore probability slices</summary>
+      {open && <ContentBoundary label="Native atlas probability slices">
+        <Suspense fallback={<p role="status">Loading source slice viewer…</p>}>
+          <CerebellarProbability part={part} parts={parts} />
+        </Suspense>
+      </ContentBoundary>}
+    </details>
+  );
+}
 
 function ProbabilityDisclosure({ kind, part, omitted = false, boundary, source }: {
   kind: SubregionKind;
@@ -85,7 +101,7 @@ const atlasNotes: Record<SubregionKind, { scope: string; protocol: string }> = {
   },
   cerebellum: {
     scope: "It shows 28 lobular compartments and six deep-nucleus labels (three pairs). I–IV share a compartment; interposed combines emboliform and globose. Cellular layers, full foliation, and individual fibers are not reconstructed.",
-    protocol: "Lobular and deep-nucleus maps come from different participant groups in the 2009 and 2011 studies. The published categorical map is used as supplied. The left/right fastigial labels contain only 2/5 voxels, and Vermis_CrusI contains 20; these fragments do not establish full anatomical extents. Source spellings are retained. Anatomical labels are not task-activation maps.",
+    protocol: "Lobular and deep-nucleus maps come from different participant groups in the 2009 and 2011 studies. The published categorical map is used as supplied. The separate probability-slice view samples original MNISym channels without resampling or renormalization. The left/right fastigial labels contain only 2/5 voxels, and Vermis_CrusI contains 20; these fragments do not establish full anatomical extents. Source spellings are retained. Anatomical labels are not task-activation maps.",
   },
 };
 
@@ -653,6 +669,7 @@ function LoadedSubregions({
           </button>
         </div>
         {selected && atlas.probabilityEvidence !== false && <ProbabilityDisclosure kind={kind} part={selected} />}
+        {selected && kind === "cerebellum" && <CerebellarProbabilityDisclosure part={selected} parts={atlas.parts} />}
         <button className="subregion-share" onClick={copyLink}>
           <Link size={14} /> Copy this atlas view
         </button>
