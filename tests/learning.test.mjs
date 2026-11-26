@@ -1,6 +1,8 @@
 import assert from "node:assert/strict";
 import test from "node:test";
 import atlas from "../src/atlas-manifest.json" with { type: "json" };
+import learningChecks from "../src/learning-self-checks.json" with { type: "json" };
+import { learningCheckIsCorrect } from "../src/learning-check.ts";
 import {
   learningPaths,
   learningSources,
@@ -111,4 +113,17 @@ test("corpus callosum tour visits the five real FreeSurfer segments and distingu
   assert.match(path.limit, /not direct axon tracing/);
   assert.equal(learningSources.callosal.url, "https://surfer.nmr.mgh.harvard.edu/fswiki/mri_cc");
   assert.equal(learningSources.callosalTopography.url, "https://pubmed.ncbi.nlm.nih.gov/16854598/");
+});
+
+test("every guided path ends with a source-scoped recall question and correctable feedback", () => {
+  for (const path of learningPaths) {
+    const check = learningChecks[path.id];
+    assert.ok(check, `${path.id}: knowledge check`);
+    assert.ok(check.question && check.correctFeedback && check.incorrectFeedback);
+    assert.equal(check.options.length, 3);
+    assert.ok(check.answerIndex >= 0 && check.answerIndex < check.options.length);
+    assert.equal(new Set(check.options).size, check.options.length);
+    assert.equal(learningCheckIsCorrect(check, check.answerIndex), true);
+    assert.equal(learningCheckIsCorrect(check, (check.answerIndex + 1) % check.options.length), false);
+  }
 });

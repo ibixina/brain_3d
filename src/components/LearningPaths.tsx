@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { lazy, Suspense, useState } from "react";
 import {
   ArrowLeft,
   ArrowRight,
@@ -9,6 +9,7 @@ import {
   X,
 } from "lucide-react";
 import { regions } from "../data";
+import ContentBoundary from "./ContentBoundary";
 import {
   filterLearningPaths,
   learningCheckDate,
@@ -17,6 +18,8 @@ import {
   type LearningPosition,
 } from "../learning";
 import "./learning.css";
+
+const LearningSelfCheck = lazy(() => import("./LearningSelfCheck"));
 
 export function LearningLibrary({
   onStart,
@@ -136,6 +139,13 @@ export function LearningExplanation({
           {source.kind} · Checked {position.path.checkedOn ?? learningCheckDate}
         </span>
       </details>
+      {position.step === position.path.steps.length - 1 && (
+        <ContentBoundary label="Learning recall check">
+          <Suspense fallback={null}>
+            <LearningSelfCheck key={position.path.id} pathId={position.path.id} />
+          </Suspense>
+        </ContentBoundary>
+      )}
     </section>
   );
 }

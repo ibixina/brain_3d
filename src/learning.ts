@@ -16,6 +16,13 @@ export type LearningStop = {
     isolate?: boolean;
   };
 };
+export type LearningSelfCheck = {
+  question: string;
+  options: string[];
+  answerIndex: number;
+  correctFeedback: string;
+  incorrectFeedback: string;
+};
 export type LearningPath = {
   id: string;
   title: string;
