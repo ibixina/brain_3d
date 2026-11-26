@@ -1,5 +1,10 @@
 import { planeAxis, planeDimensions, voxelIndex, type Grid, type Plane, type Point3 } from "./imaging.ts";
 
+export const xtractCallosalGuideStops: Record<string, number> = {
+  fma: 0,
+  fmi: 4,
+};
+
 export type XtractEntry = {
   channel: number;
   id: string;

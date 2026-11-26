@@ -5,7 +5,8 @@ import { gunzipSync } from "node:zlib";
 import test from "node:test";
 import { voxelIndex, worldPoint } from "../src/imaging.ts";
 import { probabilityPointAt } from "../src/probability-slices.ts";
-import { xtractMapSlice } from "../src/tractography.ts";
+import { learningFromHash, learningHash, learningPaths } from "../src/learning.ts";
+import { xtractCallosalGuideStops, xtractMapSlice } from "../src/tractography.ts";
 
 const read = (path) => readFileSync(new URL(`../${path}`, import.meta.url));
 const manifest = JSON.parse(read("public/tractography/xtract/manifest.json"));
@@ -92,4 +93,22 @@ test("the atlas loads only when opened and does not download a structural MRI in
   assert.match(slice, /L ← · R → · A ↑ · P ↓/);
   assert.match(slice, /L ← · R → · S ↑ · I ↓/);
   assert.match(slice, /P ← · A → · S ↑ · I ↓/);
+});
+
+test("forceps major and minor open the related, separately segmented callosal 3D guide stops", () => {
+  const path = learningPaths.find((item) => item.id === "callosum");
+  assert.ok(path);
+  assert.deepEqual(Object.keys(xtractCallosalGuideStops).sort(), ["fma", "fmi"]);
+  for (const [tract, expectedRegion] of [["fma", "aseg-251"], ["fmi", "aseg-255"]]) {
+    const step = xtractCallosalGuideStops[tract];
+    const route = learningFromHash(learningHash(path, step));
+    assert.equal(route?.path.id, "callosum");
+    assert.equal(route?.step, step);
+    assert.equal(route?.path.steps[step].region, expectedRegion);
+  }
+  const component = read("src/components/XtractWorkspace.tsx").toString();
+  assert.match(component, /doi\.org\/10\.3390\/diagnostics14161838/);
+  assert.match(component, /fswiki\/mri_cc/);
+  assert.match(component, /not registered to or projected onto that surface/);
+  assert.match(component, /target="_blank"/);
 });

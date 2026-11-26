@@ -3,7 +3,8 @@ import { ArrowUpRight, BookOpen, LoaderCircle, RotateCcw } from "lucide-react";
 import { assetUrl } from "../asset-url";
 import { planes, voxelIndex, worldPoint, type Point3 } from "../imaging";
 import { loadProbabilityBytes } from "../probability-slices";
-import { type XtractEntry, type XtractManifest } from "../tractography";
+import { learningHash, learningPaths } from "../learning";
+import { type XtractEntry, type XtractManifest, xtractCallosalGuideStops } from "../tractography";
 import XtractSlice from "./XtractSlice";
 import "./xtract.css";
 
@@ -93,6 +94,11 @@ function LoadedXtract({
     ? values[voxelIndex(point, manifest.grid.shape)] / manifest.encoding.scale * 100
     : 0;
   const coordinates = worldPoint(point, manifest.grid);
+  const callosalStopIndex = xtractCallosalGuideStops[entry.id];
+  const callosalPath = learningPaths.find((path) => path.id === "callosum");
+  const callosalStop = callosalStopIndex === undefined
+    ? undefined
+    : callosalPath?.steps[callosalStopIndex];
 
   return (
     <section className="xtract-workspace" aria-label="Xtract white-matter pathway maps">
@@ -147,6 +153,24 @@ function LoadedXtract({
             <span>low overlap</span><i /><span>high overlap</span>
           </div>
         </div>
+      )}
+
+      {callosalStop && callosalPath && (
+        <aside className="xtract-related" aria-label="Related three-dimensional anatomy">
+          <div>
+            <span className="eyebrow">RELATED 3D CONTEXT</span>
+            <p>
+              A primary diffusion-MRI study labels forceps major with the splenium and forceps minor with the genu. This guide opens the nearby <strong>{callosalStop.title.toLowerCase()}</strong> mesh. FreeSurfer divides the callosum by geometric distance; this Xtract probability map is not registered to or projected onto that surface.
+            </p>
+            <div className="xtract-related-sources">
+              <a href="https://doi.org/10.3390/diagnostics14161838" target="_blank" rel="noreferrer">Dobrynina et al. · diffusion-MRI study <ArrowUpRight size={12} /></a>
+              <a href="https://surfer.nmr.mgh.harvard.edu/fswiki/mri_cc" target="_blank" rel="noreferrer">FreeSurfer · callosum segmentation method <ArrowUpRight size={12} /></a>
+            </div>
+          </div>
+          <a className="xtract-related-link" href={learningHash(callosalPath, callosalStopIndex)} target="_blank" rel="noreferrer">
+            Explore {callosalStop.title.toLowerCase()} in the 3D learning path <ArrowUpRight size={13} />
+          </a>
+        </aside>
       )}
 
       <details className="xtract-scope">

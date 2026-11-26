@@ -139,6 +139,50 @@
   padding: 12px 0 0;
   border-top: 1px solid var(--line);
 }
+.xtract-related {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  margin-top: 16px;
+  padding: 13px 14px;
+  border: 1px solid #ffffff13;
+  border-radius: 8px;
+  background: #0d1822aa;
+}
+.xtract-related > div {
+  min-width: 0;
+}
+.xtract-related p {
+  max-width: 850px;
+  margin: 7px 0;
+  color: #91a7b4;
+  font-size: 10px;
+  line-height: 1.6;
+}
+.xtract-related p strong {
+  color: #cfdee0;
+}
+.xtract-related-sources {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 14px;
+}
+.xtract-related-sources a,
+.xtract-related-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  color: #a6cfc7;
+  font-size: 9px;
+}
+.xtract-related-link {
+  flex: 0 0 auto;
+  padding: 9px 11px;
+  border: 1px solid #8cc8b636;
+  border-radius: 6px;
+  color: #c4ded8;
+}
 .xtract-scope summary {
   color: #a8c7d1;
   font-size: 10px;
@@ -189,6 +233,13 @@
   }
   .xtract-controls {
     grid-template-columns: 1fr auto;
+  }
+  .xtract-related {
+    align-items: stretch;
+    flex-direction: column;
+  }
+  .xtract-related-link {
+    align-self: flex-start;
   }
   .xtract-legend {
     grid-column: 1 / -1;
