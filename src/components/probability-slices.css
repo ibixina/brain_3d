@@ -1,12 +1,12 @@
-.cerebellar-probability h4 {
+.probability-explorer h4 {
   color: #d1e7e5;
   font-size: 12px;
   margin: 15px 0 9px;
 }
-.cerebellar-probability p { margin: 12px 0; }
+.probability-explorer p { margin: 12px 0; }
 .probability-planes { display: flex; gap: 5px; margin: 14px 0 8px; }
 .probability-planes button { flex: 1; text-transform: capitalize; }
-.cerebellar-probability .probability-slice {
+.probability-explorer .probability-slice {
   position: relative;
   display: block;
   width: 100%;
@@ -28,10 +28,10 @@
 .probability-bottom { bottom: 2px; left: 47%; }
 .probability-scale { display: flex; align-items: center; gap: 8px; font-size: 9px; margin: 7px 0; }
 .probability-scale i { flex: 1; height: 5px; background: linear-gradient(to right, #21526b, #f2cf66); border-radius: 2px; }
-.cerebellar-probability .probability-key { color: #9ab3c1; font-size: 10px; line-height: 1.7; margin: 8px 0; }
+.probability-explorer .probability-key { color: #9ab3c1; font-size: 10px; line-height: 1.7; margin: 8px 0; }
 .probability-position { display: grid; gap: 6px; margin: 14px 0; text-transform: capitalize; }
 .probability-position input { width: 100%; margin: 4px 0; accent-color: #8ed6c5; }
 .probability-readout { padding: 1px 10px; margin: 12px 0; border: 1px solid #ffffff18; border-radius: 6px; font-size: 10px; }
 .probability-readout p:first-child { display: flex; justify-content: space-between; gap: 8px; }
 .probability-readout strong { color: #d3e8e6; font-weight: 500; }
-.cerebellar-probability button:focus-visible { outline: 2px solid #8ed6c5; outline-offset: 3px; }
+.probability-explorer button:focus-visible { outline: 2px solid #8ed6c5; outline-offset: 3px; }

@@ -24,6 +24,7 @@ import ContentBoundary, { ContentRecovery } from "./ContentBoundary";
 
 const ProbabilityEvidence = lazy(() => import("./ProbabilityEvidence"));
 const CerebellarProbability = lazy(() => import("./CerebellarProbability"));
+const HippocampalProbability = lazy(() => import("./HippocampalProbability"));
 
 function CerebellarProbabilityDisclosure({ part, parts }: { part: Subregion; parts: Subregion[] }) {
   const [open, setOpen] = useState(false);
@@ -33,6 +34,20 @@ function CerebellarProbabilityDisclosure({ part, parts }: { part: Subregion; par
       {open && <ContentBoundary label="Native atlas probability slices">
         <Suspense fallback={<p role="status">Loading source slice viewer…</p>}>
           <CerebellarProbability part={part} parts={parts} />
+        </Suspense>
+      </ContentBoundary>}
+    </details>
+  );
+}
+
+function HippocampalProbabilityDisclosure({ part, parts }: { part: Subregion; parts: Subregion[] }) {
+  const [open, setOpen] = useState(false);
+  return (
+    <details className="subregion-probability" onToggle={(event) => setOpen(event.currentTarget.open)}>
+      <summary>Explore native probability slices</summary>
+      {open && <ContentBoundary label="Native hippocampal probability slices">
+        <Suspense fallback={<p role="status">Loading source slice viewer…</p>}>
+          <HippocampalProbability part={part} parts={parts} />
         </Suspense>
       </ContentBoundary>}
     </details>
@@ -676,6 +691,7 @@ function LoadedSubregions({
         </div>
         {selected && atlas.probabilityEvidence !== false && <ProbabilityDisclosure kind={kind} part={selected} />}
         {selected && kind === "cerebellum" && <CerebellarProbabilityDisclosure part={selected} parts={atlas.parts} />}
+        {selected && kind === "hippocampus" && <HippocampalProbabilityDisclosure key={selected.id} part={selected} parts={atlas.parts} />}
         <button className="subregion-share" onClick={copyLink}>
           <Link size={14} /> Copy this atlas view
         </button>

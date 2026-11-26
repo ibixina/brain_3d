@@ -1,11 +1,11 @@
 import { useEffect, useId, useRef, useState } from "react";
 import { assetUrl } from "../asset-url.ts";
 import { cerebellarProbabilityUrl, loadProbabilityBytes, moveProbabilityPoint, probabilitySlice,
-  probabilityPointAt, sourceProbability, type CerebellarProbability } from "../cerebellar-probability.ts";
+  probabilityPointAt, sourceProbability, type CerebellarProbability } from "../probability-slices.ts";
 import { planeAxis, planeDimensions, planes, voxelIndex, worldPoint, type Plane, type Point3 } from "../imaging.ts";
 import { probabilityPercent } from "../subregion-evidence.ts";
 import { subregionName, type Subregion } from "../subregions.ts";
-import "./cerebellar-probability.css";
+import "./probability-slices.css";
 
 export default function CerebellarProbabilityPanel({ part, parts }: { part: Subregion; parts: Subregion[] }) {
   const [data, setData] = useState<{ manifest: CerebellarProbability; labels: Uint8Array } | null>(null);
@@ -72,7 +72,7 @@ function LoadedProbability({ part, parts, manifest, labels }: {
   const horizontalEnds = plane === "sagittal" ? ["P", "A"] : ["L", "R"];
   const verticalEnds = plane === "axial" ? ["A", "P"] : ["S", "I"];
   return (
-    <section className="cerebellar-probability" aria-label={`${subregionName(part)} native probability slices`}>
+    <section className="probability-explorer" aria-label={`${subregionName(part)} native probability slices`}>
       <h4>{subregionName(part)}</h4>
       <p>Explore the label’s full probability map, including locations outside its 3D surface. Starts at this channel’s peak.</p>
       <div className="probability-planes" aria-label="Source slice plane">

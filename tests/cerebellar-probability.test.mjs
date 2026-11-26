@@ -3,7 +3,7 @@ import { createHash } from "node:crypto";
 import { readFileSync } from "node:fs";
 import { gunzipSync } from "node:zlib";
 import test from "node:test";
-import { moveProbabilityPoint, probabilityPointAt, probabilitySlice, sourceProbability } from "../src/cerebellar-probability.ts";
+import { moveProbabilityPoint, probabilityPointAt, probabilitySlice, sourceProbability } from "../src/probability-slices.ts";
 import { planeAxis, planeDimensions, planes, voxelIndex, worldPoint } from "../src/imaging.ts";
 
 const read = (path) => readFileSync(new URL(`../${path}`, import.meta.url));
@@ -106,6 +106,24 @@ test("all source slice planes sample x-fastest voxels with R/A to the right and 
     }
     assert.equal(point[planeAxis[plane]], [1,2,3][planeAxis[plane]]);
   }
+});
+
+test("float32 channels preserve source probabilities and mirror the reflected side for rightward RAS display", () => {
+  const shape = [2, 2, 1], grid = { ...manifest.grid, shape }, data = { grid, encoding: { slope: 1, intercept: 0 } };
+  const values = Float32Array.from([.25, .5, .75, 1]);
+  const context = new Uint8Array(4);
+  assert.equal(sourceProbability(values[0], data.encoding), .25);
+  const right = probabilitySlice("axial", [0, 0, 0], data, values, context, 1, true);
+  assert.deepEqual(right.pixels.slice(0, 4), Uint8ClampedArray.from([242, 207, 102, 255]));
+  assert.equal(right.width, 2);
+});
+
+test("right-side click and arrow movement follow displayed RAS left/right in the axial and coronal planes", () => {
+  const shape = [4, 5, 6], start = [2, 2, 3];
+  assert.deepEqual(probabilityPointAt(start, "axial", 0, 0, shape, true), [3, 4, 3]);
+  assert.deepEqual(moveProbabilityPoint(start, "axial", "ArrowRight", shape, true), [1, 2, 3]);
+  assert.deepEqual(moveProbabilityPoint(start, "coronal", "ArrowLeft", shape, true), [3, 2, 3]);
+  assert.deepEqual(moveProbabilityPoint(start, "sagittal", "ArrowRight", shape), [2, 3, 3]);
 });
 
 test("native click and keyboard navigation preserve depth, reach every voxel center, and clamp edges", () => {

@@ -1,0 +1,1439 @@
+{
+  "version": 1,
+  "kind": "hippocampus",
+  "checkedOn": "2026-11-26",
+  "grids": {
+    "left": {
+      "shape": [
+        164,
+        224,
+        196
+      ],
+      "origin": [
+        -45.0,
+        -49.0,
+        -35.0
+      ],
+      "spacing": [
+        0.25,
+        0.25,
+        0.25
+      ],
+      "orientation": "RAS in source voxel coordinates; right-side x axis is reflected",
+      "space": "MNI-ICBM152 2009c symmetric"
+    },
+    "right": {
+      "shape": [
+        164,
+        224,
+        196
+      ],
+      "origin": [
+        45.0,
+        -49.0,
+        -35.0
+      ],
+      "spacing": [
+        -0.25,
+        0.25,
+        0.25
+      ],
+      "orientation": "RAS in source voxel coordinates; right-side x axis is reflected",
+      "space": "MNI-ICBM152 2009c symmetric"
+    }
+  },
+  "encoding": {
+    "dtype": "float32",
+    "byteOrder": "little-endian",
+    "order": "x-fastest",
+    "slope": 1,
+    "intercept": 0,
+    "displayRange": [
+      0,
+      1
+    ],
+    "sourceRange": [
+      -7.450580596923828e-08,
+      1.0
+    ]
+  },
+  "context": {
+    "asset": {
+      "url": "/subregions/hippocampus-probability/winner-channels.u8.gz",
+      "bytes": 62427,
+      "rawBytes": 7200256,
+      "sha256": "0c6c4818abbb9054b2778a3174cb4e5314a5f6d9b040653c0d242d3b0cfddae6",
+      "compressedSha256": "8fd0e6c509d95c16ebcb1cc3e9919467a7aff274680045aada616d0398945da8"
+    },
+    "dtype": "uint8 channel index",
+    "method": "Argmax over all 30 source channels; source channel order resolves ties."
+  },
+  "categories": [
+    {
+      "channel": 0,
+      "label": 0,
+      "sourceName": "Unknown"
+    },
+    {
+      "channel": 1,
+      "label": 226,
+      "sourceName": "Hippocampal_tail"
+    },
+    {
+      "channel": 2,
+      "label": 236,
+      "sourceName": "subiculum-body"
+    },
+    {
+      "channel": 3,
+      "label": 238,
+      "sourceName": "CA1-body"
+    },
+    {
+      "channel": 4,
+      "label": 235,
+      "sourceName": "subiculum-head"
+    },
+    {
+      "channel": 5,
+      "label": 215,
+      "sourceName": "hippocampal-fissure"
+    },
+    {
+      "channel": 6,
+      "label": 233,
+      "sourceName": "presubiculum-head"
+    },
+    {
+      "channel": 7,
+      "label": 201,
+      "sourceName": "alveus"
+    },
+    {
+      "channel": 8,
+      "label": 237,
+      "sourceName": "CA1-head"
+    },
+    {
+      "channel": 9,
+      "label": 234,
+      "sourceName": "presubiculum-body"
+    },
+    {
+      "channel": 10,
+      "label": 203,
+      "sourceName": "parasubiculum"
+    },
+    {
+      "channel": 11,
+      "label": 245,
+      "sourceName": "molecular_layer_HP-head"
+    },
+    {
+      "channel": 12,
+      "label": 246,
+      "sourceName": "molecular_layer_HP-body"
+    },
+    {
+      "channel": 13,
+      "label": 243,
+      "sourceName": "GC-ML-DG-head"
+    },
+    {
+      "channel": 14,
+      "label": 240,
+      "sourceName": "CA3-body"
+    },
+    {
+      "channel": 15,
+      "label": 244,
+      "sourceName": "GC-ML-DG-body"
+    },
+    {
+      "channel": 16,
+      "label": 241,
+      "sourceName": "CA4-head"
+    },
+    {
+      "channel": 17,
+      "label": 242,
+      "sourceName": "CA4-body"
+    },
+    {
+      "channel": 18,
+      "label": 212,
+      "sourceName": "fimbria"
+    },
+    {
+      "channel": 19,
+      "label": 239,
+      "sourceName": "CA3-head"
+    },
+    {
+      "channel": 20,
+      "label": 211,
+      "sourceName": "HATA"
+    },
+    {
+      "channel": 21,
+      "label": 7001,
+      "sourceName": "Lateral-nucleus"
+    },
+    {
+      "channel": 22,
+      "label": 7003,
+      "sourceName": "Basal-nucleus"
+    },
+    {
+      "channel": 23,
+      "label": 7008,
+      "sourceName": "Accessory-Basal-nucleus"
+    },
+    {
+      "channel": 24,
+      "label": 7010,
+      "sourceName": "Anterior-amygdaloid-area-AAA"
+    },
+    {
+      "channel": 25,
+      "label": 7005,
+      "sourceName": "Central-nucleus"
+    },
+    {
+      "channel": 26,
+      "label": 7006,
+      "sourceName": "Medial-nucleus"
+    },
+    {
+      "channel": 27,
+      "label": 7007,
+      "sourceName": "Cortical-nucleus"
+    },
+    {
+      "channel": 28,
+      "label": 7009,
+      "sourceName": "Corticoamygdaloid-transitio"
+    },
+    {
+      "channel": 29,
+      "label": 7015,
+      "sourceName": "Paralaminar-nucleus"
+    }
+  ],
+  "entries": {
+    "hipp-left-226": {
+      "channel": 1,
+      "label": 226,
+      "sourceName": "Hippocampal_tail",
+      "asset": {
+        "url": "/subregions/hippocampus-probability/channel-1.f32.gz",
+        "bytes": 655217,
+        "rawBytes": 28801024,
+        "sha256": "1e94ed07fac5de8bd0c844b3bf5056acc2a029dfc8512ad5bcdde372ad88ce8c",
+        "compressedSha256": "66412060cf17053c4650af2d0bd97b8f02092b2da3853721dc9f423ba5bc7d86"
+      },
+      "positiveVoxels": 158090,
+      "categoricalVoxels": 41081,
+      "peak": {
+        "index": [
+          103,
+          46,
+          162
+        ],
+        "probability": 0.9975702166557312,
+        "rasMm": [
+          -19.25,
+          -37.5,
+          5.5
+        ],
+        "selectedWins": true,
+        "winnerChannel": 1,
+        "winnerSourceName": "Hippocampal_tail"
+      }
+    },
+    "hipp-left-236": {
+      "channel": 2,
+      "label": 236,
+      "sourceName": "subiculum-body",
+      "asset": {
+        "url": "/subregions/hippocampus-probability/channel-2.f32.gz",
+        "bytes": 406665,
+        "rawBytes": 28801024,
+        "sha256": "eb2b497b3c10bd4f5d36d95345323f17264951cef994cad222d969d701865086",
+        "compressedSha256": "2d9ab341223311094df328d745cdb233f65da22960c294fc14447d88ff65c4f3"
+      },
+      "positiveVoxels": 92392,
+      "categoricalVoxels": 20625,
+      "peak": {
+        "index": [
+          69,
+          72,
+          91
+        ],
+        "probability": 0.999805212020874,
+        "rasMm": [
+          -27.75,
+          -31.0,
+          -12.25
+        ],
+        "selectedWins": true,
+        "winnerChannel": 2,
+        "winnerSourceName": "subiculum-body"
+      }
+    },
+    "hipp-left-238": {
+      "channel": 3,
+      "label": 238,
+      "sourceName": "CA1-body",
+      "asset": {
+        "url": "/subregions/hippocampus-probability/channel-3.f32.gz",
+        "bytes": 257734,
+        "rawBytes": 28801024,
+        "sha256": "1dba56816211231fb976d67564e8cfdd074cc8fe70b230be86c5832a77fb7ebc",
+        "compressedSha256": "a180e532fe4ce7d6f9a17e952400a8e99b40df3b0ef1b3f8630bd078ebd70bfa"
+      },
+      "positiveVoxels": 54149,
+      "categoricalVoxels": 7644,
+      "peak": {
+        "index": [
+          42,
+          71,
+          95
+        ],
+        "probability": 0.9963796138763428,
+        "rasMm": [
+          -34.5,
+          -31.25,
+          -11.25
+        ],
+        "selectedWins": true,
+        "winnerChannel": 3,
+        "winnerSourceName": "CA1-body"
+      }
+    },
+    "hipp-left-235": {
+      "channel": 4,
+      "label": 235,
+      "sourceName": "subiculum-head",
+      "asset": {
+        "url": "/subregions/hippocampus-probability/channel-4.f32.gz",
+        "bytes": 335932,
+        "rawBytes": 28801024,
+        "sha256": "44b6e45a3999bfc1209aa150c91913c310951d4aaffd29b2b66f8a605708462b",
+        "compressedSha256": "5843e35d28f627148584d74c9ccf5a8a1b6bc11646416f43e761cc2fd1ef8ba5"
+      },
+      "positiveVoxels": 75650,
+      "categoricalVoxels": 15273,
+      "peak": {
+        "index": [
+          61,
+          139,
+          39
+        ],
+        "probability": 1.0,
+        "rasMm": [
+          -29.75,
+          -14.25,
+          -25.25
+        ],
+        "selectedWins": true,
+        "winnerChannel": 4,
+        "winnerSourceName": "subiculum-head"
+      }
+    },
+    "hipp-left-215": {
+      "channel": 5,
+      "label": 215,
+      "sourceName": "hippocampal-fissure",
+      "asset": {
+        "url": "/subregions/hippocampus-probability/channel-5.f32.gz",
+        "bytes": 691315,
+        "rawBytes": 28801024,
+        "sha256": "382fbb188bb4c6247d108169a38d6302fef624d3c71965220e5fe94c6439de39",
+        "compressedSha256": "97ec82fe70bb8d243a6ed91081b491d4d70e59ba8a71f5277b2740d0a295a1f4"
+      },
+      "positiveVoxels": 163257,
+      "categoricalVoxels": 6861,
+      "peak": {
+        "index": [
+          78,
+          156,
+          35
+        ],
+        "probability": 0.8440802097320557,
+        "rasMm": [
+          -25.5,
+          -10.0,
+          -26.25
+        ],
+        "selectedWins": true,
+        "winnerChannel": 5,
+        "winnerSourceName": "hippocampal-fissure"
+      }
+    },
+    "hipp-left-233": {
+      "channel": 6,
+      "label": 233,
+      "sourceName": "presubiculum-head",
+      "asset": {
+        "url": "/subregions/hippocampus-probability/channel-6.f32.gz",
+        "bytes": 271604,
+        "rawBytes": 28801024,
+        "sha256": "bf24691b9cfeacdead469b31e1c1af8178223deeacfe5e8cdbb930293778cc9b",
+        "compressedSha256": "240a1930d16e8b892a9f197543efcf783a56dc87b3d9c4f358a8e56391914909"
+      },
+      "positiveVoxels": 59822,
+      "categoricalVoxels": 12023,
+      "peak": {
+        "index": [
+          88,
+          132,
+          46
+        ],
+        "probability": 1.0,
+        "rasMm": [
+          -23.0,
+          -16.0,
+          -23.5
+        ],
+        "selectedWins": true,
+        "winnerChannel": 6,
+        "winnerSourceName": "presubiculum-head"
+      }
+    },
+    "hipp-left-201": {
+      "channel": 7,
+      "label": 201,
+      "sourceName": "alveus",
+      "asset": {
+        "url": "/subregions/hippocampus-probability/channel-7.f32.gz",
+        "bytes": 1014955,
+        "rawBytes": 28801024,
+        "sha256": "ab0c322b9f38475a1b91240dc3198f9e59a0d409c45ee9db1e90b663c7ce78d1",
+        "compressedSha256": "3b04bca60724aeb7cb9f7d0a3d929763bc50bc962586dc3b29c1f0d732203a4b"
+      },
+      "positiveVoxels": 245828,
+      "categoricalVoxels": 14967,
+      "peak": {
+        "index": [
+          113,
+          160,
+          60
+        ],
+        "probability": 0.9572338461875916,
+        "rasMm": [
+          -16.75,
+          -9.0,
+          -20.0
+        ],
+        "selectedWins": true,
+        "winnerChannel": 7,
+        "winnerSourceName": "alveus"
+      }
+    },
+    "hipp-left-237": {
+      "channel": 8,
+      "label": 237,
+      "sourceName": "CA1-head",
+      "asset": {
+        "url": "/subregions/hippocampus-probability/channel-8.f32.gz",
+        "bytes": 559530,
+        "rawBytes": 28801024,
+        "sha256": "a668459f83a7c7db35f746a5ce5b6e5e9de91e027c422189aafe6f3f7a0d0c34",
+        "compressedSha256": "05b8cf853be84ef0ca488fbec21d8b49be9a2d5f319a7c1a3925f97b0cac2c02"
+      },
+      "positiveVoxels": 133218,
+      "categoricalVoxels": 39880,
+      "peak": {
+        "index": [
+          49,
+          145,
+          45
+        ],
+        "probability": 1.0,
+        "rasMm": [
+          -32.75,
+          -12.75,
+          -23.75
+        ],
+        "selectedWins": true,
+        "winnerChannel": 8,
+        "winnerSourceName": "CA1-head"
+      }
+    },
+    "hipp-left-234": {
+      "channel": 9,
+      "label": 234,
+      "sourceName": "presubiculum-body",
+      "asset": {
+        "url": "/subregions/hippocampus-probability/channel-9.f32.gz",
+        "bytes": 291424,
+        "rawBytes": 28801024,
+        "sha256": "33d113a426e15fa560ef08e6c6104b2f1f0acdacfd4cd9d04919aa0d9f03b1b7",
+        "compressedSha256": "d22e5ba77d28d96708622925b4c81e2982929164b2f534b7d2adc34f0688e41d"
+      },
+      "positiveVoxels": 63220,
+      "categoricalVoxels": 13009,
+      "peak": {
+        "index": [
+          84,
+          94,
+          84
+        ],
+        "probability": 1.0,
+        "rasMm": [
+          -24.0,
+          -25.5,
+          -14.0
+        ],
+        "selectedWins": true,
+        "winnerChannel": 9,
+        "winnerSourceName": "presubiculum-body"
+      }
+    },
+    "hipp-left-203": {
+      "channel": 10,
+      "label": 203,
+      "sourceName": "parasubiculum",
+      "asset": {
+        "url": "/subregions/hippocampus-probability/channel-10.f32.gz",
+        "bytes": 227866,
+        "rawBytes": 28801024,
+        "sha256": "55170ec7b9cee94d0615c55f4094c77b404062e92aa7069cdeca794a1e4b0bff",
+        "compressedSha256": "ef576d7cffd67576177f0a980f27a3999af520c673b10b20eeb572a6f6207df7"
+      },
+      "positiveVoxels": 47860,
+      "categoricalVoxels": 3169,
+      "peak": {
+        "index": [
+          108,
+          144,
+          46
+        ],
+        "probability": 0.9250930547714233,
+        "rasMm": [
+          -18.0,
+          -13.0,
+          -23.5
+        ],
+        "selectedWins": true,
+        "winnerChannel": 10,
+        "winnerSourceName": "parasubiculum"
+      }
+    },
+    "hipp-left-245": {
+      "channel": 11,
+      "label": 245,
+      "sourceName": "molecular_layer_HP-head",
+      "asset": {
+        "url": "/subregions/hippocampus-probability/channel-11.f32.gz",
+        "bytes": 545230,
+        "rawBytes": 28801024,
+        "sha256": "9053a37e4a6d81c4387b05b6f7f30850edd2e55386e6233f2a662f98eedfe71f",
+        "compressedSha256": "0d6481f1f841b676a675caa4755aae8514ee0878778607aee9f2c47bce7429d8"
+      },
+      "positiveVoxels": 130149,
+      "categoricalVoxels": 24953,
+      "peak": {
+        "index": [
+          93,
+          163,
+          41
+        ],
+        "probability": 0.9842736721038818,
+        "rasMm": [
+          -21.75,
+          -8.25,
+          -24.75
+        ],
+        "selectedWins": true,
+        "winnerChannel": 11,
+        "winnerSourceName": "molecular_layer_HP-head"
+      }
+    },
+    "hipp-left-246": {
+      "channel": 12,
+      "label": 246,
+      "sourceName": "molecular_layer_HP-body",
+      "asset": {
+        "url": "/subregions/hippocampus-probability/channel-12.f32.gz",
+        "bytes": 543768,
+        "rawBytes": 28801024,
+        "sha256": "e5dec5d390fa9b5a07dd8e2612eb81eff94ec43eebe636cdee29d56b9db7a7f8",
+        "compressedSha256": "7e3455c724f8fd45b462b6b03a37ae3b816ed8dd0a3e34f33fe663725ae7b693"
+      },
+      "positiveVoxels": 126939,
+      "categoricalVoxels": 17370,
+      "peak": {
+        "index": [
+          48,
+          104,
+          88
+        ],
+        "probability": 0.9934352040290833,
+        "rasMm": [
+          -33.0,
+          -23.0,
+          -13.0
+        ],
+        "selectedWins": true,
+        "winnerChannel": 12,
+        "winnerSourceName": "molecular_layer_HP-body"
+      }
+    },
+    "hipp-left-243": {
+      "channel": 13,
+      "label": 243,
+      "sourceName": "GC-ML-DG-head",
+      "asset": {
+        "url": "/subregions/hippocampus-probability/channel-13.f32.gz",
+        "bytes": 326096,
+        "rawBytes": 28801024,
+        "sha256": "e126fb92a531a4cf8645bbe13215d42d9da988e77abef55770ee28d6487a9d99",
+        "compressedSha256": "0c14e02036a61b0b8010eb75c9ae9df67109e8e837dbeb804fd13d6dd9db3437"
+      },
+      "positiveVoxels": 74083,
+      "categoricalVoxels": 11414,
+      "peak": {
+        "index": [
+          60,
+          142,
+          64
+        ],
+        "probability": 0.9461960196495056,
+        "rasMm": [
+          -30.0,
+          -13.5,
+          -19.0
+        ],
+        "selectedWins": true,
+        "winnerChannel": 13,
+        "winnerSourceName": "GC-ML-DG-head"
+      }
+    },
+    "hipp-left-240": {
+      "channel": 14,
+      "label": 240,
+      "sourceName": "CA3-body",
+      "asset": {
+        "url": "/subregions/hippocampus-probability/channel-14.f32.gz",
+        "bytes": 232252,
+        "rawBytes": 28801024,
+        "sha256": "671ab9cf4087bb07a9f076f720788e798945c0aec9733a2d03f64e7d40e8775b",
+        "compressedSha256": "1c489da327f80a4ecef0ad175cb5e40cd9a7a0d66ad7ccda8e2572bd0f63ff0f"
+      },
+      "positiveVoxels": 48108,
+      "categoricalVoxels": 7037,
+      "peak": {
+        "index": [
+          46,
+          72,
+          109
+        ],
+        "probability": 0.991334080696106,
+        "rasMm": [
+          -33.5,
+          -31.0,
+          -7.75
+        ],
+        "selectedWins": true,
+        "winnerChannel": 14,
+        "winnerSourceName": "CA3-body"
+      }
+    },
+    "hipp-left-244": {
+      "channel": 15,
+      "label": 244,
+      "sourceName": "GC-ML-DG-body",
+      "asset": {
+        "url": "/subregions/hippocampus-probability/channel-15.f32.gz",
+        "bytes": 325277,
+        "rawBytes": 28801024,
+        "sha256": "f5dd9a775b5791d60fcbb5454c093ef6855097774a42fc547cabe01b86385972",
+        "compressedSha256": "f4d72a5f19c814ac26ccb18682588b54240c32b23edeca5bde5f15d0b0c122dd"
+      },
+      "positiveVoxels": 72216,
+      "categoricalVoxels": 12274,
+      "peak": {
+        "index": [
+          48,
+          104,
+          84
+        ],
+        "probability": 0.9646042585372925,
+        "rasMm": [
+          -33.0,
+          -23.0,
+          -14.0
+        ],
+        "selectedWins": true,
+        "winnerChannel": 15,
+        "winnerSourceName": "GC-ML-DG-body"
+      }
+    },
+    "hipp-left-241": {
+      "channel": 16,
+      "label": 241,
+      "sourceName": "CA4-head",
+      "asset": {
+        "url": "/subregions/hippocampus-probability/channel-16.f32.gz",
+        "bytes": 222011,
+        "rawBytes": 28801024,
+        "sha256": "3c67b450a6f9d37861d74d0ca47cdb782005f9ad93e8fa7d5eb82ef35dd22b76",
+        "compressedSha256": "47b02dac28f275c0f4175a707084893f9db04674cd277ad3ad176333e7695b48"
+      },
+      "positiveVoxels": 47575,
+      "categoricalVoxels": 10074,
+      "peak": {
+        "index": [
+          63,
+          136,
+          62
+        ],
+        "probability": 0.9994926452636719,
+        "rasMm": [
+          -29.25,
+          -15.0,
+          -19.5
+        ],
+        "selectedWins": true,
+        "winnerChannel": 16,
+        "winnerSourceName": "CA4-head"
+      }
+    },
+    "hipp-left-242": {
+      "channel": 17,
+      "label": 242,
+      "sourceName": "CA4-body",
+      "asset": {
+        "url": "/subregions/hippocampus-probability/channel-17.f32.gz",
+        "bytes": 231694,
+        "rawBytes": 28801024,
+        "sha256": "865a484bb2f11f20b5f2a0076ca175fe8a20a74e63f6a4d0e9f47e4e690b35b5",
+        "compressedSha256": "fdd1de847210b8fb9b7bfa1276620d2d73bdfd347dcaaa3a6b57298c8e8b0967"
+      },
+      "positiveVoxels": 48413,
+      "categoricalVoxels": 10883,
+      "peak": {
+        "index": [
+          52,
+          101,
+          84
+        ],
+        "probability": 0.9995266199111938,
+        "rasMm": [
+          -32.0,
+          -23.75,
+          -14.0
+        ],
+        "selectedWins": true,
+        "winnerChannel": 17,
+        "winnerSourceName": "CA4-body"
+      }
+    },
+    "hipp-left-212": {
+      "channel": 18,
+      "label": 212,
+      "sourceName": "fimbria",
+      "asset": {
+        "url": "/subregions/hippocampus-probability/channel-18.f32.gz",
+        "bytes": 337122,
+        "rawBytes": 28801024,
+        "sha256": "f5622ca64e84be44a28ef4682fdf5f67890493bba95df5eff6fce052284798a5",
+        "compressedSha256": "c4fc3e8208ab9eca242a9a5265ae0635858dae1a119106744c16d49e3e7bba37"
+      },
+      "positiveVoxels": 74938,
+      "categoricalVoxels": 8907,
+      "peak": {
+        "index": [
+          69,
+          65,
+          125
+        ],
+        "probability": 0.8886505961418152,
+        "rasMm": [
+          -27.75,
+          -32.75,
+          -3.75
+        ],
+        "selectedWins": true,
+        "winnerChannel": 18,
+        "winnerSourceName": "fimbria"
+      }
+    },
+    "hipp-left-239": {
+      "channel": 19,
+      "label": 239,
+      "sourceName": "CA3-head",
+      "asset": {
+        "url": "/subregions/hippocampus-probability/channel-19.f32.gz",
+        "bytes": 290106,
+        "rawBytes": 28801024,
+        "sha256": "8c16684c0c299b8ab124e104ef9c6e0b1bbf1979f365853933182ac5f646ad16",
+        "compressedSha256": "cad2480c7bfb0c15e0b011c77c1cb2f3de78f2c2efc1c39afe1ff57a7f0f21a6"
+      },
+      "positiveVoxels": 65020,
+      "categoricalVoxels": 8164,
+      "peak": {
+        "index": [
+          71,
+          132,
+          80
+        ],
+        "probability": 0.9418458938598633,
+        "rasMm": [
+          -27.25,
+          -16.0,
+          -15.0
+        ],
+        "selectedWins": true,
+        "winnerChannel": 19,
+        "winnerSourceName": "CA3-head"
+      }
+    },
+    "hipp-left-211": {
+      "channel": 20,
+      "label": 211,
+      "sourceName": "HATA",
+      "asset": {
+        "url": "/subregions/hippocampus-probability/channel-20.f32.gz",
+        "bytes": 172823,
+        "rawBytes": 28801024,
+        "sha256": "b5419d74fade8aca87b61dcc088519f6f83337588ba851e46249159447097e3e",
+        "compressedSha256": "ba4504f032f66b6743fea104d810fa76e793db128ea75f0d9203ea599a274368"
+      },
+      "positiveVoxels": 34595,
+      "categoricalVoxels": 3740,
+      "peak": {
+        "index": [
+          113,
+          154,
+          80
+        ],
+        "probability": 0.958300769329071,
+        "rasMm": [
+          -16.75,
+          -10.5,
+          -15.0
+        ],
+        "selectedWins": true,
+        "winnerChannel": 20,
+        "winnerSourceName": "HATA"
+      }
+    },
+    "hipp-right-226": {
+      "channel": 1,
+      "label": 226,
+      "sourceName": "Hippocampal_tail",
+      "asset": {
+        "url": "/subregions/hippocampus-probability/channel-1.f32.gz",
+        "bytes": 655217,
+        "rawBytes": 28801024,
+        "sha256": "1e94ed07fac5de8bd0c844b3bf5056acc2a029dfc8512ad5bcdde372ad88ce8c",
+        "compressedSha256": "66412060cf17053c4650af2d0bd97b8f02092b2da3853721dc9f423ba5bc7d86"
+      },
+      "positiveVoxels": 158090,
+      "categoricalVoxels": 41081,
+      "peak": {
+        "index": [
+          103,
+          46,
+          162
+        ],
+        "probability": 0.9975702166557312,
+        "rasMm": [
+          19.25,
+          -37.5,
+          5.5
+        ],
+        "selectedWins": true,
+        "winnerChannel": 1,
+        "winnerSourceName": "Hippocampal_tail"
+      }
+    },
+    "hipp-right-236": {
+      "channel": 2,
+      "label": 236,
+      "sourceName": "subiculum-body",
+      "asset": {
+        "url": "/subregions/hippocampus-probability/channel-2.f32.gz",
+        "bytes": 406665,
+        "rawBytes": 28801024,
+        "sha256": "eb2b497b3c10bd4f5d36d95345323f17264951cef994cad222d969d701865086",
+        "compressedSha256": "2d9ab341223311094df328d745cdb233f65da22960c294fc14447d88ff65c4f3"
+      },
+      "positiveVoxels": 92392,
+      "categoricalVoxels": 20625,
+      "peak": {
+        "index": [
+          69,
+          72,
+          91
+        ],
+        "probability": 0.999805212020874,
+        "rasMm": [
+          27.75,
+          -31.0,
+          -12.25
+        ],
+        "selectedWins": true,
+        "winnerChannel": 2,
+        "winnerSourceName": "subiculum-body"
+      }
+    },
+    "hipp-right-238": {
+      "channel": 3,
+      "label": 238,
+      "sourceName": "CA1-body",
+      "asset": {
+        "url": "/subregions/hippocampus-probability/channel-3.f32.gz",
+        "bytes": 257734,
+        "rawBytes": 28801024,
+        "sha256": "1dba56816211231fb976d67564e8cfdd074cc8fe70b230be86c5832a77fb7ebc",
+        "compressedSha256": "a180e532fe4ce7d6f9a17e952400a8e99b40df3b0ef1b3f8630bd078ebd70bfa"
+      },
+      "positiveVoxels": 54149,
+      "categoricalVoxels": 7644,
+      "peak": {
+        "index": [
+          42,
+          71,
+          95
+        ],
+        "probability": 0.9963796138763428,
+        "rasMm": [
+          34.5,
+          -31.25,
+          -11.25
+        ],
+        "selectedWins": true,
+        "winnerChannel": 3,
+        "winnerSourceName": "CA1-body"
+      }
+    },
+    "hipp-right-235": {
+      "channel": 4,
+      "label": 235,
+      "sourceName": "subiculum-head",
+      "asset": {
+        "url": "/subregions/hippocampus-probability/channel-4.f32.gz",
+        "bytes": 335932,
+        "rawBytes": 28801024,
+        "sha256": "44b6e45a3999bfc1209aa150c91913c310951d4aaffd29b2b66f8a605708462b",
+        "compressedSha256": "5843e35d28f627148584d74c9ccf5a8a1b6bc11646416f43e761cc2fd1ef8ba5"
+      },
+      "positiveVoxels": 75650,
+      "categoricalVoxels": 15273,
+      "peak": {
+        "index": [
+          61,
+          139,
+          39
+        ],
+        "probability": 1.0,
+        "rasMm": [
+          29.75,
+          -14.25,
+          -25.25
+        ],
+        "selectedWins": true,
+        "winnerChannel": 4,
+        "winnerSourceName": "subiculum-head"
+      }
+    },
+    "hipp-right-215": {
+      "channel": 5,
+      "label": 215,
+      "sourceName": "hippocampal-fissure",
+      "asset": {
+        "url": "/subregions/hippocampus-probability/channel-5.f32.gz",
+        "bytes": 691315,
+        "rawBytes": 28801024,
+        "sha256": "382fbb188bb4c6247d108169a38d6302fef624d3c71965220e5fe94c6439de39",
+        "compressedSha256": "97ec82fe70bb8d243a6ed91081b491d4d70e59ba8a71f5277b2740d0a295a1f4"
+      },
+      "positiveVoxels": 163257,
+      "categoricalVoxels": 6861,
+      "peak": {
+        "index": [
+          78,
+          156,
+          35
+        ],
+        "probability": 0.8440802097320557,
+        "rasMm": [
+          25.5,
+          -10.0,
+          -26.25
+        ],
+        "selectedWins": true,
+        "winnerChannel": 5,
+        "winnerSourceName": "hippocampal-fissure"
+      }
+    },
+    "hipp-right-233": {
+      "channel": 6,
+      "label": 233,
+      "sourceName": "presubiculum-head",
+      "asset": {
+        "url": "/subregions/hippocampus-probability/channel-6.f32.gz",
+        "bytes": 271604,
+        "rawBytes": 28801024,
+        "sha256": "bf24691b9cfeacdead469b31e1c1af8178223deeacfe5e8cdbb930293778cc9b",
+        "compressedSha256": "240a1930d16e8b892a9f197543efcf783a56dc87b3d9c4f358a8e56391914909"
+      },
+      "positiveVoxels": 59822,
+      "categoricalVoxels": 12023,
+      "peak": {
+        "index": [
+          88,
+          132,
+          46
+        ],
+        "probability": 1.0,
+        "rasMm": [
+          23.0,
+          -16.0,
+          -23.5
+        ],
+        "selectedWins": true,
+        "winnerChannel": 6,
+        "winnerSourceName": "presubiculum-head"
+      }
+    },
+    "hipp-right-201": {
+      "channel": 7,
+      "label": 201,
+      "sourceName": "alveus",
+      "asset": {
+        "url": "/subregions/hippocampus-probability/channel-7.f32.gz",
+        "bytes": 1014955,
+        "rawBytes": 28801024,
+        "sha256": "ab0c322b9f38475a1b91240dc3198f9e59a0d409c45ee9db1e90b663c7ce78d1",
+        "compressedSha256": "3b04bca60724aeb7cb9f7d0a3d929763bc50bc962586dc3b29c1f0d732203a4b"
+      },
+      "positiveVoxels": 245828,
+      "categoricalVoxels": 14967,
+      "peak": {
+        "index": [
+          113,
+          160,
+          60
+        ],
+        "probability": 0.9572338461875916,
+        "rasMm": [
+          16.75,
+          -9.0,
+          -20.0
+        ],
+        "selectedWins": true,
+        "winnerChannel": 7,
+        "winnerSourceName": "alveus"
+      }
+    },
+    "hipp-right-237": {
+      "channel": 8,
+      "label": 237,
+      "sourceName": "CA1-head",
+      "asset": {
+        "url": "/subregions/hippocampus-probability/channel-8.f32.gz",
+        "bytes": 559530,
+        "rawBytes": 28801024,
+        "sha256": "a668459f83a7c7db35f746a5ce5b6e5e9de91e027c422189aafe6f3f7a0d0c34",
+        "compressedSha256": "05b8cf853be84ef0ca488fbec21d8b49be9a2d5f319a7c1a3925f97b0cac2c02"
+      },
+      "positiveVoxels": 133218,
+      "categoricalVoxels": 39880,
+      "peak": {
+        "index": [
+          49,
+          145,
+          45
+        ],
+        "probability": 1.0,
+        "rasMm": [
+          32.75,
+          -12.75,
+          -23.75
+        ],
+        "selectedWins": true,
+        "winnerChannel": 8,
+        "winnerSourceName": "CA1-head"
+      }
+    },
+    "hipp-right-234": {
+      "channel": 9,
+      "label": 234,
+      "sourceName": "presubiculum-body",
+      "asset": {
+        "url": "/subregions/hippocampus-probability/channel-9.f32.gz",
+        "bytes": 291424,
+        "rawBytes": 28801024,
+        "sha256": "33d113a426e15fa560ef08e6c6104b2f1f0acdacfd4cd9d04919aa0d9f03b1b7",
+        "compressedSha256": "d22e5ba77d28d96708622925b4c81e2982929164b2f534b7d2adc34f0688e41d"
+      },
+      "positiveVoxels": 63220,
+      "categoricalVoxels": 13009,
+      "peak": {
+        "index": [
+          84,
+          94,
+          84
+        ],
+        "probability": 1.0,
+        "rasMm": [
+          24.0,
+          -25.5,
+          -14.0
+        ],
+        "selectedWins": true,
+        "winnerChannel": 9,
+        "winnerSourceName": "presubiculum-body"
+      }
+    },
+    "hipp-right-203": {
+      "channel": 10,
+      "label": 203,
+      "sourceName": "parasubiculum",
+      "asset": {
+        "url": "/subregions/hippocampus-probability/channel-10.f32.gz",
+        "bytes": 227866,
+        "rawBytes": 28801024,
+        "sha256": "55170ec7b9cee94d0615c55f4094c77b404062e92aa7069cdeca794a1e4b0bff",
+        "compressedSha256": "ef576d7cffd67576177f0a980f27a3999af520c673b10b20eeb572a6f6207df7"
+      },
+      "positiveVoxels": 47860,
+      "categoricalVoxels": 3169,
+      "peak": {
+        "index": [
+          108,
+          144,
+          46
+        ],
+        "probability": 0.9250930547714233,
+        "rasMm": [
+          18.0,
+          -13.0,
+          -23.5
+        ],
+        "selectedWins": true,
+        "winnerChannel": 10,
+        "winnerSourceName": "parasubiculum"
+      }
+    },
+    "hipp-right-245": {
+      "channel": 11,
+      "label": 245,
+      "sourceName": "molecular_layer_HP-head",
+      "asset": {
+        "url": "/subregions/hippocampus-probability/channel-11.f32.gz",
+        "bytes": 545230,
+        "rawBytes": 28801024,
+        "sha256": "9053a37e4a6d81c4387b05b6f7f30850edd2e55386e6233f2a662f98eedfe71f",
+        "compressedSha256": "0d6481f1f841b676a675caa4755aae8514ee0878778607aee9f2c47bce7429d8"
+      },
+      "positiveVoxels": 130149,
+      "categoricalVoxels": 24953,
+      "peak": {
+        "index": [
+          93,
+          163,
+          41
+        ],
+        "probability": 0.9842736721038818,
+        "rasMm": [
+          21.75,
+          -8.25,
+          -24.75
+        ],
+        "selectedWins": true,
+        "winnerChannel": 11,
+        "winnerSourceName": "molecular_layer_HP-head"
+      }
+    },
+    "hipp-right-246": {
+      "channel": 12,
+      "label": 246,
+      "sourceName": "molecular_layer_HP-body",
+      "asset": {
+        "url": "/subregions/hippocampus-probability/channel-12.f32.gz",
+        "bytes": 543768,
+        "rawBytes": 28801024,
+        "sha256": "e5dec5d390fa9b5a07dd8e2612eb81eff94ec43eebe636cdee29d56b9db7a7f8",
+        "compressedSha256": "7e3455c724f8fd45b462b6b03a37ae3b816ed8dd0a3e34f33fe663725ae7b693"
+      },
+      "positiveVoxels": 126939,
+      "categoricalVoxels": 17370,
+      "peak": {
+        "index": [
+          48,
+          104,
+          88
+        ],
+        "probability": 0.9934352040290833,
+        "rasMm": [
+          33.0,
+          -23.0,
+          -13.0
+        ],
+        "selectedWins": true,
+        "winnerChannel": 12,
+        "winnerSourceName": "molecular_layer_HP-body"
+      }
+    },
+    "hipp-right-243": {
+      "channel": 13,
+      "label": 243,
+      "sourceName": "GC-ML-DG-head",
+      "asset": {
+        "url": "/subregions/hippocampus-probability/channel-13.f32.gz",
+        "bytes": 326096,
+        "rawBytes": 28801024,
+        "sha256": "e126fb92a531a4cf8645bbe13215d42d9da988e77abef55770ee28d6487a9d99",
+        "compressedSha256": "0c14e02036a61b0b8010eb75c9ae9df67109e8e837dbeb804fd13d6dd9db3437"
+      },
+      "positiveVoxels": 74083,
+      "categoricalVoxels": 11414,
+      "peak": {
+        "index": [
+          60,
+          142,
+          64
+        ],
+        "probability": 0.9461960196495056,
+        "rasMm": [
+          30.0,
+          -13.5,
+          -19.0
+        ],
+        "selectedWins": true,
+        "winnerChannel": 13,
+        "winnerSourceName": "GC-ML-DG-head"
+      }
+    },
+    "hipp-right-240": {
+      "channel": 14,
+      "label": 240,
+      "sourceName": "CA3-body",
+      "asset": {
+        "url": "/subregions/hippocampus-probability/channel-14.f32.gz",
+        "bytes": 232252,
+        "rawBytes": 28801024,
+        "sha256": "671ab9cf4087bb07a9f076f720788e798945c0aec9733a2d03f64e7d40e8775b",
+        "compressedSha256": "1c489da327f80a4ecef0ad175cb5e40cd9a7a0d66ad7ccda8e2572bd0f63ff0f"
+      },
+      "positiveVoxels": 48108,
+      "categoricalVoxels": 7037,
+      "peak": {
+        "index": [
+          46,
+          72,
+          109
+        ],
+        "probability": 0.991334080696106,
+        "rasMm": [
+          33.5,
+          -31.0,
+          -7.75
+        ],
+        "selectedWins": true,
+        "winnerChannel": 14,
+        "winnerSourceName": "CA3-body"
+      }
+    },
+    "hipp-right-244": {
+      "channel": 15,
+      "label": 244,
+      "sourceName": "GC-ML-DG-body",
+      "asset": {
+        "url": "/subregions/hippocampus-probability/channel-15.f32.gz",
+        "bytes": 325277,
+        "rawBytes": 28801024,
+        "sha256": "f5dd9a775b5791d60fcbb5454c093ef6855097774a42fc547cabe01b86385972",
+        "compressedSha256": "f4d72a5f19c814ac26ccb18682588b54240c32b23edeca5bde5f15d0b0c122dd"
+      },
+      "positiveVoxels": 72216,
+      "categoricalVoxels": 12274,
+      "peak": {
+        "index": [
+          48,
+          104,
+          84
+        ],
+        "probability": 0.9646042585372925,
+        "rasMm": [
+          33.0,
+          -23.0,
+          -14.0
+        ],
+        "selectedWins": true,
+        "winnerChannel": 15,
+        "winnerSourceName": "GC-ML-DG-body"
+      }
+    },
+    "hipp-right-241": {
+      "channel": 16,
+      "label": 241,
+      "sourceName": "CA4-head",
+      "asset": {
+        "url": "/subregions/hippocampus-probability/channel-16.f32.gz",
+        "bytes": 222011,
+        "rawBytes": 28801024,
+        "sha256": "3c67b450a6f9d37861d74d0ca47cdb782005f9ad93e8fa7d5eb82ef35dd22b76",
+        "compressedSha256": "47b02dac28f275c0f4175a707084893f9db04674cd277ad3ad176333e7695b48"
+      },
+      "positiveVoxels": 47575,
+      "categoricalVoxels": 10074,
+      "peak": {
+        "index": [
+          63,
+          136,
+          62
+        ],
+        "probability": 0.9994926452636719,
+        "rasMm": [
+          29.25,
+          -15.0,
+          -19.5
+        ],
+        "selectedWins": true,
+        "winnerChannel": 16,
+        "winnerSourceName": "CA4-head"
+      }
+    },
+    "hipp-right-242": {
+      "channel": 17,
+      "label": 242,
+      "sourceName": "CA4-body",
+      "asset": {
+        "url": "/subregions/hippocampus-probability/channel-17.f32.gz",
+        "bytes": 231694,
+        "rawBytes": 28801024,
+        "sha256": "865a484bb2f11f20b5f2a0076ca175fe8a20a74e63f6a4d0e9f47e4e690b35b5",
+        "compressedSha256": "fdd1de847210b8fb9b7bfa1276620d2d73bdfd347dcaaa3a6b57298c8e8b0967"
+      },
+      "positiveVoxels": 48413,
+      "categoricalVoxels": 10883,
+      "peak": {
+        "index": [
+          52,
+          101,
+          84
+        ],
+        "probability": 0.9995266199111938,
+        "rasMm": [
+          32.0,
+          -23.75,
+          -14.0
+        ],
+        "selectedWins": true,
+        "winnerChannel": 17,
+        "winnerSourceName": "CA4-body"
+      }
+    },
+    "hipp-right-212": {
+      "channel": 18,
+      "label": 212,
+      "sourceName": "fimbria",
+      "asset": {
+        "url": "/subregions/hippocampus-probability/channel-18.f32.gz",
+        "bytes": 337122,
+        "rawBytes": 28801024,
+        "sha256": "f5622ca64e84be44a28ef4682fdf5f67890493bba95df5eff6fce052284798a5",
+        "compressedSha256": "c4fc3e8208ab9eca242a9a5265ae0635858dae1a119106744c16d49e3e7bba37"
+      },
+      "positiveVoxels": 74938,
+      "categoricalVoxels": 8907,
+      "peak": {
+        "index": [
+          69,
+          65,
+          125
+        ],
+        "probability": 0.8886505961418152,
+        "rasMm": [
+          27.75,
+          -32.75,
+          -3.75
+        ],
+        "selectedWins": true,
+        "winnerChannel": 18,
+        "winnerSourceName": "fimbria"
+      }
+    },
+    "hipp-right-239": {
+      "channel": 19,
+      "label": 239,
+      "sourceName": "CA3-head",
+      "asset": {
+        "url": "/subregions/hippocampus-probability/channel-19.f32.gz",
+        "bytes": 290106,
+        "rawBytes": 28801024,
+        "sha256": "8c16684c0c299b8ab124e104ef9c6e0b1bbf1979f365853933182ac5f646ad16",
+        "compressedSha256": "cad2480c7bfb0c15e0b011c77c1cb2f3de78f2c2efc1c39afe1ff57a7f0f21a6"
+      },
+      "positiveVoxels": 65020,
+      "categoricalVoxels": 8164,
+      "peak": {
+        "index": [
+          71,
+          132,
+          80
+        ],
+        "probability": 0.9418458938598633,
+        "rasMm": [
+          27.25,
+          -16.0,
+          -15.0
+        ],
+        "selectedWins": true,
+        "winnerChannel": 19,
+        "winnerSourceName": "CA3-head"
+      }
+    },
+    "hipp-right-211": {
+      "channel": 20,
+      "label": 211,
+      "sourceName": "HATA",
+      "asset": {
+        "url": "/subregions/hippocampus-probability/channel-20.f32.gz",
+        "bytes": 172823,
+        "rawBytes": 28801024,
+        "sha256": "b5419d74fade8aca87b61dcc088519f6f83337588ba851e46249159447097e3e",
+        "compressedSha256": "ba4504f032f66b6743fea104d810fa76e793db128ea75f0d9203ea599a274368"
+      },
+      "positiveVoxels": 34595,
+      "categoricalVoxels": 3740,
+      "peak": {
+        "index": [
+          113,
+          154,
+          80
+        ],
+        "probability": 0.958300769329071,
+        "rasMm": [
+          16.75,
+          -10.5,
+          -15.0
+        ],
+        "selectedWins": true,
+        "winnerChannel": 20,
+        "winnerSourceName": "HATA"
+      }
+    }
+  },
+  "source": {
+    "archiveSha256": "3bedb212780716a9ff5547eb28f5f3018270982f085c892303eb547cb4a85811",
+    "niftiSha256": {
+      "left": "a79d5f88acfa21684a6f8c1e78da21e74ccbf152e68fb845fde048f451c4474e",
+      "right": "4d20bb95435afc9a139279ae2a159d8dfbf3f1b1de0d07d901ff6cf08570e5a3"
+    },
+    "probabilityArraySha256": "79a5ccae7812f4a8406361d8712c46a1d9141ca70825b978fac86d46e455517c",
+    "documentation": "https://surfer.nmr.mgh.harvard.edu/fswiki/SubfieldAtlasesICBMspace",
+    "paper": "https://doi.org/10.1016/j.neuroimage.2015.04.042",
+    "protocol": "https://surfer.nmr.mgh.harvard.edu/fswiki/HippocampalSubfieldsAndNucleiOfAmygdala",
+    "license": "/licenses/freesurfer.txt"
+  },
+  "method": "Each selected source float32 probability channel is preserved byte-for-byte and losslessly gzip-compressed in x-fastest order. Both source hemisphere arrays have identical probability values with reflected RAS affines; one channel file is shared while the selected side supplies its own affine. The categorical context is derived from the argmax over all 30 channels, including Unknown/background and both amygdala channels. No probability interpolation, resampling, thresholding, renormalization, or additional quantization is applied. The color display clamps tiny floating-point excursions to [0,1].",
+  "interpretation": "These are population-atlas label probabilities, not MRI intensities, an individual scan, task activation, or calibrated certainty about an individual boundary. The source atlas combines a protocol based on high-resolution ex vivo human MRI with in vivo training scans; these displayed template coordinates do not register to Cerebra\u2019s whole-brain model or bundled MRI templates."
+}
