@@ -1,5 +1,6 @@
 {
   "memory": {
+    "sourceIds": ["memory"],
     "question": "Which statement matches the hippocampus stop?",
     "options": [
       "Its surface resolves dentate gyrus and CA fields separately.",
@@ -11,6 +12,7 @@
     "incorrectFeedback": "The selected surface is the whole hippocampus. The path explicitly says it does not separate dentate gyrus or CA fields."
   },
   "movement": {
+    "sourceIds": ["basal"],
     "question": "Which divisions does the pallidal mesh combine?",
     "options": [
       "The internal and external pallidal segments.",
@@ -22,6 +24,7 @@
     "incorrectFeedback": "The path notes that the pallidal mesh combines its territory and does not resolve the internal and external segments."
   },
   "vision": {
+    "sourceIds": ["vision"],
     "question": "How should you interpret the pericalcarine surface in this path?",
     "options": [
       "As an approximate anatomical parcel near V1, not an individual functional V1 map.",
@@ -33,6 +36,7 @@
     "incorrectFeedback": "Pericalcarine is an anatomical approximation around V1. The path does not claim individual functional boundaries."
   },
   "language": {
+    "sourceIds": ["speech", "language"],
     "question": "What does this path say about speech comprehension?",
     "options": [
       "It belongs to a single superior-temporal parcel.",
@@ -44,6 +48,7 @@
     "incorrectFeedback": "The language path describes interacting processing streams and warns that atlas parcels do not represent the complete network."
   },
   "emotion": {
+    "sourceIds": ["hypothalamus"],
     "question": "What does the selected ventral-diencephalic label show in the homeostasis stop?",
     "options": [
       "A complete segmentation of hypothalamic nuclei.",
@@ -55,6 +60,7 @@
     "incorrectFeedback": "The path identifies the selected surface as surrounding ventral-diencephalic anatomy, not an individual hypothalamic nucleus."
   },
   "csf": {
+    "sourceIds": ["csf"],
     "question": "Which opening connects each lateral ventricle with the third ventricle?",
     "options": [
       "The cerebral aqueduct.",
@@ -66,6 +72,7 @@
     "incorrectFeedback": "The cerebral aqueduct instead links the third to the fourth ventricle. The interventricular foramen is the connection asked for."
   },
   "callosum": {
+    "sourceIds": ["callosal", "callosalTopography"],
     "question": "What do the model’s five corpus-callosum labels represent?",
     "options": [
       "Five directly traced bundles that define every person’s cortical connections.",

@@ -120,6 +120,11 @@ test("every guided path ends with a source-scoped recall question and correctabl
     const check = learningChecks[path.id];
     assert.ok(check, `${path.id}: knowledge check`);
     assert.ok(check.question && check.correctFeedback && check.incorrectFeedback);
+    assert.ok(check.sourceIds.length > 0, `${path.id}: cited answer`);
+    for (const sourceId of check.sourceIds) {
+      assert.ok(learningSources[sourceId], `${path.id}: source ${sourceId} exists`);
+      assert.equal(new URL(learningSources[sourceId].url).protocol, "https:");
+    }
     assert.equal(check.options.length, 3);
     assert.ok(check.answerIndex >= 0 && check.answerIndex < check.options.length);
     assert.equal(new Set(check.options).size, check.options.length);

@@ -22,6 +22,7 @@ export type LearningSelfCheck = {
   answerIndex: number;
   correctFeedback: string;
   incorrectFeedback: string;
+  sourceIds: string[];
 };
 export type LearningPath = {
   id: string;

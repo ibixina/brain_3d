@@ -1,7 +1,7 @@
 import { useId, useState } from "react";
 import checks from "../learning-self-checks.json" with { type: "json" };
 import { learningCheckIsCorrect } from "../learning-check";
-import type { LearningSelfCheck as Check } from "../learning";
+import { learningSources, type LearningSelfCheck as Check } from "../learning";
 import "./learning-self-check.css";
 
 export default function LearningSelfCheck({ pathId }: { pathId: string }) {
@@ -36,6 +36,17 @@ function LearningSelfCheckForm({ check }: { check: Check }) {
           {isCorrect ? check.correctFeedback : check.incorrectFeedback}
         </p>
       )}
+      <details className="learning-check-sources">
+        <summary>Sources for this answer</summary>
+        {check.sourceIds.map((id) => {
+          const source = learningSources[id];
+          return source ? (
+            <a key={id} href={source.url} target="_blank" rel="noreferrer">
+              {source.title}
+            </a>
+          ) : null;
+        })}
+      </details>
     </details>
   );
 }
