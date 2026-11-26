@@ -24,7 +24,7 @@ import ContentBoundary, { ContentRecovery } from "./ContentBoundary";
 
 const ProbabilityEvidence = lazy(() => import("./ProbabilityEvidence"));
 const CerebellarProbability = lazy(() => import("./CerebellarProbability"));
-const HippocampalProbability = lazy(() => import("./HippocampalProbability"));
+const MedialTemporalProbability = lazy(() => import("./MedialTemporalProbability"));
 
 function CerebellarProbabilityDisclosure({ part, parts }: { part: Subregion; parts: Subregion[] }) {
   const [open, setOpen] = useState(false);
@@ -40,14 +40,18 @@ function CerebellarProbabilityDisclosure({ part, parts }: { part: Subregion; par
   );
 }
 
-function HippocampalProbabilityDisclosure({ part, parts }: { part: Subregion; parts: Subregion[] }) {
+function MedialTemporalProbabilityDisclosure({ kind, part, parts }: {
+  kind: "hippocampus" | "amygdala";
+  part: Subregion;
+  parts: Subregion[];
+}) {
   const [open, setOpen] = useState(false);
   return (
     <details className="subregion-probability" onToggle={(event) => setOpen(event.currentTarget.open)}>
       <summary>Explore native probability slices</summary>
-      {open && <ContentBoundary label="Native hippocampal probability slices">
+      {open && <ContentBoundary label="Native anatomical probability slices">
         <Suspense fallback={<p role="status">Loading source slice viewer…</p>}>
-          <HippocampalProbability part={part} parts={parts} />
+          <MedialTemporalProbability kind={kind} part={part} parts={parts} />
         </Suspense>
       </ContentBoundary>}
     </details>
@@ -691,7 +695,7 @@ function LoadedSubregions({
         </div>
         {selected && atlas.probabilityEvidence !== false && <ProbabilityDisclosure kind={kind} part={selected} />}
         {selected && kind === "cerebellum" && <CerebellarProbabilityDisclosure part={selected} parts={atlas.parts} />}
-        {selected && kind === "hippocampus" && <HippocampalProbabilityDisclosure key={selected.id} part={selected} parts={atlas.parts} />}
+        {selected && (kind === "hippocampus" || kind === "amygdala") && <MedialTemporalProbabilityDisclosure key={selected.id} kind={kind} part={selected} parts={atlas.parts} />}
         <button className="subregion-share" onClick={copyLink}>
           <Link size={14} /> Copy this atlas view
         </button>

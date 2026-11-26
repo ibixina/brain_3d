@@ -8,29 +8,33 @@ import {
   sourceProbability,
 } from "../probability-slices.ts";
 import { planeAxis, planeDimensions, planes, voxelIndex, worldPoint, type Plane, type Point3 } from "../imaging.ts";
-import { hippocampalProbabilityUrl, type HippocampalProbabilityManifest } from "../hippocampal-probability.ts";
+import { medialTemporalProbabilityUrls, type MedialTemporalAtlasKind, type MedialTemporalProbabilityManifest } from "../medial-temporal-probability.ts";
 import { probabilityPercent } from "../subregion-evidence.ts";
 import { subregionName, type Subregion } from "../subregions.ts";
 import "./probability-slices.css";
 
-export default function HippocampalProbability({ part, parts }: { part: Subregion; parts: Subregion[] }) {
-  const [data, setData] = useState<{ manifest: HippocampalProbabilityManifest; labels: Uint8Array } | null>(null);
+export default function MedialTemporalProbability({ kind, part, parts }: {
+  kind: MedialTemporalAtlasKind;
+  part: Subregion;
+  parts: Subregion[];
+}) {
+  const [data, setData] = useState<{ manifest: MedialTemporalProbabilityManifest; labels: Uint8Array } | null>(null);
   const [error, setError] = useState(false);
   const [attempt, setAttempt] = useState(0);
   useEffect(() => {
     const controller = new AbortController();
     setError(false);
     setData(null);
-    void fetch(assetUrl(hippocampalProbabilityUrl), { signal: controller.signal })
+    void fetch(assetUrl(medialTemporalProbabilityUrls[kind]), { signal: controller.signal })
       .then(async (response) => {
         if (!response.ok) throw new Error("Probability manifest unavailable");
-        const manifest = await response.json() as HippocampalProbabilityManifest;
-        if (manifest.version !== 1 || manifest.kind !== "hippocampus" ||
+        const manifest = await response.json() as MedialTemporalProbabilityManifest;
+        if (manifest.version !== 1 || manifest.kind !== kind ||
           manifest.grids.left.shape.join() !== "164,224,196" ||
           manifest.grids.right.shape.join() !== "164,224,196" ||
           manifest.categories.length !== 30 ||
           manifest.encoding.dtype !== "float32" || manifest.encoding.order !== "x-fastest")
-          throw new Error("Hippocampal source mismatch");
+          throw new Error("Medial temporal source mismatch");
         const labels = await loadProbabilityBytes(manifest.context.asset, controller.signal);
         if (labels.length !== manifest.grids.left.shape.reduce((size, axis) => size * axis, 1))
           throw new Error("Incomplete winner context");
@@ -38,9 +42,9 @@ export default function HippocampalProbability({ part, parts }: { part: Subregio
       })
       .catch(() => { if (!controller.signal.aborted) setError(true); });
     return () => controller.abort();
-  }, [attempt]);
+  }, [attempt, kind]);
   if (error) return <div role="alert"><p>Native probability slices could not load. The selected 3D surface remains available.</p><button onClick={() => setAttempt((n) => n + 1)}>Retry source slices</button></div>;
-  if (!data) return <p role="status">Loading the native hippocampal source grid…</p>;
+  if (!data) return <p role="status">Loading the native source probability grid…</p>;
   if (!data.manifest.entries[part.id]) return <p>No probability channel is available for this label.</p>;
   return <LoadedProbability key={part.id} part={part} parts={parts} {...data} />;
 }
@@ -48,7 +52,7 @@ export default function HippocampalProbability({ part, parts }: { part: Subregio
 function LoadedProbability({ part, parts, manifest, labels }: {
   part: Subregion;
   parts: Subregion[];
-  manifest: HippocampalProbabilityManifest;
+  manifest: MedialTemporalProbabilityManifest;
   labels: Uint8Array;
 }) {
   const entry = manifest.entries[part.id];
@@ -99,7 +103,7 @@ function LoadedProbability({ part, parts, manifest, labels }: {
     ? subregionName(categoricalPart)
     : winnerChannel === 0
       ? "Unknown (source label)"
-      : `Amygdala · ${category?.sourceName ?? "source label"}`;
+      : `${category?.structure === "hippocampus" ? "Hippocampal" : "Amygdala"} · ${category?.sourceName ?? "source label"}`;
   const ras = worldPoint(point, grid);
   const xPosition = flipHorizontal ? grid.shape[horizontal] - 1 - point[horizontal] : point[horizontal];
   const horizontalEnds = plane === "sagittal" ? ["P", "A"] : ["L", "R"];
@@ -157,9 +161,11 @@ function LoadedProbability({ part, parts, manifest, labels }: {
         <p>{manifest.interpretation}</p><p>{manifest.method}</p>
         <p>{((entry.asset.bytes + manifest.context.asset.bytes) / 1000).toFixed(1)} kB compressed source channel and winner context are loaded on demand. The left and right probability arrays are shared; each side uses its source affine. Tiny negative floating-point endpoint values display as 0% while the stored channel remains unchanged.</p>
         <a href={manifest.source.documentation} target="_blank" rel="noreferrer">Original atlas distribution ↗</a>
-        <a href={manifest.source.paper} target="_blank" rel="noreferrer">Iglesias et al. (2015) ↗</a>
+        <a href={manifest.source.paper} target="_blank" rel="noreferrer">
+          {manifest.kind === "amygdala" ? "Saygin, Kliemann et al. (2017)" : "Iglesias et al. (2015)"} ↗
+        </a>
         <a href={manifest.source.protocol} target="_blank" rel="noreferrer">Current subfield output hierarchy ↗</a>
-        <a href={assetUrl(hippocampalProbabilityUrl)} target="_blank" rel="noreferrer">Probability provenance and checksums (JSON) ↗</a>
+        <a href={assetUrl(medialTemporalProbabilityUrls[manifest.kind])} target="_blank" rel="noreferrer">Probability provenance and checksums (JSON) ↗</a>
         <a href={assetUrl(manifest.source.license)} target="_blank" rel="noreferrer">FreeSurfer data license and attribution ↗</a>
       </details>
     </section>

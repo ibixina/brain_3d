@@ -1,11 +1,16 @@
 import type { Grid, Point3 } from "./imaging.ts";
 import type { ProbabilityAsset } from "./probability-slices.ts";
 
-export const hippocampalProbabilityUrl = "/subregions/hippocampus-probability/manifest.json";
+export type MedialTemporalAtlasKind = "hippocampus" | "amygdala";
 
-export type HippocampalProbabilityManifest = {
+export const medialTemporalProbabilityUrls: Record<MedialTemporalAtlasKind, string> = {
+  hippocampus: "/subregions/hippocampus-probability/manifest.json",
+  amygdala: "/subregions/amygdala-probability/manifest.json",
+};
+
+export type MedialTemporalProbabilityManifest = {
   version: number;
-  kind: string;
+  kind: MedialTemporalAtlasKind;
   checkedOn: string;
   grids: Record<"left" | "right", Grid>;
   encoding: {
@@ -22,7 +27,7 @@ export type HippocampalProbabilityManifest = {
     dtype: string;
     method: string;
   };
-  categories: { channel: number; label: number; sourceName: string }[];
+  categories: { channel: number; label: number; sourceName: string; structure: string }[];
   entries: Record<string, {
     channel: number;
     label: number;

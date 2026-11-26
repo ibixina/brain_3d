@@ -59,7 +59,7 @@
   },
   "context": {
     "asset": {
-      "url": "/subregions/hippocampus-probability/winner-channels.u8.gz",
+      "url": "/subregions/medial-temporal-probability/winner-channels.u8.gz",
       "bytes": 62427,
       "rawBytes": 7200256,
       "sha256": "0c6c4818abbb9054b2778a3174cb4e5314a5f6d9b040653c0d242d3b0cfddae6",
@@ -72,152 +72,182 @@
     {
       "channel": 0,
       "label": 0,
-      "sourceName": "Unknown"
+      "sourceName": "Unknown",
+      "structure": "unknown"
     },
     {
       "channel": 1,
       "label": 226,
-      "sourceName": "Hippocampal_tail"
+      "sourceName": "Hippocampal_tail",
+      "structure": "hippocampus"
     },
     {
       "channel": 2,
       "label": 236,
-      "sourceName": "subiculum-body"
+      "sourceName": "subiculum-body",
+      "structure": "hippocampus"
     },
     {
       "channel": 3,
       "label": 238,
-      "sourceName": "CA1-body"
+      "sourceName": "CA1-body",
+      "structure": "hippocampus"
     },
     {
       "channel": 4,
       "label": 235,
-      "sourceName": "subiculum-head"
+      "sourceName": "subiculum-head",
+      "structure": "hippocampus"
     },
     {
       "channel": 5,
       "label": 215,
-      "sourceName": "hippocampal-fissure"
+      "sourceName": "hippocampal-fissure",
+      "structure": "hippocampus"
     },
     {
       "channel": 6,
       "label": 233,
-      "sourceName": "presubiculum-head"
+      "sourceName": "presubiculum-head",
+      "structure": "hippocampus"
     },
     {
       "channel": 7,
       "label": 201,
-      "sourceName": "alveus"
+      "sourceName": "alveus",
+      "structure": "hippocampus"
     },
     {
       "channel": 8,
       "label": 237,
-      "sourceName": "CA1-head"
+      "sourceName": "CA1-head",
+      "structure": "hippocampus"
     },
     {
       "channel": 9,
       "label": 234,
-      "sourceName": "presubiculum-body"
+      "sourceName": "presubiculum-body",
+      "structure": "hippocampus"
     },
     {
       "channel": 10,
       "label": 203,
-      "sourceName": "parasubiculum"
+      "sourceName": "parasubiculum",
+      "structure": "hippocampus"
     },
     {
       "channel": 11,
       "label": 245,
-      "sourceName": "molecular_layer_HP-head"
+      "sourceName": "molecular_layer_HP-head",
+      "structure": "hippocampus"
     },
     {
       "channel": 12,
       "label": 246,
-      "sourceName": "molecular_layer_HP-body"
+      "sourceName": "molecular_layer_HP-body",
+      "structure": "hippocampus"
     },
     {
       "channel": 13,
       "label": 243,
-      "sourceName": "GC-ML-DG-head"
+      "sourceName": "GC-ML-DG-head",
+      "structure": "hippocampus"
     },
     {
       "channel": 14,
       "label": 240,
-      "sourceName": "CA3-body"
+      "sourceName": "CA3-body",
+      "structure": "hippocampus"
     },
     {
       "channel": 15,
       "label": 244,
-      "sourceName": "GC-ML-DG-body"
+      "sourceName": "GC-ML-DG-body",
+      "structure": "hippocampus"
     },
     {
       "channel": 16,
       "label": 241,
-      "sourceName": "CA4-head"
+      "sourceName": "CA4-head",
+      "structure": "hippocampus"
     },
     {
       "channel": 17,
       "label": 242,
-      "sourceName": "CA4-body"
+      "sourceName": "CA4-body",
+      "structure": "hippocampus"
     },
     {
       "channel": 18,
       "label": 212,
-      "sourceName": "fimbria"
+      "sourceName": "fimbria",
+      "structure": "hippocampus"
     },
     {
       "channel": 19,
       "label": 239,
-      "sourceName": "CA3-head"
+      "sourceName": "CA3-head",
+      "structure": "hippocampus"
     },
     {
       "channel": 20,
       "label": 211,
-      "sourceName": "HATA"
+      "sourceName": "HATA",
+      "structure": "hippocampus"
     },
     {
       "channel": 21,
       "label": 7001,
-      "sourceName": "Lateral-nucleus"
+      "sourceName": "Lateral-nucleus",
+      "structure": "amygdala"
     },
     {
       "channel": 22,
       "label": 7003,
-      "sourceName": "Basal-nucleus"
+      "sourceName": "Basal-nucleus",
+      "structure": "amygdala"
     },
     {
       "channel": 23,
       "label": 7008,
-      "sourceName": "Accessory-Basal-nucleus"
+      "sourceName": "Accessory-Basal-nucleus",
+      "structure": "amygdala"
     },
     {
       "channel": 24,
       "label": 7010,
-      "sourceName": "Anterior-amygdaloid-area-AAA"
+      "sourceName": "Anterior-amygdaloid-area-AAA",
+      "structure": "amygdala"
     },
     {
       "channel": 25,
       "label": 7005,
-      "sourceName": "Central-nucleus"
+      "sourceName": "Central-nucleus",
+      "structure": "amygdala"
     },
     {
       "channel": 26,
       "label": 7006,
-      "sourceName": "Medial-nucleus"
+      "sourceName": "Medial-nucleus",
+      "structure": "amygdala"
     },
     {
       "channel": 27,
       "label": 7007,
-      "sourceName": "Cortical-nucleus"
+      "sourceName": "Cortical-nucleus",
+      "structure": "amygdala"
     },
     {
       "channel": 28,
       "label": 7009,
-      "sourceName": "Corticoamygdaloid-transitio"
+      "sourceName": "Corticoamygdaloid-transitio",
+      "structure": "amygdala"
     },
     {
       "channel": 29,
       "label": 7015,
-      "sourceName": "Paralaminar-nucleus"
+      "sourceName": "Paralaminar-nucleus",
+      "structure": "amygdala"
     }
   ],
   "entries": {
@@ -226,7 +256,7 @@
       "label": 226,
       "sourceName": "Hippocampal_tail",
       "asset": {
-        "url": "/subregions/hippocampus-probability/channel-1.f32.gz",
+        "url": "/subregions/medial-temporal-probability/channel-1.f32.gz",
         "bytes": 655217,
         "rawBytes": 28801024,
         "sha256": "1e94ed07fac5de8bd0c844b3bf5056acc2a029dfc8512ad5bcdde372ad88ce8c",
@@ -256,7 +286,7 @@
       "label": 236,
       "sourceName": "subiculum-body",
       "asset": {
-        "url": "/subregions/hippocampus-probability/channel-2.f32.gz",
+        "url": "/subregions/medial-temporal-probability/channel-2.f32.gz",
         "bytes": 406665,
         "rawBytes": 28801024,
         "sha256": "eb2b497b3c10bd4f5d36d95345323f17264951cef994cad222d969d701865086",
@@ -286,7 +316,7 @@
       "label": 238,
       "sourceName": "CA1-body",
       "asset": {
-        "url": "/subregions/hippocampus-probability/channel-3.f32.gz",
+        "url": "/subregions/medial-temporal-probability/channel-3.f32.gz",
         "bytes": 257734,
         "rawBytes": 28801024,
         "sha256": "1dba56816211231fb976d67564e8cfdd074cc8fe70b230be86c5832a77fb7ebc",
@@ -316,7 +346,7 @@
       "label": 235,
       "sourceName": "subiculum-head",
       "asset": {
-        "url": "/subregions/hippocampus-probability/channel-4.f32.gz",
+        "url": "/subregions/medial-temporal-probability/channel-4.f32.gz",
         "bytes": 335932,
         "rawBytes": 28801024,
         "sha256": "44b6e45a3999bfc1209aa150c91913c310951d4aaffd29b2b66f8a605708462b",
@@ -346,7 +376,7 @@
       "label": 215,
       "sourceName": "hippocampal-fissure",
       "asset": {
-        "url": "/subregions/hippocampus-probability/channel-5.f32.gz",
+        "url": "/subregions/medial-temporal-probability/channel-5.f32.gz",
         "bytes": 691315,
         "rawBytes": 28801024,
         "sha256": "382fbb188bb4c6247d108169a38d6302fef624d3c71965220e5fe94c6439de39",
@@ -376,7 +406,7 @@
       "label": 233,
       "sourceName": "presubiculum-head",
       "asset": {
-        "url": "/subregions/hippocampus-probability/channel-6.f32.gz",
+        "url": "/subregions/medial-temporal-probability/channel-6.f32.gz",
         "bytes": 271604,
         "rawBytes": 28801024,
         "sha256": "bf24691b9cfeacdead469b31e1c1af8178223deeacfe5e8cdbb930293778cc9b",
@@ -406,7 +436,7 @@
       "label": 201,
       "sourceName": "alveus",
       "asset": {
-        "url": "/subregions/hippocampus-probability/channel-7.f32.gz",
+        "url": "/subregions/medial-temporal-probability/channel-7.f32.gz",
         "bytes": 1014955,
         "rawBytes": 28801024,
         "sha256": "ab0c322b9f38475a1b91240dc3198f9e59a0d409c45ee9db1e90b663c7ce78d1",
@@ -436,7 +466,7 @@
       "label": 237,
       "sourceName": "CA1-head",
       "asset": {
-        "url": "/subregions/hippocampus-probability/channel-8.f32.gz",
+        "url": "/subregions/medial-temporal-probability/channel-8.f32.gz",
         "bytes": 559530,
         "rawBytes": 28801024,
         "sha256": "a668459f83a7c7db35f746a5ce5b6e5e9de91e027c422189aafe6f3f7a0d0c34",
@@ -466,7 +496,7 @@
       "label": 234,
       "sourceName": "presubiculum-body",
       "asset": {
-        "url": "/subregions/hippocampus-probability/channel-9.f32.gz",
+        "url": "/subregions/medial-temporal-probability/channel-9.f32.gz",
         "bytes": 291424,
         "rawBytes": 28801024,
         "sha256": "33d113a426e15fa560ef08e6c6104b2f1f0acdacfd4cd9d04919aa0d9f03b1b7",
@@ -496,7 +526,7 @@
       "label": 203,
       "sourceName": "parasubiculum",
       "asset": {
-        "url": "/subregions/hippocampus-probability/channel-10.f32.gz",
+        "url": "/subregions/medial-temporal-probability/channel-10.f32.gz",
         "bytes": 227866,
         "rawBytes": 28801024,
         "sha256": "55170ec7b9cee94d0615c55f4094c77b404062e92aa7069cdeca794a1e4b0bff",
@@ -526,7 +556,7 @@
       "label": 245,
       "sourceName": "molecular_layer_HP-head",
       "asset": {
-        "url": "/subregions/hippocampus-probability/channel-11.f32.gz",
+        "url": "/subregions/medial-temporal-probability/channel-11.f32.gz",
         "bytes": 545230,
         "rawBytes": 28801024,
         "sha256": "9053a37e4a6d81c4387b05b6f7f30850edd2e55386e6233f2a662f98eedfe71f",
@@ -556,7 +586,7 @@
       "label": 246,
       "sourceName": "molecular_layer_HP-body",
       "asset": {
-        "url": "/subregions/hippocampus-probability/channel-12.f32.gz",
+        "url": "/subregions/medial-temporal-probability/channel-12.f32.gz",
         "bytes": 543768,
         "rawBytes": 28801024,
         "sha256": "e5dec5d390fa9b5a07dd8e2612eb81eff94ec43eebe636cdee29d56b9db7a7f8",
@@ -586,7 +616,7 @@
       "label": 243,
       "sourceName": "GC-ML-DG-head",
       "asset": {
-        "url": "/subregions/hippocampus-probability/channel-13.f32.gz",
+        "url": "/subregions/medial-temporal-probability/channel-13.f32.gz",
         "bytes": 326096,
         "rawBytes": 28801024,
         "sha256": "e126fb92a531a4cf8645bbe13215d42d9da988e77abef55770ee28d6487a9d99",
@@ -616,7 +646,7 @@
       "label": 240,
       "sourceName": "CA3-body",
       "asset": {
-        "url": "/subregions/hippocampus-probability/channel-14.f32.gz",
+        "url": "/subregions/medial-temporal-probability/channel-14.f32.gz",
         "bytes": 232252,
         "rawBytes": 28801024,
         "sha256": "671ab9cf4087bb07a9f076f720788e798945c0aec9733a2d03f64e7d40e8775b",
@@ -646,7 +676,7 @@
       "label": 244,
       "sourceName": "GC-ML-DG-body",
       "asset": {
-        "url": "/subregions/hippocampus-probability/channel-15.f32.gz",
+        "url": "/subregions/medial-temporal-probability/channel-15.f32.gz",
         "bytes": 325277,
         "rawBytes": 28801024,
         "sha256": "f5dd9a775b5791d60fcbb5454c093ef6855097774a42fc547cabe01b86385972",
@@ -676,7 +706,7 @@
       "label": 241,
       "sourceName": "CA4-head",
       "asset": {
-        "url": "/subregions/hippocampus-probability/channel-16.f32.gz",
+        "url": "/subregions/medial-temporal-probability/channel-16.f32.gz",
         "bytes": 222011,
         "rawBytes": 28801024,
         "sha256": "3c67b450a6f9d37861d74d0ca47cdb782005f9ad93e8fa7d5eb82ef35dd22b76",
@@ -706,7 +736,7 @@
       "label": 242,
       "sourceName": "CA4-body",
       "asset": {
-        "url": "/subregions/hippocampus-probability/channel-17.f32.gz",
+        "url": "/subregions/medial-temporal-probability/channel-17.f32.gz",
         "bytes": 231694,
         "rawBytes": 28801024,
         "sha256": "865a484bb2f11f20b5f2a0076ca175fe8a20a74e63f6a4d0e9f47e4e690b35b5",
@@ -736,7 +766,7 @@
       "label": 212,
       "sourceName": "fimbria",
       "asset": {
-        "url": "/subregions/hippocampus-probability/channel-18.f32.gz",
+        "url": "/subregions/medial-temporal-probability/channel-18.f32.gz",
         "bytes": 337122,
         "rawBytes": 28801024,
         "sha256": "f5622ca64e84be44a28ef4682fdf5f67890493bba95df5eff6fce052284798a5",
@@ -766,7 +796,7 @@
       "label": 239,
       "sourceName": "CA3-head",
       "asset": {
-        "url": "/subregions/hippocampus-probability/channel-19.f32.gz",
+        "url": "/subregions/medial-temporal-probability/channel-19.f32.gz",
         "bytes": 290106,
         "rawBytes": 28801024,
         "sha256": "8c16684c0c299b8ab124e104ef9c6e0b1bbf1979f365853933182ac5f646ad16",
@@ -796,7 +826,7 @@
       "label": 211,
       "sourceName": "HATA",
       "asset": {
-        "url": "/subregions/hippocampus-probability/channel-20.f32.gz",
+        "url": "/subregions/medial-temporal-probability/channel-20.f32.gz",
         "bytes": 172823,
         "rawBytes": 28801024,
         "sha256": "b5419d74fade8aca87b61dcc088519f6f83337588ba851e46249159447097e3e",
@@ -826,7 +856,7 @@
       "label": 226,
       "sourceName": "Hippocampal_tail",
       "asset": {
-        "url": "/subregions/hippocampus-probability/channel-1.f32.gz",
+        "url": "/subregions/medial-temporal-probability/channel-1.f32.gz",
         "bytes": 655217,
         "rawBytes": 28801024,
         "sha256": "1e94ed07fac5de8bd0c844b3bf5056acc2a029dfc8512ad5bcdde372ad88ce8c",
@@ -856,7 +886,7 @@
       "label": 236,
       "sourceName": "subiculum-body",
       "asset": {
-        "url": "/subregions/hippocampus-probability/channel-2.f32.gz",
+        "url": "/subregions/medial-temporal-probability/channel-2.f32.gz",
         "bytes": 406665,
         "rawBytes": 28801024,
         "sha256": "eb2b497b3c10bd4f5d36d95345323f17264951cef994cad222d969d701865086",
@@ -886,7 +916,7 @@
       "label": 238,
       "sourceName": "CA1-body",
       "asset": {
-        "url": "/subregions/hippocampus-probability/channel-3.f32.gz",
+        "url": "/subregions/medial-temporal-probability/channel-3.f32.gz",
         "bytes": 257734,
         "rawBytes": 28801024,
         "sha256": "1dba56816211231fb976d67564e8cfdd074cc8fe70b230be86c5832a77fb7ebc",
@@ -916,7 +946,7 @@
       "label": 235,
       "sourceName": "subiculum-head",
       "asset": {
-        "url": "/subregions/hippocampus-probability/channel-4.f32.gz",
+        "url": "/subregions/medial-temporal-probability/channel-4.f32.gz",
         "bytes": 335932,
         "rawBytes": 28801024,
         "sha256": "44b6e45a3999bfc1209aa150c91913c310951d4aaffd29b2b66f8a605708462b",
@@ -946,7 +976,7 @@
       "label": 215,
       "sourceName": "hippocampal-fissure",
       "asset": {
-        "url": "/subregions/hippocampus-probability/channel-5.f32.gz",
+        "url": "/subregions/medial-temporal-probability/channel-5.f32.gz",
         "bytes": 691315,
         "rawBytes": 28801024,
         "sha256": "382fbb188bb4c6247d108169a38d6302fef624d3c71965220e5fe94c6439de39",
@@ -976,7 +1006,7 @@
       "label": 233,
       "sourceName": "presubiculum-head",
       "asset": {
-        "url": "/subregions/hippocampus-probability/channel-6.f32.gz",
+        "url": "/subregions/medial-temporal-probability/channel-6.f32.gz",
         "bytes": 271604,
         "rawBytes": 28801024,
         "sha256": "bf24691b9cfeacdead469b31e1c1af8178223deeacfe5e8cdbb930293778cc9b",
@@ -1006,7 +1036,7 @@
       "label": 201,
       "sourceName": "alveus",
       "asset": {
-        "url": "/subregions/hippocampus-probability/channel-7.f32.gz",
+        "url": "/subregions/medial-temporal-probability/channel-7.f32.gz",
         "bytes": 1014955,
         "rawBytes": 28801024,
         "sha256": "ab0c322b9f38475a1b91240dc3198f9e59a0d409c45ee9db1e90b663c7ce78d1",
@@ -1036,7 +1066,7 @@
       "label": 237,
       "sourceName": "CA1-head",
       "asset": {
-        "url": "/subregions/hippocampus-probability/channel-8.f32.gz",
+        "url": "/subregions/medial-temporal-probability/channel-8.f32.gz",
         "bytes": 559530,
         "rawBytes": 28801024,
         "sha256": "a668459f83a7c7db35f746a5ce5b6e5e9de91e027c422189aafe6f3f7a0d0c34",
@@ -1066,7 +1096,7 @@
       "label": 234,
       "sourceName": "presubiculum-body",
       "asset": {
-        "url": "/subregions/hippocampus-probability/channel-9.f32.gz",
+        "url": "/subregions/medial-temporal-probability/channel-9.f32.gz",
         "bytes": 291424,
         "rawBytes": 28801024,
         "sha256": "33d113a426e15fa560ef08e6c6104b2f1f0acdacfd4cd9d04919aa0d9f03b1b7",
@@ -1096,7 +1126,7 @@
       "label": 203,
       "sourceName": "parasubiculum",
       "asset": {
-        "url": "/subregions/hippocampus-probability/channel-10.f32.gz",
+        "url": "/subregions/medial-temporal-probability/channel-10.f32.gz",
         "bytes": 227866,
         "rawBytes": 28801024,
         "sha256": "55170ec7b9cee94d0615c55f4094c77b404062e92aa7069cdeca794a1e4b0bff",
@@ -1126,7 +1156,7 @@
       "label": 245,
       "sourceName": "molecular_layer_HP-head",
       "asset": {
-        "url": "/subregions/hippocampus-probability/channel-11.f32.gz",
+        "url": "/subregions/medial-temporal-probability/channel-11.f32.gz",
         "bytes": 545230,
         "rawBytes": 28801024,
         "sha256": "9053a37e4a6d81c4387b05b6f7f30850edd2e55386e6233f2a662f98eedfe71f",
@@ -1156,7 +1186,7 @@
       "label": 246,
       "sourceName": "molecular_layer_HP-body",
       "asset": {
-        "url": "/subregions/hippocampus-probability/channel-12.f32.gz",
+        "url": "/subregions/medial-temporal-probability/channel-12.f32.gz",
         "bytes": 543768,
         "rawBytes": 28801024,
         "sha256": "e5dec5d390fa9b5a07dd8e2612eb81eff94ec43eebe636cdee29d56b9db7a7f8",
@@ -1186,7 +1216,7 @@
       "label": 243,
       "sourceName": "GC-ML-DG-head",
       "asset": {
-        "url": "/subregions/hippocampus-probability/channel-13.f32.gz",
+        "url": "/subregions/medial-temporal-probability/channel-13.f32.gz",
         "bytes": 326096,
         "rawBytes": 28801024,
         "sha256": "e126fb92a531a4cf8645bbe13215d42d9da988e77abef55770ee28d6487a9d99",
@@ -1216,7 +1246,7 @@
       "label": 240,
       "sourceName": "CA3-body",
       "asset": {
-        "url": "/subregions/hippocampus-probability/channel-14.f32.gz",
+        "url": "/subregions/medial-temporal-probability/channel-14.f32.gz",
         "bytes": 232252,
         "rawBytes": 28801024,
         "sha256": "671ab9cf4087bb07a9f076f720788e798945c0aec9733a2d03f64e7d40e8775b",
@@ -1246,7 +1276,7 @@
       "label": 244,
       "sourceName": "GC-ML-DG-body",
       "asset": {
-        "url": "/subregions/hippocampus-probability/channel-15.f32.gz",
+        "url": "/subregions/medial-temporal-probability/channel-15.f32.gz",
         "bytes": 325277,
         "rawBytes": 28801024,
         "sha256": "f5dd9a775b5791d60fcbb5454c093ef6855097774a42fc547cabe01b86385972",
@@ -1276,7 +1306,7 @@
       "label": 241,
       "sourceName": "CA4-head",
       "asset": {
-        "url": "/subregions/hippocampus-probability/channel-16.f32.gz",
+        "url": "/subregions/medial-temporal-probability/channel-16.f32.gz",
         "bytes": 222011,
         "rawBytes": 28801024,
         "sha256": "3c67b450a6f9d37861d74d0ca47cdb782005f9ad93e8fa7d5eb82ef35dd22b76",
@@ -1306,7 +1336,7 @@
       "label": 242,
       "sourceName": "CA4-body",
       "asset": {
-        "url": "/subregions/hippocampus-probability/channel-17.f32.gz",
+        "url": "/subregions/medial-temporal-probability/channel-17.f32.gz",
         "bytes": 231694,
         "rawBytes": 28801024,
         "sha256": "865a484bb2f11f20b5f2a0076ca175fe8a20a74e63f6a4d0e9f47e4e690b35b5",
@@ -1336,7 +1366,7 @@
       "label": 212,
       "sourceName": "fimbria",
       "asset": {
-        "url": "/subregions/hippocampus-probability/channel-18.f32.gz",
+        "url": "/subregions/medial-temporal-probability/channel-18.f32.gz",
         "bytes": 337122,
         "rawBytes": 28801024,
         "sha256": "f5622ca64e84be44a28ef4682fdf5f67890493bba95df5eff6fce052284798a5",
@@ -1366,7 +1396,7 @@
       "label": 239,
       "sourceName": "CA3-head",
       "asset": {
-        "url": "/subregions/hippocampus-probability/channel-19.f32.gz",
+        "url": "/subregions/medial-temporal-probability/channel-19.f32.gz",
         "bytes": 290106,
         "rawBytes": 28801024,
         "sha256": "8c16684c0c299b8ab124e104ef9c6e0b1bbf1979f365853933182ac5f646ad16",
@@ -1396,7 +1426,7 @@
       "label": 211,
       "sourceName": "HATA",
       "asset": {
-        "url": "/subregions/hippocampus-probability/channel-20.f32.gz",
+        "url": "/subregions/medial-temporal-probability/channel-20.f32.gz",
         "bytes": 172823,
         "rawBytes": 28801024,
         "sha256": "b5419d74fade8aca87b61dcc088519f6f83337588ba851e46249159447097e3e",
@@ -1434,6 +1464,6 @@
     "protocol": "https://surfer.nmr.mgh.harvard.edu/fswiki/HippocampalSubfieldsAndNucleiOfAmygdala",
     "license": "/licenses/freesurfer.txt"
   },
-  "method": "Each selected source float32 probability channel is preserved byte-for-byte and losslessly gzip-compressed in x-fastest order. Both source hemisphere arrays have identical probability values with reflected RAS affines; one channel file is shared while the selected side supplies its own affine. The categorical context is derived from the argmax over all 30 channels, including Unknown/background and both amygdala channels. No probability interpolation, resampling, thresholding, renormalization, or additional quantization is applied. The color display clamps tiny floating-point excursions to [0,1].",
+  "method": "Each selected source float32 probability channel is preserved byte-for-byte and losslessly gzip-compressed in x-fastest order. Both source hemisphere arrays have identical probability values with reflected RAS affines; one channel file is shared while the selected side supplies its own affine. The categorical context is derived from the argmax over all 30 channels, including Unknown/background and both anatomical atlases. No probability interpolation, resampling, thresholding, renormalization, or additional quantization is applied. The color display clamps tiny floating-point excursions to [0,1].",
   "interpretation": "These are population-atlas label probabilities, not MRI intensities, an individual scan, task activation, or calibrated certainty about an individual boundary. The source atlas combines a protocol based on high-resolution ex vivo human MRI with in vivo training scans; these displayed template coordinates do not register to Cerebra\u2019s whole-brain model or bundled MRI templates."
 }
