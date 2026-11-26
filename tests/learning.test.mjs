@@ -115,20 +115,23 @@ test("corpus callosum tour visits the five real FreeSurfer segments and distingu
   assert.equal(learningSources.callosalTopography.url, "https://pubmed.ncbi.nlm.nih.gov/16854598/");
 });
 
-test("every guided path ends with a source-scoped recall question and correctable feedback", () => {
+test("every guided path ends with three source-scoped recall questions and correctable feedback", () => {
   for (const path of learningPaths) {
     const check = learningChecks[path.id];
     assert.ok(check, `${path.id}: knowledge check`);
-    assert.ok(check.question && check.correctFeedback && check.incorrectFeedback);
-    assert.ok(check.sourceIds.length > 0, `${path.id}: cited answer`);
-    for (const sourceId of check.sourceIds) {
-      assert.ok(learningSources[sourceId], `${path.id}: source ${sourceId} exists`);
-      assert.equal(new URL(learningSources[sourceId].url).protocol, "https:");
+    assert.equal(check.questions.length, 3, `${path.id}: three questions`);
+    for (const question of check.questions) {
+      assert.ok(question.question && question.correctFeedback && question.incorrectFeedback);
+      assert.ok(question.sourceIds.length > 0, `${path.id}: cited answer`);
+      for (const sourceId of question.sourceIds) {
+        assert.ok(learningSources[sourceId], `${path.id}: source ${sourceId} exists`);
+        assert.equal(new URL(learningSources[sourceId].url).protocol, "https:");
+      }
+      assert.equal(question.options.length, 3);
+      assert.ok(question.answerIndex >= 0 && question.answerIndex < question.options.length);
+      assert.equal(new Set(question.options).size, question.options.length);
+      assert.equal(learningCheckIsCorrect(question, question.answerIndex), true);
+      assert.equal(learningCheckIsCorrect(question, (question.answerIndex + 1) % question.options.length), false);
     }
-    assert.equal(check.options.length, 3);
-    assert.ok(check.answerIndex >= 0 && check.answerIndex < check.options.length);
-    assert.equal(new Set(check.options).size, check.options.length);
-    assert.equal(learningCheckIsCorrect(check, check.answerIndex), true);
-    assert.equal(learningCheckIsCorrect(check, (check.answerIndex + 1) % check.options.length), false);
   }
 });

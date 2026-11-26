@@ -1,5 +1,5 @@
-import type { LearningSelfCheck } from "./learning";
+import type { LearningSelfCheckQuestion } from "./learning";
 
-export function learningCheckIsCorrect(check: LearningSelfCheck, answer: number) {
+export function learningCheckIsCorrect(check: LearningSelfCheckQuestion, answer: number) {
   return answer === check.answerIndex;
 }

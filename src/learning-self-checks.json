@@ -1,86 +1,198 @@
 {
   "memory": {
-    "sourceIds": ["memory"],
-    "question": "Which statement matches the hippocampus stop?",
-    "options": [
-      "Its surface resolves dentate gyrus and CA fields separately.",
-      "It shows the whole hippocampal structure; the internal subfields are not separated here.",
-      "It only shows the hippocampal tail."
-    ],
-    "answerIndex": 1,
-    "correctFeedback": "Correct. The whole hippocampal mesh gives gross context; subfields require the separate atlas.",
-    "incorrectFeedback": "The selected surface is the whole hippocampus. The path explicitly says it does not separate dentate gyrus or CA fields."
+    "questions": [
+      {
+        "question": "Which structures make up the hippocampal formation in the cited anatomy chapter?",
+        "options": ["Dentate gyrus, hippocampus proper, and subicular cortex.", "Only the hippocampus proper.", "The fornix, amygdala, and thalamus."],
+        "answerIndex": 0,
+        "correctFeedback": "Correct. The chapter uses hippocampal formation for dentate gyrus, hippocampus proper, and subicular cortex.",
+        "incorrectFeedback": "The source defines the hippocampal formation as dentate gyrus, hippocampus proper, and subicular cortex.",
+        "sourceIds": ["memory"]
+      },
+      {
+        "question": "What is a major cortical source of input to the hippocampus?",
+        "options": ["Primary motor cortex.", "Entorhinal cortex.", "Primary visual cortex only."],
+        "answerIndex": 1,
+        "correctFeedback": "Correct. Entorhinal cortex is a major input source and relays information from several cortical areas.",
+        "incorrectFeedback": "The entorhinal cortex is a major hippocampal input source in the cited pathway description.",
+        "sourceIds": ["memory"]
+      },
+      {
+        "question": "Which sequence follows the hippocampal trisynaptic pathway described by the source?",
+        "options": ["Entorhinal cortex → dentate gyrus → CA3 → CA1 → subiculum.", "Subiculum → CA1 → dentate gyrus → entorhinal cortex.", "Amygdala → putamen → cerebellum → hippocampus."],
+        "answerIndex": 0,
+        "correctFeedback": "Correct. The source describes perforant, mossy-fiber, and Schaffer-collateral stages before subicular output.",
+        "incorrectFeedback": "The described flow goes from entorhinal input through dentate gyrus, CA3 and CA1, then to subiculum.",
+        "sourceIds": ["memory"]
+      }
+    ]
   },
   "movement": {
-    "sourceIds": ["basal"],
-    "question": "Which divisions does the pallidal mesh combine?",
-    "options": [
-      "The internal and external pallidal segments.",
-      "The caudate and putamen.",
-      "The cerebellar hemispheres and vermis."
-    ],
-    "answerIndex": 0,
-    "correctFeedback": "Correct. This whole pallidal mesh does not distinguish the internal and external segments.",
-    "incorrectFeedback": "The path notes that the pallidal mesh combines its territory and does not resolve the internal and external segments."
+    "questions": [
+      {
+        "question": "Which two structures are collectively called the striatum in the cited anatomy chapter?",
+        "options": ["Caudate nucleus and putamen.", "Globus pallidus and thalamus.", "Subthalamic nucleus and substantia nigra."],
+        "answerIndex": 0,
+        "correctFeedback": "Correct. The source describes the caudate and putamen as the striatum.",
+        "incorrectFeedback": "The striatum refers to the caudate nucleus and putamen in this chapter.",
+        "sourceIds": ["basal"]
+      },
+      {
+        "question": "Do the basal ganglia form a separate descending motor pathway?",
+        "options": ["Yes; they directly activate spinal motor neurons.", "No; they modulate motor cortex and descending pathways.", "Yes; through the optic tract."],
+        "answerIndex": 1,
+        "correctFeedback": "Correct. The source describes the basal ganglia as influencing and modulating motor pathways.",
+        "incorrectFeedback": "The cited chapter says the basal ganglia do not originate a separate motor pathway; they influence and modulate motor output.",
+        "sourceIds": ["basal"]
+      },
+      {
+        "question": "What does the cited cerebellum chapter say about initiating movement?",
+        "options": ["The cerebellum initiates voluntary motor commands.", "Motor commands are initiated elsewhere; the cerebellum modifies them for accuracy and adaptation.", "The cerebellum only relays sensory signals without affecting movement."],
+        "answerIndex": 1,
+        "correctFeedback": "Correct. The chapter describes the cerebellum as adjusting motor commands and supporting coordination and learning.",
+        "incorrectFeedback": "The source distinguishes initiating motor commands from the cerebellum's role in modifying them.",
+        "sourceIds": ["cerebellum"]
+      }
+    ]
   },
   "vision": {
-    "sourceIds": ["vision"],
-    "question": "How should you interpret the pericalcarine surface in this path?",
-    "options": [
-      "As an approximate anatomical parcel near V1, not an individual functional V1 map.",
-      "As a complete map of the retina and optic nerve.",
-      "As a precise boundary of every person’s primary visual cortex."
-    ],
-    "answerIndex": 0,
-    "correctFeedback": "Correct. The parcel provides an anatomical landmark; it is not a participant-specific functional map.",
-    "incorrectFeedback": "Pericalcarine is an anatomical approximation around V1. The path does not claim individual functional boundaries."
+    "questions": [
+      {
+        "question": "Which thalamic nucleus relays visual information toward striate cortex in the cited pathway?",
+        "options": ["Lateral geniculate nucleus.", "Medial geniculate nucleus.", "Ventral posterolateral nucleus."],
+        "answerIndex": 0,
+        "correctFeedback": "Correct. The visual pathway described here passes through the lateral geniculate nucleus before occipital striate cortex.",
+        "incorrectFeedback": "The lateral geniculate nucleus is the thalamic relay named in the source's visual pathway.",
+        "sourceIds": ["vision"]
+      },
+      {
+        "question": "Which information is emphasized for the dorsal visual stream?",
+        "options": ["Object location and movement.", "Color and form only.", "Auditory pitch and speech rhythm."],
+        "answerIndex": 0,
+        "correctFeedback": "Correct. The source links dorsal processing with spatial location and movement information.",
+        "incorrectFeedback": "The dorsal stream is associated with where an object is and how it moves.",
+        "sourceIds": ["vision"]
+      },
+      {
+        "question": "Which information is emphasized for the ventral visual stream?",
+        "options": ["Object color, form, and recognition.", "Balance and vestibular reflexes.", "Pain intensity and body temperature."],
+        "answerIndex": 0,
+        "correctFeedback": "Correct. The ventral stream supports processing color and form used in recognizing visual objects.",
+        "incorrectFeedback": "The source associates the ventral stream with visual form, color, and object recognition.",
+        "sourceIds": ["vision"]
+      }
+    ]
   },
   "language": {
-    "sourceIds": ["speech", "language"],
-    "question": "What does this path say about speech comprehension?",
-    "options": [
-      "It belongs to a single superior-temporal parcel.",
-      "It depends on interacting processing streams; no one selected parcel captures the whole system.",
-      "It occurs only in pars opercularis."
-    ],
-    "answerIndex": 1,
-    "correctFeedback": "Correct. The stops present interacting networks and parcels with broader roles.",
-    "incorrectFeedback": "The language path describes interacting processing streams and warns that atlas parcels do not represent the complete network."
+    "questions": [
+      {
+        "question": "In the dual-stream model, which stream maps acoustic speech signals to frontal articulatory networks?",
+        "options": ["Ventral stream.", "Dorsal stream.", "Neither; the model has no pathways."],
+        "answerIndex": 1,
+        "correctFeedback": "Correct. The model assigns sound-to-articulation mapping to the dorsal stream.",
+        "incorrectFeedback": "The cited model maps acoustic speech to frontal articulatory networks through the dorsal stream.",
+        "sourceIds": ["speech"]
+      },
+      {
+        "question": "How does the cited model describe hemispheric organization of its two streams?",
+        "options": ["Both are strongly right-dominant.", "The ventral stream is largely bilateral; the dorsal stream is strongly left-dominant.", "Both are confined to one small frontal parcel."],
+        "answerIndex": 1,
+        "correctFeedback": "Correct. This describes the broad organization proposed in the cited model, with acknowledged hemispheric differences.",
+        "incorrectFeedback": "Hickok and Poeppel describe ventral processing as largely bilateral and dorsal processing as strongly left-dominant.",
+        "sourceIds": ["speech"]
+      },
+      {
+        "question": "What distinction is described between the classic Broca and Wernicke cases in this learning source?",
+        "options": ["Broca's patient had difficulty speaking with comprehension relatively spared; Wernicke's case involved impaired comprehension.", "Both cases were defined by blindness.", "Broca's case involved impaired hearing with no language change."],
+        "answerIndex": 0,
+        "correctFeedback": "Correct. This is the historical clinical contrast described in the source; it does not mean language is limited to two parcels.",
+        "incorrectFeedback": "The source contrasts a speech-production difficulty with relatively spared understanding in Broca's case and a comprehension disorder in Wernicke's case.",
+        "sourceIds": ["language"]
+      }
+    ]
   },
   "emotion": {
-    "sourceIds": ["hypothalamus"],
-    "question": "What does the selected ventral-diencephalic label show in the homeostasis stop?",
-    "options": [
-      "A complete segmentation of hypothalamic nuclei.",
-      "Surrounding anatomical context, not a separate hypothalamic nucleus.",
-      "A map of endocrine activation during emotion."
-    ],
-    "answerIndex": 1,
-    "correctFeedback": "Correct. This composite label gives context; it is not a hypothalamic-nucleus atlas or activity map.",
-    "incorrectFeedback": "The path identifies the selected surface as surrounding ventral-diencephalic anatomy, not an individual hypothalamic nucleus."
+    "questions": [
+      {
+        "question": "Which structure does the cited anatomy chapter identify as a major site for integrating systems that maintain homeostasis?",
+        "options": ["Hypothalamus.", "Primary visual cortex.", "Corpus callosum."],
+        "answerIndex": 0,
+        "correctFeedback": "Correct. The hypothalamus integrates autonomic, endocrine, immune, and behavioral influences on bodily regulation.",
+        "incorrectFeedback": "The source identifies the hypothalamus as a key site for homeostatic regulation.",
+        "sourceIds": ["hypothalamus"]
+      },
+      {
+        "question": "What does the cited account say about the amygdala's inputs?",
+        "options": ["It receives only visual information.", "It receives information from multiple senses and visceral sources.", "It has no connections with other brain structures."],
+        "answerIndex": 1,
+        "correctFeedback": "Correct. The source describes sensory and visceral inputs and emphasizes interacting pathways.",
+        "incorrectFeedback": "The cited account describes inputs from all senses as well as visceral sources.",
+        "sourceIds": ["amygdala"]
+      },
+      {
+        "question": "Which signal type is central to the insula source's account of awareness?",
+        "options": ["Interoceptive information about the body's physiological condition.", "Only visual color information.", "Sound location in external space."],
+        "answerIndex": 0,
+        "correctFeedback": "Correct. Craig's review discusses interoceptive representations and subjective awareness of bodily state.",
+        "incorrectFeedback": "The cited insula review focuses on interoception: sensing and representing the body's internal condition.",
+        "sourceIds": ["insula"]
+      }
+    ]
   },
   "csf": {
-    "sourceIds": ["csf"],
-    "question": "Which opening connects each lateral ventricle with the third ventricle?",
-    "options": [
-      "The cerebral aqueduct.",
-      "An interventricular foramen.",
-      "A fourth-ventricular outlet."
-    ],
-    "answerIndex": 1,
-    "correctFeedback": "Correct. The interventricular foramen links the lateral ventricle to the third ventricle.",
-    "incorrectFeedback": "The cerebral aqueduct instead links the third to the fourth ventricle. The interventricular foramen is the connection asked for."
+    "questions": [
+      {
+        "question": "Which structure produces cerebrospinal fluid in the cited ventricular-system chapter?",
+        "options": ["Choroid plexus.", "Corpus callosum.", "Caudate nucleus."],
+        "answerIndex": 0,
+        "correctFeedback": "Correct. The source identifies choroid plexus in the ventricles as the site producing CSF.",
+        "incorrectFeedback": "The ventricular-system chapter identifies choroid plexus as producing cerebrospinal fluid.",
+        "sourceIds": ["csf"]
+      },
+      {
+        "question": "What connects each lateral ventricle with the third ventricle?",
+        "options": ["Cerebral aqueduct.", "Interventricular foramen.", "Central canal."],
+        "answerIndex": 1,
+        "correctFeedback": "Correct. The interventricular foramen connects each lateral ventricle to the third ventricle.",
+        "incorrectFeedback": "The interventricular foramen leads to the third ventricle; the aqueduct connects the third and fourth.",
+        "sourceIds": ["csf"]
+      },
+      {
+        "question": "Where does the cerebral aqueduct lead?",
+        "options": ["From the third ventricle to the fourth ventricle through the midbrain.", "From the lateral ventricles directly to the subarachnoid space.", "From the fourth ventricle to the lateral ventricles."],
+        "answerIndex": 0,
+        "correctFeedback": "Correct. The aqueduct runs through the midbrain and links the third and fourth ventricles.",
+        "incorrectFeedback": "The cerebral aqueduct connects the third ventricle with the fourth through the midbrain.",
+        "sourceIds": ["csf"]
+      }
+    ]
   },
   "callosum": {
-    "sourceIds": ["callosal", "callosalTopography"],
-    "question": "What do the model’s five corpus-callosum labels represent?",
-    "options": [
-      "Five directly traced bundles that define every person’s cortical connections.",
-      "Equal geometric divisions along the callosum’s primary eigendirection; DTI projection territories use different boundaries.",
-      "Five regions measured from one person’s task-fMRI activation."
-    ],
-    "answerIndex": 1,
-    "correctFeedback": "Correct. FreeSurfer’s model labels are geometric; the cited DTI study estimated cortical projection territories with different boundaries.",
-    "incorrectFeedback": "The labels are geometric segments. The separate DTI topography is a population estimate and does not define individual axons or the same boundaries."
+    "questions": [
+      {
+        "question": "What do the model's five corpus-callosum labels represent?",
+        "options": ["Directly traced axon bundles that define each person's connections.", "Geometric divisions; DTI projection estimates use different boundaries.", "Five regions measured from a task-fMRI map."],
+        "answerIndex": 1,
+        "correctFeedback": "Correct. These model labels are geometric; the cited DTI study estimates cortical projection territories separately.",
+        "incorrectFeedback": "The model uses geometric divisions, while Hofer and Frahm's DTI-based projection estimates use a distinct scheme.",
+        "sourceIds": ["callosal", "callosalTopography"]
+      },
+      {
+        "question": "What method did Hofer and Frahm use to estimate callosal fiber topography?",
+        "options": ["Diffusion-tensor MRI tractography.", "Direct tracing of every human axon during surgery.", "Resting-state scalp EEG only."],
+        "answerIndex": 0,
+        "correctFeedback": "Correct. Their study used diffusion-tensor MRI tractography; this is an estimate of pathways, not direct tracing of individual axons.",
+        "incorrectFeedback": "The cited study used diffusion-tensor MRI tractography to estimate cortical projection territories.",
+        "sourceIds": ["callosalTopography"]
+      },
+      {
+        "question": "Should each visible geometric segment be read as a natural tissue boundary?",
+        "options": ["Yes; conventional MRI shows five distinct internal seams.", "No; the segments are an analysis scheme, not visible anatomical seams.", "Yes; each segment contains only one named cortical lobe."],
+        "answerIndex": 1,
+        "correctFeedback": "Correct. The visible divisions are a model convention; the cited article notes conventional MRI does not show morphologically distinct internal structures.",
+        "incorrectFeedback": "Treat these as operational divisions. They should not be mistaken for five natural tissue seams visible on MRI.",
+        "sourceIds": ["callosal", "callosalTopography"]
+      }
+    ]
   }
 }

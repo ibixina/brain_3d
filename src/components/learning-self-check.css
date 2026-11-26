@@ -19,6 +19,55 @@
   margin: 7px 0 0 10px;
   font-size: 10px;
 }
+.learning-self-check .learning-check-count {
+  display: block;
+  margin-top: 10px;
+  color: #91aaa7;
+  font-size: 10px;
+  font-variant-numeric: tabular-nums;
+}
+.learning-check-sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+.learning-check-navigation {
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
+  margin-top: 12px;
+}
+.learning-check-navigation button,
+.learning-check-finished button {
+  min-height: 32px;
+  padding: 5px 9px;
+  border: 1px solid var(--line);
+  border-radius: 5px;
+  background: transparent;
+  color: #b8c8d1;
+  font: inherit;
+  font-size: 10px;
+  cursor: pointer;
+}
+.learning-check-navigation button:disabled {
+  opacity: 0.45;
+  cursor: default;
+}
+.learning-check-navigation button:focus-visible,
+.learning-check-finished button:focus-visible {
+  outline: 2px solid #8cc8b6;
+  outline-offset: 2px;
+}
+.learning-check-finished p {
+  color: #b3d6c8;
+  font-size: 10px;
+}
 .learning-self-check fieldset {
   display: grid;
   gap: 7px;

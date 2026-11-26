@@ -16,7 +16,7 @@ export type LearningStop = {
     isolate?: boolean;
   };
 };
-export type LearningSelfCheck = {
+export type LearningSelfCheckQuestion = {
   question: string;
   options: string[];
   answerIndex: number;
@@ -24,6 +24,7 @@ export type LearningSelfCheck = {
   incorrectFeedback: string;
   sourceIds: string[];
 };
+export type LearningSelfCheck = { questions: LearningSelfCheckQuestion[] };
 export type LearningPath = {
   id: string;
   title: string;
