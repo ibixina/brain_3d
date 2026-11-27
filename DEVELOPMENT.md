@@ -20,12 +20,16 @@ The installed Codex CLI's generated protocol includes `account/rateLimitResetCre
 - 3 native-1-mm structural MRI templates and 117 on-demand measured IBC task-contrast volumes.
 - Activations opens **Compare activities**: 53 on-demand NeuroQuery-corpus meta-analyses plus a cited blindsight pathway, compared as A / B / only A / only B / shared on the 3D model (per-vertex) and MRI slices, which are linked both ways. The IBC viewer remains under "Single-person task maps" and old `map=` links.
 - Research index: 87 IBC protocols, 799 contrast definitions, 48 external HCP references, 20 dataset resources, 15 methods.
-- 132 Node tests and eight geometry/probability Python tests pass locally, including region visibility presets, reference navigation, exploration links, and source-exact white-matter atlas derivatives; the production build passes. Deployment verification for the current batch is recorded below.
+- 133 Node tests and eight geometry/probability Python tests pass locally, including region visibility presets, reference navigation, exploration links, and source-exact white-matter atlas derivatives; the production build passes. Deployment verification for the current batch is recorded below.
 - Rendering stops when idle and outside Anatomy; image volumes and detail meshes are bounded caches. Preserve these properties.
 - All runtime local assets must use `assetUrl()` for Pages subpath support. Heavy new resources should load on demand.
 - Licenses and checksums are retained in the repository. Never casually normalize pinned input files.
 
 ## Recent implementation history
+
+2026-11-27 (activity region → guided anatomy): when the activity inspector identifies a selected region that appears in a guided tour, it now offers a direct link to that exact stop. Midline regions with multiple stops show each route; regions without an exact stop receive no substitute or opposite-hemisphere link. The tour opens in a new tab, preserving the current A/B maps, comparison lens, selected region, and crosshair. Each destination uses the guide's existing source and anatomy description.
+
+Validation: all 133 Node tests and the production build pass; `git diff --check` is clean. A route test checks every guide stop against the real atlas parts and verifies the midline thalamus can link to both of its existing routes, with no right-to-left substitution. Firefox BiDi opened Reading vs. Watching films with Pars opercularis selected: the activity reader displayed the exact language-tour stop, `#path=language&step=3`, at a 44 px touch height and no horizontal overflow. The new UI stays in the lazy ActivityCompare chunk (12.14 kB gzip, +0.15 kB); the eager main chunk is 121.62 kB gzip (+0.03 kB). No image or mesh payload changed. Deployment pending.
 
 2026-11-27 (white-matter pathway ↔ guided anatomy context): the Xtract reader now offers a carefully labeled link from 12 selected channels to an existing, source-backed guided 3D stop: bilateral arcuate fasciculi, acoustic radiations, corticospinal tracts, fornices, optic radiations, and forceps major/minor. Ten links are curated topic navigation; their destination displays its existing region mesh, never the tract itself. The forceps cards retain the separate source-backed splenium/genu and FreeSurfer subdivision context. Every destination opens in a new tab so the selected map and crosshair remain intact. The other 30 channels have no guide card.
 

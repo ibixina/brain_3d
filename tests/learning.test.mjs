@@ -10,6 +10,7 @@ import {
   learningHash,
   learningView,
   filterLearningPaths,
+  learningStopsForRegion,
 } from "../src/learning.ts";
 
 const defaults = {
@@ -88,6 +89,23 @@ test("every learning stop can be shared and reopened without losing its path or 
     assert.equal(learningFromHash(`#path=memory&step=${step}`).step, 0);
   }
   assert.equal(learningFromHash("#path=memory").step, 0);
+});
+
+test("region lookups return every exact guided stop and no hemisphere substitutions", () => {
+  for (const path of learningPaths) {
+    for (let step = 0; step < path.steps.length; step++) {
+      const stop = path.steps[step];
+      assert.ok(atlas.parts.some((part) => part.id === stop.region));
+      const matches = learningStopsForRegion(stop.region);
+      assert.ok(matches.some((match) => match.path.id === path.id && match.step === step));
+    }
+  }
+  assert.deepEqual(
+    learningStopsForRegion("aseg-10").map(({ path }) => path.id).sort(),
+    ["memory", "movement"],
+  );
+  assert.equal(learningStopsForRegion("rh-transversetemporal").length, 0);
+  assert.deepEqual(learningStopsForRegion("not-a-region"), []);
 });
 
 test("path discovery searches system names and aliases and combines terms", () => {

@@ -349,6 +349,41 @@
 .compare-region-videos svg {
   flex-shrink: 0;
 }
+.compare-learning-links {
+  display: grid;
+  gap: 5px;
+  margin: 10px 0 12px;
+}
+.compare-learning-links > span {
+  margin-bottom: 2px;
+  color: #809bad;
+  font-size: 9px;
+}
+.compare-learning-links a {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 44px;
+  padding: 6px 8px;
+  border: 1px solid #ffffff12;
+  border-radius: 6px;
+  color: #b5d8d1;
+  font-size: 10px;
+  line-height: 1.4;
+}
+.compare-learning-links a > span {
+  flex: 1;
+  min-width: 0;
+}
+.compare-learning-links a small {
+  display: block;
+  margin-top: 2px;
+  color: #769191;
+  font-size: 8px;
+}
+.compare-learning-links a svg {
+  flex: 0 0 auto;
+}
 .compare-point dt {
   display: flex;
   align-items: center;

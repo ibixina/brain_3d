@@ -80,6 +80,13 @@ export function learningFromHash(hash: string): LearningPosition | null {
 export function learningHash(path: LearningPath, step: number) {
   return `#path=${encodeURIComponent(path.id)}&step=${step + 1}`;
 }
+export function learningStopsForRegion(regionId: string) {
+  return learningPaths.flatMap((path) =>
+    path.steps.flatMap((stop, step) =>
+      stop.region === regionId ? [{ path, step, stop }] : [],
+    ),
+  );
+}
 export function filterLearningPaths(query: string) {
   const terms = query.toLowerCase().trim().split(/\s+/).filter(Boolean);
   return learningPaths.filter((path) => {

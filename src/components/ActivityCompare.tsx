@@ -55,6 +55,7 @@ import pathwayData from "../activity-pathways.json";
 import MRISlice from "./MRISlice";
 import { withReferenceOrigin } from "../reference-navigation.ts";
 import { activityComparisonHash, regionHash } from "../region-navigation.ts";
+import { learningHash, learningStopsForRegion } from "../learning.ts";
 import "./imaging.css";
 import "./activity-compare.css";
 
@@ -608,6 +609,10 @@ export default function ActivityCompare({
       ? parts[labels[pointIndex] - 1].id
       : null;
   const selectedStat = stats.find((stat) => stat.id === selected);
+  const selectedRegion = selected ?? pointPart;
+  const selectedGuides = selectedRegion
+    ? learningStopsForRegion(selectedRegion)
+    : [];
   useEffect(() => {
     if (!point || !grid || !matrix || !modelReady) return;
     viewer.current?.setMarker(mni152ToDisplay(worldPoint(point, grid), matrix));
@@ -1016,6 +1021,26 @@ export default function ActivityCompare({
                   <span>Explore {partName(pointPart)} anatomy and specimen videos</span>
                   <ArrowUpRight size={13} />
                 </a>
+              )}
+              {selectedGuides.length > 0 && (
+                <nav
+                  className="compare-learning-links"
+                  aria-label="Guided anatomy for selected region"
+                >
+                  <span>Continue exploring this labeled part</span>
+                  {selectedGuides.map(({ path, step, stop }) => (
+                    <a
+                      key={`${path.id}:${step}`}
+                      href={learningHash(path, step)}
+                      target="_blank"
+                      rel="noreferrer"
+                    >
+                      <BookOpen size={13} />
+                      <span>{path.title}<small>Step {step + 1}: {stop.title}</small></span>
+                      <ArrowUpRight size={12} />
+                    </a>
+                  ))}
+                </nav>
               )}
               {selectedStat && selected && (
                 <p className="compare-part-summary">
