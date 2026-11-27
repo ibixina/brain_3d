@@ -4,7 +4,7 @@ import { dissectionVideos, videoProviders } from "./videos.ts";
 import { withReferenceOrigin } from "./reference-navigation.ts";
 
 export type ReferenceExploration = {
-  kind: "path" | "scan" | "video";
+  kind: "path" | "scan" | "video" | "atlas";
   id: string;
   note: string;
 };
@@ -81,6 +81,15 @@ export function referenceExplorations(article: ReferenceArticle) {
         title: path.title,
         label: `Guided path · ${path.steps.length} stops`,
         href: withReferenceOrigin(learningHash(path, 0), article.id),
+        external: false,
+      };
+    }
+    if (item.kind === "atlas") {
+      return {
+        ...item,
+        title: "Human hypothalamic-region atlas",
+        label: "Independent atlas · 50 lateralized structures",
+        href: withReferenceOrigin(`#region=aseg-28&atlas=hypothalamus`, article.id),
         external: false,
       };
     }

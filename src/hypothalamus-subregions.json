@@ -1,0 +1,1544 @@
+{
+  "version": 1,
+  "title": "Human hypothalamic-region atlas",
+  "checkedOn": "2026-11-27",
+  "probabilityEvidence": false,
+  "relatedReading": {
+    "title": "Related anatomy & systems",
+    "scope": "The atlas provides population-template labels for hypothalamic and adjacent structures. These notes discuss their regional context and selected systems; they do not add cell or pathway geometry.",
+    "links": [
+      {
+        "id": "hypothalamic-anatomy",
+        "label": "Hypothalamic anatomy & boundaries"
+      },
+      {
+        "id": "hypothalamic-systems",
+        "label": "Hypothalamic systems & experiments"
+      }
+    ]
+  },
+  "parts": [
+    {
+      "id": "hypo-1",
+      "key": "R_AC",
+      "name": "Anterior commissure",
+      "abbreviation": "AC",
+      "sourceName": "anterior commissure",
+      "sourceAbbreviation": "R_AC",
+      "hemisphere": "right",
+      "group": "Nearby white matter",
+      "aliases": [
+        "R_AC"
+      ],
+      "kind": "segmentation",
+      "source": "neudorfer-2020",
+      "label": 1,
+      "channel": 1,
+      "color": "#dc9c78",
+      "description": "Anterior commissure, right side. One of 12 structures adjacent to the hypothalamic region in the published population-template atlas.",
+      "offset": 0,
+      "vertices": 2186,
+      "triangles": 4368,
+      "voxels": 2113,
+      "center": [
+        16.799,
+        1.433,
+        -0.581
+      ]
+    },
+    {
+      "id": "hypo-2",
+      "key": "L_AC",
+      "name": "Anterior commissure",
+      "abbreviation": "AC",
+      "sourceName": "anterior commissure",
+      "sourceAbbreviation": "L_AC",
+      "hemisphere": "left",
+      "group": "Nearby white matter",
+      "aliases": [
+        "L_AC"
+      ],
+      "kind": "segmentation",
+      "source": "neudorfer-2020",
+      "label": 2,
+      "channel": 2,
+      "color": "#d2a767",
+      "description": "Anterior commissure, left side. One of 12 structures adjacent to the hypothalamic region in the published population-template atlas.",
+      "offset": 113624,
+      "vertices": 1966,
+      "triangles": 3928,
+      "voxels": 2082,
+      "center": [
+        -17.501,
+        1.392,
+        0.178
+      ]
+    },
+    {
+      "id": "hypo-3",
+      "key": "R_dB",
+      "name": "Diagonal band of Broca",
+      "abbreviation": "dB",
+      "sourceName": "diagonal band of Broca",
+      "sourceAbbreviation": "R_dB",
+      "hemisphere": "right",
+      "group": "Nearby basal forebrain",
+      "aliases": [
+        "R_dB"
+      ],
+      "kind": "segmentation",
+      "source": "neudorfer-2020",
+      "label": 3,
+      "channel": 3,
+      "color": "#80a9bc",
+      "description": "Diagonal band of Broca, right side. One of 12 structures adjacent to the hypothalamic region in the published population-template atlas.",
+      "offset": 215808,
+      "vertices": 717,
+      "triangles": 1434,
+      "voxels": 401,
+      "center": [
+        2.772,
+        0.275,
+        -4.355
+      ]
+    },
+    {
+      "id": "hypo-4",
+      "key": "L_dB",
+      "name": "Diagonal band of Broca",
+      "abbreviation": "dB",
+      "sourceName": "diagonal band of Broca",
+      "sourceAbbreviation": "L_dB",
+      "hemisphere": "left",
+      "group": "Nearby basal forebrain",
+      "aliases": [
+        "L_dB"
+      ],
+      "kind": "segmentation",
+      "source": "neudorfer-2020",
+      "label": 4,
+      "channel": 4,
+      "color": "#aa92bc",
+      "description": "Diagonal band of Broca, left side. One of 12 structures adjacent to the hypothalamic region in the published population-template atlas.",
+      "offset": 253092,
+      "vertices": 616,
+      "triangles": 1228,
+      "voxels": 326,
+      "center": [
+        -3.747,
+        -0.09,
+        -4.269
+      ]
+    },
+    {
+      "id": "hypo-5",
+      "key": "R_FX",
+      "name": "Fornix",
+      "abbreviation": "FX",
+      "sourceName": "fornix",
+      "sourceAbbreviation": "R_FX",
+      "hemisphere": "right",
+      "group": "Nearby white matter",
+      "aliases": [
+        "R_FX"
+      ],
+      "kind": "segmentation",
+      "source": "neudorfer-2020",
+      "label": 5,
+      "channel": 5,
+      "color": "#77aa94",
+      "description": "Fornix, right side. One of 12 structures adjacent to the hypothalamic region in the published population-template atlas.",
+      "offset": 285076,
+      "vertices": 1884,
+      "triangles": 3764,
+      "voxels": 1869,
+      "center": [
+        2.488,
+        6.266,
+        1.066
+      ]
+    },
+    {
+      "id": "hypo-6",
+      "key": "L_FX",
+      "name": "Fornix",
+      "abbreviation": "FX",
+      "sourceName": "fornix",
+      "sourceAbbreviation": "L_FX",
+      "hemisphere": "left",
+      "group": "Nearby white matter",
+      "aliases": [
+        "L_FX"
+      ],
+      "kind": "segmentation",
+      "source": "neudorfer-2020",
+      "label": 6,
+      "channel": 6,
+      "color": "#d18383",
+      "description": "Fornix, left side. One of 12 structures adjacent to the hypothalamic region in the published population-template atlas.",
+      "offset": 382996,
+      "vertices": 1873,
+      "triangles": 3746,
+      "voxels": 1842,
+      "center": [
+        -3.446,
+        6.515,
+        1.122
+      ]
+    },
+    {
+      "id": "hypo-7",
+      "key": "R_MT",
+      "name": "Mammillothalamic tract",
+      "abbreviation": "MT",
+      "sourceName": "mammillothalamic tract",
+      "sourceAbbreviation": "R_MT",
+      "hemisphere": "right",
+      "group": "Nearby white matter",
+      "aliases": [
+        "R_MT"
+      ],
+      "kind": "segmentation",
+      "source": "neudorfer-2020",
+      "label": 7,
+      "channel": 7,
+      "color": "#dc9c78",
+      "description": "Mammillothalamic tract, right side. One of 12 structures adjacent to the hypothalamic region in the published population-template atlas.",
+      "offset": 480392,
+      "vertices": 934,
+      "triangles": 1864,
+      "voxels": 533,
+      "center": [
+        6.123,
+        4.156,
+        9.488
+      ]
+    },
+    {
+      "id": "hypo-8",
+      "key": "L_MT",
+      "name": "Mammillothalamic tract",
+      "abbreviation": "MT",
+      "sourceName": "mammillothalamic tract",
+      "sourceAbbreviation": "L_MT",
+      "hemisphere": "left",
+      "group": "Nearby white matter",
+      "aliases": [
+        "L_MT"
+      ],
+      "kind": "segmentation",
+      "source": "neudorfer-2020",
+      "label": 8,
+      "channel": 8,
+      "color": "#d2a767",
+      "description": "Mammillothalamic tract, left side. One of 12 structures adjacent to the hypothalamic region in the published population-template atlas.",
+      "offset": 528912,
+      "vertices": 804,
+      "triangles": 1604,
+      "voxels": 435,
+      "center": [
+        -6.534,
+        3.966,
+        9.962
+      ]
+    },
+    {
+      "id": "hypo-9",
+      "key": "R_MM",
+      "name": "Mammillary bodies",
+      "abbreviation": "MM",
+      "sourceName": "mammillary bodies",
+      "sourceAbbreviation": "R_MM",
+      "hemisphere": "right",
+      "group": "Nearby hypothalamic-region structure",
+      "aliases": [
+        "R_MM"
+      ],
+      "kind": "segmentation",
+      "source": "neudorfer-2020",
+      "label": 9,
+      "channel": 9,
+      "color": "#80a9bc",
+      "description": "Mammillary bodies, right side. One of 12 structures adjacent to the hypothalamic region in the published population-template atlas.",
+      "offset": 570672,
+      "vertices": 740,
+      "triangles": 1476,
+      "voxels": 861,
+      "center": [
+        2.407,
+        -6.172,
+        8.613
+      ]
+    },
+    {
+      "id": "hypo-10",
+      "key": "L_MM",
+      "name": "Mammillary bodies",
+      "abbreviation": "MM",
+      "sourceName": "mammillary bodies",
+      "sourceAbbreviation": "L_MM",
+      "hemisphere": "left",
+      "group": "Nearby hypothalamic-region structure",
+      "aliases": [
+        "L_MM"
+      ],
+      "kind": "segmentation",
+      "source": "neudorfer-2020",
+      "label": 10,
+      "channel": 10,
+      "color": "#aa92bc",
+      "description": "Mammillary bodies, left side. One of 12 structures adjacent to the hypothalamic region in the published population-template atlas.",
+      "offset": 609104,
+      "vertices": 766,
+      "triangles": 1536,
+      "voxels": 918,
+      "center": [
+        -2.922,
+        -5.977,
+        8.782
+      ]
+    },
+    {
+      "id": "hypo-13",
+      "key": "R_STN",
+      "name": "Subthalamic nucleus",
+      "abbreviation": "STN",
+      "sourceName": "subthalamic nucleus",
+      "sourceAbbreviation": "R_STN",
+      "hemisphere": "right",
+      "group": "Nearby gray matter",
+      "aliases": [
+        "R_STN"
+      ],
+      "kind": "segmentation",
+      "source": "neudorfer-2020",
+      "label": 13,
+      "channel": 13,
+      "color": "#77aa94",
+      "description": "Subthalamic nucleus, right side. One of 12 structures adjacent to the hypothalamic region in the published population-template atlas.",
+      "offset": 648984,
+      "vertices": 1291,
+      "triangles": 2582,
+      "voxels": 1050,
+      "center": [
+        11.996,
+        0.936,
+        11.858
+      ]
+    },
+    {
+      "id": "hypo-14",
+      "key": "L_STN",
+      "name": "Subthalamic nucleus",
+      "abbreviation": "STN",
+      "sourceName": "subthalamic nucleus",
+      "sourceAbbreviation": "L_STN",
+      "hemisphere": "left",
+      "group": "Nearby gray matter",
+      "aliases": [
+        "L_STN"
+      ],
+      "kind": "segmentation",
+      "source": "neudorfer-2020",
+      "label": 14,
+      "channel": 14,
+      "color": "#d18383",
+      "description": "Subthalamic nucleus, left side. One of 12 structures adjacent to the hypothalamic region in the published population-template atlas.",
+      "offset": 716116,
+      "vertices": 1316,
+      "triangles": 2636,
+      "voxels": 1020,
+      "center": [
+        -12.581,
+        1.171,
+        12.361
+      ]
+    },
+    {
+      "id": "hypo-15",
+      "key": "R_SN",
+      "name": "Substantia nigra",
+      "abbreviation": "SN",
+      "sourceName": "substantia nigra",
+      "sourceAbbreviation": "R_SN",
+      "hemisphere": "right",
+      "group": "Nearby gray matter",
+      "aliases": [
+        "R_SN"
+      ],
+      "kind": "segmentation",
+      "source": "neudorfer-2020",
+      "label": 15,
+      "channel": 15,
+      "color": "#dc9c78",
+      "description": "Substantia nigra, right side. One of 12 structures adjacent to the hypothalamic region in the published population-template atlas.",
+      "offset": 784596,
+      "vertices": 4222,
+      "triangles": 8440,
+      "voxels": 7447,
+      "center": [
+        10.215,
+        -5.167,
+        17.036
+      ]
+    },
+    {
+      "id": "hypo-16",
+      "key": "L_SN",
+      "name": "Substantia nigra",
+      "abbreviation": "SN",
+      "sourceName": "substantia nigra",
+      "sourceAbbreviation": "L_SN",
+      "hemisphere": "left",
+      "group": "Nearby gray matter",
+      "aliases": [
+        "L_SN"
+      ],
+      "kind": "segmentation",
+      "source": "neudorfer-2020",
+      "label": 16,
+      "channel": 16,
+      "color": "#d2a767",
+      "description": "Substantia nigra, left side. One of 12 structures adjacent to the hypothalamic region in the published population-template atlas.",
+      "offset": 1004092,
+      "vertices": 4205,
+      "triangles": 8410,
+      "voxels": 6795,
+      "center": [
+        -11.15,
+        -4.682,
+        17.028
+      ]
+    },
+    {
+      "id": "hypo-17",
+      "key": "R_RN",
+      "name": "Red nucleus",
+      "abbreviation": "RN",
+      "sourceName": "red nucleus",
+      "sourceAbbreviation": "R_RN",
+      "hemisphere": "right",
+      "group": "Nearby gray matter",
+      "aliases": [
+        "R_RN"
+      ],
+      "kind": "segmentation",
+      "source": "neudorfer-2020",
+      "label": 17,
+      "channel": 17,
+      "color": "#80a9bc",
+      "description": "Red nucleus, right side. One of 12 structures adjacent to the hypothalamic region in the published population-template atlas.",
+      "offset": 1222752,
+      "vertices": 1318,
+      "triangles": 2632,
+      "voxels": 2149,
+      "center": [
+        5.683,
+        -1.529,
+        19.303
+      ]
+    },
+    {
+      "id": "hypo-18",
+      "key": "L_RN",
+      "name": "Red nucleus",
+      "abbreviation": "RN",
+      "sourceName": "red nucleus",
+      "sourceAbbreviation": "L_RN",
+      "hemisphere": "left",
+      "group": "Nearby gray matter",
+      "aliases": [
+        "L_RN"
+      ],
+      "kind": "segmentation",
+      "source": "neudorfer-2020",
+      "label": 18,
+      "channel": 18,
+      "color": "#aa92bc",
+      "description": "Red nucleus, left side. One of 12 structures adjacent to the hypothalamic region in the published population-template atlas. The supplied left label also contains detached 27- and 2-voxel fragments, including a fragment reaching the image boundary. Only the largest face-connected component (2,285 voxels) is surfaced; the source values remain unmodified in provenance.",
+      "sourceVoxels": 2314,
+      "excludedSourceFragments": [
+        27,
+        2
+      ],
+      "warning": "Detached source fragments excluded",
+      "offset": 1291240,
+      "vertices": 1368,
+      "triangles": 2732,
+      "voxels": 2285,
+      "center": [
+        -6.633,
+        -1.442,
+        19.323
+      ]
+    },
+    {
+      "id": "hypo-19",
+      "key": "R_MPO",
+      "name": "Medial preoptic nucleus",
+      "abbreviation": "MPO",
+      "sourceName": "medial preoptic nucleus",
+      "sourceAbbreviation": "R_MPO",
+      "hemisphere": "right",
+      "group": "Hypothalamus",
+      "aliases": [
+        "R_MPO"
+      ],
+      "kind": "segmentation",
+      "source": "neudorfer-2020",
+      "label": 19,
+      "channel": 19,
+      "color": "#77aa94",
+      "description": "Medial preoptic nucleus, right side. One of 13 hypothalamic labels in the published population-template atlas.",
+      "offset": 1362328,
+      "vertices": 201,
+      "triangles": 402,
+      "voxels": 88,
+      "center": [
+        2.182,
+        -0.59,
+        -1.083
+      ]
+    },
+    {
+      "id": "hypo-20",
+      "key": "L_MPO",
+      "name": "Medial preoptic nucleus",
+      "abbreviation": "MPO",
+      "sourceName": "medial preoptic nucleus",
+      "sourceAbbreviation": "L_MPO",
+      "hemisphere": "left",
+      "group": "Hypothalamus",
+      "aliases": [
+        "L_MPO"
+      ],
+      "kind": "segmentation",
+      "source": "neudorfer-2020",
+      "label": 20,
+      "channel": 20,
+      "color": "#d18383",
+      "description": "Medial preoptic nucleus, left side. One of 13 hypothalamic labels in the published population-template atlas.",
+      "offset": 1372780,
+      "vertices": 239,
+      "triangles": 478,
+      "voxels": 101,
+      "center": [
+        -3.801,
+        -0.54,
+        -1.047
+      ]
+    },
+    {
+      "id": "hypo-21",
+      "key": "R_Pa",
+      "name": "Paraventricular nucleus",
+      "abbreviation": "Pa",
+      "sourceName": "paraventricular nucleus",
+      "sourceAbbreviation": "R_Pa",
+      "hemisphere": "right",
+      "group": "Hypothalamus",
+      "aliases": [
+        "PVH",
+        "PVN",
+        "R_Pa"
+      ],
+      "kind": "segmentation",
+      "source": "neudorfer-2020",
+      "label": 21,
+      "channel": 21,
+      "color": "#dc9c78",
+      "description": "Paraventricular nucleus, right side. One of 13 hypothalamic labels in the published population-template atlas.",
+      "offset": 1385208,
+      "vertices": 647,
+      "triangles": 1298,
+      "voxels": 435,
+      "center": [
+        1.249,
+        -0.352,
+        1.539
+      ]
+    },
+    {
+      "id": "hypo-22",
+      "key": "L_Pa",
+      "name": "Paraventricular nucleus",
+      "abbreviation": "Pa",
+      "sourceName": "paraventricular nucleus",
+      "sourceAbbreviation": "L_Pa",
+      "hemisphere": "left",
+      "group": "Hypothalamus",
+      "aliases": [
+        "L_Pa",
+        "PVH",
+        "PVN"
+      ],
+      "kind": "segmentation",
+      "source": "neudorfer-2020",
+      "label": 22,
+      "channel": 22,
+      "color": "#d2a767",
+      "description": "Paraventricular nucleus, left side. One of 13 hypothalamic labels in the published population-template atlas.",
+      "offset": 1418900,
+      "vertices": 629,
+      "triangles": 1258,
+      "voxels": 429,
+      "center": [
+        -2.622,
+        -0.478,
+        1.433
+      ]
+    },
+    {
+      "id": "hypo-23",
+      "key": "R_DPEH",
+      "name": "Dorsal periventricular nucleus",
+      "abbreviation": "DPEH",
+      "sourceName": "dorsal periventricular hypothalamic nucleus",
+      "sourceAbbreviation": "R_DPEH",
+      "hemisphere": "right",
+      "group": "Hypothalamus",
+      "aliases": [
+        "R_DPEH",
+        "dorsal periventricular hypothalamic nucleus"
+      ],
+      "kind": "segmentation",
+      "source": "neudorfer-2020",
+      "label": 23,
+      "channel": 23,
+      "color": "#80a9bc",
+      "description": "Dorsal periventricular nucleus, right side. One of 13 hypothalamic labels in the published population-template atlas.",
+      "offset": 1451608,
+      "vertices": 91,
+      "triangles": 190,
+      "voxels": 30,
+      "center": [
+        1.505,
+        1.83,
+        -1.712
+      ]
+    },
+    {
+      "id": "hypo-24",
+      "key": "L_DPEH",
+      "name": "Dorsal periventricular nucleus",
+      "abbreviation": "DPEH",
+      "sourceName": "dorsal periventricular hypothalamic nucleus",
+      "sourceAbbreviation": "L_DPEH",
+      "hemisphere": "left",
+      "group": "Hypothalamus",
+      "aliases": [
+        "L_DPEH",
+        "dorsal periventricular hypothalamic nucleus"
+      ],
+      "kind": "segmentation",
+      "source": "neudorfer-2020",
+      "label": 24,
+      "channel": 24,
+      "color": "#aa92bc",
+      "description": "Dorsal periventricular nucleus, left side. One of 13 hypothalamic labels in the published population-template atlas.",
+      "offset": 1456436,
+      "vertices": 137,
+      "triangles": 298,
+      "voxels": 41,
+      "center": [
+        -1.931,
+        1.949,
+        -2.308
+      ]
+    },
+    {
+      "id": "hypo-25",
+      "key": "R_LH",
+      "name": "Lateral hypothalamus",
+      "abbreviation": "LH",
+      "sourceName": "lateral hypothalamus",
+      "sourceAbbreviation": "R_LH",
+      "hemisphere": "right",
+      "group": "Hypothalamus",
+      "aliases": [
+        "R_LH"
+      ],
+      "kind": "segmentation",
+      "source": "neudorfer-2020",
+      "label": 25,
+      "channel": 25,
+      "color": "#77aa94",
+      "description": "Lateral hypothalamus, right side. One of 13 hypothalamic labels in the published population-template atlas.",
+      "offset": 1463848,
+      "vertices": 2331,
+      "triangles": 4686,
+      "voxels": 1928,
+      "center": [
+        6.373,
+        -1.046,
+        3.927
+      ]
+    },
+    {
+      "id": "hypo-26",
+      "key": "L_LH",
+      "name": "Lateral hypothalamus",
+      "abbreviation": "LH",
+      "sourceName": "lateral hypothalamus",
+      "sourceAbbreviation": "L_LH",
+      "hemisphere": "left",
+      "group": "Hypothalamus",
+      "aliases": [
+        "L_LH"
+      ],
+      "kind": "segmentation",
+      "source": "neudorfer-2020",
+      "label": 26,
+      "channel": 26,
+      "color": "#d18383",
+      "description": "Lateral hypothalamus, left side. One of 13 hypothalamic labels in the published population-template atlas.",
+      "offset": 1585348,
+      "vertices": 2241,
+      "triangles": 4506,
+      "voxels": 1790,
+      "center": [
+        -7.202,
+        -1.322,
+        4.262
+      ]
+    },
+    {
+      "id": "hypo-27",
+      "key": "R_VM",
+      "name": "Ventromedial hypothalamus",
+      "abbreviation": "VM",
+      "sourceName": "ventromedial hypothalamus",
+      "sourceAbbreviation": "R_VM",
+      "hemisphere": "right",
+      "group": "Hypothalamus",
+      "aliases": [
+        "R_VM"
+      ],
+      "kind": "segmentation",
+      "source": "neudorfer-2020",
+      "label": 27,
+      "channel": 27,
+      "color": "#dc9c78",
+      "description": "Ventromedial hypothalamus, right side. One of 13 hypothalamic labels in the published population-template atlas.",
+      "offset": 1702168,
+      "vertices": 440,
+      "triangles": 876,
+      "voxels": 357,
+      "center": [
+        3.061,
+        -5.676,
+        3.534
+      ]
+    },
+    {
+      "id": "hypo-28",
+      "key": "L_VM",
+      "name": "Ventromedial hypothalamus",
+      "abbreviation": "VM",
+      "sourceName": "ventromedial hypothalamus",
+      "sourceAbbreviation": "L_VM",
+      "hemisphere": "left",
+      "group": "Hypothalamus",
+      "aliases": [
+        "L_VM"
+      ],
+      "kind": "segmentation",
+      "source": "neudorfer-2020",
+      "label": 28,
+      "channel": 28,
+      "color": "#d2a767",
+      "description": "Ventromedial hypothalamus, left side. One of 13 hypothalamic labels in the published population-template atlas.",
+      "offset": 1725000,
+      "vertices": 477,
+      "triangles": 954,
+      "voxels": 381,
+      "center": [
+        -4.201,
+        -5.861,
+        3.489
+      ]
+    },
+    {
+      "id": "hypo-29",
+      "key": "R_AN",
+      "name": "Arcuate nucleus",
+      "abbreviation": "AN",
+      "sourceName": "arcuate hypothalamic nucleus",
+      "sourceAbbreviation": "R_AN",
+      "hemisphere": "right",
+      "group": "Hypothalamus",
+      "aliases": [
+        "AN",
+        "ARC",
+        "R_AN",
+        "arcuate hypothalamic nucleus"
+      ],
+      "kind": "segmentation",
+      "source": "neudorfer-2020",
+      "label": 29,
+      "channel": 29,
+      "color": "#80a9bc",
+      "description": "Arcuate nucleus, right side. One of 13 hypothalamic labels in the published population-template atlas.",
+      "offset": 1749804,
+      "vertices": 445,
+      "triangles": 890,
+      "voxels": 314,
+      "center": [
+        1.955,
+        -8.455,
+        3.648
+      ]
+    },
+    {
+      "id": "hypo-30",
+      "key": "L_AN",
+      "name": "Arcuate nucleus",
+      "abbreviation": "AN",
+      "sourceName": "arcuate hypothalamic nucleus",
+      "sourceAbbreviation": "L_AN",
+      "hemisphere": "left",
+      "group": "Hypothalamus",
+      "aliases": [
+        "AN",
+        "ARC",
+        "L_AN",
+        "arcuate hypothalamic nucleus"
+      ],
+      "kind": "segmentation",
+      "source": "neudorfer-2020",
+      "label": 30,
+      "channel": 30,
+      "color": "#aa92bc",
+      "description": "Arcuate nucleus, left side. One of 13 hypothalamic labels in the published population-template atlas.",
+      "offset": 1772944,
+      "vertices": 456,
+      "triangles": 904,
+      "voxels": 325,
+      "center": [
+        -2.718,
+        -8.504,
+        3.614
+      ]
+    },
+    {
+      "id": "hypo-31",
+      "key": "R_Pe",
+      "name": "Periventricular nucleus",
+      "abbreviation": "Pe",
+      "sourceName": "periventricular hypothalamic nucleus",
+      "sourceAbbreviation": "R_Pe",
+      "hemisphere": "right",
+      "group": "Hypothalamus",
+      "aliases": [
+        "R_Pe",
+        "periventricular hypothalamic nucleus"
+      ],
+      "kind": "segmentation",
+      "source": "neudorfer-2020",
+      "label": 31,
+      "channel": 31,
+      "color": "#77aa94",
+      "description": "Periventricular nucleus, right side. One of 13 hypothalamic labels in the published population-template atlas.",
+      "offset": 1796560,
+      "vertices": 379,
+      "triangles": 758,
+      "voxels": 201,
+      "center": [
+        1.392,
+        -5.322,
+        2.089
+      ]
+    },
+    {
+      "id": "hypo-32",
+      "key": "L_Pe",
+      "name": "Periventricular nucleus",
+      "abbreviation": "Pe",
+      "sourceName": "periventricular hypothalamic nucleus",
+      "sourceAbbreviation": "L_Pe",
+      "hemisphere": "left",
+      "group": "Hypothalamus",
+      "aliases": [
+        "L_Pe",
+        "periventricular hypothalamic nucleus"
+      ],
+      "kind": "segmentation",
+      "source": "neudorfer-2020",
+      "label": 32,
+      "channel": 32,
+      "color": "#d18383",
+      "description": "Periventricular nucleus, left side. One of 13 hypothalamic labels in the published population-template atlas.",
+      "offset": 1816268,
+      "vertices": 390,
+      "triangles": 776,
+      "voxels": 223,
+      "center": [
+        -2.626,
+        -5.455,
+        2.04
+      ]
+    },
+    {
+      "id": "hypo-33",
+      "key": "R_BNST",
+      "name": "Bed nucleus of the stria terminalis",
+      "abbreviation": "BNST",
+      "sourceName": "bed nucleus of the stria terminalis",
+      "sourceAbbreviation": "R_BNST",
+      "hemisphere": "right",
+      "group": "Nearby basal forebrain",
+      "aliases": [
+        "R_BNST"
+      ],
+      "kind": "segmentation",
+      "source": "neudorfer-2020",
+      "label": 33,
+      "channel": 33,
+      "color": "#dc9c78",
+      "description": "Bed nucleus of the stria terminalis, right side. One of 12 structures adjacent to the hypothalamic region in the published population-template atlas.",
+      "offset": 1836500,
+      "vertices": 1371,
+      "triangles": 2750,
+      "voxels": 1178,
+      "center": [
+        5.717,
+        6.402,
+        -2.072
+      ]
+    },
+    {
+      "id": "hypo-34",
+      "key": "L_BNST",
+      "name": "Bed nucleus of the stria terminalis",
+      "abbreviation": "BNST",
+      "sourceName": "bed nucleus of the stria terminalis",
+      "sourceAbbreviation": "L_BNST",
+      "hemisphere": "left",
+      "group": "Nearby basal forebrain",
+      "aliases": [
+        "L_BNST"
+      ],
+      "kind": "segmentation",
+      "source": "neudorfer-2020",
+      "label": 34,
+      "channel": 34,
+      "color": "#d2a767",
+      "description": "Bed nucleus of the stria terminalis, left side. One of 12 structures adjacent to the hypothalamic region in the published population-template atlas.",
+      "offset": 1907888,
+      "vertices": 1483,
+      "triangles": 2974,
+      "voxels": 1348,
+      "center": [
+        -6.776,
+        6.482,
+        -1.266
+      ]
+    },
+    {
+      "id": "hypo-35",
+      "key": "R_NBM",
+      "name": "Nucleus basalis of Meynert",
+      "abbreviation": "NBM",
+      "sourceName": "nucleus basalis of Meynert",
+      "sourceAbbreviation": "R_NBM",
+      "hemisphere": "right",
+      "group": "Nearby basal forebrain",
+      "aliases": [
+        "R_NBM"
+      ],
+      "kind": "segmentation",
+      "source": "neudorfer-2020",
+      "label": 35,
+      "channel": 35,
+      "color": "#80a9bc",
+      "description": "Nucleus basalis of Meynert, right side. One of 12 structures adjacent to the hypothalamic region in the published population-template atlas.",
+      "offset": 1985100,
+      "vertices": 1164,
+      "triangles": 2332,
+      "voxels": 688,
+      "center": [
+        17.3,
+        -0.657,
+        0.892
+      ]
+    },
+    {
+      "id": "hypo-36",
+      "key": "L_NBM",
+      "name": "Nucleus basalis of Meynert",
+      "abbreviation": "NBM",
+      "sourceName": "nucleus basalis of Meynert",
+      "sourceAbbreviation": "L_NBM",
+      "hemisphere": "left",
+      "group": "Nearby basal forebrain",
+      "aliases": [
+        "L_NBM"
+      ],
+      "kind": "segmentation",
+      "source": "neudorfer-2020",
+      "label": 36,
+      "channel": 36,
+      "color": "#aa92bc",
+      "description": "Nucleus basalis of Meynert, left side. One of 12 structures adjacent to the hypothalamic region in the published population-template atlas.",
+      "offset": 2045676,
+      "vertices": 1043,
+      "triangles": 2082,
+      "voxels": 596,
+      "center": [
+        -18.407,
+        -0.853,
+        1.542
+      ]
+    },
+    {
+      "id": "hypo-37",
+      "key": "R_DM",
+      "name": "Dorsomedial nucleus",
+      "abbreviation": "DM",
+      "sourceName": "dorsomedial hypothalamic nucleus",
+      "sourceAbbreviation": "R_DM",
+      "hemisphere": "right",
+      "group": "Hypothalamus",
+      "aliases": [
+        "DMH",
+        "R_DM",
+        "dorsomedial hypothalamic nucleus"
+      ],
+      "kind": "segmentation",
+      "source": "neudorfer-2020",
+      "label": 37,
+      "channel": 37,
+      "color": "#77aa94",
+      "description": "Dorsomedial nucleus, right side. One of 13 hypothalamic labels in the published population-template atlas.",
+      "offset": 2099864,
+      "vertices": 206,
+      "triangles": 408,
+      "voxels": 124,
+      "center": [
+        2.551,
+        -2.223,
+        4.626
+      ]
+    },
+    {
+      "id": "hypo-38",
+      "key": "L_DM",
+      "name": "Dorsomedial nucleus",
+      "abbreviation": "DM",
+      "sourceName": "dorsomedial hypothalamic nucleus",
+      "sourceAbbreviation": "L_DM",
+      "hemisphere": "left",
+      "group": "Hypothalamus",
+      "aliases": [
+        "DMH",
+        "L_DM",
+        "dorsomedial hypothalamic nucleus"
+      ],
+      "kind": "segmentation",
+      "source": "neudorfer-2020",
+      "label": 38,
+      "channel": 38,
+      "color": "#d18383",
+      "description": "Dorsomedial nucleus, left side. One of 13 hypothalamic labels in the published population-template atlas.",
+      "offset": 2110528,
+      "vertices": 226,
+      "triangles": 448,
+      "voxels": 131,
+      "center": [
+        -3.655,
+        -2.292,
+        4.788
+      ]
+    },
+    {
+      "id": "hypo-41",
+      "key": "R_ZI",
+      "name": "Zona incerta",
+      "abbreviation": "ZI",
+      "sourceName": "zona incerta",
+      "sourceAbbreviation": "R_ZI",
+      "hemisphere": "right",
+      "group": "Nearby gray matter",
+      "aliases": [
+        "R_ZI"
+      ],
+      "kind": "segmentation",
+      "source": "neudorfer-2020",
+      "label": 41,
+      "channel": 41,
+      "color": "#dc9c78",
+      "description": "Zona incerta, right side. One of 12 structures adjacent to the hypothalamic region in the published population-template atlas.",
+      "offset": 2122232,
+      "vertices": 1339,
+      "triangles": 2702,
+      "voxels": 686,
+      "center": [
+        10.484,
+        1.505,
+        11.837
+      ]
+    },
+    {
+      "id": "hypo-42",
+      "key": "L_ZI",
+      "name": "Zona incerta",
+      "abbreviation": "ZI",
+      "sourceName": "zona incerta",
+      "sourceAbbreviation": "L_ZI",
+      "hemisphere": "left",
+      "group": "Nearby gray matter",
+      "aliases": [
+        "L_ZI"
+      ],
+      "kind": "segmentation",
+      "source": "neudorfer-2020",
+      "label": 42,
+      "channel": 42,
+      "color": "#d2a767",
+      "description": "Zona incerta, left side. One of 12 structures adjacent to the hypothalamic region in the published population-template atlas.",
+      "offset": 2192148,
+      "vertices": 1420,
+      "triangles": 2844,
+      "voxels": 778,
+      "center": [
+        -11.225,
+        1.982,
+        12.211
+      ]
+    },
+    {
+      "id": "hypo-43",
+      "key": "R_ITP",
+      "name": "Inferior thalamic peduncle",
+      "abbreviation": "ITP",
+      "sourceName": "inferior thalamic peduncle",
+      "sourceAbbreviation": "R_ITP",
+      "hemisphere": "right",
+      "group": "Nearby white matter",
+      "aliases": [
+        "R_ITP"
+      ],
+      "kind": "segmentation",
+      "source": "neudorfer-2020",
+      "label": 43,
+      "channel": 43,
+      "color": "#80a9bc",
+      "description": "Inferior thalamic peduncle, right side. One of 12 structures adjacent to the hypothalamic region in the published population-template atlas.",
+      "offset": 2266036,
+      "vertices": 764,
+      "triangles": 1540,
+      "voxels": 449,
+      "center": [
+        8.805,
+        5.654,
+        2.907
+      ]
+    },
+    {
+      "id": "hypo-44",
+      "key": "L_ITP",
+      "name": "Inferior thalamic peduncle",
+      "abbreviation": "ITP",
+      "sourceName": "inferior thalamic peduncle",
+      "sourceAbbreviation": "L_ITP",
+      "hemisphere": "left",
+      "group": "Nearby white matter",
+      "aliases": [
+        "L_ITP"
+      ],
+      "kind": "segmentation",
+      "source": "neudorfer-2020",
+      "label": 44,
+      "channel": 44,
+      "color": "#aa92bc",
+      "description": "Inferior thalamic peduncle, left side. One of 12 structures adjacent to the hypothalamic region in the published population-template atlas.",
+      "offset": 2305908,
+      "vertices": 686,
+      "triangles": 1368,
+      "voxels": 450,
+      "center": [
+        -9.332,
+        6.067,
+        3.273
+      ]
+    },
+    {
+      "id": "hypo-45",
+      "key": "R_SO",
+      "name": "Supraoptic nucleus",
+      "abbreviation": "SO",
+      "sourceName": "supraoptic hypothalamic nucleus",
+      "sourceAbbreviation": "R_SO",
+      "hemisphere": "right",
+      "group": "Hypothalamus",
+      "aliases": [
+        "R_SO",
+        "SON",
+        "supraoptic hypothalamic nucleus"
+      ],
+      "kind": "segmentation",
+      "source": "neudorfer-2020",
+      "label": 45,
+      "channel": 45,
+      "color": "#77aa94",
+      "description": "Supraoptic nucleus, right side. One of 13 hypothalamic labels in the published population-template atlas.",
+      "offset": 2341532,
+      "vertices": 421,
+      "triangles": 858,
+      "voxels": 168,
+      "center": [
+        6.078,
+        -5.716,
+        0.088
+      ]
+    },
+    {
+      "id": "hypo-46",
+      "key": "L_SO",
+      "name": "Supraoptic nucleus",
+      "abbreviation": "SO",
+      "sourceName": "supraoptic hypothalamic nucleus",
+      "sourceAbbreviation": "L_SO",
+      "hemisphere": "left",
+      "group": "Hypothalamus",
+      "aliases": [
+        "L_SO",
+        "SON",
+        "supraoptic hypothalamic nucleus"
+      ],
+      "kind": "segmentation",
+      "source": "neudorfer-2020",
+      "label": 46,
+      "channel": 46,
+      "color": "#d18383",
+      "description": "Supraoptic nucleus, left side. One of 13 hypothalamic labels in the published population-template atlas.",
+      "offset": 2363616,
+      "vertices": 441,
+      "triangles": 890,
+      "voxels": 190,
+      "center": [
+        -6.471,
+        -5.806,
+        0.058
+      ]
+    },
+    {
+      "id": "hypo-47",
+      "key": "R_SC",
+      "name": "Suprachiasmatic nucleus",
+      "abbreviation": "SC",
+      "sourceName": "suprachiasmatic hypothalamic nucleus",
+      "sourceAbbreviation": "R_SC",
+      "hemisphere": "right",
+      "group": "Hypothalamus",
+      "aliases": [
+        "R_SC",
+        "SCN",
+        "suprachiasmatic hypothalamic nucleus"
+      ],
+      "kind": "segmentation",
+      "source": "neudorfer-2020",
+      "label": 47,
+      "channel": 47,
+      "color": "#dc9c78",
+      "description": "Suprachiasmatic nucleus, right side. One of 13 hypothalamic labels in the published population-template atlas.",
+      "offset": 2386644,
+      "vertices": 127,
+      "triangles": 254,
+      "voxels": 54,
+      "center": [
+        2.181,
+        -7.843,
+        -1.396
+      ]
+    },
+    {
+      "id": "hypo-48",
+      "key": "L_SC",
+      "name": "Suprachiasmatic nucleus",
+      "abbreviation": "SC",
+      "sourceName": "suprachiasmatic hypothalamic nucleus",
+      "sourceAbbreviation": "L_SC",
+      "hemisphere": "left",
+      "group": "Hypothalamus",
+      "aliases": [
+        "L_SC",
+        "SCN",
+        "suprachiasmatic hypothalamic nucleus"
+      ],
+      "kind": "segmentation",
+      "source": "neudorfer-2020",
+      "label": 48,
+      "channel": 48,
+      "color": "#d2a767",
+      "description": "Suprachiasmatic nucleus, left side. One of 13 hypothalamic labels in the published population-template atlas.",
+      "offset": 2393248,
+      "vertices": 128,
+      "triangles": 252,
+      "voxels": 57,
+      "center": [
+        -3.258,
+        -7.898,
+        -1.293
+      ]
+    },
+    {
+      "id": "hypo-49",
+      "key": "R_TM",
+      "name": "Tuberomammillary nucleus",
+      "abbreviation": "TM",
+      "sourceName": "tuberomammillary hypothalamic nucleus",
+      "sourceAbbreviation": "R_TM",
+      "hemisphere": "right",
+      "group": "Hypothalamus",
+      "aliases": [
+        "R_TM",
+        "tuberomammillary hypothalamic nucleus"
+      ],
+      "kind": "segmentation",
+      "source": "neudorfer-2020",
+      "label": 49,
+      "channel": 49,
+      "color": "#80a9bc",
+      "description": "Tuberomammillary nucleus, right side. One of 13 hypothalamic labels in the published population-template atlas.",
+      "offset": 2399856,
+      "vertices": 416,
+      "triangles": 832,
+      "voxels": 256,
+      "center": [
+        5.174,
+        -5.833,
+        5.233
+      ]
+    },
+    {
+      "id": "hypo-50",
+      "key": "L_TM",
+      "name": "Tuberomammillary nucleus",
+      "abbreviation": "TM",
+      "sourceName": "tuberomammillary hypothalamic nucleus",
+      "sourceAbbreviation": "L_TM",
+      "hemisphere": "left",
+      "group": "Hypothalamus",
+      "aliases": [
+        "L_TM",
+        "tuberomammillary hypothalamic nucleus"
+      ],
+      "kind": "segmentation",
+      "source": "neudorfer-2020",
+      "label": 50,
+      "channel": 50,
+      "color": "#aa92bc",
+      "description": "Tuberomammillary nucleus, left side. One of 13 hypothalamic labels in the published population-template atlas.",
+      "offset": 2421488,
+      "vertices": 430,
+      "triangles": 856,
+      "voxels": 268,
+      "center": [
+        -6.266,
+        -6.091,
+        5.233
+      ]
+    },
+    {
+      "id": "hypo-51",
+      "key": "R_PH",
+      "name": "Posterior hypothalamic nucleus",
+      "abbreviation": "PH",
+      "sourceName": "posterior hypotahalamic nucleus",
+      "sourceAbbreviation": "R_PH",
+      "hemisphere": "right",
+      "group": "Hypothalamus",
+      "aliases": [
+        "R_PH",
+        "posterior hypotahalamic nucleus"
+      ],
+      "kind": "segmentation",
+      "source": "neudorfer-2020",
+      "label": 51,
+      "channel": 51,
+      "color": "#77aa94",
+      "description": "Posterior hypothalamic nucleus, right side. One of 13 hypothalamic labels in the published population-template atlas. The display spelling is corrected; the exact source spelling is retained in provenance.",
+      "offset": 2443800,
+      "vertices": 342,
+      "triangles": 680,
+      "voxels": 274,
+      "center": [
+        2.367,
+        0.382,
+        8.145
+      ]
+    },
+    {
+      "id": "hypo-52",
+      "key": "L_PH",
+      "name": "Posterior hypothalamic nucleus",
+      "abbreviation": "PH",
+      "sourceName": "posterior hypotahalamic nucleus",
+      "sourceAbbreviation": "L_PH",
+      "hemisphere": "left",
+      "group": "Hypothalamus",
+      "aliases": [
+        "L_PH",
+        "posterior hypotahalamic nucleus"
+      ],
+      "kind": "segmentation",
+      "source": "neudorfer-2020",
+      "label": 52,
+      "channel": 52,
+      "color": "#d18383",
+      "description": "Posterior hypothalamic nucleus, left side. One of 13 hypothalamic labels in the published population-template atlas. The display spelling is corrected; the exact source spelling is retained in provenance.",
+      "offset": 2461536,
+      "vertices": 378,
+      "triangles": 752,
+      "voxels": 283,
+      "center": [
+        -3.361,
+        0.439,
+        8.149
+      ]
+    },
+    {
+      "id": "hypo-53",
+      "key": "R_AHA",
+      "name": "Anterior hypothalamic area",
+      "abbreviation": "AHA",
+      "sourceName": "anterior hypothalamic area",
+      "sourceAbbreviation": "R_AHA",
+      "hemisphere": "right",
+      "group": "Hypothalamus",
+      "aliases": [
+        "R_AHA"
+      ],
+      "kind": "segmentation",
+      "source": "neudorfer-2020",
+      "label": 53,
+      "channel": 53,
+      "color": "#dc9c78",
+      "description": "Anterior hypothalamic area, right side. One of 13 hypothalamic labels in the published population-template atlas.",
+      "offset": 2481144,
+      "vertices": 564,
+      "triangles": 1132,
+      "voxels": 382,
+      "center": [
+        3.9,
+        -4.265,
+        1.305
+      ]
+    },
+    {
+      "id": "hypo-54",
+      "key": "L_AHA",
+      "name": "Anterior hypothalamic area",
+      "abbreviation": "AHA",
+      "sourceName": "anterior hypothalamic area",
+      "sourceAbbreviation": "L_AHA",
+      "hemisphere": "left",
+      "group": "Hypothalamus",
+      "aliases": [
+        "L_AHA"
+      ],
+      "kind": "segmentation",
+      "source": "neudorfer-2020",
+      "label": 54,
+      "channel": 54,
+      "color": "#d2a767",
+      "description": "Anterior hypothalamic area, left side. One of 13 hypothalamic labels in the published population-template atlas.",
+      "offset": 2510520,
+      "vertices": 510,
+      "triangles": 1016,
+      "voxels": 297,
+      "center": [
+        -5.148,
+        -4.725,
+        1.401
+      ]
+    }
+  ],
+  "omitted": [],
+  "compressedUrl": "/subregions/hypothalamus.mesh",
+  "rawUrl": "/subregions/hypothalamus.bin",
+  "source": {
+    "documentation": "https://zenodo.org/records/3942115",
+    "protocol": "https://zenodo.org/records/3942115",
+    "paper": "https://doi.org/10.1038/s41597-020-00644-6",
+    "paperTitle": "Neudorfer et al. (2020), high-resolution hypothalamic-region atlas",
+    "license": "/licenses/cc-by-4.0-legalcode.html",
+    "licenseTitle": "Creative Commons Attribution 4.0 International",
+    "attribution": "Modified Neudorfer et al. atlas derivatives \u00b7 CC BY 4.0",
+    "files": {
+      "MNI152b_atlas_labels_0.5mm.nii.gz": {
+        "url": "https://zenodo.org/api/records/3942115/files/MNI152b_atlas_labels_0.5mm.nii.gz/content",
+        "md5": "d94c770945b19b0a3f13ab43c5140e01",
+        "bytes": 563185
+      },
+      "Volumes_names-labels.csv": {
+        "url": "https://zenodo.org/api/records/3942115/files/Volumes_names-labels.csv/content",
+        "md5": "b6f3d1a221d77ccd129c4e73864c2e25",
+        "bytes": 2068
+      },
+      "README.txt": {
+        "url": "https://zenodo.org/api/records/3942115/files/README.txt/content",
+        "md5": "a18e3d04e217db39165b6c1086bdbe95",
+        "bytes": 2634
+      }
+    },
+    "labelTableUrl": "https://zenodo.org/records/3942115/files/Volumes_names-labels.csv",
+    "labelDefinitions": "https://zenodo.org/records/3942115/files/Volumes_names-labels.csv",
+    "labelDefinitionsTitle": "Published label names and lateralized IDs (CSV)",
+    "shape": [
+      394,
+      466,
+      378
+    ],
+    "affine": [
+      [
+        0.5,
+        0.0,
+        0.0,
+        -98.0
+      ],
+      [
+        0.0,
+        0.5,
+        0.0,
+        -134.0
+      ],
+      [
+        0.0,
+        0.0,
+        0.5,
+        -72.0
+      ],
+      [
+        0.0,
+        0.0,
+        0.0,
+        1.0
+      ]
+    ],
+    "spacingMm": [
+      0.5,
+      0.5,
+      0.5
+    ],
+    "frame": "MNI152b population-template space from 990 HCP subjects; recentered independently for inspection, not registered to the whole-brain surface model or bundled MRI templates",
+    "method": "The source categorical label map is retained unchanged. Marching cubes at 0.5 on its 50 label IDs; no smoothing, resampling, or decimation. One documented source anomaly is excluded from display geometry: the left red-nucleus label has face-connected components of 2, 27, and 2,285 voxels, with the 2-voxel component reaching the template edge; only its largest component is surfaced. The original label map and all IDs remain available from the source record. The generated meshes are not the authors\u2019 participant segmentation pipeline.",
+    "displayTransform": "Source RAS transformed to [R,S,-A], then recentered for a standalone view",
+    "displayOrigin": [
+      0.25,
+      -3.25,
+      9.5
+    ],
+    "coverage": "50 lateralized source labels: 13 hypothalamic structures and 12 adjacent structures per side. This is one population-template segmentation, not a complete account of hypothalamic nomenclature or individual anatomy.",
+    "sourceAuthors": "Neudorfer, Germann, Elias, Gramer, Boutet & Lozano (2020)",
+    "sourceRecord": "https://doi.org/10.5281/zenodo.3942115"
+  },
+  "geometry": {
+    "bytes": 2536992,
+    "compressedBytes": 658860,
+    "sha256": "422fc450adce2bcd787e75a5f435a5542a9661aa71958dc2ed3c72b365a221f4",
+    "compressedSha256": "11115e7af7bee85c9d2ad147d00352ff298597f4f5058f9f8b8404fff5ad3a50",
+    "triangles": 97624
+  }
+}

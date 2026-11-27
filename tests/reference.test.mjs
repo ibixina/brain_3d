@@ -468,8 +468,11 @@ test("hypothalamic reading preserves composite labels and separates physiologica
     assert.ok(anatomy.regions.includes(id));
     assert.ok(systems.regions.includes(id));
   }
-  assert.match(anatomy.scope, /no separate hypothalamus mesh/);
-  assert.match(anatomy.scope, /does not establish their exact extent/);
+  assert.match(anatomy.scope, /independent Neudorfer et al\. population-template atlas/);
+  assert.match(anatomy.scope, /not registered to this whole-brain model/);
+  const atlasLink = referenceExplorations(anatomy).find((item) => item.kind === "atlas");
+  assert.equal(atlasLink.label, "Independent atlas · 50 lateralized structures");
+  assert.match(atlasLink.href, /region=aseg-28.*atlas=hypothalamus.*from=hypothalamic-anatomy/);
   assert.deepEqual(systems.regions, ["aseg-28", "aseg-60"]);
   assert.deepEqual(
     systems.comparison.rows.slice(0, 2).map((row) => row.label),
@@ -539,6 +542,9 @@ test("reference explorations resolve to retained specimen films, real paths, and
             learningPaths.some((path) => path.id === params.get("path")),
           );
           assert.equal(params.get("step"), "1");
+        } else if (link.kind === "atlas") {
+          assert.equal(params.get("region"), "aseg-28");
+          assert.equal(params.get("atlas"), "hypothalamus");
         } else {
           assert.equal(params.get("view"), "scans");
           assert.ok(["t1", "t2", "pd"].includes(params.get("scan")));

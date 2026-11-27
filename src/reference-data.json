@@ -302,6 +302,11 @@
       "url": "https://nba.uth.tmc.edu/neuroscience/s4/chapter03.html",
       "kind": "Academic textbook"
     },
+    "hypothalamic-atlas": {
+      "title": "Neudorfer et al. · High-resolution in vivo hypothalamic-region MRI atlas (2020)",
+      "url": "https://doi.org/10.1038/s41597-020-00644-6",
+      "kind": "Population-template MRI atlas and original study"
+    },
     "scn-transplant": {
       "title": "Ralph et al. · Suprachiasmatic grafts and circadian period (1990)",
       "url": "https://pubmed.ncbi.nlm.nih.gov/2305266/",
@@ -1763,12 +1768,12 @@
         "geniculates"
       ],
       "paragraphs": [
-        "The selectable ventral diencephalon is a composite FreeSurfer imaging label. Its documented convention includes hypothalamic territory and neighboring structures such as geniculate regions, basal forebrain, and parts of ventral tegmentum. It is not a segmented hypothalamus or a single physiological unit. The source convention even includes some tissue that belongs anatomically to the midbrain.",
+        "The selectable ventral diencephalon is a composite FreeSurfer imaging label. Its documented convention includes hypothalamic territory and neighboring structures such as geniculate regions, basal forebrain, and parts of ventral tegmentum. It is not a single nucleus or physiological unit; the source convention even includes tissue that belongs anatomically to the midbrain. A separate atlas reader provides population-template labels for hypothalamic and neighboring structures; those surfaces are not registered to this composite label.",
         "Hypothalamic anatomy is described relative to the third ventricle, optic chiasm, tuber cinereum, and mammillary bodies. Longitudinal periventricular, medial, and lateral zones intersect anterior/preoptic, tuberal, and posterior regional descriptions. These are different anatomical organizing schemes, not equivalent mesh partitions.",
         "The selected names in the comparison have distinct neuronal populations and connections. Most cannot be located precisely from a smooth composite surface. Neither a teal highlight nor finer sampling identifies the SCN, arcuate nucleus, or a particular hormone-producing cell group.",
-        "The model links provide bilateral composite labels plus neighboring thalamus, third ventricle, and brainstem. Specimen lessons and MRI help orient those gross relationships. Their independent data do not supply nuclear boundaries missing from the 3D model."
+        "The model links provide bilateral composite labels plus neighboring thalamus, third ventricle, and brainstem. Specimen lessons and MRI help orient those gross relationships. The separately framed Neudorfer et al. atlas supplies 50 lateralized labels (13 hypothalamic structures and 12 adjacent structures per side). It is a population-template segmentation, not a subdivision of this mesh or the bundled MRI templates."
       ],
-      "scope": "There is no separate hypothalamus mesh. Individual hypothalamic nuclei, pituitary lobes, optic chiasm, median eminence, infundibular stalk, mammillary bodies, and their fibers or portal vessels are not individually reconstructed. The ventral-diencephalon mesh does not establish their exact extent or prove that every listed structure is fully included. Finer mode refines the composite surface. This is a selected anatomical introduction, not a complete hypothalamic atlas.",
+      "scope": "The selected ventral-diencephalon mesh remains a composite label and does not establish the exact extent of any nucleus. An independent Neudorfer et al. population-template atlas provides 50 lateralized labels for 13 hypothalamic and 12 adjacent structures per side; its surfaces are not registered to this whole-brain model. Neither view resolves cells, fiber pathways, pituitary lobes, portal vessels, or every hypothalamic anatomical convention.",
       "regions": [
         "aseg-28",
         "aseg-60",
@@ -1788,7 +1793,8 @@
         "aseg-boundaries",
         "hypothalamic-anatomy",
         "hypothalamic-autonomic",
-        "hypothalamic-pituitary"
+        "hypothalamic-pituitary",
+        "hypothalamic-atlas"
       ],
       "reading": {
         "keys": ["ventral-diencephalon"],
@@ -1796,7 +1802,7 @@
         "priority": -2
       },
       "comparison": {
-        "caption": "Selected hypothalamic names — none is a separate selectable mesh",
+        "caption": "Selected hypothalamic names — see the separate population-template atlas for labeled regional surfaces",
         "columns": ["Nucleus, area, or territory", "Selected distinction"],
         "rows": [
           {
@@ -1850,6 +1856,11 @@
         ]
       },
       "explorations": [
+        {
+          "kind": "atlas",
+          "id": "hypothalamic-atlas",
+          "note": "Opens the separately framed 0.5 mm MNI152b label atlas. These population-template surfaces are not subdivisions of the composite whole-brain mesh."
+        },
         {
           "kind": "video",
           "id": "ANlfIEv83hg",

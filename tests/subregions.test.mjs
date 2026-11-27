@@ -314,7 +314,7 @@ test("reflected source affines preserve paired amygdala surface winding and anat
 });
 
 test("standalone targets keep whole-brain source labels and hemisphere search distinct", () => {
-  for (const [id, kind] of [["aseg-16", "brainstem"], ["aseg-10", "thalamus"], ["aseg-49", "thalamus"], ["aseg-18", "amygdala"], ["aseg-54", "amygdala"], ["aseg-17", "hippocampus"], ["aseg-53", "hippocampus"]]) {
+  for (const [id, kind] of [["aseg-16", "brainstem"], ["aseg-10", "thalamus"], ["aseg-49", "thalamus"], ["aseg-18", "amygdala"], ["aseg-54", "amygdala"], ["aseg-17", "hippocampus"], ["aseg-53", "hippocampus"], ["aseg-28", "hypothalamus"], ["aseg-60", "hypothalamus"]]) {
     assert.equal(subregionForRegion(id), kind);
     assert.ok(isSubregionKind(kind));
   }

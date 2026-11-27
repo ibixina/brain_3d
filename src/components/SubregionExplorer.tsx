@@ -122,6 +122,10 @@ const atlasNotes: Record<SubregionKind, { scope: string; protocol: string }> = {
     scope: "It shows 28 lobular compartments and six deep-nucleus labels (three pairs). I–IV share a compartment; interposed combines emboliform and globose. Cellular layers, full foliation, and individual fibers are not reconstructed.",
     protocol: "Lobular and deep-nucleus maps come from different participant groups in the 2009 and 2011 studies. The published categorical map is used as supplied. The separate probability-slice view samples original MNISym channels without resampling or renormalization. The left/right fastigial labels contain only 2/5 voxels, and Vermis_CrusI contains 20; these fragments do not establish full anatomical extents. Source spellings are retained. Anatomical labels are not task-activation maps.",
   },
+  hypothalamus: {
+    scope: "This is a separate population-template atlas, not a registered subdivision of the selected ventral-diencephalon surface. It labels 13 hypothalamic regions and 12 adjacent structures per side. A 0.5 mm atlas grid is not microscopic resolution and does not establish individual boundaries.",
+    protocol: "The displayed surfaces follow the atlas's 50 left/right categorical label IDs. They are extracted from the published MNI152b 0.5 mm label map, not estimated from this app's MRI templates. Atlas labels are population-template segmentations; they do not depict neurons, cell types, fibers, or functional activity. One left red-nucleus label has two tiny disconnected source fragments, one at the template boundary; the surface omits those 29 voxels and retains its largest 2,285-voxel component. Their source values and reason for omission are documented. The source's posterior hypothalamic label name contains a spelling error; the display name is corrected while the original is retained in provenance.",
+  },
 };
 
 export default function SubregionExplorer({
@@ -159,7 +163,9 @@ export default function SubregionExplorer({
                   import("../hippocampus-subregions.json"),
                   import("../hippocampus-boundaries.json"),
                 ]).then(([atlas, boundaries]) => ({ default: { ...atlas.default, boundaries: boundaries.default } }))
-              : import("../cerebellum-subregions.json");
+              : kind === "hypothalamus"
+                ? import("../hypothalamus-subregions.json")
+                : import("../cerebellum-subregions.json");
     void request
       .then((data) => {
         if (!cancelled) setAtlas(data.default);
@@ -200,7 +206,7 @@ function LoadedSubregions({
 }) {
   const large = atlas.parts.length > 8;
   const name = subregionCatalog[kind].name;
-  const partWord = kind === "thalamus" ? "nucleus" : "subregion";
+  const partWord = kind === "thalamus" || kind === "hypothalamus" ? "structure" : "subregion";
   const resolved = resolveSubregionRoute(route, atlas.parts);
   const initialGroup = atlas.guide?.groups.find((group) => group.id === resolved.tour);
   const groupStart = initialGroup
@@ -501,7 +507,7 @@ function LoadedSubregions({
         ref={panel}
         aria-label={`${name} part descriptions`}
       >
-        <h2>Inside the {kind}.</h2>
+        <h2>{kind === "hypothalamus" ? "Inside the hypothalamic region." : `Inside the ${kind}.`}</h2>
         <p className="subregion-intro">
           {large
             ? `${visible.length} selectable ${visible.length === 1 ? "surface" : "surfaces"} from ${sourceCount} source ${sourceCount === 1 ? "label" : "labels"}${state.hemisphere === "both" ? " across both sides" : ` on the ${state.hemisphere}${kind === "cerebellum" ? " plus the vermis" : ""}`}${activeGroup ? " in this group" : ""}.`
@@ -635,7 +641,7 @@ function LoadedSubregions({
           </h3>
           <p>
             {boundary ?? selected?.description ??
-              `Surfaces derived from ${kind === "cerebellum" ? "Diedrichsen Lab’s published cerebellar label map" : `FreeSurfer’s ${kind} probability atlas`}. Colors identify atlas labels; they do not show activity, tissue color, or individual cells.`}
+              `Surfaces derived from ${kind === "cerebellum" ? "Diedrichsen Lab’s published cerebellar label map" : kind === "hypothalamus" ? "Neudorfer et al.’s published MNI152b hypothalamic-region label map" : `FreeSurfer’s ${kind} probability atlas`}. Colors identify atlas labels; they do not show activity, tissue color, or individual cells.`}
           </p>
           {boundary && atlas.guide && (
             <>
@@ -773,14 +779,16 @@ function LoadedSubregions({
           <p>
             {atlas.source.attribution ?? "Modified FreeSurfer data"} ·{" "}
             {(transferBytes / 1000).toFixed(0)} kB compressed
-            geometry, loaded on demand. Checked October 19, 2026.
+            geometry, loaded on demand. Checked {atlas.checkedOn}.
           </p>
           <a href={atlas.source.documentation} target="_blank" rel="noreferrer">
             Atlas & original data ↗
           </a>
-          <a href={atlas.source.protocol} target="_blank" rel="noreferrer">
-            Segmentation protocol & boundary differences ↗
-          </a>
+          {kind !== "hypothalamus" && (
+            <a href={atlas.source.protocol} target="_blank" rel="noreferrer">
+              Segmentation protocol & boundary differences ↗
+            </a>
+          )}
           <a href={atlas.source.paper} target="_blank" rel="noreferrer">
             {atlas.source.paperTitle ?? (kind === "amygdala"
               ? "Saygin, Kliemann et al. (2017)"
@@ -795,7 +803,7 @@ function LoadedSubregions({
               target="_blank"
               rel="noreferrer"
             >
-              Original label definitions (Table 2) ↗
+              {atlas.source.labelDefinitionsTitle ?? "Original label definitions (Table 2)"} ↗
             </a>
           )}
           <a

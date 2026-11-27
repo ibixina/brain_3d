@@ -50,6 +50,7 @@ export type SubregionAtlas = {
     protocol: string;
     paper: string;
     labelDefinitions?: string;
+    labelDefinitionsTitle?: string;
     license: string;
     spacingMm: number[];
     frame: string;
@@ -97,6 +98,11 @@ export const subregionCatalog = {
     button: "Explore lobules & deep nuclei",
     detail: "Separate atlas · 34 source-label surfaces",
   },
+  hypothalamus: {
+    name: "Hypothalamic-region",
+    button: "Explore nuclei & nearby structures",
+    detail: "Separate MRI atlas · 50 lateralized labels",
+  },
 };
 export type SubregionKind = keyof typeof subregionCatalog;
 
@@ -110,6 +116,8 @@ const targets: Record<string, SubregionKind> = {
   "aseg-53": "hippocampus",
   "aseg-8": "cerebellum",
   "aseg-47": "cerebellum",
+  "aseg-28": "hypothalamus",
+  "aseg-60": "hypothalamus",
 };
 
 export function subregionForRegion(id: string) {
