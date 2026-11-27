@@ -272,6 +272,12 @@ function LoadedSubregions({
     );
   const omitted = matchingSubregions(atlas.omitted ?? [], "", state.hemisphere).filter(inScope);
   const sourceCount = visible.length + omitted.length;
+  const hypothalamicNameCount = kind === "hypothalamus"
+    ? matchingSubregions(atlas.parts, "", state.hemisphere).filter((part) => part.group === "Hypothalamus").length
+    : 0;
+  const nearbyNameCount = kind === "hypothalamus"
+    ? matchingSubregions(atlas.parts, "", state.hemisphere).filter((part) => part.group !== "Hypothalamus").length
+    : 0;
   const focusReading = (atDescription = false) => requestAnimationFrame(() => {
     const reader = panel.current;
     const heading = reading.current;
@@ -580,6 +586,22 @@ function LoadedSubregions({
             Choose {selected ? `another ${partWord}` : `a ${partWord}`}
             <ChevronDown size={14} />
           </button>
+        )}
+        {large && kind === "hypothalamus" && (
+          <>
+            <div className="subregion-quick-filters" role="group" aria-label="Filter the label list by atlas category">
+              <button aria-pressed={query === ""} onClick={() => { setQuery(""); setChoosing(true); }}>
+                All · {visible.length}
+              </button>
+              <button aria-pressed={query === "Hypothalamus"} onClick={() => { setQuery("Hypothalamus"); setChoosing(true); }}>
+                Hypothalamus · {hypothalamicNameCount}
+              </button>
+              <button aria-pressed={query === "Nearby"} onClick={() => { setQuery("Nearby"); setChoosing(true); }}>
+                Nearby · {nearbyNameCount}
+              </button>
+            </div>
+            <p className="subregion-filter-hint">Filters the name list; all parts stay visible for spatial context.</p>
+          </>
         )}
         {(!large || choosing) && (
           <div className={large ? "subregion-chooser" : ""}>

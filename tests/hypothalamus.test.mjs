@@ -21,7 +21,11 @@ test("hypothalamic atlas labels retain source IDs, names, lateralization and act
     assert.equal(parts.filter((part) => part.group !== "Hypothalamus").length, 12);
     assert.ok(parts.every((part) => side === "left" ? part.center[0] + atlas.source.displayOrigin[0] < 0 : part.center[0] + atlas.source.displayOrigin[0] > 0));
     assert.equal(matchingSubregions(atlas.parts, "", side).length, 25);
+    assert.equal(matchingSubregions(atlas.parts, "Hypothalamus", side).length, 13);
+    assert.equal(matchingSubregions(atlas.parts, "Nearby", side).length, 12);
   }
+  assert.equal(matchingSubregions(atlas.parts, "Hypothalamus", "both").length, 26);
+  assert.equal(matchingSubregions(atlas.parts, "Nearby", "both").length, 24);
   assert.equal(new Set(atlas.parts.map((part) => part.label)).size, 50);
   assert.equal(subregionName(atlas.parts.find((part) => part.label === 47)), "Right Suprachiasmatic nucleus · SC");
   assert.deepEqual(matchingSubregions(atlas.parts, "SCN", "left").map((part) => part.label), [48]);

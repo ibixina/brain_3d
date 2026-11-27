@@ -375,6 +375,25 @@
   box-sizing: border-box;
   font-size: 11px;
 }
+.subregion-quick-filters {
+  display: grid;
+  grid-template-columns: minmax(0, 0.75fr) minmax(0, 1.2fr) minmax(0, 1fr);
+  gap: 5px;
+  margin: 4px 0;
+}
+.subregion-explorer .subregion-quick-filters button {
+  min-width: 0;
+  min-height: 40px;
+  padding: 6px 4px;
+  font-size: 9px;
+  line-height: 1.35;
+}
+.subregion-filter-hint {
+  margin: 4px 0 8px;
+  color: #92a9b8;
+  font-size: 9px;
+  line-height: 1.55;
+}
 .subregion-parts.searchable {
   max-height: 190px;
   overflow-y: auto;
