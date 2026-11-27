@@ -8,6 +8,7 @@ import {
   ChevronDown,
   Crosshair,
   ExternalLink,
+  Film,
   Layers,
   LoaderCircle,
   Plus,
@@ -53,6 +54,7 @@ import {
 import pathwayData from "../activity-pathways.json";
 import MRISlice from "./MRISlice";
 import { withReferenceOrigin } from "../reference-navigation.ts";
+import { regionHash } from "../region-navigation.ts";
 import "./imaging.css";
 import "./activity-compare.css";
 
@@ -951,6 +953,18 @@ export default function ActivityCompare({
                   </div>
                 )}
               </dl>
+              {pointPart && (
+                <a
+                  className="compare-region-videos"
+                  href={regionHash(pointPart, "videos")}
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  <Film size={14} />
+                  <span>Explore {partName(pointPart)} anatomy and specimen videos</span>
+                  <ArrowUpRight size={13} />
+                </a>
+              )}
               {selectedStat && selected && (
                 <p className="compare-part-summary">
                   {partName(selected)}: {Math.round((selectedStat.a / selectedStat.voxels) * 100)}% active in A

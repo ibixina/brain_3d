@@ -44,6 +44,11 @@ import {
   referenceOrigin,
   withReferenceOrigin,
 } from "./reference-navigation.ts";
+import {
+  regionDetailFromHash,
+  regionHash,
+  type RegionDetailRoute,
+} from "./region-navigation.ts";
 import { regionCamera, regionEnabled, regionView } from "./region-view.ts";
 import {
   isSubregionKind,
@@ -94,7 +99,11 @@ const ActivityCompare = lazy(() => import("./components/ActivityCompare"));
 const ReferenceLibrary = lazy(() => import("./components/ReferenceLibrary"));
 type Section = "anatomy" | "scans" | "activities";
 type LibraryTab = "structures" | "paths" | "reference";
-type SelectionOptions = { origin?: string | null; reveal?: boolean };
+type SelectionOptions = {
+  origin?: string | null;
+  reveal?: boolean;
+  detail?: RegionDetailRoute;
+};
 const detailTabs = ["overview", "anatomy", "connections", "videos"] as const;
 type DetailTab = (typeof detailTabs)[number];
 const libraryTabs: { id: LibraryTab; label: string }[] = [
@@ -211,7 +220,7 @@ export default function App() {
   const [error, setError] = useState("");
   const [query, setQuery] = useState("");
   const [expanded, setExpanded] = useState<string[]>([]);
-  const [tab, setTab] = useState<DetailTab>("overview");
+  const [tab, setTab] = useState<DetailTab>(() => regionDetailFromHash(location.hash));
   const [atlasRoute, setAtlasRoute] = useState(() =>
     subregionRouteFromHash(
       location.hash,
@@ -260,7 +269,7 @@ export default function App() {
   }
   function select(
     id: string,
-    { origin = null, reveal = false }: SelectionOptions = {},
+    { origin = null, reveal = false, detail }: SelectionOptions = {},
   ) {
     setLearning(null);
     setReturnReference(origin);
@@ -281,12 +290,13 @@ export default function App() {
           },
     );
     setRevealView(origin || reveal ? { camera: regionCamera(region) } : null);
-    setTab((current) => (current === "videos" ? current : "overview"));
+    const nextDetail = detail ?? (tab === "videos" ? "videos" : "overview");
+    setTab(nextDetail);
     setSidebar(false);
     history.replaceState(
       null,
       "",
-      withReferenceOrigin(`#region=${encodeURIComponent(id)}`, origin),
+      withReferenceOrigin(regionHash(id, nextDetail), origin),
     );
     focusRegion();
   }
@@ -444,7 +454,12 @@ export default function App() {
         }
         setLearning(null);
         const region = regions.find((item) => item.id === params.get("region"));
-        if (region) selectRef.current(region.id, { origin, reveal: true });
+        if (region)
+          selectRef.current(region.id, {
+            origin,
+            reveal: true,
+            detail: regionDetailFromHash(hash),
+          });
         else
           setState((current) => ({
             ...current,

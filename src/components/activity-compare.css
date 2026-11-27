@@ -329,6 +329,26 @@
 .compare-point .image-facts {
   margin: 14px 0 4px;
 }
+.compare-region-videos {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 44px;
+  margin: 4px 0 8px;
+  padding: 7px 9px;
+  border: 1px solid #9dd8d326;
+  border-radius: 7px;
+  color: #a8d2cc;
+  font-size: 10px;
+  line-height: 1.5;
+}
+.compare-region-videos span {
+  flex: 1;
+  min-width: 0;
+}
+.compare-region-videos svg {
+  flex-shrink: 0;
+}
 .compare-point dt {
   display: flex;
   align-items: center;
