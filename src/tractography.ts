@@ -1,8 +1,18 @@
 import { planeAxis, planeDimensions, voxelIndex, type Grid, type Plane, type Point3 } from "./imaging.ts";
 
-export const xtractCallosalGuideStops: Record<string, number> = {
-  fma: 0,
-  fmi: 4,
+export const xtractGuideContexts: Record<string, { path: string; step: number }> = {
+  af_l: { path: "language", step: 2 },
+  af_r: { path: "language", step: 2 },
+  ar_l: { path: "language", step: 0 },
+  ar_r: { path: "language", step: 0 },
+  cst_l: { path: "movement", step: 0 },
+  cst_r: { path: "movement", step: 0 },
+  fma: { path: "callosum", step: 0 },
+  fmi: { path: "callosum", step: 4 },
+  fx_l: { path: "memory", step: 2 },
+  fx_r: { path: "memory", step: 2 },
+  or_l: { path: "vision", step: 0 },
+  or_r: { path: "vision", step: 0 },
 };
 
 export type XtractEntry = {

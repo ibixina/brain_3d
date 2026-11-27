@@ -25,6 +25,16 @@ The installed Codex CLI's generated protocol includes `account/rateLimitResetCre
 - All runtime local assets must use `assetUrl()` for Pages subpath support. Heavy new resources should load on demand.
 - Licenses and checksums are retained in the repository. Never casually normalize pinned input files.
 
+## Recent implementation history
+
+2026-11-27 (white-matter pathway ↔ guided anatomy context): the Xtract reader now offers a carefully labeled link from 12 selected channels to an existing, source-backed guided 3D stop: bilateral arcuate fasciculi, acoustic radiations, corticospinal tracts, fornices, optic radiations, and forceps major/minor. Ten links are curated topic navigation; their destination displays its existing region mesh, never the tract itself. The forceps cards retain the separate source-backed splenium/genu and FreeSurfer subdivision context. Every destination opens in a new tab so the selected map and crosshair remain intact. The other 30 channels have no guide card.
+
+Validation: all 132 Node tests and the production build pass; `git diff --check` is clean. A new route test checks all 12 pathway-to-stop destinations and the explicit non-registration caveat. Firefox BiDi verified the left optic-radiation card, its UTHealth visual-cortex citation, shareable `#path=vision&step=1` destination, and no horizontal overflow; visual inspection at the scrolled end of the reader confirms the complete card and link sit above the fixed scan controls. No atlas payload, renderer, or eagerly loaded bundle was added; Xtract remains lazy.
+
+## Latest deployment
+
+No deployment for the current implementation yet.
+
 ## Latest completed implementation
 
 2026-11-27 (restore the selected activity location): the activity-to-specimen round trip now also carries the selected model region and its exact integer voxel crosshair. Returning restores the highlighted region, MNI coordinate, crosshair, and visible 3D marker/camera together with the A/B maps, comparison lens, stage, and measure. Invalid or out-of-grid points fall back to the activity peak instead of indexing outside the volume.

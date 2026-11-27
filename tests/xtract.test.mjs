@@ -6,7 +6,7 @@ import test from "node:test";
 import { voxelIndex, worldPoint } from "../src/imaging.ts";
 import { probabilityPointAt } from "../src/probability-slices.ts";
 import { learningFromHash, learningHash, learningPaths } from "../src/learning.ts";
-import { xtractCallosalGuideStops, xtractMapSlice } from "../src/tractography.ts";
+import { xtractGuideContexts, xtractMapSlice } from "../src/tractography.ts";
 
 const read = (path) => readFileSync(new URL(`../${path}`, import.meta.url));
 const manifest = JSON.parse(read("public/tractography/xtract/manifest.json"));
@@ -95,14 +95,23 @@ test("the atlas loads only when opened and does not download a structural MRI in
   assert.match(slice, /P ← · A → · S ↑ · I ↓/);
 });
 
-test("forceps major and minor open the related, separately segmented callosal 3D guide stops", () => {
-  const path = learningPaths.find((item) => item.id === "callosum");
-  assert.ok(path);
-  assert.deepEqual(Object.keys(xtractCallosalGuideStops).sort(), ["fma", "fmi"]);
-  for (const [tract, expectedRegion] of [["fma", "aseg-251"], ["fmi", "aseg-255"]]) {
-    const step = xtractCallosalGuideStops[tract];
+test("selected pathways link to existing, source-backed 3D guide stops without implying spatial registration", () => {
+  assert.deepEqual(Object.keys(xtractGuideContexts).sort(), ["af_l", "af_r", "ar_l", "ar_r", "cst_l", "cst_r", "fma", "fmi", "fx_l", "fx_r", "or_l", "or_r"]);
+  const channelIds = new Set(manifest.channels.map(({ id }) => id));
+  assert.ok(Object.keys(xtractGuideContexts).every((id) => channelIds.has(id)));
+  const expected = {
+    af_l: ["language", 2, "lh-parsopercularis"], af_r: ["language", 2, "lh-parsopercularis"],
+    ar_l: ["language", 0, "lh-transversetemporal"], ar_r: ["language", 0, "lh-transversetemporal"],
+    cst_l: ["movement", 0, "lh-precentral"], cst_r: ["movement", 0, "lh-precentral"],
+    fma: ["callosum", 0, "aseg-251"], fmi: ["callosum", 4, "aseg-255"],
+    fx_l: ["memory", 2, "aseg-17"], fx_r: ["memory", 2, "aseg-17"],
+    or_l: ["vision", 0, "lh-pericalcarine"], or_r: ["vision", 0, "lh-pericalcarine"],
+  };
+  for (const [tract, [pathId, step, expectedRegion]] of Object.entries(expected)) {
+    const path = learningPaths.find((item) => item.id === pathId);
+    assert.ok(path, `${tract} path exists`);
     const route = learningFromHash(learningHash(path, step));
-    assert.equal(route?.path.id, "callosum");
+    assert.equal(route?.path.id, pathId);
     assert.equal(route?.step, step);
     assert.equal(route?.path.steps[step].region, expectedRegion);
   }
@@ -110,5 +119,6 @@ test("forceps major and minor open the related, separately segmented callosal 3D
   assert.match(component, /doi\.org\/10\.3390\/diagnostics14161838/);
   assert.match(component, /fswiki\/mri_cc/);
   assert.match(component, /not registered to or projected onto that surface/);
+  assert.match(component, /it does not contain or trace the selected tract/);
   assert.match(component, /target="_blank"/);
 });
