@@ -20,12 +20,16 @@ The installed Codex CLI's generated protocol includes `account/rateLimitResetCre
 - 3 native-1-mm structural MRI templates and 117 on-demand measured IBC task-contrast volumes.
 - Activations opens **Compare activities**: 53 on-demand NeuroQuery-corpus meta-analyses plus a cited blindsight pathway, compared as A / B / only A / only B / shared on the 3D model (per-vertex) and MRI slices, which are linked both ways. The IBC viewer remains under "Single-person task maps" and old `map=` links.
 - Research index: 87 IBC protocols, 799 contrast definitions, 48 external HCP references, 20 dataset resources, 15 methods.
-- 131 Node tests and eight geometry/probability Python tests pass locally, including region visibility presets, reference navigation, exploration links, and source-exact white-matter atlas derivatives; the production build passes. Deployment verification for the current batch is recorded below.
+- 132 Node tests and eight geometry/probability Python tests pass locally, including region visibility presets, reference navigation, exploration links, and source-exact white-matter atlas derivatives; the production build passes. Deployment verification for the current batch is recorded below.
 - Rendering stops when idle and outside Anatomy; image volumes and detail meshes are bounded caches. Preserve these properties.
 - All runtime local assets must use `assetUrl()` for Pages subpath support. Heavy new resources should load on demand.
 - Licenses and checksums are retained in the repository. Never casually normalize pinned input files.
 
 ## Latest completed implementation
+
+2026-11-27 (round-trip activity ↔ anatomy/video navigation): the map-to-region link now saves the current A/B activities, overlap lens, presentation stage, and consistency/specificity measure in a validated same-site return route. The region's specimen-video panel adds **Return to activity comparison**; following it restores those comparison settings. The outbound link still opens in a separate tab, preserving the working map and crosshair. Invalid or external return values are discarded.
+
+Validation: 132 Node tests, the production build, and `git diff --check` pass. Three navigation tests cover all 104 regions, the Videos destination, a full music-vs-speech return round trip with lens/stage/measure preserved, and rejection of an invalid external return route. Firefox BiDi exercised the selection → specimen link → video list → return link flow; the video route selected one matching recommendation for Transverse temporal gyrus, and return restored the activity page to Shared + MRI slices + specificity with both activities retained. The original comparison tab stayed intact. The new return link is a 44 px touch target. The navigation state adds about 0.42 kB gzip to the main JS; the activity component remains lazy at 11.78 kB JS + 2.65 kB CSS gzip. Commit and deployment details follow push verification.
 
 2026-11-27 (activity maps → anatomy → specimen videos): a selected labeled region in **Activations** now has a direct link to that region's existing Anatomy view with its **Videos** tab already open. The destination uses the current whole-brain region ID and the established region-specific recommendations; the activity comparison opens in a new tab with its selected activities and map intact. The video panel keeps its own scope note, so a surrounding-specimen lesson is not represented as an exact demonstration of a small atlas parcel.
 

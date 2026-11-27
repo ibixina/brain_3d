@@ -45,6 +45,7 @@ import {
   withReferenceOrigin,
 } from "./reference-navigation.ts";
 import {
+  activityReturnHash,
   regionDetailFromHash,
   regionHash,
   type RegionDetailRoute,
@@ -103,6 +104,7 @@ type SelectionOptions = {
   origin?: string | null;
   reveal?: boolean;
   detail?: RegionDetailRoute;
+  returnTo?: string | null;
 };
 const detailTabs = ["overview", "anatomy", "connections", "videos"] as const;
 type DetailTab = (typeof detailTabs)[number];
@@ -269,7 +271,7 @@ export default function App() {
   }
   function select(
     id: string,
-    { origin = null, reveal = false, detail }: SelectionOptions = {},
+    { origin = null, reveal = false, detail, returnTo }: SelectionOptions = {},
   ) {
     setLearning(null);
     setReturnReference(origin);
@@ -291,12 +293,13 @@ export default function App() {
     );
     setRevealView(origin || reveal ? { camera: regionCamera(region) } : null);
     const nextDetail = detail ?? (tab === "videos" ? "videos" : "overview");
+    const nextReturn = returnTo ?? activityReturnHash(location.hash) ?? undefined;
     setTab(nextDetail);
     setSidebar(false);
     history.replaceState(
       null,
       "",
-      withReferenceOrigin(regionHash(id, nextDetail), origin),
+      withReferenceOrigin(regionHash(id, nextDetail, nextReturn), origin),
     );
     focusRegion();
   }
@@ -459,6 +462,7 @@ export default function App() {
             origin,
             reveal: true,
             detail: regionDetailFromHash(hash),
+            returnTo: activityReturnHash(hash),
           });
         else
           setState((current) => ({
@@ -1558,6 +1562,7 @@ export default function App() {
                 {tab === "videos" && (
                   <RegionVideos
                     region={selected}
+                    returnTo={activityReturnHash(location.hash)}
                     openLibrary={() => setModal("videos")}
                   />
                 )}

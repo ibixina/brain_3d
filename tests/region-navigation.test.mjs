@@ -1,7 +1,12 @@
 import assert from "node:assert/strict";
 import test from "node:test";
 import { regions } from "../src/data.ts";
-import { regionDetailFromHash, regionHash } from "../src/region-navigation.ts";
+import {
+  activityComparisonHash,
+  activityReturnHash,
+  regionDetailFromHash,
+  regionHash,
+} from "../src/region-navigation.ts";
 
 test("every modeled region can open its existing specimen-video recommendations", () => {
   for (const region of regions) {
@@ -16,4 +21,20 @@ test("ordinary region routes keep the overview tab and unknown detail values fal
   assert.equal(regionHash("aseg-10"), "#region=aseg-10");
   assert.equal(regionDetailFromHash("#region=aseg-10"), "overview");
   assert.equal(regionDetailFromHash("#region=aseg-10&detail=other"), "overview");
+});
+
+test("specimen links preserve and validate the activity comparison return route", () => {
+  const comparison = activityComparisonHash({
+    a: "meta:music",
+    b: "meta:speech-listening",
+    lens: "shared",
+    stage: "slices",
+    measure: "specificity",
+  });
+  const anatomy = regionHash("lh-bankssts", "videos", comparison);
+  assert.equal(activityReturnHash(anatomy), comparison);
+  assert.equal(
+    activityReturnHash("#region=lh-bankssts&return=view%3Danatomy%26x%3Dhttps%253A%252F%252Fevil.example"),
+    null,
+  );
 });

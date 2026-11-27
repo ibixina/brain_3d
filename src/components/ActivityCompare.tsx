@@ -54,7 +54,7 @@ import {
 import pathwayData from "../activity-pathways.json";
 import MRISlice from "./MRISlice";
 import { withReferenceOrigin } from "../reference-navigation.ts";
-import { regionHash } from "../region-navigation.ts";
+import { activityComparisonHash, regionHash } from "../region-navigation.ts";
 import "./imaging.css";
 import "./activity-compare.css";
 
@@ -956,7 +956,17 @@ export default function ActivityCompare({
               {pointPart && (
                 <a
                   className="compare-region-videos"
-                  href={regionHash(pointPart, "videos")}
+                  href={regionHash(
+                    pointPart,
+                    "videos",
+                    activityComparisonHash({
+                      a: aKey,
+                      b: bKey,
+                      lens: effectiveLens,
+                      stage,
+                      measure,
+                    }),
+                  )}
                   target="_blank"
                   rel="noreferrer"
                 >

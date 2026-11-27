@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { ArrowUpRight, Clock3, Film, Play, Search, X } from "lucide-react";
+import { ArrowLeft, ArrowUpRight, Clock3, Film, Play, Search, X } from "lucide-react";
 import type { Region } from "../data";
 import {
   dissectionVideos,
@@ -80,9 +80,11 @@ function VideoCard({
 
 export function RegionVideos({
   region,
+  returnTo = null,
   openLibrary,
 }: {
   region: Region;
+  returnTo?: string | null;
   openLibrary: () => void;
 }) {
   const matches = videosForRegion(region);
@@ -96,6 +98,11 @@ export function RegionVideos({
         <h3>FROM MODEL TO SPECIMEN</h3>
       </div>
       <p className="film-context">{regionVideoNote(region)}</p>
+      {returnTo && (
+        <a className="film-return-activity" href={returnTo}>
+          <ArrowLeft size={13} /> Return to activity comparison
+        </a>
+      )}
       <div className="film-match-key">
         <span>Structure focus</span> names the structure;{" "}
         <span>System focus</span> covers its system;{" "}
