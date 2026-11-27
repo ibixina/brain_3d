@@ -30,11 +30,27 @@ test("specimen links preserve and validate the activity comparison return route"
     lens: "shared",
     stage: "slices",
     measure: "specificity",
+    region: "lh-bankssts",
+    point: [64, 72, 48],
   });
   const anatomy = regionHash("lh-bankssts", "videos", comparison);
   assert.equal(activityReturnHash(anatomy), comparison);
+  const singleActivity = activityComparisonHash({
+    a: "meta:reading",
+    b: null,
+    lens: "a",
+    stage: "model",
+    measure: "consistency",
+    region: "lh-bankssts",
+    point: [64, 72, 48],
+  });
+  assert.equal(activityReturnHash(regionHash("lh-bankssts", "videos", singleActivity)), singleActivity);
   assert.equal(
     activityReturnHash("#region=lh-bankssts&return=view%3Danatomy%26x%3Dhttps%253A%252F%252Fevil.example"),
     null,
   );
+  const malformed = new URLSearchParams({
+    return: "view=activities&a=meta%3Amusic&lens=shared&stage=slices&measure=consistency&point=,,",
+  });
+  assert.equal(activityReturnHash(`#region=lh-bankssts&${malformed}`), null);
 });

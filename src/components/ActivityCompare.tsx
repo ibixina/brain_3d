@@ -173,6 +173,16 @@ function readHash() {
   const params = new URLSearchParams(location.hash.slice(1));
   const lens = params.get("lens") as Lens | null;
   const stage = params.get("stage") as Stage | null;
+  const regionId = params.get("region");
+  const rawPoint = params.get("point");
+  const coordinates = rawPoint && /^\d+,\d+,\d+$/.test(rawPoint)
+    ? rawPoint.split(",").map(Number)
+    : null;
+  const point = coordinates?.every(
+    (coordinate) => Number.isSafeInteger(coordinate) && coordinate >= 0,
+  )
+    ? (coordinates as Point3)
+    : null;
   return {
     a: parseKey(params.get("a")) ? params.get("a")! : defaultA,
     b: params.has("b")
@@ -188,6 +198,8 @@ function readHash() {
     measure: (params.get("measure") === "specificity"
       ? "specificity"
       : "consistency") as Measure,
+    region: regions.some((region) => region.id === regionId) ? regionId : null,
+    point,
   };
 }
 const partName = (id: string) => {
@@ -211,6 +223,9 @@ export default function ActivityCompare({
   const initial = useMemo(readHash, []);
   const [aKey, setAKey] = useState(initial.a);
   const [bKey, setBKey] = useState<string | null>(initial.b);
+  const [selected, setSelected] = useState<string | null>(initial.region);
+  const [point, setPoint] = useState<Point3 | null>(initial.point);
+  const restorePoint = useRef(initial.point !== null);
   const [lens, setLens] = useState<Lens>(initial.lens);
   const [stage, setStage] = useState<Stage>(initial.stage);
   const [measure, setMeasure] = useState<Measure>(initial.measure);
@@ -219,8 +234,6 @@ export default function ActivityCompare({
   const [picking, setPicking] = useState<"a" | "b" | null>(null);
   const [query, setQuery] = useState("");
   const [category, setCategory] = useState("all");
-  const [selected, setSelected] = useState<string | null>(null);
-  const [point, setPoint] = useState<Point3 | null>(null);
   const [primary, setPrimary] = useState<Plane>("axial");
   const [view, setView] = useState("left");
   const [deep, setDeep] = useState(false);
@@ -386,17 +399,21 @@ export default function ActivityCompare({
 
   // Keep the URL shareable.
   useEffect(() => {
-    const params = new URLSearchParams({ view: "activities", a: aKey });
-    params.set("b", bKey ?? "");
-    params.set("lens", effectiveLens);
-    params.set("stage", stage);
-    if (measure !== "consistency") params.set("measure", measure);
+    const hash = activityComparisonHash({
+      a: aKey,
+      b: bKey,
+      lens: effectiveLens,
+      stage,
+      measure,
+      region: selected,
+      point,
+    });
     history.replaceState(
       null,
       "",
-      withReferenceOrigin(`#${params}`, referenceOrigin),
+      withReferenceOrigin(hash, referenceOrigin),
     );
-  }, [aKey, bKey, effectiveLens, stage, measure, referenceOrigin]);
+  }, [aKey, bKey, effectiveLens, stage, measure, referenceOrigin, selected, point]);
 
   // The 3D model is created once and kept while switching stages.
   const modelRef = useRef<HTMLDivElement>(null);
@@ -519,6 +536,20 @@ export default function ActivityCompare({
       name === "medial-left" ? "right" : name === "medial-right" ? "left" : name;
     viewer.current?.view(camera);
   }
+  const restoredRegionApplied = useRef(false);
+  useEffect(() => {
+    if (!modelReady || !initial.region || restoredRegionApplied.current) return;
+    const region = regions.find((part) => part.id === initial.region);
+    if (!region) return;
+    restoredRegionApplied.current = true;
+    const side = region.hemisphere === "right" ? "right" : "left";
+    const deepPart = region.kind !== "cortex";
+    setDeep(deepPart);
+    applyView(
+      !deepPart && Math.abs(region.center[0]) < 22 ? `medial-${side}` : side,
+      deepPart,
+    );
+  }, [modelReady, initial.region]);
   useEffect(() => {
     viewState.current = { ...viewState.current, selected };
     viewer.current?.update(viewState.current);
@@ -527,12 +558,17 @@ export default function ActivityCompare({
   // Center the slices on the first peak whenever activity A changes.
   useEffect(() => {
     if (!grid) return;
+    if (restorePoint.current) {
+      restorePoint.current = false;
+      if (point && point.every((coordinate, axis) => coordinate < grid.shape[axis]))
+        return;
+    }
     const meta = metaFor(aKey);
     const ibc = ibcFor(aKey);
     const peak = meta?.maps[measure].peakVoxel ?? ibc?.peakVoxel;
     if (peak) setPoint(peak as Point3);
     else if (!point) setPoint([48, 66, 45]);
-  }, [aKey, grid, manifest, imaging.value]);
+  }, [aKey, grid, manifest, measure]);
 
   const t1 = imaging.value?.scans.find((scan) => scan.id === "t1");
   const structural = useVolume(stage === "model" ? undefined : t1?.asset);
@@ -572,6 +608,10 @@ export default function ActivityCompare({
       ? parts[labels[pointIndex] - 1].id
       : null;
   const selectedStat = stats.find((stat) => stat.id === selected);
+  useEffect(() => {
+    if (!point || !grid || !matrix || !modelReady) return;
+    viewer.current?.setMarker(mni152ToDisplay(worldPoint(point, grid), matrix));
+  }, [point, grid, matrix, modelReady]);
   const errors = [
     activity.error,
     imaging.error,
@@ -965,6 +1005,8 @@ export default function ActivityCompare({
                       lens: effectiveLens,
                       stage,
                       measure,
+                      region: selected ?? pointPart,
+                      point,
                     }),
                   )}
                   target="_blank"

@@ -5,10 +5,19 @@ export type ActivityComparisonState = {
   lens: string;
   stage: string;
   measure: string;
+  region?: string | null;
+  point?: [number, number, number] | null;
 };
 
 const activityKey = /^(meta|ibc|pathway):[\w-]+$/;
-const activityLenses = new Set(["overlap", "a", "b", "a-only", "b-only", "shared"]);
+const activityLenses = new Set([
+  "overlap",
+  "a",
+  "b",
+  "a-only",
+  "b-only",
+  "shared",
+]);
 const activityStages = new Set(["model", "slices", "split"]);
 const activityMeasures = new Set(["consistency", "specificity"]);
 
@@ -21,11 +30,13 @@ export function activityComparisonHash(state: ActivityComparisonState) {
   const params = new URLSearchParams({
     view: "activities",
     a: state.a,
+    b: state.b ?? "",
     lens: state.lens,
     stage: state.stage,
     measure: state.measure,
   });
-  if (state.b) params.set("b", state.b);
+  if (state.region) params.set("region", state.region);
+  if (state.point) params.set("point", state.point.join(","));
   return `#${params.toString()}`;
 }
 
@@ -35,15 +46,29 @@ export function activityReturnHash(hash: string): string | null {
   if (!raw) return null;
   const route = new URLSearchParams(raw);
   const a = route.get("a");
-  const b = route.get("b");
+  const rawB = route.get("b");
+  const b = rawB || null;
+  const region = route.get("region");
+  const rawPoint = route.get("point");
+  const point = rawPoint?.match(/^\d+,\d+,\d+$/)
+    ? rawPoint.split(",").map(Number)
+    : null;
+  const invalidPoint =
+    rawPoint !== null &&
+    (!point ||
+      point.some(
+        (coordinate) => !Number.isSafeInteger(coordinate) || coordinate < 0,
+      ));
   if (
     route.get("view") !== "activities" ||
     !a ||
     !activityKey.test(a) ||
-    (b !== null && !activityKey.test(b)) ||
+    (rawB !== null && rawB !== "" && !activityKey.test(rawB)) ||
     !activityLenses.has(route.get("lens") ?? "") ||
     !activityStages.has(route.get("stage") ?? "") ||
-    !activityMeasures.has(route.get("measure") ?? "")
+    !activityMeasures.has(route.get("measure") ?? "") ||
+    (region !== null && !/^[\w-]+$/.test(region)) ||
+    invalidPoint
   )
     return null;
   return activityComparisonHash({
@@ -52,6 +77,8 @@ export function activityReturnHash(hash: string): string | null {
     lens: route.get("lens")!,
     stage: route.get("stage")!,
     measure: route.get("measure")!,
+    region,
+    point: point ? (point as [number, number, number]) : null,
   });
 }
 
