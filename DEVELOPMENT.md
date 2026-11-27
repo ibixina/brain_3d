@@ -33,7 +33,7 @@ Validation: all 132 Node tests and the production build pass; `git diff --check`
 
 ## Latest deployment
 
-No deployment for the current implementation yet.
+Commit `d2061df` is live. GitHub Actions [run 45925515812](https://github.com/ibixina/brain_3d/actions/runs/45925515812) completed successfully and Pages deployment `8099852437` reports success. Public Firefox BiDi opened the right corticospinal Xtract map, showed the curated motor-cortex guide card with its UTHealth citation, and resolved the new movement-guide route. The public page and eager JS/CSS return HTTP 200. The Xtract workspace is lazy and verified in the live page; no atlas data payload was changed.
 
 ## Latest completed implementation
 
